@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fiche de révision — Marketing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Literata:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F3F5F0;
+    --card:#FFFFFF;
+    --ink:#1E2A3A;
+    --ink-soft:#57677A;
+    --grid:#D8E2EC;
+    --margin:#C85661;
+    --accent:#2F6FA8;
+    --highlight:#F6C453;
+    --tint-blue:#EAF1F8;
+    --tint-gold:#FBF1DC;
+    --tint-red:#FBEBEC;
+    --row-alt:#EFF1EC;
+    --ok-bg:#DFF3E6;
+    --ok-border:#3C9A5C;
+    --bad-bg:#FBEBEC;
+    --bad-border:#C85661;
+    --shadow: 0 1px 2px rgba(30,42,58,.06), 0 8px 24px rgba(30,42,58,.05);
+    --sans-fallback: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) {
+      --paper:#12161D;
+      --card:#1A2029;
+      --ink:#E7ECF2;
+      --ink-soft:#9FAEC0;
+      --grid:#26303D;
+      --margin:#E2828B;
+      --accent:#7FB0DE;
+      --highlight:#B98F2A;
+      --tint-blue:#1B2837;
+      --tint-gold:#2A2517;
+      --tint-red:#2B1B1D;
+      --row-alt:#1E2530;
+      --ok-bg:#1E3327;
+      --ok-border:#4CAF6E;
+      --bad-bg:#2B1B1D;
+      --bad-border:#E2828B;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#12161D;
+    --card:#1A2029;
+    --ink:#E7ECF2;
+    --ink-soft:#9FAEC0;
+    --grid:#26303D;
+    --margin:#E2828B;
+    --accent:#7FB0DE;
+    --highlight:#B98F2A;
+    --tint-blue:#1B2837;
+    --tint-gold:#2A2517;
+    --tint-red:#2B1B1D;
+    --row-alt:#1E2530;
+    --ok-bg:#1E3327;
+    --ok-border:#4CAF6E;
+    --bad-bg:#2B1B1D;
+    --bad-border:#E2828B;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
+    color-scheme: dark;
+  }
+
+  *{box-sizing:border-box;}
+  html{
+    scroll-padding-top: env(safe-area-inset-top, 0px);
+  }
+  @media (prefers-reduced-motion: no-preference){
+    html{ scroll-behavior:smooth; }
+  }
+  html, body{ height:100%; }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Literata", Georgia, "Times New Roman", serif;
+    line-height:1.6;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+    background-image:
+      repeating-linear-gradient(var(--grid) 0 1px, transparent 1px 34px);
+    background-attachment:local;
+  }
+  a{ color:var(--accent); }
+  ::selection{ background:var(--highlight); color:#1E2A3A; }
+
+  /* ---------- Cover / header ---------- */
+  .cover{
+    max-width:920px;
+    margin:0 auto;
+    padding:3rem 1.5rem 1.5rem;
+    text-align:center;
+  }
+  .tag{
+    display:inline-block;
+    font-family:"Kalam", cursive;
+    font-weight:700;
+    font-size:.95rem;
+    color:var(--ink);
+    border:2px solid var(--ink);
+    border-radius:3px;
+    padding:.2rem .9rem;
+    transform:rotate(-1.2deg);
+    background:var(--card);
+    box-shadow:2px 2px 0 var(--grid);
+  }
+  h1.title{
+    font-family:"Kalam", cursive;
+    font-weight:700;
+    font-size:clamp(2rem, 5vw, 3.1rem);
+    margin:.9rem 0 .3rem;
+    color:var(--ink);
+    line-height:1.15;
+  }
+  .subtitle{
+    font-size:1.05rem;
+    color:var(--ink-soft);
+    max-width:640px;
+    margin:0 auto;
+  }
+
+  /* ---------- Layout ---------- */
+  .layout{
+    max-width:1180px;
+    margin:1.5rem auto 4rem;
+    padding:0 1.25rem;
+    display:grid;
+    grid-template-columns:230px 1fr;
+    gap:1.75rem;
+    align-items:start;
+  }
+
+  /* ---------- TOC / binder tabs ---------- */
+  nav.toc{
+    position:sticky;
+    top:calc(1rem + env(safe-area-inset-top,0px));
+    background:var(--card);
+    border-radius:10px;
+    box-shadow:var(--shadow);
+    padding:.85rem .6rem;
+  }
+  nav.toc h2{
+    font-family:"Kalam", cursive;
+    font-size:.95rem;
+    font-weight:700;
+    margin:.2rem .5rem .6rem;
+    color:var(--ink-soft);
+  }
+  nav.toc ol{
+    list-style:none;
+    margin:0; padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+  }
+  nav.toc a{
+    display:flex;
+    align-items:center;
+    gap:.55rem;
+    text-decoration:none;
+    color:var(--ink);
+    font-size:.88rem;
+    padding:.5rem .6rem;
+    border-radius:7px;
+    border-left:3px solid transparent;
+  }
+  nav.toc a .n{
+    font-family:"Kalam", cursive;
+    font-weight:700;
+    color:var(--accent);
+    min-width:1.1rem;
+  }
+  nav.toc a:hover{ background:var(--tint-blue); }
+  nav.toc a.active{
+    background:var(--tint-blue);
+    border-left-color:var(--accent);
+    font-weight:600;
+  }
+
+  /* ---------- Sheet (main paper) ---------- */
+  main.sheet{
+    position:relative;
+    background:var(--card);
+    border-radius:10px;
+    box-shadow:var(--shadow);
+    padding:1.5rem 1.75rem 1.5rem 4.4rem;
+    overflow:hidden;
+  }
+  main.sheet::before{ /* punched holes */
+    content:"";
+    position:absolute; left:0; top:0; bottom:0; width:46px;
+    background-image:radial-gradient(circle, var(--paper) 42%, transparent 43%);
+    background-size:46px 78px;
+    background-position:23px 34px;
+    background-repeat:repeat-y;
+  }
+  main.sheet::after{ /* red margin rule */
+    content:"";
+    position:absolute; left:56px; top:0; bottom:0; width:2px;
+    background:var(--margin);
+    opacity:.55;
+  }
+  @media (max-width:720px){
+    main.sheet{ padding:1.5rem 1.25rem; }
+    main.sheet::before, main.sheet::after{ display:none; }
+  }
+
+  section{ scroll-margin-top:1.25rem; padding-bottom:2.2rem; }
+  section + section{
+    border-top:1px dashed var(--grid);
+    padding-top:2.2rem;
+  }
+
+  h2{
+    font-family:"Literata", serif;
+    font-weight:700;
+    font-size:1.5rem;
+    display:flex;
+    align-items:center;
+    gap:.65rem;
+    margin:0 0 1rem;
+  }
+  h2 .num{
+    font-family:"Kalam", cursive;
+    font-weight:700;
+    font-size:1.1rem;
+    color:var(--accent);
+    border:2px solid var(--accent);
+    border-radius:50%;
+    width:2rem; height:2rem;
+    display:flex; align-items:center; justify-content:center;
+    flex:none;
+  }
+  h3{ font-size:1.12rem; margin:1.5rem 0 .6rem; color:var(--ink); }
+  p{ margin:.7rem 0; }
+  ul, ol{ padding-left:1.3rem; }
+  li{ margin:.3rem 0; }
+  strong{ color:var(--ink); }
+
+  .callout-def{
+    background:var(--tint-blue);
+    border-left:4px solid var(--accent);
+    border-radius:6px;
+    padding:.85rem 1rem;
+    margin:1rem 0;
+    font-style:italic;
+  }
+  .callout-def::before{
+    content:"Définition — ";
+    font-family:"Kalam", cursive;
+    font-style:normal;
+    font-weight:700;
+    color:var(--accent);
+  }
+  .callout-tip{
+    background:var(--tint-gold);
+    border-left:4px solid var(--highlight);
+    border-radius:6px;
+    padding:.85rem 1rem;
+    margin:1rem 0;
+  }
+  .callout-warn{
+    background:var(--tint-red);
+    border-left:4px solid var(--margin);
+    border-radius:6px;
+    padding:.85rem 1rem;
+    margin:1rem 0;
+  }
+  .formula{
+    font-family:"SFMono-Regular", Menlo, Consolas, monospace;
+    font-size:.92rem;
+    background:var(--tint-blue);
+    border:1px dashed var(--accent);
+    border-radius:6px;
+    padding:.65rem .9rem;
+    margin:.6rem 0;
+    color:var(--ink);
+    overflow-x:auto;
+  }
+
+  .table-wrap{ overflow-x:auto; margin:1rem 0; }
+  table{ border-collapse:collapse; width:100%; font-size:.92rem; }
+  caption{ caption-side:top; text-align:left; font-style:italic; color:var(--ink-soft); margin-bottom:.3rem; }
+  th, td{ border:1px solid var(--grid); padding:.55rem .7rem; text-align:left; vertical-align:top; }
+  th{ background:var(--tint-blue); color:var(--ink); font-weight:600; }
+  tr:nth-child(even) td{ background:var(--row-alt); }
+
+  .amont-aval{ display:grid; grid-template-columns:1fr 1fr; gap:.9rem; margin:1rem 0; }
+  .amont-aval div{
+    border:1px solid var(--grid);
+    border-radius:8px;
+    padding:.8rem .9rem;
+    background:var(--tint-blue);
+  }
+  .amont-aval h4{ margin:0 0 .35rem; font-family:"Kalam",cursive; color:var(--accent); }
+  @media (max-width:520px){ .amont-aval{ grid-template-columns:1fr; } }
+
+  /* ---------- QCM ---------- */
+  .quiz-score{
+    font-family:"Kalam", cursive;
+    font-weight:700;
+    font-size:1.05rem;
+    background:var(--tint-blue);
+    display:inline-block;
+    padding:.4rem 1.1rem;
+    border-radius:20px;
+    margin:0 0 1.2rem;
+  }
+  .quiz-item{
+    margin:0 0 1.3rem;
+    padding:1rem 1.1rem;
+    border:1px solid var(--grid);
+    border-radius:10px;
+    background:var(--card);
+  }
+  .quiz-q{ font-weight:600; margin:0 0 .8rem; }
+  .quiz-q .qn{
+    font-family:"Kalam", cursive;
+    font-weight:700;
+    color:var(--accent);
+    margin-right:.4rem;
+  }
+  .quiz-opts{ display:flex; flex-direction:column; gap:.5rem; }
+  .quiz-opt{
+    text-align:left;
+    padding:.6rem .85rem;
+    border:1px solid var(--grid);
+    border-radius:8px;
+    background:var(--paper);
+    color:var(--ink);
+    font:inherit;
+    font-size:.94rem;
+    cursor:pointer;
+  }
+  .quiz-opt:hover:not(.locked){ border-color:var(--accent); }
+  .quiz-opt.correct{ background:var(--ok-bg); border-color:var(--ok-border); }
+  .quiz-opt.wrong{ background:var(--bad-bg); border-color:var(--bad-border); }
+  .quiz-opt.locked{ cursor:default; }
+  .quiz-explain{
+    margin:.8rem 0 0;
+    font-size:.88rem;
+    color:var(--ink-soft);
+    font-style:italic;
+    display:none;
+  }
+  .quiz-explain.show{ display:block; }
+  .quiz-reset{
+    font-family:"Kalam", cursive;
+    font-weight:700;
+    font-size:.95rem;
+    background:var(--ink);
+    color:var(--paper);
+    border:none;
+    border-radius:8px;
+    padding:.6rem 1.2rem;
+    cursor:pointer;
+    margin-top:.5rem;
+  }
+
+  /* ---------- Mobile layout ---------- */
+  @media (max-width:900px){
+    .layout{ grid-template-columns:1fr; }
+    nav.toc{
+      position:sticky;
+      top:0;
+      z-index:5;
+      border-radius:0;
+      padding:.6rem .5rem;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+    }
+    nav.toc h2{ display:none; }
+    nav.toc ol{ flex-direction:row; }
+    nav.toc a{ white-space:nowrap; }
+  }
+
+  .to-top{
+    position:fixed;
+    right:calc(1.1rem + env(safe-area-inset-right,0px));
+    bottom:calc(1.1rem + env(safe-area-inset-bottom,0px));
+    width:2.7rem; height:2.7rem;
+    border-radius:50%;
+    border:none;
+    background:var(--ink);
+    color:var(--paper);
+    font-size:1.1rem;
+    cursor:pointer;
+    box-shadow:var(--shadow);
+  }
+  .to-top:focus-visible, a:focus-visible, nav.toc a:focus-visible{
+    outline:3px solid var(--accent);
+    outline-offset:2px;
+  }
+
+  footer.note{
+    max-width:1180px;
+    margin:0 auto 3rem;
+    padding:0 1.25rem;
+    color:var(--ink-soft);
+    font-size:.85rem;
+    text-align:center;
+  }
+
+  @media print{
+    body{ background:#fff; }
+    nav.toc, .to-top{ display:none; }
+    .layout{ display:block; max-width:100%; padding:0; }
+    main.sheet{ box-shadow:none; padding:0; }
+    main.sheet::before, main.sheet::after{ display:none; }
+    section + section{ break-inside:avoid-page; }
+  }
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <span class="tag">Marketing — fiche de révision</span>
+  <h1 class="title">Stratégie marketing &amp; étude de marché</h1>
+  <p class="subtitle">De la démarche mercatique aux 4P, en passant par la segmentation, le ciblage, le positionnement et les stratégies concurrentielles.</p>
+</header>
+
+<div class="layout">
+  <nav class="toc" aria-label="Sommaire">
+    <h2>Sommaire</h2>
+    <ol>
+      <li><a href="#s1"><span class="n">1</span> Démarche mercatique</a></li>
+      <li><a href="#s2"><span class="n">2</span> Le marché de l'entreprise</a></li>
+      <li><a href="#s3"><span class="n">3</span> L'étude de la demande</a></li>
+      <li><a href="#s4"><span class="n">4</span> L'étude de l'environnement</a></li>
+      <li><a href="#s5"><span class="n">5</span> Segmentation &amp; ciblage</a></li>
+      <li><a href="#s6"><span class="n">6</span> Stratégies concurrentielles</a></li>
+      <li><a href="#s7"><span class="n">7</span> Le positionnement</a></li>
+      <li><a href="#s8"><span class="n">8</span> Objectifs marketing</a></li>
+      <li><a href="#s9"><span class="n">9</span> Marketing mix (4P)</a></li>
+      <li><a href="#s10"><span class="n">10</span> Vocabulaire clé</a></li>
+      <li><a href="#quiz"><span class="n">✓</span> QCM de révision</a></li>
+    </ol>
+  </nav>
+
+  <main class="sheet">
+
+    <section id="s1">
+      <h2><span class="num">1</span>La démarche mercatique : histoire et principes</h2>
+
+      <h3>Repères historiques</h3>
+      <ul>
+        <li><strong>Avant les années 1970</strong> : économie de production, l'offre est inférieure à la demande — il suffit de produire, tout se vend.</li>
+        <li><strong>Années 1970</strong> : apparition du terme « marketing ». L'offre dépasse la demande : il faut désormais orienter la production vers les besoins réels du client.</li>
+        <li><strong>Années 1990-2000</strong> : essor du <strong>consumérisme</strong> — multiplication des associations de défense des droits des consommateurs (remise en cause du marketing jugé trop agressif).</li>
+      </ul>
+
+      <div class="callout-def">
+        La démarche mercatique est l'ensemble des actions d'une économie de marché qui visent à <strong>prévoir, stimuler, susciter ou renouveler</strong> le besoin des consommateurs, et à <strong>adapter l'appareil productif</strong> de l'entreprise à ce besoin déterminé.
+      </div>
+
+      <h3>Un cycle continu, jamais figé</h3>
+      <p>Analyse → Adaptation → Promotion → (retour à) Analyse…</p>
+
+      <h3>Les 4 étapes de la démarche</h3>
+      <ol>
+        <li><strong>Analyser</strong> le marché (étude de la demande, de l'offre, de l'environnement).</li>
+        <li><strong>Adapter</strong> l'entreprise : fixer les objectifs à atteindre à partir de l'analyse.</li>
+        <li><strong>Concevoir</strong> le produit et le tester.</li>
+        <li><strong>Planifier</strong> les actions marketing : promouvoir le produit, définir le circuit de distribution, organiser l'action marchande, définir la communication, organiser le SAV.</li>
+      </ol>
+
+      <h3>Étape transversale : le contrôle continu</h3>
+      <p>Retex (retour d'expérience) + écoute permanente du marché (= <em>veille marketing</em>) pour rester en phase avec son marché.</p>
+
+      <div class="callout-tip">
+        <strong>Exemples classiques à citer en copie</strong> — <strong>Kodak</strong> n'a pas anticipé le basculement vers la photo numérique ; <strong>Nokia</strong> n'a pas anticipé la révolution du smartphone. Ces deux cas illustrent la « <strong>myopie marketing</strong> » (Theodore Levitt, 1960) : une entreprise qui définit son métier par son produit plutôt que par le besoin qu'elle satisfait finit par être dépassée par l'innovation.
+      </div>
+    </section>
+
+    <section id="s2">
+      <h2><span class="num">2</span>Le marché de l'entreprise</h2>
+
+      <p>La connaissance du marché est la <strong>1<sup>ère</sup> étape</strong> de la démarche stratégique : elle permet une analyse fine des <strong>opportunités et des contraintes</strong> de l'entreprise sur son marché (à relier à l'analyse <strong>SWOT</strong> : Forces/Faiblesses en interne, Opportunités/Menaces en externe).</p>
+
+      <div class="callout-def">
+        Un marché est un lieu (réel ou virtuel) de rencontre entre une offre et une demande, dont la confrontation détermine un <strong>prix</strong>.
+      </div>
+
+      <h3>Les différents types de marchés</h3>
+      <p>Classés selon l'objet de l'échange :</p>
+      <ul>
+        <li>Marché du <strong>produit</strong> (biens et services)</li>
+        <li>Marché du <strong>travail</strong></li>
+        <li>Marché <strong>financier / monétaire</strong> (capitaux)</li>
+      </ul>
+
+      <h3>Le marché du produit</h3>
+      <p>Sa connaissance est fondamentale. On précise toujours trois dimensions :</p>
+      <ol>
+        <li>Le <strong>produit</strong> concerné (nature précise)</li>
+        <li>Le <strong>territoire géographique</strong> (local, national, international)</li>
+        <li>La <strong>période de temps</strong> considérée (un marché évolue dans le temps)</li>
+      </ol>
+
+      <h3>Le marché de l'entreprise</h3>
+      <p>Lorsqu'une entreprise est présente sur plusieurs marchés, l'ensemble de ces marchés constitue le « marché de l'entreprise ».</p>
+
+      <h3>Marché amont / aval</h3>
+      <div class="amont-aval">
+        <div><h4>Amont</h4>Tous les fournisseurs de l'entreprise (matières premières, banques, prestataires de services…)</div>
+        <div><h4>Aval</h4>Les clients : intermédiaires (distributeurs) et finaux (consommateurs)</div>
+      </div>
+
+      <h3>La part de marché (PDM)</h3>
+      <p>Indicateur clé de la position concurrentielle : <em>PDM = % des ventes d'une entreprise / ventes totales d'un secteur donné.</em></p>
+      <div class="formula">PDM = Ventes de l'entreprise / Ventes totales de la profession</div>
+      <p><strong>Part de marché relative</strong> (comparaison au principal concurrent, souvent le leader) :</p>
+      <div class="formula">PDM relative = Ventes de l'entreprise / Ventes du principal concurrent</div>
+      <p><strong>Taux de pénétration</strong> (ventes actuelles vs. potentiel du marché) :</p>
+      <div class="formula">Taux de pénétration = Ventes actuelles de la profession / Ventes potentielles de la profession</div>
+
+      <div class="callout-warn">
+        <strong>Réflexe examen</strong> : bien distinguer part de marché <strong>absolue</strong> (en valeur ou en volume) et part de marché <strong>relative</strong> (comparaison à un concurrent précis) — c'est une confusion fréquente.
+      </div>
+    </section>
+
+    <section id="s3">
+      <h2><span class="num">3</span>L'étude de la demande</h2>
+
+      <p><strong>Objectif</strong> : avant d'engager toute action, le décideur marketing doit connaître l'état de la demande actuelle et potentielle. Il produit une estimation <strong>quantitative et qualitative</strong> des principaux segments de consommateurs actuels/potentiels.</p>
+
+      <h3>La segmentation « en entonnoir » de la population</h3>
+      <p>À partir de la population totale d'une zone géographique, on distingue plusieurs sous-ensembles :</p>
+      <ol>
+        <li><strong>Non-consommateurs absolus (NCA)</strong> : partie incompressible de la population qui, pour des raisons durables et variées (physiques, culturelles, économiques, religieuses…), <strong>ne consommera jamais</strong> le produit.</li>
+        <li><strong>Non-consommateurs relatifs (NCR)</strong> : ne consomment <strong>pas actuellement</strong>, mais pas de manière définitive. Il faut comprendre pourquoi ils ne consomment pas → études sur les <strong>freins et motivations</strong> (ex. modèle de Joannis : peur, risque, habitude d'un côté ; hédonisme, auto-expression, oblativité de l'autre).</li>
+        <li><strong>Consommateurs actuels</strong> : ceux qui consomment déjà le produit — chez l'entreprise ou chez un concurrent. Leur nombre est facilement quantifiable grâce aux statistiques internes et à la <strong>veille marketing</strong> (rester en permanence à l'écoute de son marché).</li>
+      </ol>
+
+      <h3>Marché actuel vs marché potentiel</h3>
+      <ul>
+        <li><strong>Marché actuel</strong> = consommateurs actuels (clients de l'entreprise + de la concurrence)</li>
+        <li><strong>Marché potentiel</strong> = marché actuel + non-consommateurs relatifs (cible que l'on peut espérer convertir)</li>
+      </ul>
+
+      <h3>Les ratios commerciaux</h3>
+      <p>L'estimation de la demande globale permet de calculer des ratios qui situent l'entreprise sur son marché et indiquent des <strong>pistes stratégiques</strong> à suivre.</p>
+      <ul>
+        <li>1<sup>er</sup> ratio essentiel : la <strong>part de marché</strong> de l'entreprise (cf. section 2)</li>
+        <li>Autres ratios utiles : <strong>taux de pénétration</strong> (consommateurs actuels / marché potentiel), <strong>taux de notoriété</strong>, <strong>taux de fidélité</strong>, <strong>panier moyen</strong>…</li>
+      </ul>
+    </section>
+
+    <section id="s4">
+      <h2><span class="num">4</span>L'étude de l'environnement</h2>
+
+      <p>Notion très vaste : l'entreprise doit analyser l'ensemble des facteurs externes qui influencent son marché (on peut mobiliser l'acronyme <strong>PESTEL</strong> — Politique, Économique, Socioculturel, Technologique, Écologique, Légal — pour structurer une réponse d'examen).</p>
+
+      <h3>Les composantes identifiées en cours</h3>
+      <ul>
+        <li><strong>Environnement démographique</strong> : connaissance des courbes démographiques (structure par âge, pyramide des âges, natalité) des principaux pays/marchés avec lesquels l'entreprise travaille.</li>
+        <li><strong>Environnement technologique</strong> : la veille technologique est <strong>capitale</strong> (anticiper les ruptures technologiques — cf. Kodak/Nokia, section 1).</li>
+        <li><strong>Environnement juridique</strong> : urbanisme, choix de société (forme juridique), réglementation en vigueur (droit de la consommation, droit du travail, normes…).</li>
+        <li><strong>Environnement culturel et commercial</strong> : il est important de localiser une entreprise près de sites attractifs pour sa cible (zone de chalandise, image du lieu).</li>
+        <li><strong>Environnement économique/politique</strong> : crise du pays, pays émetteur (marché export) en difficulté → un « risque pays » à surveiller.</li>
+      </ul>
+
+      <h3>L'étude de la concurrence</h3>
+      <p>Avant de définir une stratégie, il faut mettre en évidence les <strong>forces et faiblesses des concurrents</strong>.</p>
+      <ul>
+        <li><strong>Marché atomisé</strong> : la concurrence est nombreuse sur le marché, sans qu'aucune entreprise ne se distingue nettement (pas de leader clair) — proche de la concurrence pure et parfaite.</li>
+        <li>À l'inverse, un <strong>marché concentré / oligopolistique</strong> voit un petit nombre d'acteurs dominer nettement le marché.</li>
+      </ul>
+    </section>
+
+    <section id="s5">
+      <h2><span class="num">5</span>Segmentation &amp; ciblage</h2>
+
+      <h3>5.1 Le choix des cibles</h3>
+      <p>① <strong>Définir la cible</strong> : à qui l'entreprise s'adresse-t-elle ?</p>
+      <ul>
+        <li>Le <strong>consommateur</strong> (utilisateur final)</li>
+        <li>L'<strong>acheteur</strong> (qui paie, pas toujours le consommateur — ex. un parent qui achète pour son enfant)</li>
+        <li>Le <strong>prescripteur</strong> (qui recommande/influence le choix sans acheter ni consommer — ex. un médecin, un enseignant)</li>
+      </ul>
+
+      <p>② <strong>Définir la taille des cibles</strong> : il faut pouvoir <strong>quantifier</strong> chaque segment (sous-ensemble homogène) auquel on décide de s'adresser, grâce à l'étude de marché.</p>
+
+      <p>③ <strong>Définir la cible selon les critères de segmentation</strong>. Un segment se définit selon plusieurs critères :</p>
+      <ul>
+        <li>Catégorie socio-professionnelle (CSP), critères sociodémographiques (âge, sexe, revenu…)</li>
+        <li>Les besoins</li>
+        <li>Aptitudes et comportements</li>
+        <li>Freins et motivations</li>
+        <li>Le style de vie (critères psychographiques)</li>
+      </ul>
+      <div class="callout-tip">Pour qu'un critère de segmentation soit pertinent, il doit être <strong>mesurable</strong>, <strong>accessible</strong> (on doit pouvoir atteindre le segment via la distribution/communication) et <strong>substantiel</strong> (suffisamment important pour être rentable).</div>
+
+      <h3>5.2 Les options stratégiques liées au choix des cibles</h3>
+      <div class="table-wrap">
+      <table>
+        <thead><tr><th>Stratégie</th><th>Principe</th><th>Avantage</th><th>Limite</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Indifférenciée</strong><br>(marketing de masse)</td><td>S'adresser sans distinction à tous les consommateurs potentiels avec <strong>un seul marketing mix</strong></td><td>Économies d'échelle, coûts réduits</td><td>Ignore les attentes spécifiques de chaque segment</td></tr>
+          <tr><td><strong>Différenciée</strong><br>(segmentation)</td><td>Adapter la stratégie à chaque segment : un marketing mix spécifique par segment</td><td>Meilleure réponse aux attentes de chaque cible</td><td>Investissements plus élevés</td></tr>
+          <tr><td><strong>Concentrée</strong><br>(niche)</td><td>Ne s'adresser qu'à un seul segment préalablement défini</td><td>Forte expertise et maîtrise sur ce segment</td><td>Risque élevé de dépendance à un seul segment</td></tr>
+          <tr><td><strong>One-to-one</strong><br>(individualisée)</td><td>Différenciation jusqu'à l'individu, grâce à des bases de données (BDD) performantes</td><td>Individualisation maximale de la relation client</td><td>Nécessite des outils CRM/BDD coûteux</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p><strong>À noter</strong> : avec l'internationalisation croissante et l'homogénéisation des goûts et des modes de consommation, de nombreuses entreprises définissent des <strong>stratégies indifférenciées à l'échelle mondiale</strong>, réalisant des économies d'échelle en amortissant leurs charges de R&amp;D sur une plus grande quantité de produits vendus.</p>
+    </section>
+
+    <section id="s6">
+      <h2><span class="num">6</span>Stratégies concurrentielles</h2>
+      <p>Une fois la cible choisie, l'entreprise peut mobiliser plusieurs orientations stratégiques — <strong>souvent complémentaires entre elles</strong> :</p>
+
+      <h3>1) Stratégie concurrentielle</h3>
+      <p>L'entreprise s'efforce de gagner des parts de marché sur ses principaux concurrents. On distingue plusieurs niveaux de concurrence :</p>
+      <ul>
+        <li><strong>Concurrents directs</strong> : produits similaires répondant au même besoin (ex. Apple / Samsung)</li>
+        <li><strong>Concurrents indirects</strong> : produits différents répondant au même besoin (ex. train / avion)</li>
+        <li><strong>Concurrents internes à un même groupe</strong> : risque de <strong>cannibalisation</strong> (un produit du groupe prend des parts de marché à un autre produit du même groupe)</li>
+      </ul>
+
+      <h3>2) Stratégie intensive</h3>
+      <p>Obtenir une plus grande intensité de consommation de la part des clients actuels, en leur proposant de <strong>nouvelles occasions de consommer</strong>. Se justifie lorsque le marché est <strong>saturé et fortement concurrentiel</strong>.</p>
+
+      <h3>3) Stratégie extensive</h3>
+      <p>S'attaquer aux <strong>non-consommateurs relatifs (NCR)</strong> du produit : des personnes qui n'ont pas de raison majeure de ne pas consommer le produit, mais qui sont simplement habituées à un produit concurrent ou de substitution.</p>
+
+      <h3>4) Stratégie de fidélisation</h3>
+      <p>Stratégie <strong>compatible avec toutes les autres</strong>, centrée sur la conservation des clients existants.</p>
+      <div class="callout-tip">
+        Conquérir un nouveau client coûte nettement plus cher que fidéliser un client existant (règle empirique souvent citée : de 5 à 7 fois plus cher). Un client <strong>insatisfait</strong> propage une opinion négative à davantage de personnes qu'un client <strong>satisfait</strong> n'en recommande — d'où l'importance de la gestion de la relation client (CRM). Outils classiques : carte de fidélité, club de clientèle, programme de points, SAV de qualité, newsletters personnalisées…
+      </div>
+    </section>
+
+    <section id="s7">
+      <h2><span class="num">7</span>Le positionnement</h2>
+      <div class="callout-def">
+        Le positionnement est l'<strong>image / la personnalité / l'identité</strong> qu'une entreprise souhaite donner d'un produit au consommateur, au sein d'un univers concurrentiel.
+      </div>
+      <p>Le positionnement est <strong>la clé de voûte de la stratégie marketing et du marketing mix</strong> : toutes les variables du mix (produit, prix, distribution, communication) doivent être cohérentes avec le positionnement choisi et le décliner concrètement.</p>
+      <p>Dans un univers fortement concurrentiel, seul un positionnement <strong>affirmé</strong> permet une réelle <strong>différenciation</strong> des marques/enseignes aux yeux des consommateurs.</p>
+
+      <h3>Compléments utiles pour l'examen</h3>
+      <ul>
+        <li>Le positionnement répond à deux questions : <em>Qu'est-ce que j'offre ?</em> (identification) et <em>En quoi suis-je différent ?</em> (différenciation).</li>
+        <li>Une <strong>carte perceptuelle</strong> (mapping concurrentiel) visualise la position des marques sur deux axes (ex. prix / qualité) pour repérer les espaces libres ou saturés du marché.</li>
+        <li>Le <strong>repositionnement</strong> consiste à modifier l'image d'un produit existant pour l'adapter à un nouveau contexte concurrentiel ou à une nouvelle cible.</li>
+      </ul>
+    </section>
+
+    <section id="s8">
+      <h2><span class="num">8</span>Les objectifs marketing</h2>
+      <p>Les objectifs correspondent aux <strong>décisions des grandes orientations de l'entreprise</strong> ; ils permettent de visualiser ce qu'il faut atteindre. On distingue trois grandes catégories :</p>
+      <ul>
+        <li>Les objectifs <strong>généraux</strong> (rentabilité, croissance, pérennité…)</li>
+        <li>Les objectifs <strong>commerciaux</strong> (parts de marché, chiffre d'affaires, volume de ventes…)</li>
+        <li>Les objectifs de <strong>communication</strong></li>
+      </ul>
+
+      <h3>Les 3 types d'objectifs de communication</h3>
+      <p>Modèle proche du modèle hiérarchique <strong>AIDA</strong> (Attention, Intérêt, Désir, Action) :</p>
+      <ol>
+        <li><strong>Cognitif</strong> (faire connaître / faire savoir) : accroître la <strong>notoriété</strong> d'un produit, d'une entreprise, d'une enseigne ou d'une prestation. → agit sur le <em>savoir</em>.</li>
+        <li><strong>Affectif</strong> (faire aimer) : développer une image positive, susciter une attitude favorable envers la marque. → agit sur le <em>ressenti</em>.</li>
+        <li><strong>Comportemental / conatif</strong> (faire agir) : obtenir de la cible un comportement précis (ex. « se rendre dans un point de vente… »). → agit sur l'<em>action</em>.</li>
+      </ol>
+      <div class="callout-warn"><strong>Astuce examen</strong> : toujours relier un objectif de communication à l'un de ces 3 registres, et savoir associer un outil de communication au registre qu'il sert plutôt (la publicité média sert souvent le cognitif/affectif, la promotion des ventes sert plutôt le conatif).</div>
+    </section>
+
+    <section id="s9">
+      <h2><span class="num">9</span>Le marketing mix (4P)</h2>
+      <p>Le marketing mix organise les grands axes fixés pour la mise en œuvre de la stratégie. Il doit être <strong>cohérent en interne</strong> (les 4 variables alignées entre elles), <strong>cohérent avec la politique générale</strong> de l'entreprise, et <strong>bien dosé</strong> (équilibre des moyens/budgets entre les 4 variables).</p>
+
+      <h3>1. Produit (Product)</h3>
+      <ul>
+        <li>Caractéristiques techniques du produit, en fonction des attentes du marché</li>
+        <li><strong>Positionnement</strong> : identité/personnalité donnée au produit (démarcation vis-à-vis de la concurrence)</li>
+        <li>Choix de la <strong>marque / de l'enseigne</strong> : nom + univers ; marque <strong>ombrelle</strong> ou marque <strong>individuelle</strong></li>
+        <li>Choix de la <strong>gamme / de l'assortiment</strong> : composition et nombre de produits (largeur, profondeur de gamme)</li>
+        <li><strong>Services complémentaires</strong> (garantie, SAV, livraison…)</li>
+      </ul>
+
+      <h3>2. Prix (Price)</h3>
+      <ul>
+        <li>Stratégie de prix / prix du marché (écrémage, pénétration, alignement…)</li>
+        <li>Conditions spécifiques de remise / ristourne</li>
+        <li>Conditions de paiement acceptées</li>
+      </ul>
+
+      <h3>3. Distribution (Place)</h3>
+      <ul>
+        <li>Choix des <strong>canaux de distribution</strong> jusqu'au consommateur final (super/hypermarchés, grossistes, vente directe, e-commerce…)</li>
+        <li>Organisation de l'action marchande et de la <strong>force de vente</strong></li>
+      </ul>
+
+      <h3>4. Communication (Promotion)</h3>
+      <p>Décision stratégique à part entière : répercussions financières à <strong>court terme</strong> (budget immédiat) et à <strong>long terme</strong> (image de marque).</p>
+      <ul>
+        <li>Le <strong>budget</strong>, le choix des <strong>moyens de communication</strong></li>
+        <li>La <strong>répartition des budgets</strong> entre canaux (publicité, promotion des ventes, relations publiques, marketing direct…)</li>
+        <li>La <strong>stratégie de communication</strong> globale (média / hors-média)</li>
+      </ul>
+
+      <div class="callout-tip">
+        <strong>Pour aller plus loin</strong> — le modèle des 4P (vision producteur) se met en regard des <strong>4C</strong> de Lauterborn (vision client) : Produit → <em>Customer value</em>, Prix → <em>Cost</em>, Distribution → <em>Convenience</em>, Communication → <em>Communication</em>. Pour les services, on ajoute souvent 3P (<strong>7P</strong>) : Personnel, Processus, Preuve physique.
+      </div>
+    </section>
+
+    <section id="s10">
+      <h2><span class="num">10</span>Vocabulaire clé &amp; pièges classiques</h2>
+
+      <div class="callout-def">
+        <strong>Politique</strong> : ensemble des lignes directrices qui orientent en permanence l'action de l'entreprise dans un but donné — une façon de concevoir l'entreprise et son environnement, de la diriger, et un cadre de référence pour les décisions.
+      </div>
+      <p>→ La politique fixe également les grandes options et moyens à long terme (les grands choix financiers sont décidés dans ce cadre). On parle du « <strong>couple marché-produit</strong> » pour désigner le choix fondamental d'une politique d'entreprise.</p>
+
+      <div class="callout-def">
+        <strong>Stratégie</strong> : (Le Petit Robert) partie de la science militaire qui concerne la conduite générale de la guerre et la défense d'un pays, sur le <strong>long terme</strong>. Transposée au marketing : la conduite générale à long terme de l'entreprise face à son marché et à ses concurrents.
+      </div>
+
+      <div class="callout-def">
+        <strong>Marketing</strong> : ensemble de <strong>moyens interdépendants</strong> mis en œuvre pour réaliser les objectifs de la politique.
+      </div>
+
+      <p><strong>Positionnement</strong> : l'idée / l'image que l'on va donner du produit aux consommateurs (cf. section 7).</p>
+
+      <h3>Hiérarchie à retenir</h3>
+      <p class="formula" style="font-family:'Literata',serif;font-style:italic;">Politique (vision long terme, cadre général) → Stratégie (orientations pour atteindre les objectifs) → Marketing / marketing mix (moyens concrets) → Actions opérationnelles</p>
+
+      <h3>Pièges classiques à éviter en examen</h3>
+      <div class="callout-warn">
+        <ul style="margin:0;">
+          <li>Confondre marché <strong>potentiel</strong> et marché <strong>actuel</strong></li>
+          <li>Confondre part de marché <strong>absolue</strong> et part de marché <strong>relative</strong></li>
+          <li>Oublier qu'un objectif de communication doit être rattaché à un registre (cognitif / affectif / conatif)</li>
+          <li>Oublier que le marketing mix doit être cohérent en interne et avec le positionnement choisi</li>
+          <li>Bons exemples à mobiliser : <strong>Kodak</strong> et <strong>Nokia</strong> (myopie marketing), <strong>Apple vs Samsung</strong> (concurrents directs), <strong>train vs avion</strong> (concurrents indirects)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="quiz">
+      <h2><span class="num">✓</span>QCM de révision</h2>
+      <p>14 questions couvrant l'ensemble de la fiche. Cliquez sur une réponse pour la vérifier.</p>
+      <p class="quiz-score" id="quizScore">Score : 0 / 14</p>
+
+      <div class="quiz-item">
+        <p class="quiz-q"><span class="qn">Q1.</span> Dans les années 1970, quelle situation a fait émerger le marketing ?</p>
+        <div class="quiz-opts">
+          <button class="quiz-opt">L'offre est inférieure à la demande</button>
+          <button class="quiz-opt" data-correct="true">L'offre dépasse la demande</button>
+          <button class="quiz-opt">L'offre et la demande sont égales</button>
+          <button class="quiz-opt">Il n'existe pas encore de marché</button>
+        </div>
+        <p class="quiz-explain">Quand l'offre dépasse la demande, il faut orienter la production vers les besoins réels du client : c'est la naissance de la démarche mercatique.</p>
+      </div>
+
+      <div class="quiz-item">
+        <p class="quiz-q"><span class="qn">Q2.</span> Les cas Kodak et Nokia illustrent surtout...</p>
+        <div class="quiz-opts">
+          <button class="quiz-opt">Une stratégie de fidélisation réussie</button>
+          <button class="quiz-opt" data-correct="true">La « myopie marketing » (Theodore Levitt)</button>
+          <button class="quiz-opt">Une stratégie concurrentielle indirecte</button>
+          <button class="quiz-opt">Un marché atomisé</button>
+        </div>
+        <p class="quiz-explain">Ces entreprises ont défini leur métier par leur produit plutôt que par le besoin qu'elles satisfaisaient, et ont été dépassées par l'innovation.</p>
+      </div>
+
+      <div class="quiz-item">
+        <p class="quiz-q"><span class="qn">Q3.</span> Le « marché amont » d'une entreprise désigne...</p>
+        <div class="quiz-opts">
+          <button class="quiz-opt">Ses clients finaux</button>
+          <button class="quiz-opt">Ses concurrents directs</button>
+          <button class="quiz-opt" data-correct="true">Ses fournisseurs (matières premières, banques, services…)</button>
+          <button class="quiz-opt">Ses intermédiaires de distribution</button>
+        </div>
+        <p class="quiz-explain">L'amont regroupe tous les fournisseurs de l'entreprise ; l'aval regroupe les clients (intermédiaires et finaux).</p>
+      </div>
+
+      <div class="quiz-item">
+        <p class="quiz-q"><span class="qn">Q4.</span> Comment calcule-t-on la part de marché <strong>relative</strong> ?</p>
+        <div class="quiz-opts">
+          <button class="quiz-opt">Ventes de l'entreprise / Ventes totales de la profession</button>
+          <button class="quiz-opt" data-correct="true">Ventes de l'entreprise / Ventes du principal concurrent</button>
+          <button class="quiz-opt">Ventes potentielles / Ventes actuelles</button>
+          <button class="quiz-opt">Ventes du concurrent / Ventes totales de la profession</button>
+        </div>
+        <p class="quiz-explain">La part de marché relative compare l'entreprise à son principal concurrent (souvent le leader), contrairement à la part de marché absolue.</p>
+      </div>
+
+      <div class="quiz-item">
+        <p class="quiz-q"><span class="qn">Q5.</span> Un non-consommateur <strong>relatif</strong> est quelqu'un qui...</p>
+        <div class="quiz-opts">
+          <button class="quiz-opt">Ne consommera jamais le produit, pour des raisons durables</button>
+          <button class="quiz-opt">Consomme déjà le produit chez un concurrent</button>
+          <button class="quiz-opt" data-correct="true">Ne consomme pas actuellement, mais pourrait un jour consommer le produit</button>
+          <button class="quiz-opt">Fait partie du marché actuel de l'entreprise</button>
+        </div>
+        <p class="quiz-explain">Contrairement au non-consommateur absolu, le frein du non-consommateur relatif n'est pas définitif : il peut être levé.</p>
+      </div>
+
+      <div class="quiz-item">
+        <p class="quiz-q"><span class="qn">Q6.</span> Qu'appelle-t-on un « marché atomisé » ?</p>
+        <div class="quiz-opts">
+          <button class="quiz-opt">Un marché dominé par deux ou trois grandes entreprises</button>
+          <button class="quiz-opt" data-correct="true">Un marché à la concurrence nombreuse, sans acteur qui se distingue nettement</button>
+          <button class="quiz-opt">Un marché en situation de monopole</button>
+          <button class="quiz-opt">Un marché sans aucune concurrence</button>
+        </div>
+        <p class="quiz-explain">Le marché atomisé se rapproche de la concurrence pure et parfaite : aucun acteur n'a de position dominante claire.</p>
+      </div>
+
+      <div class="quiz-item">
+        <p class="quiz-q"><span class="qn">Q7.</span> Proposer un marketing mix spécifique à chaque segment de marché correspond à la stratégie...</p>
+        <div class="quiz-opts">
+          <button class="quiz-opt">Indifférenciée</button>
+          <button class="quiz-opt" data-correct="true">Différenciée</button>
+          <button class="quiz-opt">Concentrée</button>
+          <button class="quiz-opt">Extensive</button>
+        </div>
+        <p class="quiz-explain">La stratégie différenciée (ou de segmentation) adapte le marketing mix à chaque segment ; elle demande plus d'investissement que la stratégie indifférenciée.</p>
+      </div>
+
+      <div class="quiz-item">
+        <p class="quiz-q"><span class="qn">Q8.</span> Pour être pertinent, un critère de segmentation doit notamment être...</p>
+        <div class="quiz-opts">
+          <button class="quiz-opt">Uniquement démographique</button>
+          <button class="quiz-opt" data-correct="true">Mesurable, accessible et substantiel</button>
+          <button class="quiz-opt">Identique pour tous les segments du marché</button>
+          <button class="quiz-opt">Défini une fois pour toutes, sans révision possible</button>
+        </div>
+        <p class="quiz-explain">Un bon critère doit permettre de quantifier le segment, de l'atteindre via la distribution/communication, et représenter un volume suffisant pour être rentable.</p>
+      </div>
+
+      <div class="quiz-item">
+        <p class="quiz-q"><span class="qn">Q9.</span> S'attaquer aux non-consommateurs relatifs correspond à la stratégie...</p>
+        <div class="quiz-opts">
+          <button class="quiz-opt">Intensive</button>
+          <button class="quiz-opt" data-correct="true">Extensive</button>
+          <button class="quiz-opt">De fidélisation</button>
+          <button class="quiz-opt">Concurrentielle</button>
+        </div>
+        <p class="quiz-explain">La stratégie extensive vise à convertir des non-consommateurs relatifs, habitués à un produit concurrent ou de substitution.</p>
+      </div>
+
+      <div class="quiz-item">
+        <p class="quiz-q"><span class="qn">Q10.</span> Apple et Samsung sont des concurrents...</p>
+        <div class="quiz-opts">
+          <button class="quiz-opt">Indirects</button>
+          <button class="quiz-opt">Internes à un même groupe</button>
+          <button class="quiz-opt" data-correct="true">Directs</button>
+          <button class="quiz-opt">Ce ne sont pas des concurrents</button>
+        </div>
+        <p class="quiz-explain">Concurrents directs = produits similaires répondant au même besoin. Train/avion serait un exemple de concurrents indirects.</p>
+      </div>
+
+      <div class="quiz-item">
+        <p class="quiz-q"><span class="qn">Q11.</span> Le positionnement d'un produit correspond à...</p>
+        <div class="quiz-opts">
+          <button class="quiz-opt">Son prix de vente sur le marché</button>
+          <button class="quiz-opt" data-correct="true">L'image/l'identité que l'entreprise souhaite lui donner dans l'esprit du consommateur</button>
+          <button class="quiz-opt">Le circuit de distribution utilisé</button>
+          <button class="quiz-opt">Le budget alloué à la communication</button>
+        </div>
+        <p class="quiz-explain">Le positionnement est la clé de voûte de la stratégie marketing : toutes les variables du mix doivent le décliner de façon cohérente.</p>
+      </div>
+
+      <div class="quiz-item">
+        <p class="quiz-q"><span class="qn">Q12.</span> Un objectif de communication « cognitif » vise à...</p>
+        <div class="quiz-opts">
+          <button class="quiz-opt">Faire aimer la marque</button>
+          <button class="quiz-opt">Faire adopter un comportement précis</button>
+          <button class="quiz-opt" data-correct="true">Faire connaître un produit ou une marque (accroître la notoriété)</button>
+          <button class="quiz-opt">Fixer le prix psychologique</button>
+        </div>
+        <p class="quiz-explain">Cognitif = faire savoir ; affectif = faire aimer ; comportemental/conatif = faire agir.</p>
+      </div>
+
+      <div class="quiz-item">
+        <p class="quiz-q"><span class="qn">Q13.</span> Laquelle de ces variables ne fait <strong>pas</strong> partie des 4P du marketing mix ?</p>
+        <div class="quiz-opts">
+          <button class="quiz-opt">Produit</button>
+          <button class="quiz-opt">Distribution</button>
+          <button class="quiz-opt" data-correct="true">Personnel</button>
+          <button class="quiz-opt">Communication</button>
+        </div>
+        <p class="quiz-explain">Les 4P sont Produit, Prix, Distribution, Communication. Le Personnel fait partie des 3P ajoutés pour les services (modèle des 7P).</p>
+      </div>
+
+      <div class="quiz-item">
+        <p class="quiz-q"><span class="qn">Q14.</span> Selon la hiérarchie vue en cours, quel est l'ordre correct ?</p>
+        <div class="quiz-opts">
+          <button class="quiz-opt">Marketing → Stratégie → Politique</button>
+          <button class="quiz-opt" data-correct="true">Politique → Stratégie → Marketing</button>
+          <button class="quiz-opt">Stratégie → Marketing → Politique</button>
+          <button class="quiz-opt">Marketing → Politique → Stratégie</button>
+        </div>
+        <p class="quiz-explain">La politique fixe le cadre long terme, la stratégie en découle, et le marketing rassemble les moyens concrets et interdépendants pour l'appliquer.</p>
+      </div>
+
+      <button class="quiz-reset" id="quizReset">Recommencer le QCM</button>
+    </section>
+
+  </main>
+</div>
+
+<footer class="note">Fiche de révision — bon courage pour l'examen.</footer>
+
+<button class="to-top" id="toTop" aria-label="Retour en haut" title="Retour en haut">↑</button>
+
+<script>
+  document.getElementById('toTop').addEventListener('click', function(){
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  var links = Array.prototype.slice.call(document.querySelectorAll('nav.toc a'));
+  var sections = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+
+  if ('IntersectionObserver' in window){
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        var id = '#' + entry.target.id;
+        var link = links.filter(function(a){ return a.getAttribute('href') === id; })[0];
+        if (!link) return;
+        if (entry.isIntersecting){
+          links.forEach(function(a){ a.classList.remove('active'); });
+          link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-15% 0px -70% 0px', threshold: 0 });
+    sections.forEach(function(s){ if (s) observer.observe(s); });
+  }
+
+  var quizItems = Array.prototype.slice.call(document.querySelectorAll('.quiz-item'));
+  var scoreEl = document.getElementById('quizScore');
+  var total = quizItems.length;
+  var score = 0;
+
+  function updateScore(){
+    scoreEl.textContent = 'Score : ' + score + ' / ' + total;
+  }
+
+  quizItems.forEach(function(item){
+    var opts = Array.prototype.slice.call(item.querySelectorAll('.quiz-opt'));
+    var explain = item.querySelector('.quiz-explain');
+    opts.forEach(function(opt){
+      opt.addEventListener('click', function(){
+        if (item.dataset.answered === 'true') return;
+        item.dataset.answered = 'true';
+        var isCorrect = opt.dataset.correct === 'true';
+        if (isCorrect){ score++; updateScore(); }
+        opts.forEach(function(o){
+          o.classList.add('locked');
+          if (o.dataset.correct === 'true'){ o.classList.add('correct'); }
+          else if (o === opt){ o.classList.add('wrong'); }
+        });
+        explain.classList.add('show');
+      });
+    });
+  });
+
+  document.getElementById('quizReset').addEventListener('click', function(){
+    score = 0;
+    updateScore();
+    quizItems.forEach(function(item){
+      item.dataset.answered = 'false';
+      item.querySelector('.quiz-explain').classList.remove('show');
+      item.querySelectorAll('.quiz-opt').forEach(function(o){
+        o.classList.remove('locked','correct','wrong');
+      });
+    });
+    document.getElementById('quiz').scrollIntoView({block:'start'});
+  });
+</script>
+
+</body>
+</html>

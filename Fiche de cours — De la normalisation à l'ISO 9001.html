@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fiche de cours — De la normalisation à l'ISO 9001</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#fbfcfd; --panel:#f1f4f7; --ink:#15263a; --muted:#56687c; --rule:#d5dde6;
+  --plan:#2f5fb3; --do:#c8423b; --check:#7a4fa8; --act:#2e8a52;
+  --ok-bg:#e6f4ea; --ko-bg:#fbe8e7;
+  --serif:"Source Serif 4", Georgia, "Times New Roman", serif;
+  --sans:"Public Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#10171f; --panel:#18222d; --ink:#e3e9ef; --muted:#9aabbc; --rule:#2c3a48;
+    --plan:#7ea3e8; --do:#ef8a83; --check:#b99ae0; --act:#6fcb92;
+    --ok-bg:#16301f; --ko-bg:#3a1d1b;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#10171f; --panel:#18222d; --ink:#e3e9ef; --muted:#9aabbc; --rule:#2c3a48;
+  --plan:#7ea3e8; --do:#ef8a83; --check:#b99ae0; --act:#6fcb92;
+  --ok-bg:#16301f; --ko-bg:#3a1d1b;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 1rem/1.6 var(--sans)}
+a{color:var(--plan)}
+:focus-visible{outline:2px solid var(--plan);outline-offset:2px}
+
+.layout{display:grid;grid-template-columns:15rem minmax(0,1fr);gap:3rem;max-width:72rem;margin:0 auto;padding:2rem 1.5rem 4rem}
+nav.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 1.5rem);align-self:start;font-size:.9rem}
+nav.toc ol{list-style:none;margin:0;padding:0;border-left:1px solid var(--rule)}
+nav.toc li a{display:block;padding:.3rem .9rem;color:var(--muted);text-decoration:none;border-left:3px solid transparent;margin-left:-2px}
+nav.toc li a:hover{color:var(--ink);border-left-color:var(--rule)}
+nav.toc .qcm-link a{color:var(--plan);font-weight:600}
+@media (max-width:860px){
+  .layout{grid-template-columns:1fr;gap:1.5rem}
+  nav.toc{position:static}
+  nav.toc ol{display:flex;flex-wrap:wrap;gap:.3rem;border:0}
+  nav.toc li a{border:1px solid var(--rule);border-radius:999px;margin:0;padding:.2rem .7rem}
+}
+
+main{max-width:46rem}
+/* En-tête façon document maîtrisé */
+.docbox{border:1.5px solid var(--ink);display:grid;grid-template-columns:1fr auto;margin-bottom:2.5rem}
+.docbox .t{padding:1.2rem 1.4rem;border-right:1.5px solid var(--ink)}
+.docbox h1{font:700 clamp(1.7rem,4vw,2.4rem)/1.15 var(--serif);margin:0 0 .4rem}
+.docbox p{margin:0;color:var(--muted)}
+.docbox dl{margin:0;display:grid;grid-template-columns:auto auto;font-size:.82rem}
+.docbox dt,.docbox dd{margin:0;padding:.45rem .8rem;border-bottom:1px solid var(--rule)}
+.docbox dt{color:var(--muted)}
+.docbox dd{font-weight:600}
+@media (max-width:560px){.docbox{grid-template-columns:1fr}.docbox .t{border-right:0;border-bottom:1.5px solid var(--ink)}}
+
+/* Carte PDCA des chapitres */
+.pdca{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin:1.2rem 0 .6rem}
+.pdca div{padding:.6rem .5rem;color:#fff;font-size:.78rem;line-height:1.25;min-height:4.6rem}
+.pdca b{display:block;font:700 1.35rem/1 var(--serif);margin-bottom:.25rem}
+.pdca .p{background:var(--plan)}.pdca .d{background:var(--do)}.pdca .c{background:var(--check)}.pdca .a{background:var(--act)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .pdca div{color:#10171f}}
+:root[data-theme="dark"] .pdca div{color:#10171f}
+.pdca-legend{display:flex;gap:1rem;flex-wrap:wrap;font-size:.8rem;color:var(--muted)}
+.pdca-legend span::before{content:"";display:inline-block;width:.7rem;height:.7rem;margin-right:.35rem;vertical-align:-1px}
+.pdca-legend .p::before{background:var(--plan)}.pdca-legend .d::before{background:var(--do)}.pdca-legend .c::before{background:var(--check)}.pdca-legend .a::before{background:var(--act)}
+@media (max-width:620px){.pdca{grid-template-columns:repeat(4,1fr)}}
+
+section{margin-bottom:3rem}
+h2{font:700 1.6rem/1.2 var(--serif);margin:0 0 1rem;padding-bottom:.4rem;border-bottom:1.5px solid var(--ink)}
+h2 small{font:500 .85rem var(--sans);color:var(--muted);margin-left:.5rem}
+h3{font:600 1.1rem/1.3 var(--sans);margin:1.8rem 0 .5rem}
+p,ul,ol{margin:.5rem 0 .9rem}
+li{margin:.2rem 0}
+.def{border-left:3px solid var(--plan);background:var(--panel);padding:.8rem 1rem;margin:1rem 0;font-family:var(--serif);font-size:1.05rem;line-height:1.55}
+.retenir{border:1px solid var(--rule);border-left:3px solid var(--act);padding:.7rem 1rem;margin:1rem 0}
+.retenir strong:first-child{color:var(--act)}
+.tbl{overflow-x:auto;margin:1rem 0}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{border:1px solid var(--rule);padding:.45rem .6rem;text-align:left;vertical-align:top}
+th{background:var(--panel);font-weight:600}
+td.y{font-weight:700;white-space:nowrap;font-family:var(--serif)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media (max-width:620px){.two{grid-template-columns:1fr}}
+.two > div{border:1px solid var(--rule);padding:.7rem 1rem}
+.two h4{margin:0 0 .3rem;font-size:.95rem}
+
+/* QCM */
+#qcm h2{border-color:var(--plan)}
+.qbar{position:sticky;top:env(safe-area-inset-top,0px);background:var(--paper);border-bottom:1px solid var(--rule);padding:.6rem 0;margin-bottom:1rem;display:flex;align-items:center;gap:1rem;z-index:2;flex-wrap:wrap}
+.qbar .score{font-weight:700}
+.qbar .track{flex:1;min-width:8rem;height:6px;background:var(--panel)}
+.qbar .fill{height:100%;background:var(--plan);width:0;transition:width .25s}
+button{font:inherit;cursor:pointer}
+.btn{border:1.5px solid var(--ink);background:transparent;color:var(--ink);padding:.35rem .9rem}
+.btn:hover{background:var(--panel)}
+.q{border:1px solid var(--rule);padding:1rem 1.1rem;margin-bottom:1rem}
+.q .n{font-size:.8rem;color:var(--muted)}
+.q .txt{font-weight:600;margin:.2rem 0 .7rem}
+.opts{display:grid;gap:.4rem}
+.opt{display:block;width:100%;text-align:left;border:1px solid var(--rule);background:var(--paper);color:var(--ink);padding:.55rem .8rem}
+.opt:hover:not(:disabled){border-color:var(--plan)}
+.opt:disabled{cursor:default}
+.opt.good{background:var(--ok-bg);border-color:var(--act)}
+.opt.bad{background:var(--ko-bg);border-color:var(--do)}
+.expl{margin-top:.7rem;font-size:.92rem;display:none}
+.q.done .expl{display:block}
+.expl b.ok{color:var(--act)}.expl b.ko{color:var(--do)}
+#result{display:none;border:1.5px solid var(--ink);padding:1rem 1.2rem;margin-top:1.5rem}
+#result.show{display:block}
+#result p{margin:.3rem 0}
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc" aria-label="Sommaire">
+  <ol>
+    <li><a href="#histoire">Histoire des normes</a></li>
+    <li><a href="#norme">Qu'est-ce qu'une norme ?</a></li>
+    <li><a href="#acteurs">Les acteurs</a></li>
+    <li><a href="#concept">Évolution du concept qualité</a></li>
+    <li><a href="#iso9000">Famille ISO 9000</a></li>
+    <li><a href="#certif">Certification</a></li>
+    <li><a href="#intro">ISO 9001 : §0 à §3</a></li>
+    <li><a href="#art4">§4 Contexte</a></li>
+    <li><a href="#art5">§5 Leadership</a></li>
+    <li><a href="#art6">§6 Planification</a></li>
+    <li class="qcm-link"><a href="#qcm">QCM (25 questions)</a></li>
+  </ol>
+</nav>
+
+<main>
+<header class="docbox">
+  <div class="t">
+    <h1>De la normalisation à l'ISO 9001</h1>
+    <p>Fiche de révision — cours SeaTech de Jean-Yves Bernard, avec l'ISO 9001:2015 de §0 à §6.</p>
+  </div>
+  <dl>
+    <dt>Module</dt><dd>Qualité</dd>
+    <dt>Référentiel</dt><dd>ISO 9001:2015</dd>
+    <dt>Couvre</dt><dd>§0 → §6</dd>
+    <dt>Contrôle</dt><dd>25 QCM</dd>
+  </dl>
+</header>
+
+<!-- 1 -->
+<section id="histoire">
+<h2>Histoire des normes</h2>
+<p>Le besoin de règles communes est très ancien : il naît dès qu'il faut mesurer, échanger ou rendre des pièces interchangeables.</p>
+<div class="tbl"><table>
+<tr><th>Date</th><th>Événement</th></tr>
+<tr><td class="y">Antiquité</td><td>Mesures de distance sur les stades olympiques (pied grec ou romain).</td></tr>
+<tr><td class="y">1516</td><td>« Loi sur la pureté de la bière » de Guillaume IV de Bavière : orge, eau et houblon uniquement.</td></tr>
+<tr><td class="y">1732</td><td>Louis XV réduit à 5 les diamètres de canons : interchangeabilité et approvisionnement des troupes.</td></tr>
+<tr><td class="y">1795</td><td>Adoption du mètre pour faciliter les échanges et le commerce.</td></tr>
+<tr><td class="y">1860</td><td>Royaume-Uni : premier système régissant les filetages industriels.</td></tr>
+<tr><td class="y">1906</td><td>Création de la CEI (Commission électrotechnique internationale).</td></tr>
+<tr><td class="y">1918</td><td>France : Commission permanente de standardisation (CPS), constructions mécaniques.</td></tr>
+<tr><td class="y">1926</td><td>Création de l'AFNOR.</td></tr>
+<tr><td class="y">1941</td><td>Statut de la normalisation et marque NF. Entrée en guerre des USA : échantillonnage, statistiques.</td></tr>
+<tr><td class="y">1947</td><td>Création de l'ISO.</td></tr>
+<tr><td class="y">1954</td><td>Japon : qualité totale et cercles de qualité à l'échelle de l'économie.</td></tr>
+<tr><td class="y">1967</td><td>Marée noire du Torrey Canyon : une non-conformité associée au risque devient médiatique.</td></tr>
+<tr><td class="y">1973</td><td>Premier choc pétrolier : main-d'œuvre plus chère, on s'intéresse au coût des rebuts.</td></tr>
+<tr><td class="y">1979</td><td>L'ISO lance des normes internationales d'assurance qualité.</td></tr>
+<tr><td class="y">1987</td><td>Naissance de la série ISO 9000.</td></tr>
+<tr><td class="y">1988</td><td>Création de l'AFAQ.</td></tr>
+<tr><td class="y">1994 → 2026</td><td>Versions ISO 9000 1994, 2000, 2008, 2015, 2026 ; ISO 14000 (environnement) en 1996.</td></tr>
+</table></div>
+</section>
+
+<!-- 2 -->
+<section id="norme">
+<h2>Qu'est-ce qu'une norme ?</h2>
+<div class="def">Document établi par consensus et approuvé par un organisme reconnu, qui fournit, pour des usages communs et répétés, des règles, des lignes directrices ou des caractéristiques, pour des activités ou leurs résultats, garantissant un niveau d'ordre optimal dans un contexte donné.</div>
+<p>Une norme n'est <strong>pas une loi</strong> : elle exprime les attentes d'un groupe envers ses membres et reste <strong>d'application volontaire</strong>. Elle peut toutefois s'imposer :</p>
+<ul>
+<li>par contrat (relation client-fournisseur) ;</li>
+<li>quand une loi y fait référence (sécurité du travail, environnement…) ;</li>
+<li>pour justifier l'appartenance à un groupe (AOC) ;</li>
+<li>pour des raisons de sécurité ou d'interchangeabilité (marquage CE).</li>
+</ul>
+
+<h3>Les 4 types de normes</h3>
+<div class="tbl"><table>
+<tr><th>Type</th><th>Rôle</th></tr>
+<tr><td>Fondamentales</td><td>Terminologie, métrologie, symboles : un langage commun, utilisé par les autres normes.</td></tr>
+<tr><td>D'essai et d'analyse</td><td>Conditions de réalisation des essais et analyses.</td></tr>
+<tr><td>De spécification</td><td>Caractéristiques qu'un produit ou service doit atteindre (homologation).</td></tr>
+<tr><td>D'organisation et de service</td><td>Ne fixent rien sur le produit, mais les conditions dans lesquelles il est réalisé (c'est le cas de l'ISO 9001).</td></tr>
+</table></div>
+
+<h3>Enjeux de la normalisation</h3>
+<p>L'avantage majeur est la <strong>cohérence des caractéristiques</strong> des produits et services. Pour le client : sécurité, clarté, transparence (limites d'utilisation, durée de vie, recyclage). Pour le producteur : adaptation plus rapide au marché, échanges facilités, maintenance plus efficace grâce aux sous-ensembles normalisés.</p>
+
+<h3>Élaboration d'une norme</h3>
+<p>Trois phases : <strong>préparatoire</strong> (étude de faisabilité technique et économique par les experts), <strong>élaboration</strong> du projet, <strong>validation</strong> par les parties intéressées puis homologation et publication. Cela prend généralement plusieurs années.</p>
+<p>À l'ISO, la voie normale compte 6 étapes : NP (proposition) → CD (projet de comité) → consensus au TC/SC → enquête sur DIS → vote formel sur FDIS → publication. Une voie « fast track » permet d'entrer directement au stade DIS.</p>
+</section>
+
+<!-- 3 -->
+<section id="acteurs">
+<h2>Les acteurs de la normalisation</h2>
+<p>Environ <strong>1 million</strong> de normes dans le monde, <strong>35 000</strong> en France, <strong>2 000</strong> publiées chaque année en France. Il existe aussi des normes de groupements interprofessionnels (Qualibat, Label rouge, AOC…).</p>
+<div class="tbl"><table>
+<tr><th>Acteur</th><th>Création</th><th>À retenir</th></tr>
+<tr><td>AFNOR</td><td>1926</td><td>Association loi 1901 reconnue d'utilité publique, sous tutelle du ministère de l'Industrie. Anime le système français (marque NF), représente la France au CEN et à l'ISO.</td></tr>
+<tr><td>LNE</td><td>1901</td><td>Laboratoire national d'essais, EPIC depuis 1978, pilote la métrologie française depuis 2005 (Laboratoire national de métrologie et d'essais).</td></tr>
+<tr><td>COFRAC</td><td>1994</td><td>Comité français d'accréditation : reconnaît la compétence et l'impartialité des laboratoires et organismes d'inspection et de certification.</td></tr>
+<tr><td>CEN</td><td>1961</td><td>Comité européen de normalisation (Bruxelles), marque EN, surtout santé et sécurité ; hors électrotechnique et télécoms.</td></tr>
+<tr><td>ISO</td><td>1947</td><td>ONG basée à Genève, 167 pays (un membre par pays), aucun pouvoir réglementaire ; partenariat avec l'OMC. Hors électrotechnique (CEI) et télécoms (UIT).</td></tr>
+</table></div>
+<p>La série ISO 9000 est rédigée par le comité technique <strong>ISO/TC 176</strong> « Management et assurance de la qualité », auquel participe l'AFNOR. En France, elle est publiée sous la référence <strong>NF EN ISO 9001</strong>.</p>
+</section>
+
+<!-- 4 -->
+<section id="concept">
+<h2>Évolution du concept qualité</h2>
+<div class="tbl"><table>
+<tr><th>Penseur</th><th>Apport</th></tr>
+<tr><td>Colbert (1664)</td><td>La qualité supérieure des produits attire les acheteurs étrangers.</td></tr>
+<tr><td>Taylor</td><td>Organisation scientifique du travail (productivité ×3).</td></tr>
+<tr><td>Fayol</td><td>« Prévoir, organiser, commander, coordonner, contrôler ».</td></tr>
+<tr><td>Shewhart</td><td>Cartes de contrôle, maîtrise statistique des procédés (MSP).</td></tr>
+<tr><td>Deming</td><td>Roue PDCA.</td></tr>
+<tr><td>Crosby</td><td>« Zéro défaut » (1960) : prévention, conformité aux exigences.</td></tr>
+<tr><td>Feigenbaum</td><td>TQC / TQM, coût d'obtention de la qualité (COQ).</td></tr>
+<tr><td>Ohno</td><td>Toyota Production System (TPS).</td></tr>
+<tr><td>Shingo</td><td>Poka-yoke, SMED.</td></tr>
+<tr><td>Ishikawa</td><td>Cercles qualité, diagramme causes-effet.</td></tr>
+</table></div>
+
+<h3>Le « zéro défaut » selon les 5M</h3>
+<p><strong>Méthodes</strong> (bonnes pratiques), <strong>Machines</strong> (équipements capables), <strong>Main-d'œuvre</strong> (personnel compétent), <strong>Matière</strong> (matériaux adaptés), <strong>Milieu</strong> (maîtrise des paramètres environnementaux).</p>
+
+<h3>Grille de maturité de Crosby</h3>
+<div class="tbl"><table>
+<tr><th>Niveau</th><th>Situation</th><th>Coût de non-qualité (détecté / réel, % CA)</th></tr>
+<tr><td>1. Incertitude</td><td>La qualité n'est pas un outil de management</td><td>inconnu / ~20 %</td></tr>
+<tr><td>2. Réveil</td><td>Reconnue importante, mais rien de concret</td><td>5 % / 15 %</td></tr>
+<tr><td>3. Vision éclairée</td><td>La direction bâtit un plan formel d'amélioration</td><td>8 % / 12 %</td></tr>
+<tr><td>4. Sagesse</td><td>Prévention efficace, problèmes traités à la source</td><td>6,5 % / 8 %</td></tr>
+<tr><td>5. Certitude</td><td>La qualité est un outil de management</td><td>2,5 % / 2,5 %</td></tr>
+</table></div>
+<p>Crosby propose un programme en <strong>14 points</strong> : engagement de la direction, équipes d'amélioration, mesure, coût de la non-qualité, sensibilisation, action corrective, planification du zéro défaut, formation de l'encadrement, journée zéro défaut, objectifs, élimination des causes d'erreur, reconnaissance, comité qualité, recommencer.</p>
+
+<h3>Du tri au système</h3>
+<p>Le contrôle remonte le flux : en sortie de production (tri), puis en production (maîtrise des procédés), puis en entrée (fournisseurs). Ensuite la qualité dépasse le produit pour s'intéresser aux organisations : c'est l'<strong>approche systémique</strong>, jusqu'à la « science du profit partagé » (développement durable, éthique).</p>
+
+<h3>Coût d'obtention de la qualité (COQ)</h3>
+<div class="two">
+  <div><h4>Coûts contrôlables → à augmenter</h4><p><strong>Prévention</strong> : a priori, pour éviter défauts et erreurs.<br><strong>Contrôle</strong> : a posteriori, pour vérifier la conformité.</p></div>
+  <div><h4>Coûts résultants → à diminuer</h4><p><strong>Défaillances internes</strong> : non-conformités non vues par le client.<br><strong>Défaillances externes</strong> : non-conformités constatées par le client.</p></div>
+</div>
+<p>Répartition nationale indiquée dans le cours : défaillances internes ≈ 50 %, contrôle ≈ 25 %, externes ≈ 20 %, prévention ≈ 5 %. L'objectif est de <strong>trouver le juste équilibre</strong>.</p>
+</section>
+
+<!-- 5 -->
+<section id="iso9000">
+<h2>La famille ISO 9000</h2>
+<div class="tbl"><table>
+<tr><th>Norme</th><th>Contenu</th></tr>
+<tr><td>ISO 9000</td><td>Principes essentiels et vocabulaire</td></tr>
+<tr><td>ISO 9001</td><td>Exigences du système de management de la qualité (seule certifiable)</td></tr>
+<tr><td>ISO 9004</td><td>Lignes directrices pour l'amélioration des performances</td></tr>
+<tr><td>ISO 19011</td><td>Audit des systèmes de management (qualité, environnement)</td></tr>
+</table></div>
+<p>En 2000, ISO 9001, 9002 et 9003 fusionnent en une seule ISO 9001 ; ISO 8402 rejoint l'ISO 9000 ; ISO 10011 devient ISO 19011. Objectif : simplification et accessibilité.</p>
+<div class="tbl"><table>
+<tr><th>Version</th><th>Apport principal</th></tr>
+<tr><td class="y">1987</td><td>Assurance qualité fondée sur des procédures</td></tr>
+<tr><td class="y">1994</td><td>Actions préventives</td></tr>
+<tr><td class="y">2000</td><td>Approche processus et PDCA</td></tr>
+<tr><td class="y">2008</td><td>Ajustements</td></tr>
+<tr><td class="y">2015</td><td>Nouvelle architecture (HLS), approche risques / opportunités</td></tr>
+<tr><td class="y">2026</td><td>Changement climatique, continuité d'activité, éthique et culture qualité, parties intéressées, technologies émergentes</td></tr>
+</table></div>
+</section>
+
+<!-- 6 -->
+<section id="certif">
+<h2>Enjeux et certification</h2>
+<div class="two">
+  <div><h4>Enjeux externes d'un SMQ</h4><ul><li>Notoriété, image de marque</li><li>Satisfaction et fidélisation client</li><li>Nouveaux marchés</li><li>Démontrer la conformité</li></ul></div>
+  <div><h4>Enjeux internes d'un SMQ</h4><ul><li>Mobiliser le personnel</li><li>Favoriser l'initiative</li><li>Réorganiser les processus (qui fait quoi, moins de gaspillage, prévention des risques)</li><li>Communication entre services</li></ul></div>
+</div>
+<div class="retenir"><strong>À retenir.</strong> L'ISO 9001 fixe un <strong>objectif de fin, pas de moyens</strong>. Elle n'impose ni structure de rédaction, ni documents types, ni terminologie. C'est à l'organisme de définir qui fait quoi, quand, comment et pourquoi.</div>
+<h3>Parcours de certification</h3>
+<ol>
+<li>Volonté affichée de se conformer au référentiel.</li>
+<li>Mise en place d'un SMQ répondant aux exigences.</li>
+<li>Audit par un expert indépendant qui relève des preuves tangibles.</li>
+<li>Un comité de certification délivre le certificat sur la foi du rapport.</li>
+</ol>
+<p>Cycle : audit initial (documentaire puis complet) → <strong>certificat valable 3 ans</strong> → audit de suivi 1 → audit de suivi 2 → audit de renouvellement.</p>
+</section>
+
+<!-- 7 -->
+<section id="intro">
+<h2>ISO 9001:2015 <small>§0 à §3</small></h2>
+<div class="pdca" aria-label="Structure des chapitres 4 à 10 selon le PDCA">
+  <div class="p"><b>4</b>Contexte</div>
+  <div class="p"><b>5</b>Leadership</div>
+  <div class="p"><b>6</b>Planification</div>
+  <div class="d"><b>7</b>Support</div>
+  <div class="d"><b>8</b>Réalisation</div>
+  <div class="c"><b>9</b>Évaluation</div>
+  <div class="a"><b>10</b>Amélioration</div>
+</div>
+<div class="pdca-legend"><span class="p">Plan</span><span class="d">Do</span><span class="c">Check</span><span class="a">Act</span></div>
+
+<h3>§0.1 Avantages potentiels d'un SMQ</h3>
+<p>Fournir en permanence des produits conformes (client, légal, réglementaire) ; plus d'opportunités d'accroître la satisfaction ; prise en compte des risques et opportunités ; aptitude à démontrer la conformité.</p>
+
+<h3>§0.2 Les 7 principes de management de la qualité</h3>
+<p>Orientation client, leadership, implication du personnel, approche processus, amélioration, prise de décision fondée sur des preuves, management des relations avec les parties intéressées. <em>(Détaillés dans l'ISO 9000.)</em></p>
+
+<h3>§0.3 Approche processus, PDCA et risques</h3>
+<p>Un processus transforme des <strong>éléments d'entrée</strong> (matière, énergie, informations) venant de sources amont en <strong>éléments de sortie</strong> (produit, service, décision) destinés à l'aval, avec des points de contrôle pour mesurer la performance.</p>
+<div class="def">Risque : effet de l'incertitude. L'effet est un écart, positif ou négatif, par rapport à une attente. Il s'exprime souvent comme la combinaison des conséquences d'un événement et de la vraisemblance de son occurrence.</div>
+
+<h3>§0.4 Structure HLS</h3>
+<p>La structure de haut niveau (HLS) commune facilite les systèmes de management intégrés : ISO 14001 (environnement), ISO 45001 (SST), ISO 27001 (sécurité de l'information), ISO 50001 (énergie), etc.</p>
+
+<h3>§1 à §3</h3>
+<p>§1 Domaine d'application : démontrer l'aptitude à fournir constamment des produits conformes et accroître la satisfaction client. §2 Références normatives et §3 Termes et définitions renvoient à l'<strong>ISO 9000:2015</strong>.</p>
+</section>
+
+<!-- 8 -->
+<section id="art4">
+<h2>§4 Contexte de l'organisme</h2>
+<h3>§4.1 Compréhension de l'organisme et de son contexte</h3>
+<p>Définir, surveiller et revoir les enjeux <strong>internes et externes</strong> qui influencent la finalité et la pérennité de l'organisme. L'organisme doit aussi déterminer si des enjeux découlent du <strong>changement climatique</strong>.</p>
+<p>Outil proposé : <strong>PESTEL</strong> — Politique, Économique, Socioculturel, Technologique, Écologique, Législatif. Exemple Carrefour : pressions politiques contre les hypermarchés, hausse des matières premières, demande de local/bio et de proximité, caisses automatiques et drive, normes environnementales, normes d'hygiène alimentaire.</p>
+
+<h3>§4.2 Besoins et attentes des parties intéressées</h3>
+<p>Les parties intéressées <strong>pertinentes</strong> sont celles qui présentent un risque significatif pour la pérennité si leurs attentes ne sont pas satisfaites. Proposition : une matrice (clients, actionnaires, banques, fournisseurs, médias, pouvoirs publics, riverains, syndicats, concurrents…) cotée par fréquence d'interaction, impact et levier d'action.</p>
+
+<h3>§4.3 Domaine d'application du SMQ</h3>
+<p>Décrire le champ (activités) et le périmètre (géographique). Les éventuelles exclusions doivent être identifiées et justifiées. Document tenu à jour et disponible (par exemple dans le manuel qualité).</p>
+
+<h3>§4.4 SMQ et ses processus</h3>
+<p>Pour chaque processus, déterminer : a) entrées et sorties, b) séquence et interactions, c) critères et méthodes, d) ressources, e) responsabilités et autorités, f) risques et opportunités, g) évaluation, h) amélioration. Conserver l'information documentée nécessaire au fonctionnement et les preuves de fonctionnement.</p>
+<p>Une <strong>fiche processus</strong> type rassemble : finalité, pilote, entrées/sorties avec origine et destination, activités, exigences, ressources, indicateurs, risques et enregistrements.</p>
+</section>
+
+<!-- 9 -->
+<section id="art5">
+<h2>§5 Leadership</h2>
+<h3>§5.1 Leadership et engagement</h3>
+<p>La direction <strong>assume la responsabilité de l'efficacité du SMQ</strong>, intègre politique et objectifs à la stratégie, promeut l'approche processus et par les risques, fournit les ressources, communique, soutient le personnel et promeut l'amélioration.</p>
+<p><strong>§5.1.2 Orientation client</strong> : exigences client, légales et réglementaires déterminées et satisfaites ; risques et opportunités pris en compte ; accroissement de la satisfaction préservé. Trois temps d'écoute :</p>
+<ul>
+<li><strong>Futur</strong> : écoute stratégique, réflexion prospective ;</li>
+<li><strong>Présent</strong> : écoute contractuelle, exigences relatives au produit ;</li>
+<li><strong>Passé</strong> : satisfaction client, écoute des points faibles, source d'amélioration.</li>
+</ul>
+
+<h3>§5.2 Politique qualité</h3>
+<p>Ce n'est pas une déclaration standard : c'est un choix stratégique, intégré à la politique globale. Elle doit être appropriée au contexte, fournir un cadre aux objectifs, inclure l'engagement de satisfaire aux exigences et l'engagement d'amélioration continue. Elle est documentée, communiquée, comprise, appliquée, et disponible pour les parties intéressées. Conseil : simple, à court/moyen terme, et <strong>communiquer</strong>.</p>
+
+<h3>§5.3 Rôles, responsabilités et autorités</h3>
+<p>Attribués, communiqués et compris, sans ambiguïté. Le <strong>représentant de la direction n'est plus exigé</strong> depuis 2015. Buts : efficacité des processus, continuité du SMQ, compte rendu à la direction.</p>
+</section>
+
+<!-- 10 -->
+<section id="art6">
+<h2>§6 Planification</h2>
+<h3>§6.1 Actions face aux risques et opportunités</h3>
+<p>À partir des enjeux (§4.1) et des parties intéressées (§4.2), identifier et hiérarchiser risques et opportunités, planifier des actions et évaluer leur efficacité. Outil proposé : <strong>SWOT</strong>.</p>
+<div class="tbl"><table>
+<tr><th></th><th>Positif</th><th>Négatif</th></tr>
+<tr><th>Interne</th><td>Forces (Strengths)</td><td>Faiblesses (Weaknesses)</td></tr>
+<tr><th>Externe</th><td>Opportunités (Opportunities)</td><td>Menaces (Threats)</td></tr>
+</table></div>
+<div class="two">
+  <div><h4>Options face aux risques</h4><p>Éviter, en faire une opportunité, éliminer la source, réduire la probabilité, réduire les conséquences, partager, maintenir de façon assumée.</p></div>
+  <div><h4>Options face aux opportunités</h4><p>Nouvelles pratiques, nouveau produit, nouveau marché, nouveaux clients, partenariat.</p></div>
+</div>
+
+<h3>§6.2 Objectifs qualité et plan d'actions</h3>
+<p>Objectifs cohérents avec la politique, <strong>mesurables</strong>, pertinents, surveillés, communiqués, mis à jour, documentés. Plan d'actions : quoi, quelles ressources, qui, quand, comment évaluer.</p>
+<p>Un objectif se veut <strong>SMART</strong> : Spécifique, Mesurable, Ambitieux et Accepté, Réaliste, Temporel.</p>
+<div class="two">
+  <div><h4>Performance</h4><p><strong>Efficacité</strong> : conformité des prestations.<br><strong>Efficience</strong> : maîtrise des ressources allouées.</p></div>
+  <div><h4>Indicateurs</h4><p><strong>De résultat</strong> : visibles par le client (ex. taux de satisfaction).<br><strong>De fonctionnement</strong> : efficacité interne (ex. heures passées par réclamation).</p></div>
+</div>
+
+<h3>§6.3 Planification des modifications</h3>
+<p>Toute modification du SMQ est planifiée en tenant compte de son objectif et de ses conséquences sur : a) l'intégrité du SMQ, b) la disponibilité des ressources, c) l'attribution des responsabilités et autorités.</p>
+</section>
+
+<!-- QCM -->
+<section id="qcm">
+<h2>QCM</h2>
+<p>Choisis une réponse : la correction s'affiche aussitôt. Le score final apparaît quand tout est répondu.</p>
+<div class="qbar">
+  <span class="score" id="score">0 / 0</span>
+  <div class="track"><div class="fill" id="fill"></div></div>
+  <button class="btn" id="reset" type="button">Recommencer</button>
+</div>
+<div id="questions"></div>
+<div id="result" role="status" aria-live="polite"></div>
+</section>
+</main>
+</div>
+
+<script>
+const Q = [
+ ["Une norme est, par nature :", ["Une obligation légale","D'application volontaire","Imposée par l'ISO à ses membres","Réservée aux entreprises certifiées"],1,"Une norme est d'application volontaire. Elle peut devenir obligatoire par contrat ou si une loi y fait référence."],
+ ["Pourquoi Louis XV fait-il normaliser le diamètre des canons en 1732 ?",["Réduire leur poids","Permettre l'interchangeabilité et faciliter l'approvisionnement","Augmenter leur portée","Imposer un monopole royal"],1,"Réduire à 5 le nombre de diamètres permettait l'interchangeabilité et simplifiait l'approvisionnement des troupes."],
+ ["En quelle année l'AFNOR a-t-elle été créée ?",["1906","1918","1926","1947"],2,"AFNOR : 1926. La CEI date de 1906, la CPS de 1918, l'ISO de 1947."],
+ ["L'ISO est :",["Une agence de l'ONU","Une ONG basée à Genève","Un organisme européen basé à Bruxelles","Une administration française"],1,"L'ISO est une organisation non gouvernementale basée à Genève, sans pouvoir réglementaire. Le CEN, lui, siège à Bruxelles."],
+ ["Quel organisme français atteste la compétence et l'impartialité des organismes certificateurs ?",["AFNOR","LNE","COFRAC","AFAQ"],2,"Le COFRAC (1994) accrédite laboratoires et organismes d'inspection et de certification."],
+ ["Quelle norme de la famille ISO 9000 est certifiable ?",["ISO 9000","ISO 9001","ISO 9004","ISO 19011"],1,"Seule l'ISO 9001 contient des exigences certifiables. 9000 = vocabulaire, 9004 = amélioration des performances, 19011 = audit."],
+ ["L'ISO 9001 est une norme de type :",["Fondamentale","D'essai et d'analyse","De spécification","D'organisation"],3,"Elle ne fixe aucune caractéristique du produit, mais les conditions d'organisation dans lesquelles il est réalisé."],
+ ["Quel comité technique de l'ISO rédige la série ISO 9000 ?",["TC 176","TC 207","JTC 1","TC 292"],0,"L'ISO/TC 176 « Management et assurance de la qualité »."],
+ ["Quelle version de l'ISO 9001 introduit l'approche processus et le PDCA ?",["1987","1994","2000","2015"],2,"2000 : approche processus et PDCA. 1994 : actions préventives. 2015 : approche risques et HLS."],
+ ["Quelle version introduit l'approche risques / opportunités et la structure HLS ?",["2000","2008","2015","2026"],2,"La version 2015 adopte la nouvelle architecture HLS et l'approche par les risques."],
+ ["Selon la répartition du COQ présentée, quel poste est le plus lourd ?",["Prévention","Contrôle","Défaillances internes","Défaillances externes"],2,"Les défaillances internes représentent environ 50 %. L'idée est d'augmenter prévention et contrôle pour les réduire."],
+ ["Un produit défectueux retourné par le client relève des coûts :",["De prévention","De contrôle","De défaillances internes","De défaillances externes"],3,"La non-conformité est constatée par le client : c'est une défaillance externe."],
+ ["Au niveau « Certitude » de Crosby, le coût de la non-qualité est d'environ :",["20 % du CA","12 % du CA","8 % du CA","2,5 % du CA"],3,"Au stade Certitude, coût détecté et réel se rejoignent à 2,5 % du CA."],
+ ["À qui doit-on le concept de « zéro défaut » ?",["Deming","Crosby","Ishikawa","Taylor"],1,"Philip Crosby, dans les années 1960."],
+ ["Les 5M sont :",["Méthodes, Machines, Main-d'œuvre, Matière, Milieu","Mesure, Méthodes, Management, Matière, Marché","Machines, Maintenance, Méthodes, Métrologie, Milieu","Main-d'œuvre, Moyens, Mesure, Marketing, Matière"],0,"Méthodes, Machines, Main-d'œuvre, Matière, Milieu."],
+ ["Durée de validité d'un certificat ISO 9001 :",["1 an","2 ans","3 ans","5 ans"],2,"3 ans, avec deux audits de suivi puis un audit de renouvellement."],
+ ["Dans la structure de l'ISO 9001:2015, le chapitre 9 correspond à :",["Plan","Do","Check","Act"],2,"§9 Évaluation des performances = Check. §4-6 = Plan, §7-8 = Do, §10 = Act."],
+ ["Selon l'ISO, le risque est défini comme :",["La probabilité d'un accident","L'effet de l'incertitude","Un écart toujours négatif","Une non-conformité potentielle"],1,"Le risque est l'effet de l'incertitude ; cet effet peut être positif ou négatif."],
+ ["Quel outil le cours propose-t-il pour le §4.1 (enjeux internes et externes) ?",["SWOT","PESTEL","5 pourquoi","AMDEC"],1,"PESTEL pour l'analyse externe du contexte ; le SWOT est proposé au §6.1."],
+ ["Une partie intéressée « pertinente » est une partie qui :",["Est un client direct","Présente un risque significatif pour la pérennité si ses attentes ne sont pas satisfaites","Est citée dans le contrat","Est actionnaire"],1,"C'est le critère de pertinence retenu au §4.2."],
+ ["Au §4.3, une exclusion du domaine d'application doit être :",["Interdite","Identifiée et justifiée","Validée par l'AFNOR","Limitée au §8"],1,"Les exclusions sont possibles si elles sont identifiées et justifiées."],
+ ["Quelle exigence a disparu avec la version 2015 (§5.3) ?",["La politique qualité","La nomination d'un représentant de la direction","La revue de direction","L'audit interne"],1,"Le représentant de la direction n'est plus mentionné ; la direction elle-même porte la responsabilité du SMQ."],
+ ["Dans un SWOT, une « menace » est :",["Interne et négative","Externe et négative","Interne et positive","Externe et positive"],1,"Menaces = origine externe, effet négatif. Faiblesses = interne et négatif."],
+ ["Dans SMART, le « M » signifie :",["Motivant","Mesurable","Maîtrisé","Managérial"],1,"Spécifique, Mesurable, Ambitieux/Accepté, Réaliste, Temporel."],
+ ["« Nombre d'heures passées à traiter les réclamations » est un indicateur :",["De résultat","De fonctionnement","De satisfaction","Réglementaire"],1,"Il mesure l'efficience interne, pas ce que voit le client : c'est un indicateur de fonctionnement."]
+];
+
+const box = document.getElementById('questions');
+const scoreEl = document.getElementById('score');
+const fill = document.getElementById('fill');
+const result = document.getElementById('result');
+let answered = 0, correct = 0;
+
+function render(){
+  box.innerHTML = ''; answered = 0; correct = 0; update();
+  result.className = ''; result.innerHTML = '';
+  Q.forEach((q,i)=>{
+    const d = document.createElement('div');
+    d.className = 'q';
+    d.innerHTML = `<div class="n">Question ${i+1}</div><div class="txt">${q[0]}</div><div class="opts"></div><div class="expl"></div>`;
+    const opts = d.querySelector('.opts');
+    q[1].forEach((o,j)=>{
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'opt'; b.textContent = o;
+      b.addEventListener('click',()=>answer(d,q,j));
+      opts.appendChild(b);
+    });
+    box.appendChild(d);
+  });
+}
+function answer(d,q,j){
+  if(d.classList.contains('done')) return;
+  d.classList.add('done');
+  const btns = d.querySelectorAll('.opt');
+  btns.forEach(b=>b.disabled = true);
+  btns[q[2]].classList.add('good');
+  const ok = j === q[2];
+  if(!ok) btns[j].classList.add('bad');
+  answered++; if(ok) correct++;
+  d.querySelector('.expl').innerHTML = (ok ? '<b class="ok">Correct.</b> ' : '<b class="ko">Incorrect.</b> ') + q[3];
+  update();
+  if(answered === Q.length) finish();
+}
+function update(){
+  scoreEl.textContent = `${correct} / ${answered}` + (answered ? '' : ` (sur ${Q.length})`);
+  fill.style.width = (answered / Q.length * 100) + '%';
+}
+function finish(){
+  const pct = Math.round(correct / Q.length * 100);
+  let msg = pct >= 80 ? 'Très bonne maîtrise du cours.' : pct >= 50 ? 'Base correcte : relis les sections où tu as fait des erreurs.' : 'Reprends la fiche section par section avant de retenter.';
+  result.innerHTML = `<p><strong>Score final : ${correct} / ${Q.length} (${pct} %)</strong></p><p>${msg}</p>`;
+  result.className = 'show';
+}
+document.getElementById('reset').addEventListener('click',()=>{render();document.getElementById('qcm').scrollIntoView();});
+render();
+</script>
+</body>
+</html>
