@@ -1,0 +1,939 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Éléments finis 1D — les démonstrations à connaître</title>
+<style>
+:root{
+  --paper:#fbfcff; --card:#ffffff; --ink:#1b2350; --soft:#4d5688; --rule:#d9def1;
+  --margin:#d4453b; --accent:#2b3fa8; --pink:#ffd6e8; --green:#cfeec0; --code:#f0f2fb;
+  --w0:#d4453b; --w1:#2f9e44; --w2:#2b3fa8;
+  --math:"STIX Two Math","Cambria Math","Latin Modern Math","Times New Roman",serif;
+  --body:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --ui:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--paper:#12152a;--card:#181c37;--ink:#e7eafc;--soft:#a9b0d9;--rule:#2c3262;
+    --margin:#e4665d;--accent:#93a5ff;--pink:#5b2746;--green:#24492c;--code:#1c2141;
+    --w0:#ef6f66;--w1:#5fd07a;--w2:#8fa2ff;}
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:4.2rem}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:1.06rem;line-height:1.62;
+  padding:0 1rem 4rem 1.7rem;position:relative}
+body::before{content:"";position:fixed;top:0;bottom:0;left:.75rem;width:2px;background:var(--margin);opacity:.55}
+.wrap{max-width:46rem;margin:0 auto}
+h1,h2,h3{font-family:var(--ui);line-height:1.2;letter-spacing:-.01em}
+h1{font-size:clamp(1.7rem,5.5vw,2.4rem);margin:2.2rem 0 .6rem}
+h2{font-size:1.5rem;margin:3.2rem 0 .8rem;padding-bottom:.35rem;border-bottom:2px solid var(--rule)}
+h3{font-size:1.15rem;margin:0 0 .5rem}
+p{margin:.6rem 0}
+a{color:var(--accent)}
+.lede{font-size:1.12rem;color:var(--soft)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:3px}
+
+nav{position:sticky;top:0;z-index:5;background:var(--paper);margin:0 -1rem 0 -1.7rem;padding:.55rem 1rem .55rem 1.7rem;
+  border-bottom:1px solid var(--rule);overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch}
+nav a{font-family:var(--ui);font-size:.86rem;text-decoration:none;color:var(--ink);padding:.28rem .7rem;margin-right:.35rem;
+  border:1px solid var(--rule);border-radius:99px;display:inline-block}
+nav a:hover{background:var(--pink)}
+
+.tag{font-family:var(--ui);font-size:.74rem;padding:.12rem .55rem;border-radius:99px;margin-left:.4rem;vertical-align:middle;font-weight:600;white-space:nowrap}
+.tag.cours{background:var(--pink)}
+.tag.plus{background:var(--green)}
+
+/* --- math --- */
+m,eq{font-family:var(--math);font-style:italic}
+m{white-space:normal}
+eq{display:block;text-align:center;margin:.75rem 0;font-size:1.1rem;overflow-x:auto;padding:.25rem 0}
+.up{font-style:normal}
+sub,sup{line-height:0;font-size:.72em}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .15em;line-height:1.25}
+.frac>span:first-child{border-bottom:1px solid currentColor;padding:0 .25em}
+.frac>span:last-child{padding:0 .25em}
+.int,.sum{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1;margin:0 .12em}
+.int .s{font-size:1.9em;line-height:.85;font-style:normal}
+.sum .s{font-size:1.5em;line-height:1;font-style:normal}
+.int .t,.int .b,.sum .t,.sum .b{font-size:.68em;font-style:normal}
+.int .t{align-self:flex-end}.int .b{align-self:flex-start}
+table.mat{display:inline-table;vertical-align:middle;border-left:2px solid currentColor;border-right:2px solid currentColor;
+  border-radius:7px;border-spacing:0;margin:.15rem .25rem}
+table.mat td{padding:.12em .55em;text-align:center;font-style:italic}
+
+/* --- blocs --- */
+.claim{background:var(--pink);border-radius:6px;padding:.6rem .9rem;margin:.8rem 0;font-family:var(--body)}
+.claim b{font-family:var(--ui);font-size:.85rem}
+.note{border-left:4px solid var(--w1);background:var(--green);padding:.5rem .9rem;border-radius:0 6px 6px 0;margin:1rem 0}
+.demo{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:1.1rem 1.15rem 1.2rem;margin:1.6rem 0}
+.demo h3 .tag{float:none}
+ol.proof{margin:.7rem 0 .2rem;padding-left:1.3rem;border-left:3px solid var(--accent);padding-left:1.6rem}
+ol.proof>li{margin:.75rem 0}
+ol.proof>li::marker{font-family:var(--ui);font-weight:700;color:var(--accent)}
+.qed{text-align:right;font-family:var(--math);color:var(--soft)}
+ul.tight{padding-left:1.2rem}ul.tight li{margin:.3rem 0}
+table.vocab,table.recap{border-collapse:collapse;width:100%;font-size:.97rem;margin:1rem 0}
+table.vocab td,table.vocab th,table.recap td,table.recap th{border-bottom:1px solid var(--rule);padding:.5rem .55rem;vertical-align:top;text-align:left}
+table.vocab th,table.recap th{font-family:var(--ui);font-size:.85rem}
+.scroll{overflow-x:auto}
+pre{background:var(--code);border-radius:8px;padding:.9rem 1rem;overflow-x:auto;font-size:.86rem;line-height:1.5;margin:.8rem 0}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+figure{margin:1.2rem 0}
+figcaption{font-family:var(--ui);font-size:.85rem;color:var(--soft);margin-top:.3rem}
+svg{max-width:100%;height:auto;display:block}
+svg text{font-family:var(--math);fill:var(--ink);font-size:15px;font-style:italic}
+
+/* --- simulateur --- */
+.sim{background:var(--card);border:2px solid var(--w1);border-radius:12px;padding:1rem 1.1rem;margin:1.2rem 0}
+.ctrl{display:grid;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));gap:.8rem 1.2rem;font-family:var(--ui);font-size:.9rem}
+.ctrl label{display:flex;flex-direction:column;gap:.25rem}
+.ctrl input[type=range]{width:100%}
+.ctrl select{font:inherit;padding:.3rem;border-radius:6px;border:1px solid var(--rule);background:var(--paper);color:var(--ink)}
+.ctrl .chk{flex-direction:row;align-items:center;gap:.5rem}
+.stats{font-family:var(--ui);font-size:.9rem;display:flex;flex-wrap:wrap;gap:.4rem 1.4rem;margin:.6rem 0}
+.stats b{font-variant-numeric:tabular-nums}
+.legend{font-family:var(--ui);font-size:.82rem;color:var(--soft);display:flex;gap:1rem;flex-wrap:wrap}
+.legend i{display:inline-block;width:1.6rem;border-top:3px solid;vertical-align:middle;margin-right:.3rem}
+.ex{stroke:var(--soft);fill:none;stroke-width:2;stroke-dasharray:6 4}
+.fem{stroke:var(--margin);fill:none;stroke-width:2.6;stroke-linejoin:round}
+.hat{stroke:var(--w2);fill:none;stroke-width:1.3;opacity:.55}
+.axis{stroke:var(--soft);stroke-width:1}
+.node{fill:var(--margin)}
+.mtx{overflow-x:auto;font-size:.95rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Éléments finis en 1D : comprendre, puis savoir démontrer</h1>
+  <p class="lede">Synthèse de tes cours EF n°1 à 6 (14/09/26), avec toutes les étapes des calculs et quelques compléments que ton prof peut demander. Fil rouge : <m>−u″ + c·u = f</m> sur ]0, L[ avec <m>u(0) = u(L) = 0</m>.</p>
+  <p><span class="tag cours" style="margin-left:0">Dans ton cours</span> <span class="tag plus">Complément</span></p>
+</header>
+
+<nav aria-label="Sommaire">
+  <a href="#ef">Les EF, concrètement</a>
+  <a href="#sim">Simulateur</a>
+  <a href="#d1">Démonstrations</a>
+  <a href="#lhs">Algorithme LHS</a>
+  <a href="#recap">Fiche formules</a>
+  <a href="#matlab">Matlab</a>
+  <a href="#pieges">Pièges</a>
+</nav>
+
+<!-- ======================= 1. EF CONCRÈTEMENT ======================= -->
+<section id="ef">
+<h2>Les éléments finis, concrètement</h2>
+
+<p><b>Le problème.</b> Une barre de longueur L est bloquée à ses deux extrémités et subit une charge f(x). On cherche son déplacement u(x) par rapport à la position de repos. La physique donne l'équation (P) : <m>−u″ + c·u = f</m>, avec <m>u(0) = u(L) = 0</m> (conditions de Dirichlet). Sauf cas très particuliers, on ne sait pas écrire u avec des fonctions usuelles : il faut construire une solution <em>approchée</em> <m>u<sub>h</sub> ≈ u</m>.</p>
+
+<figure>
+<svg viewBox="0 0 520 190" role="img" aria-label="Barre encastrée aux deux extrémités, chargée, avec sa déformée">
+  <defs><marker id="ar" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="var(--ink)"/></marker></defs>
+  <g stroke="var(--ink)" stroke-width="1.6" fill="none">
+    <line x1="60" y1="70" x2="460" y2="70"/>
+    <line x1="60" y1="50" x2="60" y2="130"/><line x1="460" y1="50" x2="460" y2="130"/>
+    <g stroke-width="1"><line x1="60" y1="60" x2="48" y2="72"/><line x1="60" y1="80" x2="48" y2="92"/><line x1="60" y1="100" x2="48" y2="112"/>
+    <line x1="460" y1="60" x2="472" y2="72"/><line x1="460" y1="80" x2="472" y2="92"/><line x1="460" y1="100" x2="472" y2="112"/></g>
+  </g>
+  <g stroke="var(--ink)" stroke-width="1.4" marker-end="url(#ar)">
+    <line x1="110" y1="14" x2="110" y2="60"/><line x1="170" y1="14" x2="170" y2="60"/><line x1="230" y1="14" x2="230" y2="60"/>
+    <line x1="290" y1="14" x2="290" y2="60"/><line x1="350" y1="14" x2="350" y2="60"/><line x1="410" y1="14" x2="410" y2="60"/>
+  </g>
+  <path d="M60,70 C140,150 380,150 460,70" fill="none" stroke="var(--margin)" stroke-width="2.6"/>
+  <text x="250" y="168">u(x) : déplacement</text><text x="472" y="26">f</text><text x="56" y="150">0</text><text x="455" y="150">L</text>
+</svg>
+<figcaption>Barre bloquée aux deux bouts : u(0) = u(L) = 0.</figcaption>
+</figure>
+
+<div class="note"><b>Remarque de prof.</b> −u″ + c·u = f décrit une corde (ou une barre) tendue posée sur une fondation élastique de raideur c. Une vraie poutre en flexion (Euler–Bernoulli) donnerait une équation d'ordre 4 (u⁗). On garde ce modèle 1D parce qu'il contient déjà <em>toute</em> la méthode.</div>
+
+<h3>L'idée des EF en trois étapes</h3>
+<ul class="tight">
+<li><b>On remplace une fonction par quelques nombres.</b> On découpe [0, L] en N+1 cellules de longueur <m>h = L/(N+1)</m>. Aux N+2 nœuds <m>x<sub>i</sub> = i·h</m>, on garde une inconnue <m>u<sub>i</sub> ≈ u(x<sub>i</sub>)</m>. On passe d'une infinité d'inconnues (la fonction u) à N+2.</li>
+<li><b>On relie les points par des morceaux simples.</b> Entre deux nœuds on trace une droite : <m>u<sub>h</sub> = \sum{i=0}{N+1} u<sub>i</sub> w<sub>i</sub>(x)</m>, où les <m>w<sub>i</sub></m> sont des « chapeaux ». C'est la règle et les piquets : tu notes la hauteur aux piquets et tu tends un fil entre eux. Plus les piquets sont serrés, plus le fil colle à la courbe.</li>
+<li><b>On exige l'équation « en moyenne », pas en chaque point.</b> Un u<sub>h</sub> affine par morceaux est « cassé » aux nœuds : u<sub>h</sub>″ n'existe pas, donc (P) n'a aucun sens pour lui. On multiplie (P) par une fonction test v, on intègre, on fait une IPP : c'est la <em>forme faible</em>, qui ne demande qu'une seule dérivée. En prenant v = w<sub>0</sub>, …, w<sub>N+1</sub>, on obtient N+2 équations pour N+2 inconnues : un système linéaire <m>AU = B</m>.</li>
+</ul>
+
+<h3>Vocabulaire ↔ objets concrets</h3>
+<div class="scroll"><table class="vocab">
+<tr><th>Terme</th><th>Ce que c'est ici</th></tr>
+<tr><td>Maillage</td><td>Les points <m>0 = x<sub>0</sub> &lt; x<sub>1</sub> &lt; … &lt; x<sub>N+1</sub> = L</m>, pas <m>h = L/(N+1)</m></td></tr>
+<tr><td>Cellule (élément)</td><td><m>m<sub>i</sub> = [x<sub>i</sub>, x<sub>i+1</sub>]</m></td></tr>
+<tr><td>Degrés de liberté (ddl)</td><td>Les inconnues <m>u<sub>i</sub> ≈ u(x<sub>i</sub>)</m></td></tr>
+<tr><td>Fonctions de forme (de base)</td><td>Chapeaux <m>w<sub>i</sub></m>, avec <m>w<sub>i</sub>(x<sub>j</sub>) = δ<sub>ij</sub></m></td></tr>
+<tr><td>Forme bilinéaire a, forme linéaire b</td><td><m>a(u,v) = \int{0}{L}(u′v′ + c·u·v)dx</m> et <m>b(v) = \int{0}{L} f·v dx</m></td></tr>
+<tr><td>Matrice de rigidité A</td><td>Termes <m>a(w<sub>j</sub>, w<sub>i</sub>)</m> : « à quel point les briques i et j interagissent »</td></tr>
+<tr><td>Vecteur des efforts B</td><td>Termes <m>b(w<sub>j</sub>)</m> : « combien la charge f sollicite la brique j »</td></tr>
+<tr><td>Quadrature</td><td>Calcul numérique des intégrales quand on ne peut pas les faire à la main</td></tr>
+</table></div>
+
+<h3>Le déroulé d'un calcul EF</h3>
+<ol>
+<li>Forme forte (P), l'équation physique.</li>
+<li>Forme faible <m>a(u,v) = b(v)</m> pour toute fonction test v (IPP).</li>
+<li>Choix de l'espace d'approximation : maillage + fonctions chapeau.</li>
+<li>Assemblage du système <m>AU = B</m>.</li>
+<li>Imposition des conditions de Dirichlet.</li>
+<li>Résolution, puis vérification de l'erreur (elle doit tendre vers 0 quand h → 0).</li>
+</ol>
+
+<h3>Pourquoi cette recette est si utilisée</h3>
+<ul class="tight">
+<li><b>Matrice creuse.</b> Chaque chapeau ne « voit » que ses voisins : A est tridiagonale en 1D, et reste creuse en 2D/3D. C'est ce qui permet de résoudre des millions d'inconnues.</li>
+<li><b>Forme faible.</b> Elle demande moins de régularité (1 dérivée au lieu de 2) et traite proprement les conditions aux limites.</li>
+<li><b>Géométrie libre.</b> En 2D/3D, les cellules deviennent des triangles ou des tétraèdres qui épousent n'importe quelle pièce. Abaqus, Ansys, Code_Aster, etc. suivent exactement les étapes 1 à 6, avec les équations de l'élasticité.</li>
+<li><b>Théorie de la convergence.</b> On sait prouver et quantifier que <m>u<sub>h</sub> → u</m> (voir D11).</li>
+</ul>
+</section>
+
+<!-- ======================= SIMULATEUR ======================= -->
+<section id="sim">
+<h2>Simulateur : vois la méthode fonctionner</h2>
+<p>Ici L = 1, c est constante et la charge est choisie pour que la solution exacte soit <m>u(x) = sin(πx)</m>, soit <m>f = (π² + c)·sin(πx)</m>. Le simulateur assemble A et B cellule par cellule (avec la quadrature que tu choisis), impose Dirichlet par remplacement de lignes comme dans ton cours, puis résout.</p>
+
+<div class="sim">
+  <div class="ctrl">
+    <label>N (nœuds intérieurs) : <b id="vN">3</b><input id="rN" type="range" min="1" max="31" value="3"></label>
+    <label>c : <b id="vC">1.0</b><input id="rC" type="range" min="0.1" max="50" step="0.1" value="1"></label>
+    <label>Quadrature
+      <select id="sQ"><option value="left">Rectangle à gauche</option><option value="trap">Trapèze</option><option value="mid" selected>Point milieu</option><option value="simp">Simpson</option></select></label>
+    <label>M (sous-intervalles par cellule)
+      <select id="sM"><option>1</option><option>2</option><option>5</option><option selected>10</option><option>50</option></select></label>
+    <label class="chk"><input id="cH" type="checkbox"> Afficher les briques <m>u<sub>i</sub>w<sub>i</sub></m></label>
+  </div>
+  <div id="plot" role="img" aria-label="Solution exacte et solution éléments finis"></div>
+  <div class="legend"><span><i style="border-color:var(--soft);border-top-style:dashed"></i>solution exacte</span><span><i style="border-color:var(--margin)"></i>solution EF u<sub>h</sub></span><span><i style="border-color:var(--w2)"></i>briques u<sub>i</sub>w<sub>i</sub></span></div>
+  <div class="stats" id="stats"></div>
+  <div class="mtx" id="mtx"></div>
+</div>
+
+<h3>Convergence : on divise h par 2</h3>
+<div class="scroll"><table class="recap" id="conv"></table></div>
+<p>L'erreur L² est divisée par ≈ 4 quand h est divisé par 2 : c'est l'ordre 2 annoncé en D11. Change la quadrature ou M (essaie M = 1 puis M = 50) : l'ordre reste 2, seule la constante de l'erreur bouge. Deux observations à comprendre : (1) « rectangle à gauche » et « trapèze » donnent exactement les mêmes résultats ici, car les termes en trop se compensent entre deux cellules voisines pour tous les nœuds intérieurs (les nœuds du bord sont remplacés par Dirichlet) ; (2) avec M = 1, ces deux formules remplacent la matrice de masse par une matrice diagonale, technique appelée « condensation de masse » (<em>mass lumping</em>), qui conserve l'ordre 2 ; (3) « Simpson » intègre <em>exactement</em> les coefficients de A dès M = 1 quand c est constante (les fonctions à intégrer sont des polynômes de degré ≤ 2) : seule la charge B est alors approchée.</p>
+</section>
+
+<!-- ======================= DÉMONSTRATIONS ======================= -->
+<section id="demos">
+<h2>Les démonstrations</h2>
+
+<div class="claim"><b>Cadre.</b> L &gt; 0, f et c continues avec c &gt; 0. Problème (P) : <m>−u″ + c·u = f</m> sur ]0, L[, <m>u(0) = u(L) = 0</m>. Fonctions test : <m>V = {v continues, C¹ par morceaux, v(0) = v(L) = 0}</m> (en toute rigueur, l'espace de Sobolev <m>H¹<sub>0</sub>(0,L)</m>). Maillage uniforme : <m>h = L/(N+1)</m>, <m>x<sub>i</sub> = i·h</m>, <m>i = 0, …, N+1</m>.</div>
+
+<!-- D1 -->
+<article class="demo" id="d1">
+<h3>D1 · Intégration par parties <span class="tag cours">Dans ton cours</span></h3>
+<div class="claim"><b>À retenir.</b> <m>\int{a}{b} u′v dx = [uv]<sub>a</sub><sup>b</sup> − \int{a}{b} u v′ dx</m>, et en particulier <m>\int{0}{L} u″v dx = [u′v]<sub>0</sub><sup>L</sup> − \int{0}{L} u′v′ dx</m>.</div>
+<ol class="proof">
+<li><b>Dérivée d'un produit.</b> Pour u, v dérivables : <m>(uv)′ = u′v + uv′</m>.</li>
+<li><b>On intègre sur [a, b].</b> Par linéarité de l'intégrale : <eq>\int{a}{b}(uv)′dx = \int{a}{b}u′v dx + \int{a}{b}u v′dx</eq></li>
+<li><b>Théorème fondamental de l'analyse.</b> <m>uv</m> est une primitive de <m>(uv)′</m>, donc <m>\int{a}{b}(uv)′dx = [uv]<sub>a</sub><sup>b</sup> = u(b)v(b) − u(a)v(a)</m>.</li>
+<li><b>On isole.</b> <eq>\int{a}{b}u′v dx = [uv]<sub>a</sub><sup>b</sup> − \int{a}{b}u v′dx</eq></li>
+<li><b>Cas utile en EF.</b> On remplace u par u′ et on prend [a, b] = [0, L] : <eq>\int{0}{L}u″v dx = [u′v]<sub>0</sub><sup>L</sup> − \int{0}{L}u′v′dx</eq></li>
+</ol>
+<p class="qed">∎</p>
+</article>
+
+<!-- D2 -->
+<article class="demo" id="d2">
+<h3>D2 · De la forme forte à la forme faible <span class="tag cours">Dans ton cours</span></h3>
+<div class="claim"><b>À retenir.</b> Si u est solution de (P), alors pour toute fonction test v ∈ V : <m>\int{0}{L}u′v′dx + \int{0}{L}c·u·v dx = \int{0}{L}f·v dx</m>, c'est-à-dire <m>a(u,v) = b(v)</m>.</div>
+<ol class="proof">
+<li><b>On multiplie (P) par v.</b> (P) est vraie en tout x, donc en multipliant par le nombre v(x) : <eq>−u″(x)v(x) + c(x)u(x)v(x) = f(x)v(x), pour tout x ∈ [0, L]</eq></li>
+<li><b>On intègre sur [0, L].</b> Toutes les fonctions sont continues, donc intégrables, et l'intégrale est linéaire : <eq>−\int{0}{L}u″v dx + \int{0}{L}c u v dx = \int{0}{L}f v dx</eq></li>
+<li><b>IPP sur le terme en u″</b> (D1) : <eq>−\int{0}{L}u″v dx = −[u′v]<sub>0</sub><sup>L</sup> + \int{0}{L}u′v′dx</eq></li>
+<li><b>Terme de bord.</b> Comme v(0) = v(L) = 0 : <eq>[u′v]<sub>0</sub><sup>L</sup> = u′(L)v(L) − u′(0)v(0) = 0</eq> C'est pour cela qu'on impose v(0) = v(L) = 0 (« On suppose que v(0) = v(L) = 0 » dans ton cours).</li>
+<li><b>Conclusion.</b> On obtient la forme faible <eq>\int{0}{L}u′v′dx + \int{0}{L}c u v dx = \int{0}{L}f v dx</eq> On pose <m>a(u,v) = \int{0}{L}(u′v′ + c·u·v)dx</m> et <m>b(v) = \int{0}{L}f v dx</m>, d'où <m>a(u,v) = b(v)</m>.</li>
+</ol>
+<p><b>Ce qu'on gagne.</b> (P) exige que u soit deux fois dérivable. La forme faible n'exige qu'<em>une</em> dérivée. Une solution faible est donc une fonction dérivable une fois qui vérifie <m>a(u,v) = b(v)</m> pour tout v ∈ V. C'est ce qui autorise les chapeaux, qui ne sont pas dérivables aux nœuds.</p>
+<p class="qed">∎</p>
+</article>
+
+<!-- D3 -->
+<article class="demo" id="d3">
+<h3>D3 · Réciproque, et pourquoi Dirichlet « ne coûte rien » <span class="tag plus">Complément</span></h3>
+<div class="claim"><b>À retenir.</b> Si u est de classe C², u(0) = u(L) = 0, et <m>a(u,v) = b(v)</m> pour tout v ∈ V, alors u vérifie (P). Une condition de Neumann, elle, apparaît naturellement dans b.</div>
+<ol class="proof">
+<li><b>On remonte les calculs de D2.</b> Par IPP et v(0) = v(L) = 0, <m>\int{0}{L}u′v′dx = −\int{0}{L}u″v dx</m>. La forme faible devient <eq>\int{0}{L}g(x)v(x)dx = 0 pour tout v ∈ V, avec g = −u″ + c·u − f</eq> g est continue.</li>
+<li><b>Raisonnement par l'absurde.</b> Supposons g(x₀) ≠ 0 pour un x₀ ∈ ]0, L[, par exemple g(x₀) &gt; 0. Par continuité, il existe δ &gt; 0 tel que g &gt; 0 sur [x₀−δ, x₀+δ] ⊂ ]0, L[.</li>
+<li><b>Fonction test bien choisie.</b> Prenons <m>v(x) = max(0, δ − |x − x₀|)</m> (un chapeau centré en x₀). Alors v ∈ V, v ≥ 0, v(x₀) &gt; 0, et v est nulle hors de [x₀−δ, x₀+δ]. Donc <m>\int{0}{L}g v dx = \int{x₀−δ}{x₀+δ}g v dx &gt; 0</m> (intégrande continue, ≥ 0, strictement positive en x₀). Contradiction avec l'étape 1.</li>
+<li><b>Conclusion.</b> g = 0 sur ]0, L[, donc sur [0, L] par continuité : u vérifie (P).</li>
+<li><b>Neumann (Rque de ton cours : u′(L) = α).</b> Si on ne force plus v(L) = 0, le terme de bord de D2 devient <m>[u′v]<sub>0</sub><sup>L</sup> = α·v(L)</m> (avec v(0) = 0). Comme <m>−\int{0}{L}u″v = −αv(L) + \int{0}{L}u′v′</m>, la forme faible est <eq>a(u,v) = \int{0}{L}f v dx + α·v(L)</eq> La condition de Neumann est « naturelle » : elle ne se met pas dans l'espace, elle modifie b. La condition de Dirichlet, elle, est « essentielle » : elle se met dans l'espace.</li>
+</ol>
+<p class="qed">∎</p>
+</article>
+
+<!-- D4 -->
+<article class="demo" id="d4">
+<h3>D4 · b est linéaire, a est bilinéaire et symétrique <span class="tag cours">Dans ton cours</span></h3>
+<div class="claim"><b>À retenir.</b> Pour v, v₁, v₂ ∈ V et λ₁, λ₂ ∈ ℝ : <m>b(λ₁v₁ + λ₂v₂) = λ₁b(v₁) + λ₂b(v₂)</m>. De plus <m>a</m> est linéaire en chaque variable et <m>a(u,v) = a(v,u)</m>.</div>
+<ol class="proof">
+<li><b>b est linéaire.</b> <eq>b(λ₁v₁ + λ₂v₂) = \int{0}{L}f(x)(λ₁v₁(x) + λ₂v₂(x))dx = λ₁\int{0}{L}f v₁dx + λ₂\int{0}{L}f v₂dx = λ₁b(v₁) + λ₂b(v₂)</eq> On a utilisé : distributivité du produit, linéarité de l'intégrale, sortie des constantes λᵢ.</li>
+<li><b>a est linéaire en u.</b> Comme la dérivation est linéaire, <m>(λ₁u₁ + λ₂u₂)′ = λ₁u₁′ + λ₂u₂′</m>. Donc <eq>a(λ₁u₁ + λ₂u₂, v) = λ₁\int{0}{L}u₁′v′dx + λ₂\int{0}{L}u₂′v′dx + λ₁\int{0}{L}c u₁v dx + λ₂\int{0}{L}c u₂v dx</eq> <eq>= λ₁ a(u₁, v) + λ₂ a(u₂, v)</eq></li>
+<li><b>a est symétrique.</b> Le produit de réels est commutatif : <m>u′v′ = v′u′</m> et <m>c·u·v = c·v·u</m>. Donc <m>a(u,v) = a(v,u)</m>.</li>
+<li><b>a est linéaire en v.</b> Par symétrie : <m>a(u, λ₁v₁ + λ₂v₂) = a(λ₁v₁ + λ₂v₂, u) = λ₁a(v₁,u) + λ₂a(v₂,u) = λ₁a(u,v₁) + λ₂a(u,v₂)</m>. Linéaire en u et en v : <m>a</m> est <b>bilinéaire</b>.</li>
+</ol>
+<p><b>Pourquoi c'est crucial.</b> La bilinéarité de a et la linéarité de b permettent de tout ramener aux fonctions de base (D6).</p>
+<p class="qed">∎</p>
+</article>
+
+<!-- D5 -->
+<article class="demo" id="d5">
+<h3>D5 · Les fonctions chapeau forment une base de V<sub>h</sub> <span class="tag cours">Dans ton cours</span> <span class="tag plus">Complément</span></h3>
+<div class="claim"><b>À retenir.</b> <m>w<sub>i</sub>(x) = (x − x<sub>i−1</sub>)/h</m> sur [x<sub>i−1</sub>, x<sub>i</sub>], <m>(x<sub>i+1</sub> − x)/h</m> sur [x<sub>i</sub>, x<sub>i+1</sub>], 0 ailleurs. Alors <m>w<sub>i</sub>(x<sub>j</sub>) = δ<sub>ij</sub></m>, et tout élément de <m>V<sub>h</sub></m> s'écrit de façon unique <m>u<sub>h</sub> = \sum{i=0}{N+1} u<sub>i</sub>w<sub>i</sub></m> avec <m>u<sub>i</sub> = u<sub>h</sub>(x<sub>i</sub>)</m>.</div>
+
+<figure>
+<svg viewBox="0 0 520 220" role="img" aria-label="Les trois fonctions chapeau pour N = 1">
+  <line class="axis" x1="30" y1="180" x2="500" y2="180"/><line class="axis" x1="50" y1="30" x2="50" y2="190"/>
+  <line x1="50" y1="50" x2="470" y2="50" stroke="var(--rule)" stroke-dasharray="3 4"/>
+  <polyline points="50,50 260,180" fill="none" stroke="var(--w0)" stroke-width="3"/>
+  <polyline points="50,180 260,50 470,180" fill="none" stroke="var(--w1)" stroke-width="3"/>
+  <polyline points="260,180 470,50" fill="none" stroke="var(--w2)" stroke-width="3"/>
+  <g stroke="var(--ink)"><line x1="50" y1="176" x2="50" y2="184"/><line x1="260" y1="176" x2="260" y2="184"/><line x1="470" y1="176" x2="470" y2="184"/></g>
+  <text x="44" y="202">x₀ = 0</text><text x="248" y="202">x₁</text><text x="452" y="202">x₂ = L</text>
+  <text x="30" y="55">1</text>
+  <text x="100" y="88" fill="var(--w0)" style="fill:var(--w0)">w₀</text><text x="245" y="40" style="fill:var(--w1)">w₁</text><text x="420" y="88" style="fill:var(--w2)">w₂</text>
+</svg>
+<figcaption>N = 1 : trois nœuds, trois fonctions de base (comme dans ton schéma).</figcaption>
+</figure>
+
+<ol class="proof">
+<li><b>Propriété d'interpolation.</b> <m>w<sub>i</sub>(x<sub>i</sub>) = (x<sub>i</sub> − x<sub>i−1</sub>)/h = h/h = 1</m>. En <m>x<sub>i±1</sub></m> : <m>w<sub>i</sub>(x<sub>i−1</sub>) = 0</m> et <m>w<sub>i</sub>(x<sub>i+1</sub>) = (x<sub>i+1</sub> − x<sub>i+1</sub>)/h = 0</m>. Aux autres nœuds w<sub>i</sub> est nulle. Donc <m>w<sub>i</sub>(x<sub>j</sub>) = δ<sub>ij</sub></m> (symbole de Kronecker : 1 si i = j, 0 sinon).</li>
+<li><b>Continuité (classe C⁰, le « k = 0 » de tes notes).</b> En <m>x<sub>i</sub></m>, les deux morceaux valent 1. En <m>x<sub>i−1</sub></m> et <m>x<sub>i+1</sub></m>, ils valent 0 comme la fonction nulle voisine. Donc w<sub>i</sub> est continue.</li>
+<li><b>Support et dérivée.</b> Le support est [x<sub>i−1</sub>, x<sub>i+1</sub>] (deux cellules). Sauf aux nœuds, <m>w<sub>i</sub>′ = +1/h</m> sur ]x<sub>i−1</sub>, x<sub>i</sub>[, <m>−1/h</m> sur ]x<sub>i</sub>, x<sub>i+1</sub>[, 0 ailleurs. Aux nœuds w<sub>i</sub>′ n'existe pas, mais cela ne change aucune intégrale (un point est de mesure nulle) : c'est exactement pourquoi il faut la forme faible.</li>
+<li><b>Liberté.</b> Si <m>\sum α<sub>i</sub>w<sub>i</sub> = 0</m>, on évalue en <m>x<sub>j</sub></m> : <m>\sum α<sub>i</sub>δ<sub>ij</sub> = α<sub>j</sub> = 0</m>. Donc tous les α<sub>j</sub> sont nuls.</li>
+<li><b>Génération.</b> Soit <m>u<sub>h</sub></m> continue et affine sur chaque cellule. Posons <m>g = \sum u<sub>h</sub>(x<sub>i</sub>)w<sub>i</sub></m>. Sur une cellule, g est une somme de fonctions affines, donc affine. Elle prend en x<sub>i</sub> et x<sub>i+1</sub> les mêmes valeurs que u<sub>h</sub> (propriété d'interpolation). Deux fonctions affines qui coïncident en deux points distincts sont égales : g = u<sub>h</sub> sur chaque cellule.</li>
+<li><b>Conséquence.</b> <m>dim V<sub>h</sub> = N+2</m> et <m>u<sub>h</sub>(x<sub>i</sub>) = u<sub>i</sub></m> : les inconnues sont directement les valeurs aux nœuds. Exemple de ton cours (N = 1) : <m>u<sub>h</sub>(x<sub>1</sub>) = u₀·0 + u₁·1 + u₂·0 = u₁</m>.</li>
+</ol>
+<p class="qed">∎</p>
+</article>
+
+<!-- D6 -->
+<article class="demo" id="d6">
+<h3>D6 · Du problème discret au système AU = B <span class="tag cours">Dans ton cours</span></h3>
+<div class="claim"><b>À retenir.</b> Trouver <m>u<sub>h</sub> ∈ V<sub>h</sub></m> tel que <m>a(u<sub>h</sub>, v<sub>h</sub>) = b(v<sub>h</sub>)</m> pour tout <m>v<sub>h</sub> ∈ V<sub>h</sub></m> équivaut à <m>AU = B</m>, avec <m>A<sub>ij</sub> = a(w<sub>j</sub>, w<sub>i</sub>)</m> et <m>B<sub>i</sub> = b(w<sub>i</sub>)</m>.</div>
+<p>On écrit <m>u<sub>h</sub> = \sum u<sub>i</sub>w<sub>i</sub></m> et <m>v<sub>h</sub> = \sum v<sub>j</sub>w<sub>j</sub></m>, avec <m>U = (u₀, …, u<sub>N+1</sub>)<sup>T</sup></m> et <m>V = (v₀, …, v<sub>N+1</sub>)<sup>T</sup></m>. Ton cours détaille le cas N = 1 (trois nœuds) ; voici la version générale.</p>
+<ol class="proof">
+<li><b>Linéarité de a en sa 1ʳᵉ variable</b> (D4) : <eq>a(u<sub>h</sub>, v<sub>h</sub>) = \sum{i=0}{N+1} u<sub>i</sub> a(w<sub>i</sub>, v<sub>h</sub>)</eq> Pour N = 1 : <m>u₀a(w₀,v<sub>h</sub>) + u₁a(w₁,v<sub>h</sub>) + u₂a(w₂,v<sub>h</sub>)</m>.</li>
+<li><b>Linéarité en la 2ᵉ variable</b> : <m>a(w<sub>i</sub>, v<sub>h</sub>) = \sum v<sub>j</sub> a(w<sub>i</sub>, w<sub>j</sub>)</m>. Pour N = 1 : <m>a(w₀, v<sub>h</sub>) = v₀a(w₀,w₀) + v₁a(w₀,w₁) + v₂a(w₀,w₂)</m>, et de même pour w₁, w₂ : neuf termes. En général : <eq>a(u<sub>h</sub>, v<sub>h</sub>) = \sum{i=0}{N+1}\sum{j=0}{N+1} u<sub>i</sub> v<sub>j</sub> a(w<sub>i</sub>, w<sub>j</sub>)</eq> (« utilisation de la linéarité 2 fois » dans ton cours).</li>
+<li><b>Écriture matricielle.</b> On a <m>V<sup>T</sup>AU = \sum<sub>j</sub>\sum<sub>i</sub> v<sub>j</sub>A<sub>ji</sub>u<sub>i</sub></m>. Pour retrouver la double somme, il faut <m>A<sub>ji</sub> = a(w<sub>i</sub>, w<sub>j</sub>)</m>. Comme a est symétrique (D4), <m>A = (a(w<sub>i</sub>, w<sub>j</sub>))</m> convient : A est symétrique. Donc <eq>a(u<sub>h</sub>, v<sub>h</sub>) = V<sup>T</sup> A U</eq></li>
+<li><b>Second membre.</b> Linéarité de b : <eq>b(v<sub>h</sub>) = b(\sum v<sub>j</sub>w<sub>j</sub>) = \sum{j=0}{N+1} v<sub>j</sub> b(w<sub>j</sub>) = V<sup>T</sup>B, avec B = (b(w₀), …, b(w<sub>N+1</sub>))<sup>T</sup></eq> Pour N = 1 : <m>b(v<sub>h</sub>) = v₀b(w₀) + v₁b(w₁) + v₂b(w₂)</m> (les intégrales <m>\int{0}{L}f w<sub>j</sub></m> de ton cours EF-5).</li>
+<li><b>Le problème discret devient</b> <m>V<sup>T</sup>AU = V<sup>T</sup>B</m> pour tout V, soit <eq>V<sup>T</sup>(AU − B) = 0 pour tout V ∈ ℝ<sup>N+2</sup></eq></li>
+<li><b>On en déduit AU = B.</b> Prenons V = e<sub>k</sub> (vecteur dont toutes les composantes sont nulles sauf la k-ième, qui vaut 1) : on obtient <m>(AU − B)<sub>k</sub> = 0</m>, pour chaque k. (Autre choix : V = AU − B donne ‖AU − B‖² = 0.) Réciproquement, si AU = B alors <m>V<sup>T</sup>(AU − B) = 0</m> pour tout V. Il y a bien équivalence.</li>
+</ol>
+<p><b>Cas N = 1, explicitement :</b> <eq>\mat{a(w₀,w₀) | a(w₀,w₁) | a(w₀,w₂) // a(w₁,w₀) | a(w₁,w₁) | a(w₁,w₂) // a(w₂,w₀) | a(w₂,w₁) | a(w₂,w₂)} \mat{u₀ // u₁ // u₂} = \mat{b(w₀) // b(w₁) // b(w₂)}</eq></p>
+<p class="qed">∎</p>
+</article>
+
+<!-- D7 -->
+<article class="demo" id="d7">
+<h3>D7 · Structure de A et calcul de ses coefficients <span class="tag cours">Dans ton cours</span> <span class="tag plus">Complément</span></h3>
+<div class="claim"><b>À retenir.</b> A est symétrique et <b>tridiagonale</b> : <m>a(w<sub>i</sub>, w<sub>j</sub>) = 0</m> si <m>|i − j| ≥ 2</m>. Pour c constante : diagonale <m>2/h + 2ch/3</m> (1/h + ch/3 aux extrémités), sur-diagonale <m>−1/h + ch/6</m>.</div>
+<ol class="proof">
+<li><b>Symétrie.</b> Elle vient de a(u,v) = a(v,u) (D4).</li>
+<li><b>Tridiagonalité.</b> Le support de w<sub>i</sub> est [x<sub>i−1</sub>, x<sub>i+1</sub>]. Si j ≥ i+2, alors x<sub>j−1</sub> ≥ x<sub>i+1</sub> : les deux supports n'ont au plus qu'un point commun. Sur ]0, L[ privé de ce point, <m>w<sub>i</sub>w<sub>j</sub> = 0</m> et <m>w<sub>i</sub>′w<sub>j</sub>′ = 0</m>. L'intégrande de a(w<sub>i</sub>, w<sub>j</sub>) est nul presque partout, donc <m>a(w<sub>i</sub>, w<sub>j</sub>) = 0</m>. (Ton cours : « si |i−j| ≥ 2 alors a(w<sub>i</sub>, w<sub>j</sub>) = 0 ».)</li>
+<li><b>Termes diagonaux.</b> <m>a(w<sub>i</sub>, w<sub>i</sub>) = \int{0}{L}[(w<sub>i</sub>′)² + c·w<sub>i</sub>²]dx</m>, et l'intégrale se réduit au support : <eq>a(w<sub>i</sub>,w<sub>i</sub>) = \int{x₀}{x₁}[…]dx si i = 0 ; &nbsp; \int{x<sub>N</sub>}{x<sub>N+1</sub>}[…]dx si i = N+1 ; &nbsp; \int{x<sub>i−1</sub>}{x<sub>i</sub>}[…]dx + \int{x<sub>i</sub>}{x<sub>i+1</sub>}[…]dx si 1 ≤ i ≤ N</eq></li>
+<li><b>Termes hors diagonale.</b> Seul le voisin direct interagit : <m>a(w<sub>i</sub>, w<sub>i+1</sub>) = \int{x<sub>i</sub>}{x<sub>i+1</sub>}[w<sub>i</sub>′w<sub>i+1</sub>′ + c·w<sub>i</sub>w<sub>i+1</sub>]dx</m>, pour i = 0, …, N.</li>
+<li><b>Calcul exact quand c est constante (uniforme).</b> Sur une cellule, en posant t = x − x<sub>i</sub> ∈ [0, h] :
+  <ul class="tight">
+  <li>Raideur : <m>(w<sub>i</sub>′)² = 1/h²</m>, donc <m>\int (w<sub>i</sub>′)² = h·(1/h²) = 1/h</m>.</li>
+  <li>Couplage : <m>w<sub>i</sub>′w<sub>i+1</sub>′ = (−1/h)(1/h) = −1/h²</m>, donc l'intégrale vaut <m>−1/h</m>.</li>
+  <li>Masse diagonale : <m>\int{0}{h}(t/h)²dt = h/3</m>.</li>
+  <li>Masse croisée : <m>\int{0}{h}\frac{(h−t)}{h}·\frac{t}{h}dt = \frac{1}{h²}(h·\frac{h²}{2} − \frac{h³}{3}) = h/6</m>.</li>
+  </ul>
+  Un nœud intérieur touche 2 cellules, un nœud du bord n'en touche qu'une, d'où : <eq>a(w<sub>i</sub>,w<sub>i</sub>) = \frac{2}{h} + \frac{2ch}{3} (1 ≤ i ≤ N), &nbsp; \frac{1}{h} + \frac{ch}{3} (i = 0, N+1), &nbsp; a(w<sub>i</sub>,w<sub>i+1</sub>) = −\frac{1}{h} + \frac{ch}{6}</eq></li>
+<li><b>Écriture compacte.</b> <eq>A = \frac{1}{h}\mat{1 | −1 | 0 | ⋯ | 0 // −1 | 2 | −1 | ⋱ | ⋮ // 0 | ⋱ | ⋱ | ⋱ | 0 // ⋮ | ⋱ | −1 | 2 | −1 // 0 | ⋯ | 0 | −1 | 1} + \frac{ch}{6}\mat{2 | 1 | 0 | ⋯ | 0 // 1 | 4 | 1 | ⋱ | ⋮ // 0 | ⋱ | ⋱ | ⋱ | 0 // ⋮ | ⋱ | 1 | 4 | 1 // 0 | ⋯ | 0 | 1 | 2}</eq> Première matrice : <em>matrice de rigidité</em> (terme en u′v′). Seconde : <em>matrice de masse</em> (terme en c·u·v).</li>
+<li><b>Sanity check.</b> Pour c = 0 et une ligne intérieure, <m>(AU)<sub>i</sub> = (−u<sub>i−1</sub> + 2u<sub>i</sub> − u<sub>i+1</sub>)/h</m>. Divisée par h, c'est le schéma aux différences finies classique pour −u″. Les deux méthodes coïncident ici.</li>
+</ol>
+<p><b>Si c n'est pas constante</b> (ou si l'intégrale ne se fait pas à la main), on calcule chaque intégrale par quadrature (D10), en posant <m>ψ = (w<sub>i</sub>′)² + c·w<sub>i</sub>²</m> ou <m>ψ = w<sub>i</sub>′w<sub>i+1</sub>′ + c·w<sub>i</sub>w<sub>i+1</sub></m>.</p>
+<p class="qed">∎</p>
+</article>
+
+<!-- D8 -->
+<article class="demo" id="d8">
+<h3>D8 · A est définie positive, donc u<sub>h</sub> existe et est unique <span class="tag plus">Complément</span></h3>
+<div class="claim"><b>À retenir.</b> Si c &gt; 0, alors pour tout V ≠ 0 : <m>V<sup>T</sup>AV &gt; 0</m>. A est symétrique définie positive, donc inversible : le système <m>AU = B</m> a une solution unique.</div>
+<ol class="proof">
+<li><b>Lien forme–matrice.</b> Soit V ∈ ℝ<sup>N+2</sup> et <m>v<sub>h</sub> = \sum v<sub>i</sub>w<sub>i</sub></m>. Par D6, <m>V<sup>T</sup>AV = a(v<sub>h</sub>, v<sub>h</sub>) = \int{0}{L}[(v<sub>h</sub>′)² + c·v<sub>h</sub>²]dx</m>.</li>
+<li><b>Positivité.</b> Le premier terme est ≥ 0. Donc <m>V<sup>T</sup>AV ≥ \int{0}{L}c·v<sub>h</sub>²dx</m>.</li>
+<li><b>Définie.</b> Si V ≠ 0, alors v<sub>h</sub> ≠ 0 (D5 : les w<sub>i</sub> sont libres). v<sub>h</sub> est continue et non nulle : v<sub>h</sub>² &gt; 0 sur un petit intervalle. Avec c &gt; 0 continue, <m>\int c·v<sub>h</sub>² &gt; 0</m>.</li>
+<li><b>Inversibilité.</b> Si AV = 0, alors V<sup>T</sup>AV = 0, donc V = 0 : le noyau de A est réduit à {0}, A est inversible (matrice carrée).</li>
+<li><b>Bord.</b> Cela vaut pour A avant imposition de Dirichlet. Le système <em>réduit</em> (D9), obtenu en supprimant les lignes et colonnes 0 et N+1, est une sous-matrice principale de A, donc reste symétrique définie positive.</li>
+</ol>
+<p class="qed">∎</p>
+</article>
+
+<!-- D9 -->
+<article class="demo" id="d9">
+<h3>D9 · Imposer u(0) = u(L) = 0 dans le système <span class="tag cours">Dans ton cours</span></h3>
+<div class="claim"><b>À retenir.</b> On remplace la ligne 0 de A par (1, 0, …, 0) et B₀ par 0, la dernière ligne par (0, …, 0, 1) et B<sub>N+1</sub> par 0. La solution du système modifié est (0, U<sub>int</sub>, 0), où U<sub>int</sub> résout le système réduit N×N.</div>
+<ol class="proof">
+<li><b>Pourquoi les lignes 0 et N+1 sont à remplacer.</b> La ligne k du système est l'équation <m>a(u<sub>h</sub>, w<sub>k</sub>) = b(w<sub>k</sub>)</m>, obtenue avec la fonction test w<sub>k</sub>. Mais w₀(0) = 1 ≠ 0 et w<sub>N+1</sub>(L) = 1 ≠ 0 : ces fonctions ne sont pas dans V, donc ces deux équations ne font pas partie du problème.</li>
+<li><b>À la place :</b> les conditions u<sub>h</sub>(0) = u₀ = 0 et u<sub>h</sub>(L) = u<sub>N+1</sub> = 0 (D5, propriété d'interpolation). Ce sont les lignes <m>1·u₀ = 0</m> et <m>1·u<sub>N+1</sub> = 0</m>.</li>
+<li><b>Système modifié :</b> <eq>\mat{1 | 0 | ⋯ | 0 // ⋮ | ⋱ | | ⋮ // ⋮ | | ⋱ | ⋮ // 0 | ⋯ | 0 | 1}\mat{u₀ // u₁ // ⋮ // u<sub>N+1</sub>} = \mat{0 // B₁ // ⋮ // 0}</eq> avec les lignes 1 à N inchangées.</li>
+<li><b>Équivalence avec le système réduit.</b> Dans la ligne 1, <m>A₁₀u₀ + A₁₁u₁ + A₁₂u₂ = B₁</m>. Comme u₀ = 0, le terme A₁₀u₀ disparaît. Idem ligne N avec u<sub>N+1</sub>. Les lignes 1 à N donnent donc <m>A<sub>int</sub>U<sub>int</sub> = B<sub>int</sub></m>, où A<sub>int</sub> est A privée des lignes/colonnes 0 et N+1 (taille N×N, symétrique définie positive d'après D8).</li>
+</ol>
+<p><b>Remarque.</b> Le remplacement de lignes détruit la symétrie de la matrice (la ligne 1 garde son terme A₁₀, alors que la ligne 0 n'a plus de terme en u₁). Le système reste inversible, mais on perd la symétrie. Si on veut la garder, on résout directement le système réduit N×N. Pour une condition non homogène u(0) = α, on impose u₀ = α et on retire A₁₀·α du second membre de la ligne 1.</p>
+<p class="qed">∎</p>
+</article>
+
+<!-- D10 -->
+<article class="demo" id="d10">
+<h3>D10 · Quadrature numérique : rectangle, trapèze, point milieu, Simpson <span class="tag cours">Dans ton cours</span> <span class="tag plus">Complément</span></h3>
+<div class="claim"><b>À retenir.</b> Sur [a, b] avec M sous-intervalles, <m>dx̃ = (b − a)/M</m> et <m>x̃<sub>j</sub> = a + j·dx̃</m> : <br>
+rectangle gauche : <m>I ≈ dx̃\sum{j=0}{M−1}f(x̃<sub>j</sub>)</m> ; trapèze : <m>I ≈ dx̃\sum{j=0}{M−1}\frac{f(x̃<sub>j</sub>) + f(x̃<sub>j+1</sub>)}{2}</m> ; point milieu : <m>I ≈ dx̃\sum{j=0}{M−1}f(x̃<sub>j</sub> + dx̃/2)</m> ; <b>Simpson</b> : <m>I ≈ \frac{dx̃}{6}\sum{j=0}{M−1}[f(x̃<sub>j</sub>) + 4f(x̃<sub>j</sub> + dx̃/2) + f(x̃<sub>j+1</sub>)]</m>.</div>
+<p><b>Pourquoi en a-t-on besoin ?</b> Les intégrales <m>\int c·w<sub>i</sub>w<sub>j</sub></m> et <m>\int f·w<sub>i</sub></m> ne se calculent « à la main » que si c et f sont polynomiales. Sinon on approche <m>I(f) = \int{a}{b}f(x)dx</m>.</p>
+<ol class="proof">
+<li><b>Formules simples (M = 1).</b> On remplace f sur [a, b] par un polynôme simple, puis on intègre exactement :
+  <ul class="tight">
+  <li>constante f(a) : <m>I ≈ f(a)(b − a)</m> (rectangle à gauche) ;</li>
+  <li>constante f((a+b)/2) : <m>I ≈ f(\frac{a+b}{2})(b − a)</m> (point milieu) ;</li>
+  <li>droite passant par (a, f(a)) et (b, f(b)) : <m>p(x) = f(a) + \frac{f(b) − f(a)}{b − a}(x − a)</m>, et <m>\int{a}{b}p = f(a)(b−a) + \frac{f(b)−f(a)}{b−a}·\frac{(b−a)²}{2} = \frac{f(a)+f(b)}{2}(b − a)</m> (trapèze).</li>
+  </ul></li>
+<li><b>Formules composées.</b> On applique la formule simple sur chacun des M intervalles [x̃<sub>j</sub>, x̃<sub>j+1</sub>] (largeur dx̃) et on additionne (relation de Chasles). C'est ce que fait la fonction Matlab de ton cours : <code>S = S + f(xt)</code> puis <code>S = S*dxt</code>. Pour le point milieu, la seule ligne qui change est <code>S = S + f(xt + dxt/2)</code> (fonction <code>quadm</code>, voir la section Matlab).</li>
+<li><b>Erreur du rectangle à gauche (ordre 1).</b> Si f est C¹ avec <m>|f′| ≤ K</m>, sur [x̃<sub>j</sub>, x̃<sub>j+1</sub>] : <m>|f(x) − f(x̃<sub>j</sub>)| ≤ K(x − x̃<sub>j</sub>)</m> (accroissements finis). Donc <eq>|\int{x̃<sub>j</sub>}{x̃<sub>j+1</sub>}(f(x) − f(x̃<sub>j</sub>))dx| ≤ K\frac{dx̃²}{2}</eq> On additionne les M intervalles : <eq>|I − S| ≤ M·K\frac{dx̃²}{2} = K\frac{(b−a)}{2}dx̃</eq> L'erreur est en O(dx̃) : diviser dx̃ par 2 divise l'erreur par 2.</li>
+<li><b>Trapèze et point milieu (ordre 2, résultat admis).</b> Pour f de classe C² : <eq>I − S<sub>trap</sub> = −\frac{(b−a)}{12}dx̃²f″(ξ), &nbsp; I − S<sub>mil</sub> = +\frac{(b−a)}{24}dx̃²f″(ξ), &nbsp; ξ ∈ [a, b]</eq> Elles sont exactes pour les fonctions affines. Diviser dx̃ par 2 divise l'erreur par 4.</li>
+<li><b>Simpson (ordre 4).</b> On remplace f sur [a, b] par la <em>parabole</em> passant par (a, f(a)), (m, f(m)) et (b, f(b)), avec <m>m = (a+b)/2</m>.
+  <ul class="tight">
+  <li>Changement de variable : <m>η = (b − a)/2</m>, <m>t = x − m ∈ [−η, η]</m>, et <m>p(t) = α + βt + γt²</m>.</li>
+  <li><m>p(0) = f(m)</m> donne <m>α = f(m)</m>. En additionnant <m>p(−η) = f(a)</m> et <m>p(η) = f(b)</m> : <m>f(a) + f(b) = 2α + 2γη²</m>, d'où <m>γ = \frac{f(a) + f(b) − 2f(m)}{2η²}</m>.</li>
+  <li>Le terme <m>βt</m> est impair : son intégrale sur [−η, η] est nulle. Donc <eq>\int{−η}{η}p(t)dt = 2ηα + \frac{2γη³}{3} = \frac{η}{3}(f(a) + 4f(m) + f(b)) = \frac{b−a}{6}(f(a) + 4f(m) + f(b))</eq></li>
+  <li><b>Lien avec les formules précédentes :</b> Simpson = ⅔ (point milieu) + ⅓ (trapèze). Les erreurs en dx̃²·f″, qui valent <m>+\frac{b−a}{24}</m> pour le milieu et <m>−\frac{b−a}{12}</m> pour le trapèze, se compensent : <m>2×\frac{1}{24} − \frac{1}{12} = 0</m>.</li>
+  <li><b>Exactitude.</b> Formule exacte pour les polynômes de degré ≤ 3 (le terme en t³ est impair, donc d'intégrale nulle, et la formule le retrouve aussi). Exemple : <m>\int{0}{1}x³dx = \frac{1}{6}(0 + 4·\frac{1}{8} + 1) = \frac{1}{4}</m>.</li>
+  <li><b>Formule composée.</b> Sur chaque sous-intervalle : <eq>I ≈ \frac{dx̃}{6}\sum{j=0}{M−1}[f(x̃<sub>j</sub>) + 4f(x̃<sub>j</sub> + dx̃/2) + f(x̃<sub>j+1</sub>)]</eq> Les points intérieurs x̃<sub>j</sub> comptent deux fois : on retrouve les poids 1, 4, 2, 4, 2, …, 4, 1. Coût : 2M + 1 évaluations de f.</li>
+  <li><b>Erreur (admis).</b> Pour f de classe C⁴ : <m>I − S = −\frac{b−a}{2880}dx̃⁴f⁗(ξ)</m>. Diviser dx̃ par 2 divise l'erreur par 16 (ordre 4).</li>
+  </ul></li>
+<li><b>Application aux coefficients (ton cours).</b> Avec <code>quad(ψ, a, b, M)</code> = approximation de <m>\int{a}{b}ψ</m> : <ul class="tight">
+  <li><m>a(w₀,w₀) ≈ quad(ψ, x₀, x₁, M)</m> avec <m>ψ = (w₀′)² + c·w₀²</m> ;</li>
+  <li><m>a(w<sub>N+1</sub>,w<sub>N+1</sub>) ≈ quad(ψ, x<sub>N</sub>, x<sub>N+1</sub>, M)</m> avec <m>ψ = (w<sub>N+1</sub>′)² + c·w<sub>N+1</sub>²</m> ;</li>
+  <li>1 ≤ i ≤ N : <m>a(w<sub>i</sub>,w<sub>i</sub>) ≈ quad(ψ, x<sub>i−1</sub>, x<sub>i</sub>, M) + quad(ψ, x<sub>i</sub>, x<sub>i+1</sub>, M)</m> avec <m>ψ = (w<sub>i</sub>′)² + c·w<sub>i</sub>²</m> ;</li>
+  <li>hors diagonale : <m>a(w<sub>i</sub>,w<sub>i+1</sub>) ≈ quad(ψ, x<sub>i</sub>, x<sub>i+1</sub>, M)</m> avec <m>ψ = w<sub>i</sub>′w<sub>i+1</sub>′ + c·w<sub>i</sub>w<sub>i+1</sub></m> ;</li>
+  <li>second membre : <m>b(w₀) ≈ quad(f·w₀, x₀, x₁, M)</m>, <m>b(w<sub>N+1</sub>) ≈ quad(f·w<sub>N+1</sub>, x<sub>N</sub>, x<sub>N+1</sub>, M)</m>, et pour 1 ≤ i ≤ N la somme des deux cellules avec <m>ψ = f·w<sub>i</sub></m>.</li></ul></li>
+</ol>
+<p class="qed">∎</p>
+</article>
+
+<!-- D11 -->
+<article class="demo" id="d11">
+<h3>D11 · Pourquoi u<sub>h</sub> est la meilleure approximation possible <span class="tag plus">Complément</span></h3>
+<div class="claim"><b>À retenir.</b> Orthogonalité de Galerkin : <m>a(u − u<sub>h</sub>, v<sub>h</sub>) = 0</m> pour tout <m>v<sub>h</sub> ∈ V<sub>h</sub></m>. Conséquence : <m>‖u − u<sub>h</sub>‖<sub>a</sub> ≤ ‖u − v<sub>h</sub>‖<sub>a</sub></m> pour tout <m>v<sub>h</sub> ∈ V<sub>h</sub></m>, avec <m>‖v‖<sub>a</sub> = √a(v,v)</m> (norme d'énergie).</div>
+<ol class="proof">
+<li><b>Orthogonalité.</b> Comme <m>V<sub>h</sub> ⊂ V</m>, la forme faible exacte tient pour v<sub>h</sub> : <m>a(u, v<sub>h</sub>) = b(v<sub>h</sub>)</m>. Le problème discret donne <m>a(u<sub>h</sub>, v<sub>h</sub>) = b(v<sub>h</sub>)</m>. On soustrait et on utilise la linéarité en la 1ʳᵉ variable : <m>a(u − u<sub>h</sub>, v<sub>h</sub>) = 0</m>.</li>
+<li><b>a est un produit scalaire.</b> Symétrique et bilinéaire (D4), et <m>a(v,v) = \int(v′)² + c·v² &gt; 0</m> si v ≠ 0 (même argument que D8). L'inégalité de Cauchy–Schwarz s'applique : <m>a(v,w) ≤ ‖v‖<sub>a</sub>‖w‖<sub>a</sub></m>.</li>
+<li><b>Meilleure approximation.</b> Soit v<sub>h</sub> ∈ V<sub>h</sub>. On écrit <m>u − u<sub>h</sub> = (u − v<sub>h</sub>) + (v<sub>h</sub> − u<sub>h</sub>)</m>, avec <m>v<sub>h</sub> − u<sub>h</sub> ∈ V<sub>h</sub></m>. Alors <eq>‖u − u<sub>h</sub>‖<sub>a</sub>² = a(u − u<sub>h</sub>, u − v<sub>h</sub>) + a(u − u<sub>h</sub>, v<sub>h</sub> − u<sub>h</sub>) = a(u − u<sub>h</sub>, u − v<sub>h</sub>)</eq> (le second terme est nul par orthogonalité). Par Cauchy–Schwarz : <eq>‖u − u<sub>h</sub>‖<sub>a</sub>² ≤ ‖u − u<sub>h</sub>‖<sub>a</sub>·‖u − v<sub>h</sub>‖<sub>a</sub></eq> On divise par ‖u − u<sub>h</sub>‖<sub>a</sub> (si non nul) : <m>‖u − u<sub>h</sub>‖<sub>a</sub> ≤ ‖u − v<sub>h</sub>‖<sub>a</sub></m>.</li>
+<li><b>Vitesse de convergence (résultat admis).</b> Prenons pour v<sub>h</sub> l'interpolée affine de u. Pour u ∈ H², l'erreur d'interpolation en énergie est en O(h), d'où <m>‖u − u<sub>h</sub>‖<sub>a</sub> ≤ C·h·‖u″‖<sub>L²</sub></m> : c'est le « e<sub>h</sub> → 0 quand h → 0 » de ton cours. Par un argument de dualité (Aubin–Nitsche), l'erreur L² est en O(h²), ce que montre le tableau du simulateur.</li>
+</ol>
+<p class="qed">∎</p>
+</article>
+
+<!-- D12 -->
+<article class="demo" id="d12">
+<h3>D12 · Ordre de convergence d'une quadrature <span class="tag cours">Dans ton cours</span></h3>
+<div class="claim"><b>À retenir.</b> Si l'erreur vaut <m>Err(M) = δ·M<sup>β</sup></m> avec <m>β = −p</m> et p &gt; 0, alors <m>Err = \frac{δ}{(b−a)<sup>p</sup>}·dx̃<sup>p</sup></m> : la méthode est d'ordre p. En échelle log-log, <m>Err(M)</m> est une droite de pente <m>−p</m>.</div>
+<ol class="proof">
+<li><b>Pas de la subdivision.</b> <m>dx̃ = (b − a)/M</m>, donc <m>1/M = dx̃/(b − a)</m>.</li>
+<li><b>Modèle d'erreur (tableau).</b> <m>Err = δ·M<sup>β</sup></m>, avec <m>β = −p</m> : <eq>Err = δ·M<sup>−p</sup> = δ·\frac{1}{M<sup>p</sup>}</eq> (δ est une constante qui dépend de f et de la méthode).</li>
+<li><b>On fait apparaître dx̃.</b> On multiplie et divise par <m>(b−a)<sup>p</sup></m> : <eq>Err = δ·\frac{(b−a)<sup>p</sup>}{(b−a)<sup>p</sup>}·(\frac{1}{M})<sup>p</sup> = \frac{δ}{(b−a)<sup>p</sup>}·(\frac{b−a}{M})<sup>p</sup> = C·dx̃<sup>p</sup>, &nbsp; C = \frac{δ}{(b−a)<sup>p</sup>}</eq></li>
+<li><b>Lecture sur un graphique.</b> On prend le logarithme : <eq>ln Err = ln δ − p·ln M</eq> C'est une droite de pente <m>−p</m> en fonction de ln M (échelle log-log, <code>loglog</code> dans Matlab). La pente donne l'ordre, l'ordonnée à l'origine donne δ.</li>
+<li><b>Lecture sans graphique.</b> Quand on double M : <m>\frac{Err(2M)}{Err(M)} = 2<sup>−p</sup></m>, donc <m>p = log₂\frac{Err(M)}{Err(2M)}</m>. Un rapport de 2 signifie p = 1, un rapport de 4 signifie p = 2, un rapport de 16 signifie p = 4.</li>
+</ol>
+<p><b>Mesure sur ∫₀¹ eˣ dx = e − 1</b> (pentes obtenues par régression sur M = 2, 4, …, 128) :</p>
+<div class="scroll"><table class="recap">
+<tr><th>Formule</th><th>Ordre p mesuré</th><th>Ordre théorique</th></tr>
+<tr><td>Rectangle à gauche</td><td>0,98</td><td>1</td></tr>
+<tr><td>Point milieu</td><td>2,00</td><td>2</td></tr>
+<tr><td>Trapèze</td><td>2,00</td><td>2</td></tr>
+<tr><td>Simpson</td><td>4,00</td><td>4</td></tr>
+</table></div>
+<p>Script Matlab complet (il faut les fichiers <code>quadg.m</code>, <code>quadm.m</code>, <code>quadt.m</code> et <code>quadsimp.m</code> dans le même dossier) :</p>
+<pre><code>% ordre_quad.m : ordre de convergence des formules de quadrature
+% Test : I = int_0^1 exp(x) dx = e - 1
+clear; clc;
+
+f   = @(x) exp(x);
+a   = 0;  b = 1;
+Iex = exp(1) - 1;
+
+Ms       = 2.^(1:7);                                  % M = 2, 4, ..., 128
+quad_fun = {@quadg, @quadm, @quadt, @quadsimp};
+noms     = {'rectangle gauche', 'point milieu', 'trapeze', 'Simpson'};
+
+figure; hold on;
+for k = 1:numel(quad_fun)
+    err = zeros(size(Ms));
+    for n = 1:numel(Ms)
+        err(n) = abs(quad_fun{k}(f, a, b, Ms(n)) - Iex);
+    end
+    loglog(Ms, err, 'o-', 'LineWidth', 1.3);
+    coef  = polyfit(log(Ms), log(err), 1);   % ln(Err) = ln(delta) + beta*ln(M)
+    p     = -coef(1);                        % beta = -p
+    delta = exp(coef(2));
+    fprintf('%-18s p = %.2f   delta = %.3e\n', noms{k}, p, delta);
+end
+set(gca, 'XScale', 'log', 'YScale', 'log'); grid on;
+xlabel('M'); ylabel('|I - S|');
+legend(noms, 'Location', 'southwest');
+</code></pre>
+<p class="qed">∎</p>
+</article>
+</section>
+
+<!-- ======================= LHS / RHS ======================= -->
+<section id="lhs">
+<h2>Assembler A comme au tableau : LHS et RHS</h2>
+<p>Au tableau, on écrit deux fonctions : <code>LHS(c, L, N, M)</code> (« left-hand side », le membre de gauche) qui renvoie la matrice A, et <code>RHS</code> qui renvoie le second membre B. Les paramètres sont c (la fonction), L (la longueur), N (le nombre de nœuds intérieurs) et M (le nombre de sous-intervalles de la quadrature). Voici l'algorithme de ta dernière photo, mis au propre, puis la partie qui manquait : le calcul de <m>A(i, i+1)</m> et de <m>A(i+1, i)</m>.</p>
+
+<h3>Correspondance des indices</h3>
+<div class="scroll"><table class="vocab">
+<tr><th>Objet</th><th>Numérotation « maths »</th><th>Numérotation Matlab</th></tr>
+<tr><td>Nœuds</td><td><m>x<sub>k</sub> = k·h</m>, k = 0…N+1</td><td>indice <m>i = k + 1</m>, de 1 à N+2</td></tr>
+<tr><td>Nœud de l'indice i</td><td colspan="2"><m>x̄ = (i − 1)·h</m> (le « x̄ » de ton tableau), avec <m>h = L/(N+1)</m></td></tr>
+<tr><td>Nœuds du bord (Dirichlet)</td><td>k = 0 et k = N+1</td><td>i = 1 et i = N+2</td></tr>
+<tr><td>Nœuds intérieurs</td><td>1 ≤ k ≤ N</td><td><b>2 ≤ i ≤ N+1</b> (l'encadré de ton tableau)</td></tr>
+</table></div>
+
+<article class="demo" id="d13">
+<h3>D13 · Coefficients A(i,i), A(i,i+1) et A(i+1,i) <span class="tag cours">Dans ton cours</span> <span class="tag plus">Complément</span></h3>
+<div class="claim"><b>À retenir.</b> Avec <m>x̄ = (i−1)h</m> :<br>
+<m>A(i,i) = quad(ψ, x̄−h, x̄, M) + quad(ψ, x̄, x̄+h, M)</m>, avec <m>ψ = (w<sub>i</sub>′)² + c·w<sub>i</sub>²</m> ;<br>
+<m>A(i,i+1) = quad(ψ₂, x̄, x̄+h, M)</m>, avec <m>ψ₂ = w<sub>i</sub>′w<sub>i+1</sub>′ + c·w<sub>i</sub>w<sub>i+1</sub></m> (une seule cellule) ;<br>
+<m>A(i+1,i) = A(i,i+1)</m> (symétrie).</div>
+<ol class="proof">
+<li><b>Les fonctions du tableau.</b> Le chapeau centré en <m>x̄</m> et sa dérivée (D5) s'écrivent en Matlab avec des tests logiques, qui valent 1 (vrai) ou 0 (faux) et jouent le rôle des accolades de la définition par morceaux :
+<pre><code>w  = @(x,xbar,h) ((x-(xbar-h))/h).*(x&gt;xbar-h).*(x&lt;xbar) + ((xbar+h-x)/h).*(x&gt;xbar).*(x&lt;xbar+h);
+dw = @(x,xbar,h) (1/h)*(x&gt;xbar-h).*(x&lt;xbar) - (1/h)*(x&gt;xbar).*(x&lt;xbar+h);</code></pre>
+(La fonction <code>dw</code> est la dérivée calculée en D5 : +1/h à gauche de x̄, −1/h à droite.)</li>
+<li><b>Diagonale A(i,i) (ta photo).</b> Pour chaque indice intérieur i = 2…N+1 : <code>xbar = (i-1)*h</code>, <code>wtemp = @(x) w(x,xbar,h)</code>, <code>dwtemp = @(x) dw(x,xbar,h)</code>, <code>psi = @(x) dwtemp(x).^2 + c(x).*wtemp(x).^2</code>. Le support de w<sub>i</sub> est [x̄−h, x̄+h], soit deux cellules, d'où deux appels à la quadrature (D7, étape 3) : <eq>A(i,i) = quad(ψ, x̄−h, x̄, M) + quad(ψ, x̄, x̄+h, M)</eq></li>
+<li><b>Sur-diagonale A(i,i+1).</b> Les nœuds i et i+1 sont <m>x̄</m> et <m>x̄+h</m>. On définit le chapeau voisin <code>wnext = @(x) w(x,xbar+h,h)</code> et <code>dwnext = @(x) dw(x,xbar+h,h)</code>. Les deux supports ne se rencontrent que sur la cellule [x̄, x̄+h] (D7, étape 2), donc <b>une seule</b> quadrature suffit. Sur cette cellule : <eq>w<sub>i</sub> = \frac{x̄+h−x}{h}, &nbsp; w<sub>i</sub>′ = −\frac{1}{h}, &nbsp; w<sub>i+1</sub> = \frac{x−x̄}{h}, &nbsp; w<sub>i+1</sub>′ = +\frac{1}{h}</eq> d'où <eq>ψ₂(x) = −\frac{1}{h²} + c(x)\frac{(x̄+h−x)(x−x̄)}{h²}, &nbsp; A(i,i+1) = quad(ψ₂, x̄, x̄+h, M)</eq> Pour c constante, on retrouve la valeur exacte de D7 : <m>−\frac{1}{h} + \frac{ch}{6}</m>.</li>
+<li><b>Sous-diagonale A(i+1,i).</b> Comme <m>a</m> est symétrique (D4), <m>a(w<sub>i+1</sub>, w<sub>i</sub>) = a(w<sub>i</sub>, w<sub>i+1</sub>)</m>. Donc <eq>A(i+1,i) = A(i,i+1)</eq> C'est la ligne « <m>a<sub>i+1,i</sub> = a<sub>i,i+1</sub></m> » de ton tableau : on ne calcule l'intégrale qu'une fois.</li>
+<li><b>Bornes des boucles et Dirichlet.</b> Sur ton tableau, <code>A(1,1) = 1</code> et <code>A(N+2,N+2) = 1</code> fixent u₀ = u<sub>N+1</sub> = 0 (D9). La diagonale se calcule pour i = 2…N+1, mais la sur-diagonale seulement pour <b>i = 2…N</b>. Pour i = N+1, la formule écrirait A(N+1, N+2) et A(N+2, N+1), c'est-à-dire un couplage avec le nœud du bord, ce qui détruirait la dernière ligne (0, …, 0, 1). Avec ces bornes, les lignes 1 et N+2 sont exactement (1, 0, …, 0) et (0, …, 0, 1), et A reste <b>symétrique</b> : c'est le système réduit de D9 (étape 4), complété par deux lignes identité.</li>
+</ol>
+<p class="qed">∎</p>
+</article>
+
+<h3>Fichiers Matlab complets</h3>
+<p>Il faut dans le même dossier : <code>quadm.m</code> (point milieu, voir plus haut), <code>LHS.m</code>, <code>RHS.m</code> et le script principal.</p>
+
+<p><b>LHS.m</b></p>
+<pre><code>function A = LHS(c, L, N, M)
+% LHS  Matrice A du systeme AU = B pour  -u'' + c(x) u = f(x),  u(0) = u(L) = 0
+%   c : handle @(x) ...      L : longueur de la poutre
+%   N : nombre de noeuds interieurs      M : sous-intervalles de quadrature par cellule
+%   Numerotation Matlab : le noeud x_k (k = 0..N+1) est stocke a l'indice i = k+1
+
+    h = L/(N+1);
+    A = zeros(N+2, N+2);
+    A(1,1)     = 1;                 % Dirichlet : U_0 = 0
+    A(N+2,N+2) = 1;                 % Dirichlet : U_{N+1} = 0
+
+    % Chapeau centre en xbar et sa derivee (fonctions du tableau)
+    w  = @(x,xbar,h) ((x-(xbar-h))/h).*(x&gt;xbar-h).*(x&lt;xbar) + ((xbar+h-x)/h).*(x&gt;xbar).*(x&lt;xbar+h);
+    dw = @(x,xbar,h) (1/h)*(x&gt;xbar-h).*(x&lt;xbar) - (1/h)*(x&gt;xbar).*(x&lt;xbar+h);
+
+    for i = 2:N+1
+        xbar = (i-1)*h;             % noeud correspondant a l'indice i
+
+        wtemp  = @(x) w(x,xbar,h);
+        dwtemp = @(x) dw(x,xbar,h);
+
+        % ---- diagonale A(i,i) : deux cellules
+        psi    = @(x) dwtemp(x).^2 + c(x).*wtemp(x).^2;
+        A(i,i) = quadm(psi, xbar-h, xbar, M) + quadm(psi, xbar, xbar+h, M);
+
+        % ---- sur-diagonale A(i,i+1) : une seule cellule, puis A(i+1,i) par symetrie
+        if i &lt;= N
+            wnext  = @(x) w(x,xbar+h,h);
+            dwnext = @(x) dw(x,xbar+h,h);
+            psi2     = @(x) dwtemp(x).*dwnext(x) + c(x).*wtemp(x).*wnext(x);
+            A(i,i+1) = quadm(psi2, xbar, xbar+h, M);
+            A(i+1,i) = A(i,i+1);
+        end
+    end
+end
+</code></pre>
+
+<p><b>RHS.m</b></p>
+<pre><code>function B = RHS(f, L, N, M)
+% RHS  Second membre B du systeme AU = B : B(i) = int f(x) w_i(x) dx
+%   B(1) = B(N+2) = 0 (Dirichlet)
+
+    h = L/(N+1);
+    B = zeros(N+2, 1);
+
+    w = @(x,xbar,h) ((x-(xbar-h))/h).*(x&gt;xbar-h).*(x&lt;xbar) + ((xbar+h-x)/h).*(x&gt;xbar).*(x&lt;xbar+h);
+
+    for i = 2:N+1
+        xbar  = (i-1)*h;
+        wtemp = @(x) w(x,xbar,h);
+        psi   = @(x) f(x).*wtemp(x);
+        B(i)  = quadm(psi, xbar-h, xbar, M) + quadm(psi, xbar, xbar+h, M);
+    end
+end
+</code></pre>
+
+<p><b>main_ef.m</b></p>
+<pre><code>% main_ef.m : resolution complete avec LHS et RHS
+clear; clc;
+
+L = 1;  N = 9;  M = 10;
+c = @(x) 1 + 0*x;                   % c(x) = 1
+f = @(x) (pi^2 + 1)*sin(pi*x);      % u_exacte(x) = sin(pi x)
+
+A = LHS(c, L, N, M);
+B = RHS(f, L, N, M);
+U = A \ B;
+
+x  = (0:N+1)*L/(N+1);
+xx = linspace(0, L, 400);
+plot(xx, sin(pi*xx), 'k--', x, U, 'ro-', 'LineWidth', 1.5);
+legend('solution exacte', 'EF P1'); xlabel('x'); grid on;
+fprintf('erreur max aux noeuds = %.3e\n', max(abs(U' - sin(pi*x))));
+</code></pre>
+<p>J'ai simulé cet assemblage en Python (mêmes formules, N = 9, c = 1, M = 10) : A est bien symétrique et l'erreur maximale aux nœuds vaut environ 7·10⁻⁴.</p>
+
+<h3>Attention : avec ces fonctions w et dw, il faut le point milieu</h3>
+<p>Les tests <code>(x&gt;xbar-h)</code> et <code>(x&lt;xbar)</code> sont des inégalités <em>strictes</em> : aux nœuds, <code>w</code> et <code>dw</code> valent 0, ce qui est faux (w(x̄) = 1, et dw n'est pas définie en un nœud). Le point milieu n'évalue jamais la fonction aux extrémités d'une cellule : il n'est pas touché. Le rectangle à gauche, le trapèze et Simpson évaluent en x̄−h, x̄ ou x̄+h : ils lisent des valeurs fausses.</p>
+<p>Test sur A(3,3) et A(3,4), avec N = 4, L = 1, c = 1 (donc h = 0,2), M = 10 :</p>
+<div class="scroll"><table class="recap">
+<tr><th>Quadrature</th><th>A(3,3)</th><th>A(3,4)</th></tr>
+<tr><td>Valeur exacte (D7)</td><td>10,1333</td><td>−4,9667</td></tr>
+<tr><td>Point milieu</td><td>10,1330</td><td>−4,9665</td></tr>
+<tr><td>Rectangle à gauche ou trapèze</td><td>9,1140</td><td>−4,4670</td></tr>
+<tr><td>Simpson</td><td>9,7933</td><td>−4,8000</td></tr>
+</table></div>
+<p>C'est probablement la raison pour laquelle ton cours utilise le point milieu dans cet assemblage. Pour employer Simpson (qui est exact dès M = 1 quand c est constante), utilise des fonctions restreintes à la cellule, comme dans <code>fem1d.m</code> (<code>wL</code> et <code>wR</code>) : là, toutes les quadratures fonctionnent, et il suffit d'écrire <code>qd = @quadsimp;</code>.</p>
+</section>
+
+<!-- ======================= FICHE FORMULES ======================= -->
+<section id="recap">
+<h2>Fiche formules</h2>
+<div class="scroll"><table class="recap">
+<tr><th>Objet</th><th>Formule</th></tr>
+<tr><td>Forme forte (P)</td><td><m>−u″ + c·u = f</m> sur ]0, L[ ; <m>u(0) = u(L) = 0</m></td></tr>
+<tr><td>Forme faible</td><td><m>a(u,v) = b(v)</m> pour tout v ∈ V, avec <m>a(u,v) = \int{0}{L}(u′v′ + c·u·v)dx</m>, <m>b(v) = \int{0}{L}f·v dx</m></td></tr>
+<tr><td>Maillage</td><td><m>h = L/(N+1)</m>, <m>x<sub>i</sub> = i·h</m>, i = 0…N+1</td></tr>
+<tr><td>Chapeau</td><td><m>w<sub>i</sub> = (x − x<sub>i−1</sub>)/h</m> puis <m>(x<sub>i+1</sub> − x)/h</m>, 0 ailleurs ; <m>w<sub>i</sub>(x<sub>j</sub>) = δ<sub>ij</sub></m></td></tr>
+<tr><td>Approximation</td><td><m>u<sub>h</sub> = \sum{i=0}{N+1}u<sub>i</sub>w<sub>i</sub></m>, <m>u<sub>i</sub> = u<sub>h</sub>(x<sub>i</sub>) ≈ u(x<sub>i</sub>)</m></td></tr>
+<tr><td>Problème discret</td><td><m>a(u<sub>h</sub>, v<sub>h</sub>) = b(v<sub>h</sub>)</m> ⇔ <m>V<sup>T</sup>AU = V<sup>T</sup>B</m> ⇔ <m>AU = B</m></td></tr>
+<tr><td>Matrice et second membre</td><td><m>A<sub>ij</sub> = a(w<sub>i</sub>, w<sub>j</sub>)</m> (symétrique, tridiagonale, SPD), <m>B<sub>i</sub> = b(w<sub>i</sub>)</m></td></tr>
+<tr><td>c constante</td><td>diag <m>2/h + 2ch/3</m>, bords <m>1/h + ch/3</m>, hors-diag <m>−1/h + ch/6</m></td></tr>
+<tr><td>Dirichlet</td><td>ligne 0 → (1, 0, …), B₀ = 0 ; ligne N+1 → (…, 0, 1), B<sub>N+1</sub> = 0</td></tr>
+<tr><td>Quadratures</td><td>rect. gauche (ordre 1), trapèze et point milieu (ordre 2), Simpson <m>\frac{b−a}{6}(f(a) + 4f(m) + f(b))</m> (ordre 4). Erreur <m>Err = δ·M<sup>−p</sup></m></td></tr>
+<tr><td>Erreur</td><td><m>‖u − u<sub>h</sub>‖<sub>a</sub> = O(h)</m>, <m>‖u − u<sub>h</sub>‖<sub>L²</sub> = O(h²)</m></td></tr>
+</table></div>
+
+<h3>Ce que tu dois savoir refaire sans regarder</h3>
+<ul class="tight">
+<li>IPP, puis passage forme forte → forme faible avec le terme de bord (D1, D2).</li>
+<li>Linéarité de b, bilinéarité et symétrie de a (D4).</li>
+<li>Propriétés des chapeaux, w<sub>i</sub>(x<sub>j</sub>) = δ<sub>ij</sub>, et u<sub>h</sub>(x<sub>i</sub>) = u<sub>i</sub> (D5).</li>
+<li>Développement de a(u<sub>h</sub>, v<sub>h</sub>) en double somme, puis V<sup>T</sup>AU = V<sup>T</sup>B ⇒ AU = B (D6).</li>
+<li>A tridiagonale, calcul des coefficients par quadrature, et exact si c constante (D7, D10).</li>
+<li>Modification de A et B pour Dirichlet (D9).</li>
+<li>Formule de Simpson et mesure de l'ordre d'une quadrature (D10, D12).</li>
+<li>Coefficients A(i,i), A(i,i+1), A(i+1,i) et bornes des boucles de LHS (D13).</li>
+</ul>
+</section>
+
+<!-- ======================= MATLAB ======================= -->
+<section id="matlab">
+<h2>Implémentation Matlab complète</h2>
+<p>Un seul fichier <code>fem1d.m</code> (fonctions locales en fin de fichier, Matlab R2016b ou plus récent). Il assemble cellule par cellule : la contribution de chaque cellule à a(w<sub>i</sub>, w<sub>j</sub>) et b(w<sub>i</sub>) est calculée par quadrature, et les sommes de tes formules « i = 0 / 1 ≤ i ≤ N / i = N+1 » sont obtenues en cumulant les cellules. Les indices Matlab sont décalés de 1 : le nœud x<sub>i</sub> est <code>x(i+1)</code>.</p>
+<pre><code>% fem1d.m : EF P1 pour  -u'' + c(x) u = f(x)  sur ]0,L[,  u(0) = u(L) = 0
+clear; clc;
+
+L = 1;  N = 9;  M = 10;             % N noeuds interieurs, M sous-intervalles de quadrature par cellule
+qd = @quadm;                        % quadrature utilisee : @quadg (rect. gauche), @quadt (trapeze), @quadm (point milieu), @quadsimp (Simpson)
+h = L/(N+1);
+x = (0:N+1)*h;                      % noeuds x_0,...,x_{N+1} stockes dans x(1),...,x(N+2)
+
+c = @(t) 1 + 0*t;                   % c(x) = 1
+f = @(t) (pi^2 + 1)*sin(pi*t);      % choisi pour que u_exacte(x) = sin(pi x)
+
+A = zeros(N+2, N+2);
+B = zeros(N+2, 1);
+
+% ---- Assemblage : cellule m_i = [x_i, x_{i+1}], i = 0..N
+for i = 0:N
+    xa = x(i+1);  xb = x(i+2);
+    wL = @(t) (xb - t)/h;           % w_i     restreinte a la cellule
+    wR = @(t) (t - xa)/h;           % w_{i+1} restreinte a la cellule
+
+    A(i+1,i+1) = A(i+1,i+1) + qd(@(t)  1/h^2 + c(t).*wL(t).^2,      xa, xb, M);
+    A(i+1,i+2) = A(i+1,i+2) + qd(@(t) -1/h^2 + c(t).*wL(t).*wR(t),  xa, xb, M);
+    A(i+2,i+1) = A(i+1,i+2);        % symetrie
+    A(i+2,i+2) = A(i+2,i+2) + qd(@(t)  1/h^2 + c(t).*wR(t).^2,      xa, xb, M);
+
+    B(i+1) = B(i+1) + qd(@(t) f(t).*wL(t), xa, xb, M);
+    B(i+2) = B(i+2) + qd(@(t) f(t).*wR(t), xa, xb, M);
+end
+
+% ---- Conditions de Dirichlet : U_0 = 0 et U_{N+1} = 0
+A(1,:)   = 0;  A(1,1)     = 1;  B(1)   = 0;
+A(end,:) = 0;  A(end,end) = 1;  B(end) = 0;
+
+% ---- Resolution
+U = A \ B;
+
+% ---- Post-traitement
+xx = linspace(0, L, 400);
+plot(xx, sin(pi*xx), 'k--', x, U, 'ro-', 'LineWidth', 1.5);
+legend('solution exacte', 'EF P1'); xlabel('x'); grid on;
+fprintf('erreur max aux noeuds = %.3e\n', max(abs(U' - sin(pi*x))));
+
+% ================== fonctions locales ==================
+function S = quadg(f, a, b, M)     % rectangles a gauche composes
+    dxt = (b - a)/M;
+    S = 0;
+    for j = 0:M-1
+        xt = a + j*dxt;
+        S = S + f(xt);
+    end
+    S = S*dxt;
+end
+
+function simp = quadsimp(f, a, b, M)   % Simpson compose
+    dxt = (b - a)/M;
+    simp = 0;
+    for j = 0:M-1
+        xt = a + j*dxt;
+        simp = simp + f(xt) + 4*f(xt + dxt/2) + f(xt + dxt);
+    end
+    simp = simp*dxt/6;
+end
+
+function S = quadm(f, a, b, M)     % point milieu compose
+    dxt = (b - a)/M;
+    S = 0;
+    for j = 0:M-1
+        xt = a + j*dxt;
+        S = S + f(xt + dxt/2);      % f evaluee au milieu du sous-intervalle
+    end
+    S = S*dxt;
+end
+
+function S = quadt(f, a, b, M)     % trapezes composes
+    dxt = (b - a)/M;
+    S = 0;
+    for j = 0:M-1
+        xt = a + j*dxt;
+        S = S + (f(xt) + f(xt + dxt))/2;
+    end
+    S = S*dxt;
+end
+</code></pre>
+<p>La quadrature utilisée se choisit en un seul endroit, à la ligne <code>qd = @quadm;</code> : mets <code>@quadg</code> (rectangle à gauche) ou <code>@quadt</code> (trapèze) pour comparer. Seule la ligne <code>S = S + f(xt + dxt/2)</code> distingue le point milieu du rectangle à gauche.</p>
+
+<h3>Test de la fonction point milieu</h3>
+<p>Calcul de <m>\int{0}{π}sin(x)dx = 2</m> : quand M double, l'erreur doit être divisée par ≈ 4 (ordre 2).</p>
+<pre><code>f = @(x) sin(x);
+for M = [1 2 4 8 16 32]
+    S = quadm(f, 0, pi, M);
+    fprintf('M = %2d   S = %.8f   erreur = %.2e\n', M, S, abs(S - 2));
+end</code></pre>
+
+<h3>Version vectorisée (sans boucle)</h3>
+<pre><code>function S = quadm_vec(f, a, b, M)
+    dxt = (b - a)/M;
+    xm  = a + ((0:M-1) + 0.5)*dxt;   % tous les milieux d'un coup
+    S   = sum(f(xm))*dxt;
+end</code></pre>
+<p>Cette version exige que <code>f</code> accepte un vecteur : il faut écrire <code>.*</code>, <code>.^</code>, <code>./</code> dans les fonctions passées en argument, comme dans l'assemblage de <code>fem1d.m</code>.</p>
+
+<h3>Fonction Simpson : quadsimp.m</h3>
+<p>Ta version, corrigée : la variable de sortie déclarée dans l'en-tête (<code>simp</code>) doit être celle que l'on remplit, sinon Matlab signale une sortie non affectée. Les blocs <code>arguments</code> demandent Matlab R2019b ou plus récent (sinon, supprime-les).</p>
+<pre><code>function simp = quadsimp(f, a, b, M)
+% QUADSIMP  Formule composee de Simpson pour approcher I(f) = int_a^b f(x) dx
+%   f : handle de fonction (ex. @(x) sin(x))
+%   a, b : bornes de l'intervalle
+%   M : nombre de sous-intervalles (chacun utilise ses 2 extremites et son milieu)
+
+arguments (Input)
+    f
+    a
+    b
+    M
+end
+arguments (Output)
+    simp
+end
+
+dxt = (b - a)/M;            % pas de la subdivision
+simp = 0;
+
+for j = 0:M-1
+    xt = a + j*dxt;         % extremite gauche du sous-intervalle j
+    simp = simp + f(xt) + 4*f(xt + dxt/2) + f(xt + dxt);
+end
+
+simp = simp*dxt/6;
+end
+</code></pre>
+<p>Test sur <m>\int{0}{π}sin(x)dx = 2</m> : l'erreur est divisée par ≈ 16 quand M double (ordre 4).</p>
+<pre><code>f = @(x) sin(x);
+for M = [1 2 4 8 16 32]
+    S = quadsimp(f, 0, pi, M);
+    fprintf('M = %2d   S = %.10f   erreur = %.2e\n', M, S, abs(S - 2));
+end</code></pre>
+<p>Version vectorisée (sans boucle) :</p>
+<pre><code>function simp = quadsimp_vec(f, a, b, M)
+    dxt  = (b - a)/M;
+    xg   = a + (0:M-1)*dxt;                          % extremites gauches
+    simp = sum( f(xg) + 4*f(xg + dxt/2) + f(xg + dxt) )*dxt/6;
+end</code></pre>
+</section>
+
+<!-- ======================= PIÈGES ======================= -->
+<section id="pieges">
+<h2>Points à corriger ou à surveiller dans tes notes</h2>
+<ul class="tight">
+<li><b>« Conditions initiales » (EF-5).</b> u(0) = u(L) = 0 sont des conditions aux <em>limites</em> (Dirichlet). « Initiales » désigne les problèmes qui évoluent dans le temps.</li>
+<li><b>Linéarité de b (EF n°2).</b> Il n'y a qu'une seule forme b. On écrit <m>b(λ₁v₁ + λ₂v₂) = λ₁b(v₁) + λ₂b(v₂)</m>, avec des fonctions v₁, v₂ (et non « b₁, b₂ »).</li>
+<li><b>Rôle de c.</b> Retiens c comme un coefficient de rappel (raideur d'une fondation élastique). L'hypothèse c &gt; 0 sert à garantir que A est définie positive (D8).</li>
+<li><b>Fonction Matlab (EF-6).</b> Le code écrit est le rectangle à gauche. La correction en rouge <code>f(xt + dxt/2)</code> donne le <em>point milieu</em>. Pour le <em>trapèze</em>, il faut <code>(f(xt) + f(xt+dxt))/2</code>.</li>
+<li><b>ψ pour i = N+1.</b> Il doit contenir w<sub>N+1</sub> (et non w₀) : <m>ψ = (w<sub>N+1</sub>′)² + c·w<sub>N+1</sub>²</m>, sur la cellule [x<sub>N</sub>, x<sub>N+1</sub>].</li>
+<li><b>« ∀V, V<sup>T</sup>(AU − B) = 0 ⇒ AU = B ».</b> Cela suppose que toutes les w<sub>j</sub> sont des fonctions test admissibles. Avec Dirichlet, w₀ et w<sub>N+1</sub> ne le sont pas : d'où le remplacement des lignes 0 et N+1 (D9).</li>
+<li><b>Variable de sortie d'une fonction Matlab.</b> Le nom déclaré dans <code>function simp = quadsimp(...)</code> doit recevoir la valeur finale. Si tu calcules dans une autre variable (<code>S</code>), <code>simp</code> n'est jamais affectée.</li>
+<li><b>Chapeaux « globaux » avec inégalités strictes.</b> Les fonctions <code>w</code> et <code>dw</code> du tableau donnent 0 aux nœuds : à utiliser avec le point milieu uniquement (voir la section LHS / RHS).</li>
+<li><b>Bornes de la sur-diagonale.</b> Dans <code>LHS</code>, la diagonale se calcule pour i = 2…N+1 mais la sur-diagonale pour i = 2…N seulement, sinon on écrit un couplage avec le nœud du bord et on casse la ligne (0, …, 0, 1).</li>
+<li><b>Indexation.</b> Avec N+2 nœuds numérotés 0…N+1, la matrice est (N+2)×(N+2) mais il n'y a que N inconnues réelles. Dans ton cours, « B₁ = 0 » désigne la première composante, c'est-à-dire B₀ dans la numérotation 0…N+1.</li>
+</ul>
+</section>
+
+</div>
+
+<!-- ======================= CŒUR NUMÉRIQUE ======================= -->
+<script id="core">
+function quad(psi,a,b,M,method){
+  const dx=(b-a)/M; let S=0;
+  for(let j=0;j<M;j++){
+    const xt=a+j*dx;
+    if(method==='left') S+=psi(xt);
+    else if(method==='mid') S+=psi(xt+dx/2);
+    else if(method==='simp') S+=(psi(xt)+4*psi(xt+dx/2)+psi(xt+dx))/6;
+    else S+=(psi(xt)+psi(xt+dx))/2;
+  }
+  return S*dx;
+}
+function thomas(lo,di,up,r){
+  const n=di.length,c=new Array(n),d=new Array(n),x=new Array(n);
+  c[0]=up[0]/di[0]; d[0]=r[0]/di[0];
+  for(let i=1;i<n;i++){
+    const m=di[i]-lo[i]*c[i-1];
+    c[i]=up[i]/m; d[i]=(r[i]-lo[i]*d[i-1])/m;
+  }
+  x[n-1]=d[n-1];
+  for(let i=n-2;i>=0;i--) x[i]=d[i]-c[i]*x[i+1];
+  return x;
+}
+function solveFEM(N,c,method,M){
+  const h=1/(N+1),n=N+2;
+  const x=Array.from({length:n},(_,i)=>i*h);
+  const lo=new Array(n).fill(0),di=new Array(n).fill(0),up=new Array(n).fill(0),B=new Array(n).fill(0);
+  const f=t=>(Math.PI*Math.PI+c)*Math.sin(Math.PI*t);
+  for(let k=0;k<=N;k++){
+    const a=x[k],b=x[k+1];
+    const wL=t=>(b-t)/h, wR=t=>(t-a)/h;
+    di[k]+=quad(t=>1/(h*h)+c*wL(t)*wL(t),a,b,M,method);
+    const off=quad(t=>-1/(h*h)+c*wL(t)*wR(t),a,b,M,method);
+    up[k]+=off; lo[k+1]+=off;
+    di[k+1]+=quad(t=>1/(h*h)+c*wR(t)*wR(t),a,b,M,method);
+    B[k]+=quad(t=>f(t)*wL(t),a,b,M,method);
+    B[k+1]+=quad(t=>f(t)*wR(t),a,b,M,method);
+  }
+  // Dirichlet : remplacement des lignes 0 et N+1
+  di[0]=1; up[0]=0; B[0]=0;
+  di[n-1]=1; lo[n-1]=0; B[n-1]=0;
+  const U=thomas(lo,di,up,B);
+  return {N,h,n,x,U,lo,di,up,B};
+}
+function errors(res){
+  const {x,U,h,n}=res;
+  let emax=0;
+  for(let i=0;i<n;i++) emax=Math.max(emax,Math.abs(U[i]-Math.sin(Math.PI*x[i])));
+  let s=0; const P=40;
+  for(let k=0;k<n-1;k++){
+    for(let p=0;p<P;p++){
+      const t=x[k]+(p+0.5)*h/P;
+      const uh=U[k]+(U[k+1]-U[k])*(t-x[k])/h;
+      const e=uh-Math.sin(Math.PI*t);
+      s+=e*e*h/P;
+    }
+  }
+  return {emax,l2:Math.sqrt(s)};
+}
+</script>
+
+<script>
+/* mise en forme des formules : \frac{a}{b}, \int{a}{b}, \sum{a}{b}, \mat{a | b // c | d} */
+function fmt(s){
+  let prev;
+  do{
+    prev=s;
+    s=s.replace(/\\frac\{([^{}]*)\}\{([^{}]*)\}/g,'<span class="frac"><span>$1</span><span>$2</span></span>');
+    s=s.replace(/\\int\{([^{}]*)\}\{([^{}]*)\}/g,'<span class="int"><span class="t">$2</span><span class="s">∫</span><span class="b">$1</span></span>');
+    s=s.replace(/\\sum\{([^{}]*)\}\{([^{}]*)\}/g,'<span class="sum"><span class="t">$2</span><span class="s">Σ</span><span class="b">$1</span></span>');
+    s=s.replace(/\\mat\{([^{}]*)\}/g,(_,t)=>'<table class="mat">'+t.split('//').map(r=>'<tr>'+r.split('|').map(c=>'<td>'+c.trim()+'</td>').join('')+'</tr>').join('')+'</table>');
+  }while(s!==prev);
+  return s;
+}
+/* \sum sans bornes, utilisé dans le texte */
+function fmtPlain(s){return s.replace(/\\sum(?![{a-z])/g,'Σ').replace(/\\int(?![{a-z])/g,'∫');}
+document.querySelectorAll('m,eq').forEach(e=>{e.innerHTML=fmtPlain(fmt(e.innerHTML));});
+
+/* ---------- simulateur ---------- */
+const $=id=>document.getElementById(id);
+const fmtN=(v,d=3)=>(Math.abs(v)<1e-12?'0':v.toFixed(d));
+function render(){
+  const N=+$('rN').value, c=+$('rC').value, method=$('sQ').value, M=+$('sM').value, hats=$('cH').checked;
+  $('vN').textContent=N; $('vC').textContent=c.toFixed(1);
+  const res=solveFEM(N,c,method,M), er=errors(res);
+  const W=640,H=300,ml=34,mr=14,mt=14,mb=32;
+  const xs=t=>ml+t*(W-ml-mr);
+  const ymax=Math.max(1.1,Math.max(...res.U)*1.08), ymin=Math.min(-0.08,Math.min(...res.U)*1.08);
+  const ys=v=>mt+(ymax-v)/(ymax-ymin)*(H-mt-mb);
+  let svg=`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">`;
+  svg+=`<line class="axis" x1="${xs(0)}" y1="${ys(0)}" x2="${xs(1)}" y2="${ys(0)}"/><line class="axis" x1="${xs(0)}" y1="${ys(ymin)}" x2="${xs(0)}" y2="${ys(ymax)}"/>`;
+  if(hats){
+    for(let i=0;i<res.n;i++){
+      const pts=[];
+      if(i>0) pts.push([res.x[i-1],0]);
+      pts.push([res.x[i],res.U[i]]);
+      if(i<res.n-1) pts.push([res.x[i+1],0]);
+      svg+=`<polyline class="hat" points="${pts.map(p=>xs(p[0]).toFixed(1)+','+ys(p[1]).toFixed(1)).join(' ')}"/>`;
+    }
+  }
+  const ex=[]; for(let k=0;k<=200;k++){const t=k/200; ex.push(xs(t).toFixed(1)+','+ys(Math.sin(Math.PI*t)).toFixed(1));}
+  svg+=`<polyline class="ex" points="${ex.join(' ')}"/>`;
+  svg+=`<polyline class="fem" points="${res.x.map((t,i)=>xs(t).toFixed(1)+','+ys(res.U[i]).toFixed(1)).join(' ')}"/>`;
+  res.x.forEach((t,i)=>{svg+=`<circle class="node" cx="${xs(t).toFixed(1)}" cy="${ys(res.U[i]).toFixed(1)}" r="${res.n>20?2.5:4}"/>`;});
+  svg+=`<text x="${xs(0)-4}" y="${H-10}">0</text><text x="${xs(1)-4}" y="${H-10}">L</text></svg>`;
+  $('plot').innerHTML=svg;
+  $('stats').innerHTML=`<span>h = <b>${res.h.toFixed(4)}</b></span><span>inconnues réelles : <b>${N}</b></span><span>erreur max aux nœuds : <b>${er.emax.toExponential(2)}</b></span><span>erreur L² : <b>${er.l2.toExponential(2)}</b></span>`;
+  if(res.n<=7){
+    const n=res.n; let t='<p>Système <m>AU = B</m> après Dirichlet (lignes 0 et N+1 remplacées) :</p><table class="mat">';
+    for(let i=0;i<n;i++){
+      t+='<tr>';
+      for(let j=0;j<n;j++){
+        let v=0; if(j===i)v=res.di[i]; else if(j===i-1)v=res.lo[i]; else if(j===i+1)v=res.up[i];
+        t+=`<td>${fmtN(v,2)}</td>`;
+      }
+      t+='</tr>';
+    }
+    t+='</table> <b>U</b> = <table class="mat">'+res.U.map(v=>`<tr><td>${fmtN(v,3)}</td></tr>`).join('')+'</table> <b>B</b> = <table class="mat">'+res.B.map(v=>`<tr><td>${fmtN(v,3)}</td></tr>`).join('')+'</table>';
+    $('mtx').innerHTML=t;
+  } else $('mtx').innerHTML='<p style="font-family:var(--ui);font-size:.85rem;color:var(--soft)">Baisse N à 5 ou moins pour voir la matrice et les vecteurs.</p>';
+  // tableau de convergence
+  let rows='<tr><th>N + 1</th><th>h</th><th>erreur max (nœuds)</th><th>erreur L²</th><th>ordre L² observé</th></tr>', prev=null;
+  [1,3,7,15,31,63].forEach(n=>{
+    const r=solveFEM(n,c,method,M), e=errors(r);
+    const ord=prev?Math.log2(prev/e.l2).toFixed(2):'';
+    rows+=`<tr><td>${n+1}</td><td>${r.h.toFixed(4)}</td><td>${e.emax.toExponential(2)}</td><td>${e.l2.toExponential(2)}</td><td>${ord}</td></tr>`;
+    prev=e.l2;
+  });
+  $('conv').innerHTML=rows;
+}
+['rN','rC','sQ','sM','cH'].forEach(id=>$(id).addEventListener('input',render));
+render();
+</script>
+</body>
+</html>
