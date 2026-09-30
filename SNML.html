@@ -1,895 +1,2141 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Machine Learning — Fiche de révision</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --paper:#FBF8F1;
-    --paper-alt:#F1EBDC;
-    --ink:#1C2430;
-    --ink-soft:#54606F;
-    --line:#DDD3BC;
-    --accent-blue:#3A6EA5;
-    --accent-teal:#2C8C82;
-    --accent-gold:#C98A2C;
-    --accent-red:#BE4B3C;
-    --dotA:#BE4B3C;
-    --dotB:#3A6EA5;
-    --dotGray:#9AA5B1;
-    --font-display:'Literata', Georgia, 'Times New Roman', serif;
-    --font-body:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --font-mono:'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
-    --radius:5px;
-    color-scheme: light;
-  }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --paper:#171B22;
-      --paper-alt:#1E2430;
-      --ink:#ECE7DA;
-      --ink-soft:#B6BFCC;
-      --line:#2C3542;
-      --dotGray:#6B7684;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Machine Learning — Fiche de révision</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --paper: #FBF8F1;
+      --paper-alt: #F1EBDC;
+      --ink: #1C2430;
+      --ink-soft: #54606F;
+      --line: #DDD3BC;
+      --accent-blue: #3A6EA5;
+      --accent-teal: #2C8C82;
+      --accent-gold: #C98A2C;
+      --accent-red: #BE4B3C;
+      --dotA: #BE4B3C;
+      --dotB: #3A6EA5;
+      --dotGray: #9AA5B1;
+      --font-display: 'Literata', Georgia, 'Times New Roman', serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
+      --radius: 5px;
+      color-scheme: light;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --paper: #171B22;
+        --paper-alt: #1E2430;
+        --ink: #ECE7DA;
+        --ink-soft: #B6BFCC;
+        --line: #2C3542;
+        --dotGray: #6B7684;
+        color-scheme: dark;
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --paper: #171B22;
+      --paper-alt: #1E2430;
+      --ink: #ECE7DA;
+      --ink-soft: #B6BFCC;
+      --line: #2C3542;
+      --dotGray: #6B7684;
       color-scheme: dark;
     }
-  }
-  :root[data-theme="dark"]{
-    --paper:#171B22;
-    --paper-alt:#1E2430;
-    --ink:#ECE7DA;
-    --ink-soft:#B6BFCC;
-    --line:#2C3542;
-    --dotGray:#6B7684;
-    color-scheme: dark;
-  }
-  *,*::before,*::after{ box-sizing:border-box; }
-  html{
-    scroll-behavior:smooth;
-    scroll-padding-top: calc(64px + env(safe-area-inset-top,0px));
-  }
-  body{
-    margin:0;
-    background:var(--paper);
-    color:var(--ink);
-    font-family:var(--font-body);
-    line-height:1.6;
-    padding-top: env(safe-area-inset-top,0px);
-    padding-bottom: env(safe-area-inset-bottom,0px);
-    -webkit-font-smoothing:antialiased;
-  }
-  @media (prefers-reduced-motion: reduce){
-    *,*::before,*::after{
-      animation-duration:0.001ms !important;
-      animation-iteration-count:1 !important;
-      transition-duration:0.001ms !important;
-      scroll-behavior:auto !important;
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
     }
-  }
-  a{ color:var(--accent-blue); }
-  strong{ color:var(--ink); }
-  ::selection{ background:var(--accent-gold); color:#1C1408; }
 
-  /* progress bar */
-  #progressBar{
-    position:fixed; top:0; left:0; height:3px; width:0%;
-    background:var(--accent-red); z-index:60; transition:width .1s linear;
-  }
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: calc(64px + env(safe-area-inset-top, 0px));
+    }
 
-  /* sticky nav */
-  .topnav{
-    position:sticky; top:0; z-index:50;
-    background:color-mix(in srgb, var(--paper) 92%, transparent);
-    backdrop-filter:blur(6px);
-    border-bottom:1px solid var(--line);
-    padding:10px 20px calc(10px + env(safe-area-inset-top,0px) * 0);
-    padding-top:10px;
-  }
-  .topnav-inner{
-    max-width:760px; margin:0 auto;
-    display:flex; align-items:center; gap:14px;
-    overflow-x:auto; scrollbar-width:none;
-  }
-  .topnav-inner::-webkit-scrollbar{ display:none; }
-  .topnav-title{
-    font-family:var(--font-display); font-weight:600; font-size:.95rem;
-    white-space:nowrap; color:var(--ink); text-decoration:none; flex:none;
-  }
-  .topnav-links{ display:flex; gap:6px; flex:none; }
-  .topnav-links a{
-    font-size:.78rem; text-decoration:none; color:var(--ink-soft);
-    padding:5px 10px; border:1px solid var(--line); border-radius:999px;
-    white-space:nowrap; transition:color .15s ease, border-color .15s ease;
-  }
-  .topnav-links a:hover{ color:var(--ink); border-color:var(--ink-soft); }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+      -webkit-font-smoothing: antialiased;
+    }
 
-  .wrap{ max-width:760px; margin:0 auto; padding:0 20px 100px; }
+    @media (prefers-reduced-motion: reduce) {
 
-  /* hero */
-  header.hero{
-    max-width:760px; margin:0 auto; padding:56px 20px 30px;
-  }
-  .kicker{
-    font-family:var(--font-mono); font-size:.72rem; letter-spacing:.02em;
-    color:var(--accent-teal); margin:0 0 14px;
-  }
-  h1.title{
-    font-family:var(--font-display); font-weight:600; font-style:italic;
-    font-size:clamp(1.9rem, 5vw, 2.6rem); line-height:1.15; margin:0 0 14px;
-    max-width:15ch;
-  }
-  .hero-sub{ color:var(--ink-soft); max-width:56ch; margin:0 0 20px; font-size:1rem; }
-  .hero-meta{
-    display:flex; flex-wrap:wrap; gap:8px 18px; font-size:.82rem; color:var(--ink-soft);
-    border-top:1px dashed var(--line); padding-top:16px;
-  }
-  .hero-meta span strong{ color:var(--ink); }
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
 
-  /* sections */
-  section{ padding:44px 0; border-bottom:1px dashed var(--line); }
-  section:last-of-type{ border-bottom:none; }
-  .sec-head{ display:flex; align-items:baseline; gap:14px; margin-bottom:18px; }
-  .sec-num{
-    font-family:var(--font-display); font-style:italic; font-weight:600;
-    font-size:1rem; color:var(--accent-teal); flex:none;
-  }
-  h2.sec-title{
-    font-family:var(--font-display); font-weight:600; font-size:1.5rem; margin:0;
-  }
-  h3.sub-title{
-    font-family:var(--font-display); font-weight:600; font-size:1.15rem;
-    margin:30px 0 10px;
-  }
-  p{ margin:0 0 14px; }
-  .lede{ font-size:1.04rem; }
+    a {
+      color: var(--accent-blue);
+    }
 
-  /* definitions */
-  .defs{ display:grid; grid-template-columns:1fr; gap:0; border-top:1px solid var(--line); }
-  .def-row{ padding:14px 0; border-bottom:1px solid var(--line); }
-  .def-term{
-    font-family:var(--font-display); font-weight:600; font-size:1rem; margin:0 0 4px;
-    color:var(--ink);
-  }
-  .def-text{ margin:0; color:var(--ink-soft); font-size:.94rem; }
+    strong {
+      color: var(--ink);
+    }
 
-  /* bullet lists */
-  ul.concepts{ list-style:none; margin:0 0 8px; padding:0; }
-  ul.concepts > li{
-    position:relative; padding-left:20px; margin-bottom:12px; font-size:.97rem;
-  }
-  ul.concepts > li::before{
-    content:"—"; position:absolute; left:0; color:var(--accent-teal);
-  }
-  code.math{
-    font-family:var(--font-mono); background:var(--paper-alt); padding:1px 5px;
-    border-radius:3px; font-size:.88em; white-space:nowrap;
-  }
-  .formula-block{
-    font-family:var(--font-mono); background:var(--paper-alt); border:1px solid var(--line);
-    border-radius:var(--radius); padding:14px 16px; margin:10px 0 16px; font-size:.86rem;
-    overflow-x:auto;
-  }
+    ::selection {
+      background: var(--accent-gold);
+      color: #1C1408;
+    }
 
-  /* small compare table */
-  table.cmp{ width:100%; border-collapse:collapse; margin:10px 0 16px; font-size:.88rem; }
-  table.cmp th, table.cmp td{ border:1px solid var(--line); padding:8px 10px; text-align:left; vertical-align:top; }
-  table.cmp th{ background:var(--paper-alt); font-family:var(--font-display); font-weight:600; }
+    /* progress bar */
+    #progressBar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: var(--accent-red);
+      z-index: 60;
+      transition: width .1s linear;
+    }
 
-  /* widgets */
-  .widget{
-    background:var(--paper-alt); border:1px solid var(--line); border-radius:var(--radius);
-    padding:16px 16px 14px; margin:18px 0 22px;
-  }
-  .widget-label{
-    font-family:var(--font-mono); font-size:.68rem; letter-spacing:.03em; text-transform:uppercase;
-    color:var(--accent-teal); margin:0 0 10px;
-  }
-  .anim-svg{ width:100%; height:auto; display:block; max-width:420px; margin:0 auto; }
-  .widget-caption{ font-size:.88rem; color:var(--ink-soft); margin:10px 0 0; }
-  .tabs{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px; }
-  .tab-btn{
-    font-family:var(--font-body); font-size:.78rem; padding:6px 12px;
-    border:1px solid var(--line); background:var(--paper); color:var(--ink-soft);
-    border-radius:999px; cursor:pointer; transition:all .15s ease;
-  }
-  .tab-btn:hover{ color:var(--ink); }
-  .tab-btn.active{ background:var(--ink); color:var(--paper); border-color:var(--ink); }
-  .tab-btn:focus-visible, button:focus-visible, input:focus-visible{
-    outline:2px solid var(--accent-blue); outline-offset:2px;
-  }
-  .tab-panel{ display:none; }
-  .tab-panel.active{ display:block; }
+    /* sticky nav */
+    .topnav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: color-mix(in srgb, var(--paper) 92%, transparent);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--line);
+      padding: 10px 20px calc(10px + env(safe-area-inset-top, 0px) * 0);
+      padding-top: 10px;
+    }
 
-  .dot{ transform-box:fill-box; transform-origin:center; }
-  .dot.dotA{ fill:var(--dotA); }
-  .dot.dotB{ fill:var(--dotB); }
-  .dot.dotGray{ fill:var(--dotGray); }
-  .dot.cluster1{ fill:var(--accent-teal); }
-  .dot.cluster2{ fill:var(--accent-gold); }
-  .dot.cluster3{ fill:var(--dotA); }
-  @keyframes dotIn{ from{ opacity:0; transform:scale(.35); } to{ opacity:1; transform:scale(1); } }
-  .dot.dotA, .dot.dotB, .dot.dotGray{ animation:dotIn .35s ease both; }
-  @keyframes gather{ from{ opacity:.15; transform:translate(var(--dx,0px),var(--dy,0px)); } to{ opacity:1; transform:translate(0,0); } }
-  .dot.cluster1, .dot.cluster2, .dot.cluster3{ animation:gather .7s ease both; }
+    .topnav-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
 
-  .draw-anim{ stroke-dasharray:var(--len); stroke-dashoffset:var(--len); animation:drawLine .8s .5s ease forwards; }
-  @keyframes drawLine{ to{ stroke-dashoffset:0; } }
-  .boundary{ stroke:var(--ink); stroke-width:2; fill:none; }
-  .boundary2{ stroke:var(--ink); stroke-width:2; fill:none; }
+    .topnav-inner::-webkit-scrollbar {
+      display: none;
+    }
 
-  .scatter circle{ fill:var(--ink-soft); }
-  .fit-line{ fill:none; stroke:var(--accent-blue); stroke-width:3; opacity:0; animation:fadeIn .5s ease forwards; }
-  @keyframes fadeIn{ to{ opacity:1; } }
+    .topnav-title {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: .95rem;
+      white-space: nowrap;
+      color: var(--ink);
+      text-decoration: none;
+      flex: none;
+    }
 
-  .grid-rect{ fill:none; stroke:var(--line); }
-  .agent{ fill:var(--accent-teal); animation:agentMove 6s linear infinite; }
-  @keyframes agentMove{
-    0%{ transform:translate(0,0); }
-    25%{ transform:translate(70px,-14px); }
-    50%{ transform:translate(150px,0px); }
-    75%{ transform:translate(190px,-18px); }
-    100%{ transform:translate(0,0); }
-  }
-  .reward{ fill:var(--accent-gold); font-family:var(--font-mono); font-weight:700; font-size:14px; animation:rewardPulse 6s linear infinite; }
-  @keyframes rewardPulse{ 0%,38%{opacity:0;} 48%,62%{opacity:1;} 72%,100%{opacity:0;} }
+    .topnav-links {
+      display: flex;
+      gap: 6px;
+      flex: none;
+    }
 
-  .split-bar{ display:flex; width:100%; height:46px; border:1px solid var(--line); overflow:hidden; border-radius:3px; }
-  .split-seg{
-    width:0; transition:width 1.1s ease; display:flex; align-items:center; justify-content:center;
-    font-family:var(--font-mono); font-size:.68rem; color:#fff; white-space:nowrap; overflow:hidden;
-  }
-  .split-bar.in-view .seg-train{ width:60%; }
-  .split-bar.in-view .seg-val{ width:20%; }
-  .split-bar.in-view .seg-test{ width:20%; }
-  .seg-train{ background:var(--accent-blue); }
-  .seg-val{ background:var(--accent-teal); }
-  .seg-test{ background:var(--accent-gold); color:#241a05; }
+    .topnav-links a {
+      font-size: .78rem;
+      text-decoration: none;
+      color: var(--ink-soft);
+      padding: 5px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      white-space: nowrap;
+      transition: color .15s ease, border-color .15s ease;
+    }
 
-  .gd-controls{ display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
-  .gd-btn{
-    font-family:var(--font-body); font-size:.78rem; padding:7px 13px; border-radius:4px;
-    border:1px solid var(--ink); background:var(--paper); color:var(--ink); cursor:pointer;
-  }
-  .gd-btn:hover{ background:var(--ink); color:var(--paper); }
-  .gd-btn:disabled{ opacity:.4; cursor:not-allowed; }
-  .gd-status{ font-family:var(--font-mono); font-size:.78rem; margin-top:10px; min-height:1.2em; color:var(--ink-soft); }
-  #gdBall{ transition:cx .45s ease, cy .45s ease; }
+    .topnav-links a:hover {
+      color: var(--ink);
+      border-color: var(--ink-soft);
+    }
 
-  .switch-row{ display:flex; align-items:center; gap:8px; font-size:.9rem; margin-bottom:10px; cursor:pointer; }
-  #scaleEllipse{ fill:none; stroke:var(--accent-blue); stroke-width:2; transition:rx .6s ease, ry .6s ease, cx .6s ease; }
-  .grad-path{ fill:none; stroke:var(--accent-red); stroke-width:2; transition:opacity .4s ease; }
+    .wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 20px 100px;
+    }
 
-  .sig-readout{
-    font-family:var(--font-mono); font-size:.82rem; margin:10px 0 12px; color:var(--ink-soft);
-  }
-  .sig-readout span{ color:var(--ink); font-weight:600; }
-  input[type="range"]{ width:100%; accent-color:var(--accent-blue); }
-  .axis{ stroke:var(--line); stroke-width:1; }
-  .threshold{ stroke:var(--accent-gold); stroke-width:1.5; }
-  #sigCurve{ fill:none; stroke:var(--accent-blue); stroke-width:2.5; }
+    /* hero */
+    header.hero {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 56px 20px 30px;
+    }
 
-  /* pieges */
-  .piege{
-    border-left:3px solid var(--accent-red); padding:6px 0 6px 16px; margin-bottom:18px;
-  }
-  .piege .vs{ font-family:var(--font-mono); font-size:.72rem; color:var(--accent-red); display:block; margin-bottom:4px; letter-spacing:.02em; }
+    .kicker {
+      font-family: var(--font-mono);
+      font-size: .72rem;
+      letter-spacing: .02em;
+      color: var(--accent-teal);
+      margin: 0 0 14px;
+    }
 
-  /* quiz */
-  .quiz-item{
-    border:1px solid var(--line); border-radius:var(--radius); padding:14px 16px; margin-bottom:12px;
-    background:var(--paper-alt);
-  }
-  .quiz-q{ font-weight:600; margin:0 0 8px; font-size:.96rem; }
-  details{ margin-top:2px; }
-  summary{
-    cursor:pointer; font-family:var(--font-mono); font-size:.75rem; color:var(--accent-blue);
-    list-style:none; display:inline-flex; align-items:center; gap:6px;
-  }
-  summary::-webkit-details-marker{ display:none; }
-  summary::before{ content:"▸"; transition:transform .2s ease; }
-  details[open] summary::before{ transform:rotate(90deg); }
-  .quiz-a{
-    margin:10px 0 0; padding:10px 12px; background:var(--paper); border-left:2px solid var(--accent-teal);
-    font-size:.9rem; color:var(--ink-soft);
-  }
+    h1.title {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-style: italic;
+      font-size: clamp(1.9rem, 5vw, 2.6rem);
+      line-height: 1.15;
+      margin: 0 0 14px;
+      max-width: 15ch;
+    }
 
-  footer{ text-align:center; padding:30px 20px 50px; color:var(--ink-soft); font-size:.78rem; }
-</style>
+    .hero-sub {
+      color: var(--ink-soft);
+      max-width: 56ch;
+      margin: 0 0 20px;
+      font-size: 1rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      font-size: .82rem;
+      color: var(--ink-soft);
+      border-top: 1px dashed var(--line);
+      padding-top: 16px;
+    }
+
+    .hero-meta span strong {
+      color: var(--ink);
+    }
+
+    /* sections */
+    section {
+      padding: 44px 0;
+      border-bottom: 1px dashed var(--line);
+    }
+
+    section:last-of-type {
+      border-bottom: none;
+    }
+
+    .sec-head {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .sec-num {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--accent-teal);
+      flex: none;
+    }
+
+    h2.sec-title {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1.5rem;
+      margin: 0;
+    }
+
+    h3.sub-title {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1.15rem;
+      margin: 30px 0 10px;
+    }
+
+    p {
+      margin: 0 0 14px;
+    }
+
+    .lede {
+      font-size: 1.04rem;
+    }
+
+    /* definitions */
+    .defs {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .def-row {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .def-term {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1rem;
+      margin: 0 0 4px;
+      color: var(--ink);
+    }
+
+    .def-text {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: .94rem;
+    }
+
+    /* bullet lists */
+    ul.concepts {
+      list-style: none;
+      margin: 0 0 8px;
+      padding: 0;
+    }
+
+    ul.concepts>li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 12px;
+      font-size: .97rem;
+    }
+
+    ul.concepts>li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--accent-teal);
+    }
+
+    code.math {
+      font-family: var(--font-mono);
+      background: var(--paper-alt);
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-size: .88em;
+      white-space: nowrap;
+    }
+
+    .formula-block {
+      font-family: var(--font-mono);
+      background: var(--paper-alt);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      margin: 10px 0 16px;
+      font-size: .86rem;
+      overflow-x: auto;
+    }
+
+    /* small compare table */
+    table.cmp {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0 16px;
+      font-size: .88rem;
+    }
+
+    table.cmp th,
+    table.cmp td {
+      border: 1px solid var(--line);
+      padding: 8px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    table.cmp th {
+      background: var(--paper-alt);
+      font-family: var(--font-display);
+      font-weight: 600;
+    }
+
+    /* widgets */
+    .widget {
+      background: var(--paper-alt);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px 16px 14px;
+      margin: 18px 0 22px;
+    }
+
+    .widget-label {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      letter-spacing: .03em;
+      text-transform: uppercase;
+      color: var(--accent-teal);
+      margin: 0 0 10px;
+    }
+
+    .anim-svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .widget-caption {
+      font-size: .88rem;
+      color: var(--ink-soft);
+      margin: 10px 0 0;
+    }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .tab-btn {
+      font-family: var(--font-body);
+      font-size: .78rem;
+      padding: 6px 12px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--ink-soft);
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all .15s ease;
+    }
+
+    .tab-btn:hover {
+      color: var(--ink);
+    }
+
+    .tab-btn.active {
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
+    }
+
+    .tab-btn:focus-visible,
+    button:focus-visible,
+    input:focus-visible {
+      outline: 2px solid var(--accent-blue);
+      outline-offset: 2px;
+    }
+
+    .tab-panel {
+      display: none;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    .dot {
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+
+    .dot.dotA {
+      fill: var(--dotA);
+    }
+
+    .dot.dotB {
+      fill: var(--dotB);
+    }
+
+    .dot.dotGray {
+      fill: var(--dotGray);
+    }
+
+    .dot.cluster1 {
+      fill: var(--accent-teal);
+    }
+
+    .dot.cluster2 {
+      fill: var(--accent-gold);
+    }
+
+    .dot.cluster3 {
+      fill: var(--dotA);
+    }
+
+    @keyframes dotIn {
+      from {
+        opacity: 0;
+        transform: scale(.35);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .dot.dotA,
+    .dot.dotB,
+    .dot.dotGray {
+      animation: dotIn .35s ease both;
+    }
+
+    @keyframes gather {
+      from {
+        opacity: .15;
+        transform: translate(var(--dx, 0px), var(--dy, 0px));
+      }
+
+      to {
+        opacity: 1;
+        transform: translate(0, 0);
+      }
+    }
+
+    .dot.cluster1,
+    .dot.cluster2,
+    .dot.cluster3 {
+      animation: gather .7s ease both;
+    }
+
+    .draw-anim {
+      stroke-dasharray: var(--len);
+      stroke-dashoffset: var(--len);
+      animation: drawLine .8s .5s ease forwards;
+    }
+
+    @keyframes drawLine {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    .boundary {
+      stroke: var(--ink);
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .boundary2 {
+      stroke: var(--ink);
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .scatter circle {
+      fill: var(--ink-soft);
+    }
+
+    .fit-line {
+      fill: none;
+      stroke: var(--accent-blue);
+      stroke-width: 3;
+      opacity: 0;
+      animation: fadeIn .5s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    .grid-rect {
+      fill: none;
+      stroke: var(--line);
+    }
+
+    .agent {
+      fill: var(--accent-teal);
+      animation: agentMove 6s linear infinite;
+    }
+
+    @keyframes agentMove {
+      0% {
+        transform: translate(0, 0);
+      }
+
+      25% {
+        transform: translate(70px, -14px);
+      }
+
+      50% {
+        transform: translate(150px, 0px);
+      }
+
+      75% {
+        transform: translate(190px, -18px);
+      }
+
+      100% {
+        transform: translate(0, 0);
+      }
+    }
+
+    .reward {
+      fill: var(--accent-gold);
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 14px;
+      animation: rewardPulse 6s linear infinite;
+    }
+
+    @keyframes rewardPulse {
+
+      0%,
+      38% {
+        opacity: 0;
+      }
+
+      48%,
+      62% {
+        opacity: 1;
+      }
+
+      72%,
+      100% {
+        opacity: 0;
+      }
+    }
+
+    .split-bar {
+      display: flex;
+      width: 100%;
+      height: 46px;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      border-radius: 3px;
+    }
+
+    .split-seg {
+      width: 0;
+      transition: width 1.1s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .split-bar.in-view .seg-train {
+      width: 60%;
+    }
+
+    .split-bar.in-view .seg-val {
+      width: 20%;
+    }
+
+    .split-bar.in-view .seg-test {
+      width: 20%;
+    }
+
+    .seg-train {
+      background: var(--accent-blue);
+    }
+
+    .seg-val {
+      background: var(--accent-teal);
+    }
+
+    .seg-test {
+      background: var(--accent-gold);
+      color: #241a05;
+    }
+
+    .gd-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .gd-btn {
+      font-family: var(--font-body);
+      font-size: .78rem;
+      padding: 7px 13px;
+      border-radius: 4px;
+      border: 1px solid var(--ink);
+      background: var(--paper);
+      color: var(--ink);
+      cursor: pointer;
+    }
+
+    .gd-btn:hover {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .gd-btn:disabled {
+      opacity: .4;
+      cursor: not-allowed;
+    }
+
+    .gd-status {
+      font-family: var(--font-mono);
+      font-size: .78rem;
+      margin-top: 10px;
+      min-height: 1.2em;
+      color: var(--ink-soft);
+    }
+
+    #gdBall {
+      transition: cx .45s ease, cy .45s ease;
+    }
+
+    .switch-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .9rem;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+
+    #scaleEllipse {
+      fill: none;
+      stroke: var(--accent-blue);
+      stroke-width: 2;
+      transition: rx .6s ease, ry .6s ease, cx .6s ease;
+    }
+
+    .grad-path {
+      fill: none;
+      stroke: var(--accent-red);
+      stroke-width: 2;
+      transition: opacity .4s ease;
+    }
+
+    .sig-readout {
+      font-family: var(--font-mono);
+      font-size: .82rem;
+      margin: 10px 0 12px;
+      color: var(--ink-soft);
+    }
+
+    .sig-readout span {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--accent-blue);
+    }
+
+    .axis {
+      stroke: var(--line);
+      stroke-width: 1;
+    }
+
+    .threshold {
+      stroke: var(--accent-gold);
+      stroke-width: 1.5;
+    }
+
+    #sigCurve {
+      fill: none;
+      stroke: var(--accent-blue);
+      stroke-width: 2.5;
+    }
+
+    /* pieges */
+    .piege {
+      border-left: 3px solid var(--accent-red);
+      padding: 6px 0 6px 16px;
+      margin-bottom: 18px;
+    }
+
+    .piege .vs {
+      font-family: var(--font-mono);
+      font-size: .72rem;
+      color: var(--accent-red);
+      display: block;
+      margin-bottom: 4px;
+      letter-spacing: .02em;
+    }
+
+    /* quiz */
+    .quiz-item {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      margin-bottom: 12px;
+      background: var(--paper-alt);
+    }
+
+    .quiz-q {
+      font-weight: 600;
+      margin: 0 0 8px;
+      font-size: .96rem;
+    }
+
+    details {
+      margin-top: 2px;
+    }
+
+    summary {
+      cursor: pointer;
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      color: var(--accent-blue);
+      list-style: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::before {
+      content: "▸";
+      transition: transform .2s ease;
+    }
+
+    details[open] summary::before {
+      transform: rotate(90deg);
+    }
+
+    .quiz-a {
+      margin: 10px 0 0;
+      padding: 10px 12px;
+      background: var(--paper);
+      border-left: 2px solid var(--accent-teal);
+      font-size: .9rem;
+      color: var(--ink-soft);
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px 50px;
+      color: var(--ink-soft);
+      font-size: .78rem;
+    }
+
+    /* chapitre 4 widgets */
+    .dot.sv {
+      stroke: var(--accent-gold);
+      stroke-width: 2.5;
+    }
+
+    .dot.violation {
+      stroke: var(--accent-red);
+      stroke-width: 2;
+      stroke-dasharray: 3, 2;
+    }
+
+    .margin-line {
+      stroke: var(--ink-soft);
+      stroke-width: 1.5;
+    }
+
+    #widget-kernel .kdot {
+      transition: transform .8s ease;
+    }
+
+    #widget-kernel.lifted .klift {
+      transform: translateY(-78px);
+    }
+
+    #kernelLine {
+      stroke: var(--ink);
+      stroke-width: 2;
+      opacity: 0;
+      transition: opacity .5s ease .3s;
+    }
+
+    .svr-pt {
+      stroke: var(--ink);
+      stroke-width: 1;
+      transition: fill .2s ease;
+    }
+  </style>
 </head>
+
 <body>
 
-<div id="progressBar"></div>
-<nav class="topnav">
-  <div class="topnav-inner">
-    <a href="#top" class="topnav-title">ML · fiche</a>
-    <div class="topnav-links">
-      <a href="#essentiel">Essentiel</a>
-      <a href="#definitions">Définitions</a>
-      <a href="#chap1">Ch.1</a>
-      <a href="#chap2">Ch.2</a>
-      <a href="#chap3">Ch.3</a>
-      <a href="#pieges">Pièges</a>
-      <a href="#quiz">Quiz</a>
-    </div>
-  </div>
-</nav>
-
-<header class="hero" id="top">
-  <p class="kicker">SEATECH · SYSTÈMES NUMÉRIQUES PAR ALTERNANCE · MACHINE LEARNING</p>
-  <h1 class="title">Fiche de révision : les trois piliers du Machine Learning</h1>
-  <p class="hero-sub">De l'idée générale de l'apprentissage automatique jusqu'aux deux premiers algorithmes concrets — la régression linéaire et la régression logistique — avec les définitions, les formules et les pièges classiques à connaître avant l'examen.</p>
-  <div class="hero-meta">
-    <span>Cours de <strong>Yassine Zniyed</strong></span>
-    <span><strong>3 chapitres</strong> couverts</span>
-    <span><strong>19</strong> définitions clés</span>
-    <span><strong>12</strong> questions d'auto-évaluation</span>
-  </div>
-</header>
-
-<main class="wrap">
-
-  <!-- 1. ESSENTIEL -->
-  <section id="essentiel">
-    <div class="sec-head"><span class="sec-num">01</span><h2 class="sec-title">L'essentiel en un paragraphe</h2></div>
-    <p class="lede">Le <strong>Machine Learning</strong> consiste à programmer une machine non pas avec des règles écrites à la main, mais à partir de <strong>données</strong>, pour qu'elle apprenne à réaliser une tâche <strong>T</strong> et améliore sa performance <strong>P</strong> grâce à l'expérience <strong>E</strong>. On distingue quatre grandes familles de problèmes — <strong>supervisé</strong> (données étiquetées, pour la classification ou la régression), <strong>non supervisé</strong> (sans étiquette, pour le clustering ou la réduction de dimension), <strong>semi-supervisé</strong> (mélange des deux) et <strong>par renforcement</strong> (apprentissage par récompense) — et la réussite d'un modèle dépend autant de la qualité des données que de l'algorithme, sous peine de <strong>sur-</strong> ou <strong>sous-apprentissage</strong>. Ce cours construit ensuite deux algorithmes fondamentaux du ML supervisé à partir des mêmes briques : une <strong>fonction de décision</strong> paramétrée par θ, une <strong>fonction de coût</strong> J(θ) à minimiser, et l'algorithme de la <strong>descente de gradient</strong>. La <strong>régression linéaire</strong> prédit une valeur continue via f<sub>θ</sub>(x)=θᵀx et un coût quadratique (MSE), résolu soit par descente de gradient (itérative, nécessite mise à l'échelle et un bon taux d'apprentissage α), soit analytiquement (équation normale). La <strong>régression logistique</strong> adapte ce cadre à la <strong>classification</strong> binaire en passant θᵀx dans une fonction <strong>sigmoïde</strong> pour obtenir une probabilité, avec un coût logarithmique convexe et une <strong>frontière de décision</strong> définie par θᵀx=0 — linéaire ou non selon les descripteurs choisis — généralisable au multi-classe via la stratégie <strong>one-vs-all</strong>.</p>
-  </section>
-
-  <!-- 2. DEFINITIONS -->
-  <section id="definitions">
-    <div class="sec-head"><span class="sec-num">02</span><h2 class="sec-title">Les définitions clés</h2></div>
-    <p>Les termes ci-dessous doivent être sus par cœur — ce sont ceux qu'un examinateur attend mot pour mot.</p>
-    <div class="defs">
-      <div class="def-row"><p class="def-term">Machine Learning</p><p class="def-text">Science de la programmation des machines pour qu'elles apprennent à partir de données plutôt que par des règles explicites.</p></div>
-      <div class="def-row"><p class="def-term">Apprentissage supervisé</p><p class="def-text">Apprentissage à partir de données étiquetées (la sortie y est connue pour chaque exemple) ; regroupe la classification (sortie discrète) et la régression (sortie continue).</p></div>
-      <div class="def-row"><p class="def-term">Apprentissage non supervisé</p><p class="def-text">Apprentissage à partir de données sans étiquette ; regroupe le clustering (partitionnement) et la réduction de dimension.</p></div>
-      <div class="def-row"><p class="def-term">Apprentissage semi-supervisé</p><p class="def-text">Mélange de données étiquetées (peu nombreuses) et non étiquetées (nombreuses).</p></div>
-      <div class="def-row"><p class="def-term">Apprentissage par renforcement</p><p class="def-text">Un agent apprend par essais-erreurs à choisir les actions qui maximisent une récompense cumulée.</p></div>
-      <div class="def-row"><p class="def-term">Modèle paramétrique</p><p class="def-text">Modèle dont la forme analytique est fixée à l'avance, et dont on cherche seulement les paramètres optimaux (les θ).</p></div>
-      <div class="def-row"><p class="def-term">Fonction de décision f<sub>θ</sub></p><p class="def-text">Fonction qui, à partir des descripteurs x, produit la sortie prédite ŷ (ou une probabilité).</p></div>
-      <div class="def-row"><p class="def-term">Fonction de coût J(θ)</p><p class="def-text">Mesure l'écart entre les prédictions du modèle et les vraies valeurs ; c'est elle que l'on minimise pour entraîner le modèle.</p></div>
-      <div class="def-row"><p class="def-term">Descente de gradient</p><p class="def-text">Algorithme itératif qui met à jour θ dans la direction opposée au gradient de J(θ), pondérée par le taux d'apprentissage α.</p></div>
-      <div class="def-row"><p class="def-term">Taux d'apprentissage α</p><p class="def-text">Hyperparamètre qui contrôle la taille des pas de la descente de gradient.</p></div>
-      <div class="def-row"><p class="def-term">Régression linéaire</p><p class="def-text">Modèle supervisé prédisant une sortie continue comme combinaison linéaire des descripteurs : f<sub>θ</sub>(x)=θᵀx.</p></div>
-      <div class="def-row"><p class="def-term">Régression logistique</p><p class="def-text">Modèle supervisé de classification qui applique une fonction sigmoïde à θᵀx pour produire une probabilité entre 0 et 1.</p></div>
-      <div class="def-row"><p class="def-term">Fonction sigmoïde g(z)</p><p class="def-text">Fonction en S, g(z)=1/(1+e⁻ᶻ), qui compresse toute valeur réelle dans l'intervalle ]0,1[.</p></div>
-      <div class="def-row"><p class="def-term">Limite (frontière) de décision</p><p class="def-text">Ensemble des points où θᵀx=0 ; sépare l'espace des descripteurs entre les classes prédites.</p></div>
-      <div class="def-row"><p class="def-term">Sur-apprentissage (overfitting)</p><p class="def-text">Modèle trop complexe qui colle aux données d'entraînement (bruit compris) mais généralise mal sur de nouvelles données.</p></div>
-      <div class="def-row"><p class="def-term">Sous-apprentissage (underfitting)</p><p class="def-text">Modèle trop simple pour capturer la structure des données ; mauvaises performances même sur l'entraînement.</p></div>
-      <div class="def-row"><p class="def-term">Ensembles d'entraînement / validation / test</p><p class="def-text">Trois sous-ensembles des données, servant respectivement à apprendre les paramètres, ajuster les hyperparamètres, et évaluer la performance finale sur des données jamais vues.</p></div>
-      <div class="def-row"><p class="def-term">Mise à l'échelle (normalisation)</p><p class="def-text">Transformation des descripteurs pour qu'ils aient des échelles comparables, ce qui accélère et stabilise la descente de gradient.</p></div>
-      <div class="def-row"><p class="def-term">Équation normale</p><p class="def-text">Solution analytique directe de la régression linéaire : θ̂=(XᵀX)⁻¹Xᵀy.</p></div>
-      <div class="def-row"><p class="def-term">One-vs-all</p><p class="def-text">Stratégie de classification multi-classes : on entraîne un classifieur binaire par classe et on choisit la classe de probabilité maximale.</p></div>
-    </div>
-  </section>
-
-  <!-- 3. CHAPITRE 1 -->
-  <section id="chap1">
-    <div class="sec-head"><span class="sec-num">03 · Ch.1</span><h2 class="sec-title">Introduction au Machine Learning</h2></div>
-
-    <ul class="concepts">
-      <li><strong>Deux définitions complémentaires</strong> du ML : (1) science de la programmation des machines pour qu'elles <strong>apprennent à partir des données</strong> plutôt que par des règles explicites ; (2) définition d'ingénierie — un programme apprend de l'<strong>expérience E</strong> par rapport à une <strong>tâche T</strong> et une <strong>mesure de performance P</strong>, si sa performance sur T (mesurée par P) s'améliore avec E.</li>
-      <li><strong>Pourquoi le Machine Learning ?</strong> Il simplifie des règles trop complexes à écrire à la main, s'adapte à des données qui évoluent, permet de résoudre des problèmes sans solution algorithmique connue, et aide les humains à mieux comprendre leurs données.</li>
-      <li><strong>Exemples d'applications</strong> : systèmes de recommandation, voitures autonomes, alertes trafic, reconnaissance faciale, filtrage anti-spam…</li>
-    </ul>
-
-    <h3 class="sub-title">Les quatre familles de problèmes</h3>
-    <div class="widget" id="widget-types">
-      <p class="widget-label">Illustration interactive — cliquer sur un onglet</p>
-      <div class="tabs">
-        <button class="tab-btn active" data-target="tab-sup">Supervisé</button>
-        <button class="tab-btn" data-target="tab-unsup">Non supervisé</button>
-        <button class="tab-btn" data-target="tab-semi">Semi-supervisé</button>
-        <button class="tab-btn" data-target="tab-rl">Renforcement</button>
-      </div>
-      <div class="tab-panel active" id="tab-sup">
-        <svg viewBox="0 0 240 140" class="anim-svg" aria-hidden="true">
-          <circle class="dot dotA" cx="40" cy="40" r="6" style="animation-delay:.02s"/>
-          <circle class="dot dotA" cx="70" cy="30" r="6" style="animation-delay:.08s"/>
-          <circle class="dot dotA" cx="55" cy="65" r="6" style="animation-delay:.14s"/>
-          <circle class="dot dotA" cx="30" cy="85" r="6" style="animation-delay:.2s"/>
-          <circle class="dot dotB" cx="170" cy="50" r="6" style="animation-delay:.08s"/>
-          <circle class="dot dotB" cx="200" cy="75" r="6" style="animation-delay:.14s"/>
-          <circle class="dot dotB" cx="180" cy="100" r="6" style="animation-delay:.2s"/>
-          <circle class="dot dotB" cx="150" cy="110" r="6" style="animation-delay:.26s"/>
-          <line class="boundary draw-anim" style="--len:120" x1="115" y1="10" x2="115" y2="130"/>
-        </svg>
-        <p class="widget-caption">Chaque point est déjà <strong>étiqueté</strong> (rouge/bleu). Le modèle apprend une règle pour prédire l'étiquette de nouveaux points → <strong>classification</strong>. Pour une sortie continue, on parlerait de <strong>régression</strong>.</p>
-      </div>
-      <div class="tab-panel" id="tab-unsup">
-        <svg viewBox="0 0 240 140" class="anim-svg" aria-hidden="true">
-          <circle class="dot cluster1" cx="40" cy="40" r="6" style="--dx:40px;--dy:30px; animation-delay:0s"/>
-          <circle class="dot cluster1" cx="55" cy="28" r="6" style="--dx:35px;--dy:35px; animation-delay:.05s"/>
-          <circle class="dot cluster1" cx="35" cy="62" r="6" style="--dx:45px;--dy:20px; animation-delay:.1s"/>
-          <circle class="dot cluster2" cx="130" cy="35" r="6" style="--dx:-20px;--dy:40px; animation-delay:.15s"/>
-          <circle class="dot cluster2" cx="150" cy="55" r="6" style="--dx:-30px;--dy:20px; animation-delay:.2s"/>
-          <circle class="dot cluster2" cx="120" cy="60" r="6" style="--dx:-10px;--dy:30px; animation-delay:.25s"/>
-          <circle class="dot cluster3" cx="190" cy="100" r="6" style="--dx:-40px;--dy:-40px; animation-delay:.3s"/>
-          <circle class="dot cluster3" cx="170" cy="115" r="6" style="--dx:-20px;--dy:-50px; animation-delay:.35s"/>
-          <circle class="dot cluster3" cx="200" cy="120" r="6" style="--dx:-45px;--dy:-35px; animation-delay:.4s"/>
-        </svg>
-        <p class="widget-caption">Aucun point n'est étiqueté. L'algorithme regroupe seul les points qui se ressemblent → <strong>clustering</strong> (ou réduit leur nombre de dimensions).</p>
-      </div>
-      <div class="tab-panel" id="tab-semi">
-        <svg viewBox="0 0 240 140" class="anim-svg" aria-hidden="true">
-          <circle class="dot dotA" cx="40" cy="40" r="6" style="animation-delay:.02s"/>
-          <circle class="dot dotGray" cx="70" cy="30" r="6" style="animation-delay:.06s"/>
-          <circle class="dot dotGray" cx="55" cy="65" r="6" style="animation-delay:.1s"/>
-          <circle class="dot dotGray" cx="30" cy="85" r="6" style="animation-delay:.14s"/>
-          <circle class="dot dotB" cx="170" cy="50" r="6" style="animation-delay:.18s"/>
-          <circle class="dot dotGray" cx="200" cy="75" r="6" style="animation-delay:.22s"/>
-          <circle class="dot dotGray" cx="180" cy="100" r="6" style="animation-delay:.26s"/>
-          <circle class="dot dotGray" cx="150" cy="110" r="6" style="animation-delay:.3s"/>
-        </svg>
-        <p class="widget-caption">Seuls quelques points sont étiquetés (rouge/bleu) ; la majorité ne l'est pas (gris). Le modèle combine les deux pour mieux généraliser.</p>
-      </div>
-      <div class="tab-panel" id="tab-rl">
-        <svg viewBox="0 0 240 140" class="anim-svg" aria-hidden="true">
-          <rect class="grid-rect" x="10" y="10" width="220" height="120"/>
-          <rect class="agent" x="20" y="100" width="16" height="16"/>
-          <text class="reward" x="115" y="45">+1</text>
-        </svg>
-        <p class="widget-caption">Un <strong>agent</strong> essaie des actions dans un environnement et reçoit une <strong>récompense</strong> (ou une pénalité) ; il apprend la stratégie qui maximise le gain cumulé.</p>
+  <div id="progressBar"></div>
+  <nav class="topnav">
+    <div class="topnav-inner">
+      <a href="#top" class="topnav-title">ML · fiche</a>
+      <div class="topnav-links">
+        <a href="#essentiel">Essentiel</a>
+        <a href="#definitions">Définitions</a>
+        <a href="#chap1">Ch.1</a>
+        <a href="#chap2">Ch.2</a>
+        <a href="#chap3">Ch.3</a>
+        <a href="#chap4">Ch.4</a>
+        <a href="#pieges">Pièges</a>
+        <a href="#quiz">Quiz</a>
       </div>
     </div>
+  </nav>
 
-    <ul class="concepts">
-      <li><strong>Cinq défis majeurs du ML</strong> : quantité insuffisante de données, données de mauvaise qualité, données non pertinentes, données non représentatives, et <strong>sur-apprentissage</strong> / <strong>sous-apprentissage</strong>.</li>
-    </ul>
+  <header class="hero" id="top">
+    <p class="kicker">SEATECH · SYSTÈMES NUMÉRIQUES PAR ALTERNANCE · MACHINE LEARNING</p>
+    <h1 class="title">Fiche de révision : les trois piliers du Machine Learning</h1>
+    <p class="hero-sub">De l'idée générale de l'apprentissage automatique jusqu'aux deux premiers algorithmes concrets —
+      la régression linéaire et la régression logistique — avec les définitions, les formules et les pièges classiques à
+      connaître avant l'examen.</p>
+    <div class="hero-meta">
+      <span>Cours de <strong>Yassine Zniyed</strong></span>
+      <span><strong>4 chapitres</strong> couverts</span>
+      <span><strong>30</strong> définitions clés</span>
+      <span><strong>20</strong> questions d'auto-évaluation</span>
+    </div>
+  </header>
 
-    <div class="widget" id="widget-fit">
-      <p class="widget-label">Illustration interactive — cliquer sur un onglet</p>
-      <div class="tabs">
-        <button class="tab-btn active" data-target="fit-under">Sous-apprentissage</button>
-        <button class="tab-btn" data-target="fit-good">Ajustement optimal</button>
-        <button class="tab-btn" data-target="fit-over">Sur-apprentissage</button>
+  <main class="wrap">
+
+    <!-- 1. ESSENTIEL -->
+    <section id="essentiel">
+      <div class="sec-head"><span class="sec-num">01</span>
+        <h2 class="sec-title">L'essentiel en un paragraphe</h2>
       </div>
-      <div class="tab-panel active" id="fit-under">
+      <p class="lede">Le <strong>Machine Learning</strong> consiste à programmer une machine non pas avec des règles
+        écrites à la main, mais à partir de <strong>données</strong>, pour qu'elle apprenne à réaliser une tâche
+        <strong>T</strong> et améliore sa performance <strong>P</strong> grâce à l'expérience <strong>E</strong>. On
+        distingue quatre grandes familles de problèmes — <strong>supervisé</strong> (données étiquetées, pour la
+        classification ou la régression), <strong>non supervisé</strong> (sans étiquette, pour le clustering ou la
+        réduction de dimension), <strong>semi-supervisé</strong> (mélange des deux) et <strong>par renforcement</strong>
+        (apprentissage par récompense) — et la réussite d'un modèle dépend autant de la qualité des données que de
+        l'algorithme, sous peine de <strong>sur-</strong> ou <strong>sous-apprentissage</strong>. Ce cours construit
+        ensuite deux algorithmes fondamentaux du ML supervisé à partir des mêmes briques : une <strong>fonction de
+          décision</strong> paramétrée par θ, une <strong>fonction de coût</strong> J(θ) à minimiser, et l'algorithme de
+        la <strong>descente de gradient</strong>. La <strong>régression linéaire</strong> prédit une valeur continue via
+        f<sub>θ</sub>(x)=θᵀx et un coût quadratique (MSE), résolu soit par descente de gradient (itérative, nécessite
+        mise à l'échelle et un bon taux d'apprentissage α), soit analytiquement (équation normale). La
+        <strong>régression logistique</strong> adapte ce cadre à la <strong>classification</strong> binaire en passant
+        θᵀx dans une fonction <strong>sigmoïde</strong> pour obtenir une probabilité, avec un coût logarithmique convexe
+        et une <strong>frontière de décision</strong> définie par θᵀx=0 — linéaire ou non selon les descripteurs choisis
+        — généralisable au multi-classe via la stratégie <strong>one-vs-all</strong>. Les <strong>machines à vecteurs de
+          support (SVM)</strong> abordent la classification sous un angle géométrique : trouver l'hyperplan qui sépare
+        les classes en maximisant la <strong>marge</strong>, définie uniquement par les <strong>vecteurs de
+          support</strong> les plus proches — en version <strong>rigide</strong> (aucune violation tolérée) ou
+        <strong>souple</strong> (un hyperparamètre C arbitre le compromis marge/erreurs). Quand les données ne sont pas
+        linéairement séparables, l'<strong>astuce du noyau</strong> (kernel trick) permet de raisonner comme si les
+        données avaient été projetées dans un espace de plus grande dimension — sans jamais calculer cette projection
+        explicitement — via des noyaux comme le <strong>polynomial</strong> ou le <strong>RBF gaussien</strong>, la même
+        idée s'étendant à la régression via la <strong>SVR</strong>.
+      </p>
+    </section>
+
+    <!-- 2. DEFINITIONS -->
+    <section id="definitions">
+      <div class="sec-head"><span class="sec-num">02</span>
+        <h2 class="sec-title">Les définitions clés</h2>
+      </div>
+      <p>Les termes ci-dessous doivent être sus par cœur — ce sont ceux qu'un examinateur attend mot pour mot.</p>
+      <div class="defs">
+        <div class="def-row">
+          <p class="def-term">Machine Learning</p>
+          <p class="def-text">Science de la programmation des machines pour qu'elles apprennent à partir de données
+            plutôt que par des règles explicites.</p>
+        </div>
+        <div class="def-row">
+          <p class="def-term">Apprentissage supervisé</p>
+          <p class="def-text">Apprentissage à partir de données étiquetées (la sortie y est connue pour chaque exemple)
+            ; regroupe la classification (sortie discrète) et la régression (sortie continue).</p>
+        </div>
+        <div class="def-row">
+          <p class="def-term">Apprentissage non supervisé</p>
+          <p class="def-text">Apprentissage à partir de données sans étiquette ; regroupe le clustering
+            (partitionnement) et la réduction de dimension.</p>
+        </div>
+        <div class="def-row">
+          <p class="def-term">Apprentissage semi-supervisé</p>
+          <p class="def-text">Mélange de données étiquetées (peu nombreuses) et non étiquetées (nombreuses).</p>
+        </div>
+        <div class="def-row">
+          <p class="def-term">Apprentissage par renforcement</p>
+          <p class="def-text">Un agent apprend par essais-erreurs à choisir les actions qui maximisent une récompense
+            cumulée.</p>
+        </div>
+        <div class="def-row">
+          <p class="def-term">Modèle paramétrique</p>
+          <p class="def-text">Modèle dont la forme analytique est fixée à l'avance, et dont on cherche seulement les
+            paramètres optimaux (les θ).</p>
+        </div>
+        <div class="def-row">
+          <p class="def-term">Fonction de décision f<sub>θ</sub></p>
+          <p class="def-text">Fonction qui, à partir des descripteurs x, produit la sortie prédite ŷ (ou une
+            probabilité).</p>
+        </div>
+        <div class="def-row">
+          <p class="def-term">Fonction de coût J(θ)</p>
+          <p class="def-text">Mesure l'écart entre les prédictions du modèle et les vraies valeurs ; c'est elle que l'on
+            minimise pour entraîner le modèle.</p>
+        </div>
+        <div class="def-row">
+          <p class="def-term">Descente de gradient</p>
+          <p class="def-text">Algorithme itératif qui met à jour θ dans la direction opposée au gradient de J(θ),
+            pondérée par le taux d'apprentissage α.</p>
+        </div>
+        <div class="def-row">
+          <p class="def-term">Taux d'apprentissage α</p>
+          <p class="def-text">Hyperparamètre qui contrôle la taille des pas de la descente de gradient.</p>
+        </div>
+        <div class="def-row">
+          <p class="def-term">Régression linéaire</p>
+          <p class="def-text">Modèle supervisé prédisant une sortie continue comme combinaison linéaire des descripteurs
+            : f<sub>θ</sub>(x)=θᵀx.</p>
+        </div>
+        <div class="def-row">
+          <p class="def-term">Régression logistique</p>
+          <p class="def-text">Modèle supervisé de classification qui applique une fonction sigmoïde à θᵀx pour produire
+            une probabilité entre 0 et 1.</p>
+        </div>
+        <div class="def-row">
+          <p class="def-term">Fonction sigmoïde g(z)</p>
+          <p class="def-text">Fonction en S, g(z)=1/(1+e⁻ᶻ), qui compresse toute valeur réelle dans l'intervalle ]0,1[.
+          </p>
+        </div>
+        <div class="def-row">
+          <p class="def-term">Limite (frontière) de décision</p>
+          <p class="def-text">Ensemble des points où θᵀx=0 ; sépare l'espace des descripteurs entre les classes
+            prédites.</p>
+        </div>
+        <div class="def-row">
+          <p class="def-term">Sur-apprentissage (overfitting)</p>
+          <p class="def-text">Modèle trop complexe qui colle aux données d'entraînement (bruit compris) mais généralise
+            mal sur de nouvelles données.</p>
+        </div>
+        <div class="def-row">
+          <p class="def-term">Sous-apprentissage (underfitting)</p>
+          <p class="def-text">Modèle trop simple pour capturer la structure des données ; mauvaises performances même
+            sur l'entraînement.</p>
+        </div>
+        <div class="def-row">
+          <p class="def-term">Ensembles d'entraînement / validation / test</p>
+          <p class="def-text">Trois sous-ensembles des données, servant respectivement à apprendre les paramètres,
+            ajuster les hyperparamètres, et évaluer la performance finale sur des données jamais vues.</p>
+        </div>
+        <div class="def-row">
+          <p class="def-term">Mise à l'échelle (normalisation)</p>
+          <p class="def-text">Transformation des descripteurs pour qu'ils aient des échelles comparables, ce qui
+            accélère et stabilise la descente de gradient.</p>
+        </div>
+        <div class="def-row">
+          <p class="def-term">Équation normale</p>
+          <p class="def-text">Solution analytique directe de la régression linéaire : θ̂=(XᵀX)⁻¹Xᵀy.</p>
+        </div>
+        <div class="def-row">
+          <p class="def-term">One-vs-all</p>
+          <p class="def-text">Stratégie de classification multi-classes : on entraîne un classifieur binaire par classe
+            et on choisit la classe de probabilité maximale.</p>
+        </div>
+        <div class="def-row">
+          <p class="def-term">Hyperplan séparateur</p>
+          <p class="def-text">Hyperplan d'équation wᵀx+b=0 qui sépare les deux classes en maximisant la marge γ.</p>
+        </div>
+        <div class="def-row">
+          <p class="def-term">Marge γ</p>
+          <p class="def-text">Distance entre l'hyperplan séparateur et l'échantillon d'entraînement le plus proche.</p>
+        </div>
+        <div class="def-row">
+          <p class="def-term">Vecteurs de support</p>
+          <p class="def-text">Échantillons situés exactement à une distance γ de l'hyperplan séparateur ; ce sont eux,
+            et eux seuls, qui déterminent sa position.</p>
+        </div>
+        <div class="def-row">
+          <p class="def-term">SVM à marge rigide</p>
+          <p class="def-text">SVM qui impose qu'aucun échantillon ne soit dans la zone d'indécision ; ne fonctionne que
+            si les données sont linéairement séparables et est sensible aux valeurs aberrantes.</p>
+        </div>
+        <div class="def-row">
+          <p class="def-term">SVM à marge souple</p>
+          <p class="def-text">SVM qui tolère des violations de marge (via des variables d'écart ζ⁽ⁱ⁾≥0) pour gérer des
+            données non parfaitement séparables.</p>
+        </div>
+        <div class="def-row">
+          <p class="def-term">Hyperparamètre C</p>
+          <p class="def-text">Contrôle le compromis entre largeur de la marge et nombre de violations tolérées dans une
+            SVM à marge souple.</p>
+        </div>
+        <div class="def-row">
+          <p class="def-term">Noyau (kernel) k(x,z)</p>
+          <p class="def-text">Fonction s'écrivant comme un produit scalaire ⟨φ(x),φ(z)⟩ dans un espace de Hilbert ;
+            mesure la similarité entre deux échantillons.</p>
+        </div>
+        <div class="def-row">
+          <p class="def-term">Astuce du noyau (kernel trick)</p>
+          <p class="def-text">Permet de calculer k(x,z) directement, sans jamais calculer explicitement la
+            transformation φ(x), ce qui rend le calcul beaucoup plus efficace.</p>
+        </div>
+        <div class="def-row">
+          <p class="def-term">Espace de redescription</p>
+          <p class="def-text">Espace de plus grande dimension dans lequel des données non linéairement séparables le
+            deviennent, via une application φ.</p>
+        </div>
+        <div class="def-row">
+          <p class="def-term">SVR (Support Vector Regression)</p>
+          <p class="def-text">Adaptation de la SVM à la régression : on cherche à faire tenir un maximum de points à
+            l'intérieur d'un tube de largeur ε, plutôt qu'à maximiser une marge entre classes.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. CHAPITRE 1 -->
+    <section id="chap1">
+      <div class="sec-head"><span class="sec-num">03 · Ch.1</span>
+        <h2 class="sec-title">Introduction au Machine Learning</h2>
+      </div>
+
+      <ul class="concepts">
+        <li><strong>Deux définitions complémentaires</strong> du ML : (1) science de la programmation des machines pour
+          qu'elles <strong>apprennent à partir des données</strong> plutôt que par des règles explicites ; (2)
+          définition d'ingénierie — un programme apprend de l'<strong>expérience E</strong> par rapport à une
+          <strong>tâche T</strong> et une <strong>mesure de performance P</strong>, si sa performance sur T (mesurée par
+          P) s'améliore avec E.
+        </li>
+        <li><strong>Pourquoi le Machine Learning ?</strong> Il simplifie des règles trop complexes à écrire à la main,
+          s'adapte à des données qui évoluent, permet de résoudre des problèmes sans solution algorithmique connue, et
+          aide les humains à mieux comprendre leurs données.</li>
+        <li><strong>Exemples d'applications</strong> : systèmes de recommandation, voitures autonomes, alertes trafic,
+          reconnaissance faciale, filtrage anti-spam…</li>
+      </ul>
+
+      <h3 class="sub-title">Les quatre familles de problèmes</h3>
+      <div class="widget" id="widget-types">
+        <p class="widget-label">Illustration interactive — cliquer sur un onglet</p>
+        <div class="tabs">
+          <button class="tab-btn active" data-target="tab-sup">Supervisé</button>
+          <button class="tab-btn" data-target="tab-unsup">Non supervisé</button>
+          <button class="tab-btn" data-target="tab-semi">Semi-supervisé</button>
+          <button class="tab-btn" data-target="tab-rl">Renforcement</button>
+        </div>
+        <div class="tab-panel active" id="tab-sup">
+          <svg viewBox="0 0 240 140" class="anim-svg" aria-hidden="true">
+            <circle class="dot dotA" cx="40" cy="40" r="6" style="animation-delay:.02s" />
+            <circle class="dot dotA" cx="70" cy="30" r="6" style="animation-delay:.08s" />
+            <circle class="dot dotA" cx="55" cy="65" r="6" style="animation-delay:.14s" />
+            <circle class="dot dotA" cx="30" cy="85" r="6" style="animation-delay:.2s" />
+            <circle class="dot dotB" cx="170" cy="50" r="6" style="animation-delay:.08s" />
+            <circle class="dot dotB" cx="200" cy="75" r="6" style="animation-delay:.14s" />
+            <circle class="dot dotB" cx="180" cy="100" r="6" style="animation-delay:.2s" />
+            <circle class="dot dotB" cx="150" cy="110" r="6" style="animation-delay:.26s" />
+            <line class="boundary draw-anim" style="--len:120" x1="115" y1="10" x2="115" y2="130" />
+          </svg>
+          <p class="widget-caption">Chaque point est déjà <strong>étiqueté</strong> (rouge/bleu). Le modèle apprend une
+            règle pour prédire l'étiquette de nouveaux points → <strong>classification</strong>. Pour une sortie
+            continue, on parlerait de <strong>régression</strong>.</p>
+        </div>
+        <div class="tab-panel" id="tab-unsup">
+          <svg viewBox="0 0 240 140" class="anim-svg" aria-hidden="true">
+            <circle class="dot cluster1" cx="40" cy="40" r="6" style="--dx:40px;--dy:30px; animation-delay:0s" />
+            <circle class="dot cluster1" cx="55" cy="28" r="6" style="--dx:35px;--dy:35px; animation-delay:.05s" />
+            <circle class="dot cluster1" cx="35" cy="62" r="6" style="--dx:45px;--dy:20px; animation-delay:.1s" />
+            <circle class="dot cluster2" cx="130" cy="35" r="6" style="--dx:-20px;--dy:40px; animation-delay:.15s" />
+            <circle class="dot cluster2" cx="150" cy="55" r="6" style="--dx:-30px;--dy:20px; animation-delay:.2s" />
+            <circle class="dot cluster2" cx="120" cy="60" r="6" style="--dx:-10px;--dy:30px; animation-delay:.25s" />
+            <circle class="dot cluster3" cx="190" cy="100" r="6" style="--dx:-40px;--dy:-40px; animation-delay:.3s" />
+            <circle class="dot cluster3" cx="170" cy="115" r="6" style="--dx:-20px;--dy:-50px; animation-delay:.35s" />
+            <circle class="dot cluster3" cx="200" cy="120" r="6" style="--dx:-45px;--dy:-35px; animation-delay:.4s" />
+          </svg>
+          <p class="widget-caption">Aucun point n'est étiqueté. L'algorithme regroupe seul les points qui se ressemblent
+            → <strong>clustering</strong> (ou réduit leur nombre de dimensions).</p>
+        </div>
+        <div class="tab-panel" id="tab-semi">
+          <svg viewBox="0 0 240 140" class="anim-svg" aria-hidden="true">
+            <circle class="dot dotA" cx="40" cy="40" r="6" style="animation-delay:.02s" />
+            <circle class="dot dotGray" cx="70" cy="30" r="6" style="animation-delay:.06s" />
+            <circle class="dot dotGray" cx="55" cy="65" r="6" style="animation-delay:.1s" />
+            <circle class="dot dotGray" cx="30" cy="85" r="6" style="animation-delay:.14s" />
+            <circle class="dot dotB" cx="170" cy="50" r="6" style="animation-delay:.18s" />
+            <circle class="dot dotGray" cx="200" cy="75" r="6" style="animation-delay:.22s" />
+            <circle class="dot dotGray" cx="180" cy="100" r="6" style="animation-delay:.26s" />
+            <circle class="dot dotGray" cx="150" cy="110" r="6" style="animation-delay:.3s" />
+          </svg>
+          <p class="widget-caption">Seuls quelques points sont étiquetés (rouge/bleu) ; la majorité ne l'est pas (gris).
+            Le modèle combine les deux pour mieux généraliser.</p>
+        </div>
+        <div class="tab-panel" id="tab-rl">
+          <svg viewBox="0 0 240 140" class="anim-svg" aria-hidden="true">
+            <rect class="grid-rect" x="10" y="10" width="220" height="120" />
+            <rect class="agent" x="20" y="100" width="16" height="16" />
+            <text class="reward" x="115" y="45">+1</text>
+          </svg>
+          <p class="widget-caption">Un <strong>agent</strong> essaie des actions dans un environnement et reçoit une
+            <strong>récompense</strong> (ou une pénalité) ; il apprend la stratégie qui maximise le gain cumulé.
+          </p>
+        </div>
+      </div>
+
+      <ul class="concepts">
+        <li><strong>Cinq défis majeurs du ML</strong> : quantité insuffisante de données, données de mauvaise qualité,
+          données non pertinentes, données non représentatives, et <strong>sur-apprentissage</strong> /
+          <strong>sous-apprentissage</strong>.
+        </li>
+      </ul>
+
+      <div class="widget" id="widget-fit">
+        <p class="widget-label">Illustration interactive — cliquer sur un onglet</p>
+        <div class="tabs">
+          <button class="tab-btn active" data-target="fit-under">Sous-apprentissage</button>
+          <button class="tab-btn" data-target="fit-good">Ajustement optimal</button>
+          <button class="tab-btn" data-target="fit-over">Sur-apprentissage</button>
+        </div>
+        <div class="tab-panel active" id="fit-under">
+          <svg viewBox="0 0 240 140" class="anim-svg" aria-hidden="true">
+            <g class="scatter">
+              <circle cx="20" cy="90" r="4" />
+              <circle cx="40" cy="50" r="4" />
+              <circle cx="55" cy="100" r="4" />
+              <circle cx="70" cy="35" r="4" />
+              <circle cx="85" cy="95" r="4" />
+              <circle cx="100" cy="45" r="4" />
+              <circle cx="115" cy="100" r="4" />
+              <circle cx="130" cy="30" r="4" />
+              <circle cx="145" cy="95" r="4" />
+              <circle cx="160" cy="40" r="4" />
+              <circle cx="175" cy="90" r="4" />
+              <circle cx="190" cy="45" r="4" />
+              <circle cx="205" cy="95" r="4" />
+              <circle cx="220" cy="55" r="4" />
+            </g>
+            <path class="fit-line" d="M10,70 L230,65" />
+          </svg>
+          <p class="widget-caption">Modèle trop simple : la droite ignore la structure des données → erreurs
+            importantes, même sur l'entraînement (biais élevé).</p>
+        </div>
+        <div class="tab-panel" id="fit-good">
+          <svg viewBox="0 0 240 140" class="anim-svg" aria-hidden="true">
+            <g class="scatter">
+              <circle cx="20" cy="90" r="4" />
+              <circle cx="40" cy="50" r="4" />
+              <circle cx="55" cy="100" r="4" />
+              <circle cx="70" cy="35" r="4" />
+              <circle cx="85" cy="95" r="4" />
+              <circle cx="100" cy="45" r="4" />
+              <circle cx="115" cy="100" r="4" />
+              <circle cx="130" cy="30" r="4" />
+              <circle cx="145" cy="95" r="4" />
+              <circle cx="160" cy="40" r="4" />
+              <circle cx="175" cy="90" r="4" />
+              <circle cx="190" cy="45" r="4" />
+              <circle cx="205" cy="95" r="4" />
+              <circle cx="220" cy="55" r="4" />
+            </g>
+            <path class="fit-line" d="M15,80 C50,55 60,85 90,68 C115,90 120,45 150,62 C175,80 185,55 225,60" />
+          </svg>
+          <p class="widget-caption">Modèle avec la bonne complexité : il capture la tendance générale sans coller au
+            bruit → bonne généralisation.</p>
+        </div>
+        <div class="tab-panel" id="fit-over">
+          <svg viewBox="0 0 240 140" class="anim-svg" aria-hidden="true">
+            <g class="scatter">
+              <circle cx="20" cy="90" r="4" />
+              <circle cx="40" cy="50" r="4" />
+              <circle cx="55" cy="100" r="4" />
+              <circle cx="70" cy="35" r="4" />
+              <circle cx="85" cy="95" r="4" />
+              <circle cx="100" cy="45" r="4" />
+              <circle cx="115" cy="100" r="4" />
+              <circle cx="130" cy="30" r="4" />
+              <circle cx="145" cy="95" r="4" />
+              <circle cx="160" cy="40" r="4" />
+              <circle cx="175" cy="90" r="4" />
+              <circle cx="190" cy="45" r="4" />
+              <circle cx="205" cy="95" r="4" />
+              <circle cx="220" cy="55" r="4" />
+            </g>
+            <path class="fit-line"
+              d="M20,90 L40,50 L55,100 L70,35 L85,95 L100,45 L115,100 L130,30 L145,95 L160,40 L175,90 L190,45 L205,95 L220,55" />
+          </svg>
+          <p class="widget-caption">Modèle trop complexe : la courbe passe par <strong>tous</strong> les points
+            d'entraînement, bruit compris, mais généralisera mal à de nouvelles données (variance élevée).</p>
+        </div>
+      </div>
+
+      <h3 class="sub-title">Entraînement, validation, test</h3>
+      <div class="widget" id="widget-split">
+        <p class="widget-label">Illustration interactive — défiler pour lancer l'animation</p>
+        <div class="split-bar" id="splitBar">
+          <div class="split-seg seg-train"><span>Entraînement 60%</span></div>
+          <div class="split-seg seg-val"><span>Validation 20%</span></div>
+          <div class="split-seg seg-test"><span>Test 20%</span></div>
+        </div>
+        <p class="widget-caption">On découpe toujours les données en trois pour pouvoir évaluer objectivement la
+          <strong>capacité de généralisation</strong> du modèle : entraînement pour apprendre les θ, validation pour
+          choisir le modèle ou ses hyperparamètres, test pour l'évaluation finale, une seule fois.
+        </p>
+      </div>
+    </section>
+
+    <!-- 4. CHAPITRE 2 -->
+    <section id="chap2">
+      <div class="sec-head"><span class="sec-num">03 · Ch.2</span>
+        <h2 class="sec-title">Régression linéaire</h2>
+      </div>
+
+      <ul class="concepts">
+        <li><strong>Rappels d'algèbre linéaire</strong> : addition matricielle terme à terme, produit matrice-vecteur /
+          matrice-matrice, <strong>matrice inversible</strong> (A·A⁻¹=A⁻¹·A=I), <strong>matrice transposée</strong> (on
+          échange lignes et colonnes) — les bases indispensables pour manipuler θ et X.</li>
+        <li><strong>Modèle paramétrique &amp; fonction de décision</strong> : la variable cible y est une combinaison
+          linéaire pondérée des descripteurs.</li>
+      </ul>
+      <div class="formula-block">f<sub>θ</sub>(x) = θ₀ + θ₁x₁ + θ₂x₂ + ⋯ + θₙxₙ = θᵀx&nbsp;&nbsp;&nbsp;(ŷ = θᵀx)</div>
+      <p style="font-size:.9rem;color:var(--ink-soft);margin-top:-8px;">θ₀ est le <strong>biais</strong> (intercept),
+        θ₁…θₙ les poids associés à chaque descripteur.</p>
+
+      <h3 class="sub-title">Fonction de coût (MSE)</h3>
+      <p>Les coefficients sont obtenus en minimisant la somme des moindres carrés :</p>
+      <div class="formula-block">J(θ) = (1 / 2m) · Σᵢ₌₁ᵐ ( f<sub>θ</sub>(x⁽ⁱ⁾) − y⁽ⁱ⁾ )²&nbsp;&nbsp;&nbsp;&nbsp;But :
+        argmin<sub>θ</sub> J(θ)</div>
+
+      <h3 class="sub-title">La descente de gradient</h3>
+      <ul class="concepts">
+        <li>On répète, <strong>simultanément</strong> pour chaque θⱼ, jusqu'à convergence : θⱼ ← θⱼ − α·∂J/∂θⱼ.</li>
+        <li>α (<strong>taux d'apprentissage</strong>) fixe la taille du pas. Trop petit → convergence lente. Trop grand
+          → l'algorithme peut dépasser le minimum, voire diverger.</li>
+        <li>En s'approchant du minimum, les pas deviennent naturellement plus petits (le gradient diminue) : pas besoin
+          de réduire α au fil du temps.</li>
+      </ul>
+      <div class="widget" id="widget-gd">
+        <p class="widget-label">Illustration interactive — la fonction de coût J(θ)</p>
+        <svg viewBox="0 0 300 130" class="anim-svg" aria-hidden="true">
+          <path d="M30,101.4 L60,63.6 L90,36.6 L120,20.4 L150,15 L180,20.4 L210,36.6 L240,63.6 L270,101.4" fill="none"
+            stroke="var(--line)" stroke-width="2" />
+          <circle id="gdBall" cx="30" cy="101.4" r="7" fill="var(--accent-red)" />
+        </svg>
+        <div class="gd-controls">
+          <button class="gd-btn" data-alpha="40">α optimal</button>
+          <button class="gd-btn" data-alpha="8">α trop petit</button>
+          <button class="gd-btn" data-alpha="180">α trop grand</button>
+          <button class="gd-btn" id="gdReset">Réinitialiser</button>
+        </div>
+        <p class="gd-status" id="gdStatus">Choisis un taux d'apprentissage pour lancer la descente.</p>
+      </div>
+
+      <ul class="concepts">
+        <li><strong>Régression multivariable</strong> : généralisation directe à n descripteurs, avec x₀=1 pour intégrer
+          θ₀ dans le produit matriciel θᵀx.</li>
+        <li><strong>Mise à l'échelle des données</strong> : sans normalisation, les contours de J(θ) sont des ellipses
+          allongées → la descente de gradient <strong>zigzague</strong>. Après normalisation (ex : min-max), les
+          contours deviennent circulaires → convergence plus directe.</li>
+      </ul>
+      <div class="widget" id="widget-scale">
+        <label class="switch-row"><input type="checkbox" id="scaleToggle" /> Normaliser les descripteurs</label>
         <svg viewBox="0 0 240 140" class="anim-svg" aria-hidden="true">
-          <g class="scatter">
-            <circle cx="20" cy="90" r="4"/><circle cx="40" cy="50" r="4"/><circle cx="55" cy="100" r="4"/><circle cx="70" cy="35" r="4"/><circle cx="85" cy="95" r="4"/><circle cx="100" cy="45" r="4"/><circle cx="115" cy="100" r="4"/><circle cx="130" cy="30" r="4"/><circle cx="145" cy="95" r="4"/><circle cx="160" cy="40" r="4"/><circle cx="175" cy="90" r="4"/><circle cx="190" cy="45" r="4"/><circle cx="205" cy="95" r="4"/><circle cx="220" cy="55" r="4"/>
+          <ellipse id="scaleEllipse" cx="120" cy="70" rx="95" ry="30" />
+          <path id="pathZigzag" class="grad-path" d="M120,70 L92,50 L138,36 L74,20 L110,8" />
+          <path id="pathStraight" class="grad-path" d="M120,70 L110,8" style="opacity:0" />
+          <circle cx="120" cy="70" r="4" fill="var(--ink)" />
+          <circle cx="110" cy="8" r="5" fill="var(--accent-gold)" />
+        </svg>
+        <p class="widget-caption" id="scaleCaption">Sans normalisation : les contours de J(θ) sont allongés → la
+          descente de gradient <strong>zigzague</strong> avant de converger.</p>
+      </div>
+
+      <ul class="concepts">
+        <li><strong>Régression polynomiale</strong> : f<sub>θ</sub>(x) = θ₀+θ₁x+⋯+θ_d x<sup>d</sup> — se ramène à une
+          régression linéaire multivariable (sur les puissances de x) et permet d'introduire de la
+          <strong>non-linéarité</strong>.
+        </li>
+      </ul>
+
+      <h3 class="sub-title">Solution analytique vs descente de gradient</h3>
+      <div class="formula-block">θ̂ = (Xᵀ X)⁻¹ · Xᵀ · y&nbsp;&nbsp;(équation normale)</div>
+      <table class="cmp">
+        <tr>
+          <th>Solution analytique</th>
+          <th>Descente de gradient</th>
+        </tr>
+        <tr>
+          <td>Pas besoin de choisir α</td>
+          <td>Besoin de choisir α</td>
+        </tr>
+        <tr>
+          <td>Non itérative</td>
+          <td>Nécessite de nombreuses itérations</td>
+        </tr>
+        <tr>
+          <td>Coûteuse si n est très grand (inversion de matrice)</td>
+          <td>Fonctionne bien même avec n très grand</td>
+        </tr>
+        <tr>
+          <td>Mise à l'échelle non requise</td>
+          <td>Mise à l'échelle requise</td>
+        </tr>
+      </table>
+      <ul class="concepts">
+        <li><strong>Batch / mini-batch / stochastique</strong> : variantes de la descente de gradient selon le nombre
+          d'exemples utilisés à chaque mise à jour — tout le jeu d'entraînement, un petit sous-ensemble, ou un seul
+          exemple à la fois.</li>
+      </ul>
+    </section>
+
+    <!-- 5. CHAPITRE 3 -->
+    <section id="chap3">
+      <div class="sec-head"><span class="sec-num">03 · Ch.3</span>
+        <h2 class="sec-title">Régression logistique</h2>
+      </div>
+
+      <ul class="concepts">
+        <li><strong>Classification binaire</strong> : y ∈ {0,1} (classe négative / positive). La régression linéaire
+          classique ne convient pas : f<sub>θ</sub>(x)=θᵀx peut sortir de l'intervalle [0,1].</li>
+        <li><strong>Fonction de prédiction (sigmoïde)</strong> : f<sub>θ</sub>(x) = g(θᵀx), avec g(z) = 1/(1+e⁻ᶻ).
+          f<sub>θ</sub>(x) s'interprète comme <strong>P(y=1 | x ; θ)</strong>, une probabilité.</li>
+      </ul>
+      <div class="widget" id="widget-sigmoid">
+        <p class="widget-label">Illustration interactive — déplacer le curseur</p>
+        <input type="range" id="sigSlider" min="-10" max="10" step="0.1" value="-2" />
+        <p class="sig-readout">z = <span id="sigZ">−2.0</span> → g(z) = <span id="sigG">0.119</span> → prédiction :
+          <span id="sigPred">classe 0 (&lt; 0.5)</span>
+        </p>
+        <svg viewBox="0 0 260 130" class="anim-svg" aria-hidden="true">
+          <line class="axis" x1="10" y1="15" x2="10" y2="115" />
+          <line class="axis" x1="10" y1="115" x2="250" y2="115" />
+          <line class="threshold" x1="10" y1="60" x2="250" y2="60" stroke-dasharray="4,4" />
+          <path id="sigCurve" />
+          <circle id="sigDot" cx="90" cy="98" r="6" fill="var(--accent-blue)" />
+        </svg>
+        <p class="widget-caption">Quand z=θᵀx franchit 0, g(z) franchit 0.5 : c'est exactement là que se situe la
+          <strong>frontière de décision</strong>.
+        </p>
+      </div>
+
+      <ul class="concepts">
+        <li><strong>Limite de décision</strong> : on décide ŷ=1 si f<sub>θ</sub>(x) ≥ 0.5, ŷ=0 sinon — ce qui équivaut
+          exactement à θᵀx ≥ 0. La frontière est donc l'ensemble <strong>θᵀx = 0</strong>.</li>
+        <li><strong>Frontières non-linéaires</strong> : en ajoutant des descripteurs d'ordre élevé (x₁², x₁x₂, …), cette
+          frontière peut devenir un cercle ou une courbe complexe, tout en restant fondée sur le signe de θᵀx.</li>
+      </ul>
+      <div class="widget" id="widget-boundary">
+        <p class="widget-label">Illustration interactive — cliquer sur un onglet</p>
+        <div class="tabs">
+          <button class="tab-btn active" data-target="b-lin">Frontière linéaire</button>
+          <button class="tab-btn" data-target="b-circ">Frontière non-linéaire</button>
+        </div>
+        <div class="tab-panel active" id="b-lin">
+          <svg viewBox="0 0 240 140" class="anim-svg" aria-hidden="true">
+            <circle class="dot dotA" cx="30" cy="110" r="6" style="animation-delay:.02s" />
+            <circle class="dot dotA" cx="50" cy="120" r="6" style="animation-delay:.08s" />
+            <circle class="dot dotA" cx="45" cy="90" r="6" style="animation-delay:.14s" />
+            <circle class="dot dotA" cx="70" cy="105" r="6" style="animation-delay:.2s" />
+            <circle class="dot dotA" cx="60" cy="130" r="6" style="animation-delay:.26s" />
+            <circle class="dot dotB" cx="170" cy="30" r="6" style="animation-delay:.08s" />
+            <circle class="dot dotB" cx="190" cy="50" r="6" style="animation-delay:.14s" />
+            <circle class="dot dotB" cx="160" cy="20" r="6" style="animation-delay:.2s" />
+            <circle class="dot dotB" cx="210" cy="40" r="6" style="animation-delay:.26s" />
+            <circle class="dot dotB" cx="180" cy="60" r="6" style="animation-delay:.32s" />
+            <line class="boundary2 draw-anim" style="--len:237" x1="15" y1="125" x2="225" y2="15" />
+          </svg>
+          <p class="widget-caption">La frontière θᵀx = 0 est une <strong>droite</strong> : suffisant quand les classes
+            sont linéairement séparables.</p>
+        </div>
+        <div class="tab-panel" id="b-circ">
+          <svg viewBox="0 0 240 140" class="anim-svg" aria-hidden="true">
+            <circle class="dot dotA" cx="20" cy="20" r="6" style="animation-delay:.02s" />
+            <circle class="dot dotA" cx="220" cy="20" r="6" style="animation-delay:.06s" />
+            <circle class="dot dotA" cx="20" cy="120" r="6" style="animation-delay:.1s" />
+            <circle class="dot dotA" cx="220" cy="120" r="6" style="animation-delay:.14s" />
+            <circle class="dot dotA" cx="120" cy="15" r="6" style="animation-delay:.18s" />
+            <circle class="dot dotA" cx="120" cy="125" r="6" style="animation-delay:.22s" />
+            <circle class="dot dotB" cx="120" cy="70" r="6" style="animation-delay:.26s" />
+            <circle class="dot dotB" cx="108" cy="60" r="6" style="animation-delay:.3s" />
+            <circle class="dot dotB" cx="132" cy="80" r="6" style="animation-delay:.34s" />
+            <circle class="dot dotB" cx="105" cy="85" r="6" style="animation-delay:.38s" />
+            <circle class="dot dotB" cx="135" cy="60" r="6" style="animation-delay:.42s" />
+            <circle class="boundary2 draw-anim" style="--len:220" cx="120" cy="70" r="35" />
+          </svg>
+          <p class="widget-caption">En ajoutant des descripteurs d'ordre élevé, θᵀx = 0 peut définir un
+            <strong>cercle</strong> (ou une forme plus complexe).
+          </p>
+        </div>
+      </div>
+
+      <h3 class="sub-title">Fonction de coût (log loss)</h3>
+      <p>Utiliser la MSE ici rendrait J(θ) <strong>non convexe</strong> (risque de minima locaux). On utilise donc :</p>
+      <div class="formula-block">Cost(f<sub>θ</sub>(x), y) = −log(f<sub>θ</sub>(x)) si
+        y=1&nbsp;&nbsp;;&nbsp;&nbsp;−log(1−f<sub>θ</sub>(x)) si y=0</div>
+      <div class="formula-block">J(θ) = −(1/m) · Σᵢ [ y⁽ⁱ⁾log(f<sub>θ</sub>(x⁽ⁱ⁾)) + (1−y⁽ⁱ⁾)log(1−f<sub>θ</sub>(x⁽ⁱ⁾))
+        ]</div>
+      <p style="font-size:.9rem;color:var(--ink-soft);margin-top:-8px;">Cette écriture compacte remplace simplement y
+        par 0 ou 1 dans la formule par morceaux. Cette fonction de coût, elle, <strong>est convexe</strong>.</p>
+
+      <ul class="concepts">
+        <li><strong>Descente de gradient pour la régression logistique</strong> : la formule de mise à jour a exactement
+          la même forme que pour la régression linéaire (θⱼ ← θⱼ − α·(1/m)Σ(f<sub>θ</sub>(x⁽ⁱ⁾)−y⁽ⁱ⁾)xⱼ⁽ⁱ⁾) — seule la
+          fonction f<sub>θ</sub> change (sigmoïde au lieu de linéaire).</li>
+        <li><strong>Classification multi-classes (one-vs-all)</strong> : pour L classes, on entraîne L classifieurs
+          logistiques binaires (« classe k contre le reste ») ; pour un nouvel exemple, on choisit la classe k qui
+          maximise f<sub>θ</sub><sup>(k)</sup>(x).</li>
+      </ul>
+    </section>
+
+    <!-- 5bis. CHAPITRE 4 -->
+    <section id="chap4">
+      <div class="sec-head"><span class="sec-num">03 · Ch.4</span>
+        <h2 class="sec-title">Machines à vecteurs de support (SVM)</h2>
+      </div>
+
+      <ul class="concepts">
+        <li><strong>Séparabilité linéaire</strong> : un jeu de données D={(x⁽ⁱ⁾,y⁽ⁱ⁾)}, avec y⁽ⁱ⁾∈{−1,1}, est
+          linéairement séparable s'il existe un hyperplan qui laisse tous les points positifs d'un côté et tous les
+          négatifs de l'autre.</li>
+        <li><strong>Idée de la SVM</strong> : parmi l'infinité d'hyperplans séparateurs possibles, on choisit celui qui
+          <strong>maximise la marge</strong> γ — la distance à l'échantillon d'entraînement le plus proche. Ce plan est
+          équidistant de l'échantillon positif et de l'échantillon négatif les plus proches.
+        </li>
+        <li><strong>Vecteurs de support</strong> : les échantillons situés exactement à distance γ de l'hyperplan H (sur
+          H⁺ ou H⁻). La <strong>zone d'indécision</strong>, entre H⁺ et H⁻, ne contient aucun échantillon dans le cas
+          rigide.</li>
+        <li><strong>Sensibilité à l'échelle</strong> : comme pour la régression linéaire, les SVM sont sensibles aux
+          différences d'échelle entre descripteurs — une normalisation (ex : StandardScaler) est recommandée.</li>
+      </ul>
+
+      <div class="widget" id="widget-margin">
+        <p class="widget-label">Illustration interactive — cliquer sur un onglet</p>
+        <div class="tabs">
+          <button class="tab-btn active" data-target="margin-hard">Marge rigide</button>
+          <button class="tab-btn" data-target="margin-soft">Marge souple</button>
+        </div>
+        <div class="tab-panel active" id="margin-hard">
+          <svg viewBox="0 0 240 140" class="anim-svg" aria-hidden="true">
+            <circle class="dot dotA" cx="30" cy="130" r="6" style="animation-delay:.02s" />
+            <circle class="dot dotA" cx="55" cy="135" r="6" style="animation-delay:.08s" />
+            <circle class="dot dotA" cx="15" cy="100" r="6" style="animation-delay:.14s" />
+            <circle class="dot dotA sv" cx="60" cy="112" r="7" style="animation-delay:.2s" />
+            <circle class="dot dotB" cx="190" cy="20" r="6" style="animation-delay:.08s" />
+            <circle class="dot dotB" cx="210" cy="45" r="6" style="animation-delay:.14s" />
+            <circle class="dot dotB" cx="160" cy="10" r="6" style="animation-delay:.2s" />
+            <circle class="dot dotB sv" cx="150" cy="43" r="7" style="animation-delay:.26s" />
+            <line class="boundary draw-anim" style="--len:224" x1="20" y1="120" x2="220" y2="20" />
+            <line class="margin-line draw-anim" style="--len:224" x1="12" y1="136" x2="212" y2="36" />
+            <line class="margin-line draw-anim" style="--len:224" x1="28" y1="104" x2="228" y2="4" />
+          </svg>
+          <p class="widget-caption">Les points entourés (en <strong>doré</strong>) sont les <strong>vecteurs de
+              support</strong> : ce sont eux, et eux seuls, qui fixent la position de H (trait plein) et des marges
+            H⁺/H⁻ (traits fins). Aucun point n'est toléré entre les deux.</p>
+        </div>
+        <div class="tab-panel" id="margin-soft">
+          <svg viewBox="0 0 240 140" class="anim-svg" aria-hidden="true">
+            <circle class="dot dotA" cx="30" cy="130" r="6" style="animation-delay:.02s" />
+            <circle class="dot dotA" cx="55" cy="135" r="6" style="animation-delay:.08s" />
+            <circle class="dot dotA" cx="15" cy="100" r="6" style="animation-delay:.14s" />
+            <circle class="dot dotA sv" cx="60" cy="112" r="7" style="animation-delay:.2s" />
+            <circle class="dot dotA violation" cx="165" cy="58" r="6" style="animation-delay:.32s" />
+            <circle class="dot dotB" cx="190" cy="20" r="6" style="animation-delay:.08s" />
+            <circle class="dot dotB" cx="210" cy="45" r="6" style="animation-delay:.14s" />
+            <circle class="dot dotB" cx="160" cy="10" r="6" style="animation-delay:.2s" />
+            <circle class="dot dotB sv" cx="150" cy="43" r="7" style="animation-delay:.26s" />
+            <circle class="dot dotB violation" cx="72" cy="95" r="6" style="animation-delay:.38s" />
+            <line class="boundary draw-anim" style="--len:224" x1="20" y1="120" x2="220" y2="20" />
+            <line class="margin-line draw-anim" style="--len:224" x1="12" y1="136" x2="212" y2="36" />
+            <line class="margin-line draw-anim" style="--len:224" x1="28" y1="104" x2="228" y2="4" />
+          </svg>
+          <p class="widget-caption">Les points cerclés en <strong>pointillés rouges</strong> violent la marge
+            (ζ⁽ⁱ⁾&gt;0) : c'est toléré. L'hyperparamètre <strong>C</strong> arbitre le compromis — C petit → marge
+            large, plus de violations ; C grand → marge étroite, moins de violations.</p>
+        </div>
+      </div>
+
+      <h3 class="sub-title">Formulation mathématique (aperçu)</h3>
+      <div class="formula-block">Marge rigide : argmin<sub>w,b</sub> ½‖w‖² &nbsp;t.q.&nbsp; y⁽ⁱ⁾(wᵀx⁽ⁱ⁾+b) ≥ 1</div>
+      <div class="formula-block">Marge souple : argmin<sub>w,b,ζ</sub> ½‖w‖² + C·Σᵢζ⁽ⁱ⁾ &nbsp;t.q.&nbsp; y⁽ⁱ⁾(wᵀx⁽ⁱ⁾+b)
+        ≥ 1−ζ⁽ⁱ⁾, ζ⁽ⁱ⁾≥0</div>
+      <p style="font-size:.9rem;color:var(--ink-soft);margin-top:-8px;">On minimise ‖w‖² (norme au carré, dérivable)
+        plutôt que ‖w‖ pour avoir une marge large ; minimiser ‖w‖ revient à maximiser γ=1/‖w‖. Une <strong>formulation
+          duale</strong>, équivalente, exprime le même problème en fonction des multiplicateurs de Lagrange λᵢ — c'est
+        cette forme qui permet d'introduire l'astuce du noyau.</p>
+      <ul class="concepts">
+        <li><strong>Fonction de prédiction</strong> : f<sub>w,b</sub>(x) = signe(wᵀx+b), ou de façon équivalente en
+          fonction des λᵢ et des produits scalaires ⟨x⁽ⁱ⁾,x⟩ (forme duale) — c'est cette dernière écriture qui rend
+          l'astuce du noyau possible.</li>
+      </ul>
+
+      <h3 class="sub-title">Le cas non linéaire : SVM à noyau</h3>
+      <ul class="concepts">
+        <li><strong>Idée</strong> : quand une frontière linéaire ne suffit pas, on transforme les données via une
+          application φ vers un <strong>espace de redescription</strong> de plus grande dimension, où elles redeviennent
+          linéairement séparables.</li>
+        <li><strong>Astuce du noyau</strong> : calculer φ(x) explicitement est très coûteux (ex : O(n²) pour un noyau
+          quadratique). L'astuce consiste à calculer directement k(x,z)=⟨φ(x),φ(z)⟩ — bien moins cher (ex : O(n)) —
+          <strong>sans jamais calculer φ(x)</strong> explicitement.
+        </li>
+      </ul>
+
+      <div class="widget" id="widget-kernel">
+        <p class="widget-label">Illustration interactive</p>
+        <button class="gd-btn" id="kernelToggle">Appliquer la transformation φ</button>
+        <svg viewBox="0 -25 240 165" class="anim-svg" aria-hidden="true">
+          <line id="kernelLine" x1="5" y1="11" x2="235" y2="11" />
+          <circle class="dot dotA kdot" cx="20" cy="20" r="6" style="animation-delay:.02s" />
+          <circle class="dot dotA kdot" cx="220" cy="20" r="6" style="animation-delay:.06s" />
+          <circle class="dot dotA kdot" cx="20" cy="120" r="6" style="animation-delay:.1s" />
+          <circle class="dot dotA kdot" cx="220" cy="120" r="6" style="animation-delay:.14s" />
+          <circle class="dot dotA kdot" cx="120" cy="15" r="6" style="animation-delay:.18s" />
+          <circle class="dot dotA kdot" cx="120" cy="130" r="6" style="animation-delay:.22s" />
+          <circle class="dot dotB kdot klift" cx="120" cy="70" r="6" style="animation-delay:.26s" />
+          <circle class="dot dotB kdot klift" cx="108" cy="60" r="6" style="animation-delay:.3s" />
+          <circle class="dot dotB kdot klift" cx="132" cy="80" r="6" style="animation-delay:.34s" />
+          <circle class="dot dotB kdot klift" cx="105" cy="85" r="6" style="animation-delay:.38s" />
+          <circle class="dot dotB kdot klift" cx="135" cy="60" r="6" style="animation-delay:.42s" />
+        </svg>
+        <p class="widget-caption" id="kernelCaption">Dans l'espace original, les deux classes ne sont <strong>pas
+            linéairement séparables</strong> (aucune droite ne peut les séparer).</p>
+      </div>
+
+      <ul class="concepts">
+        <li><strong>Noyau (kernel)</strong> k(x,z)=⟨φ(x),φ(z)⟩ : fonction continue, symétrique, semi-définie positive ;
+          s'interprète comme une <strong>mesure de similarité</strong> entre deux échantillons.</li>
+        <li><strong>Noyaux usuels</strong> : <strong>polynomial</strong> k(x,z)=(xᵀz+c)<sup>d</sup> ; <strong>RBF
+            gaussien</strong> k(x,z)=exp(−‖x−z‖²/2σ²) ; le cas particulier <strong>linéaire</strong> revient à ne pas
+          transformer les données.</li>
+        <li><strong>Quel noyau choisir ?</strong> Linéaire si les données sont déjà séparables ou pour du texte (grands
+          jeux de données) ; RBF gaussien par défaut en l'absence d'information sur les données ; polynomial quand les
+          données sont bien normalisées.</li>
+      </ul>
+
+      <h3 class="sub-title">Multi-classe et régression (SVR)</h3>
+      <ul class="concepts">
+        <li><strong>SVM multi-classes</strong> : <strong>un contre tous</strong> (L classifieurs, un par classe contre
+          le reste), <strong>un contre un</strong> (L(L−1)/2 classifieurs, un par paire de classes, puis vote
+          majoritaire), ou une formulation <strong>globale</strong> directement multi-classe.</li>
+        <li><strong>SVR (Support Vector Regression)</strong> : on inverse l'objectif — au lieu de maximiser une marge
+          entre classes, on cherche à faire tenir un maximum de points à l'intérieur d'un <strong>tube ε</strong>, en
+          limitant les violations. Comme pour la classification, un noyau permet de traiter les cas non linéaires.</li>
+      </ul>
+      <div class="widget" id="widget-svr">
+        <p class="widget-label">Illustration interactive — déplacer le curseur</p>
+        <input type="range" id="epsSlider" min="8" max="45" step="1" value="25" />
+        <p class="sig-readout">Largeur du tube ε = <span id="epsVal">25</span> px — <span id="epsCount">0</span>
+          vecteur(s) de support (hors tube)</p>
+        <svg viewBox="0 0 240 140" class="anim-svg" aria-hidden="true">
+          <line id="svrUpper" class="threshold" stroke-dasharray="4,4" x1="10" y1="65" x2="230" y2="15" />
+          <line id="svrLower" class="threshold" stroke-dasharray="4,4" x1="10" y1="115" x2="230" y2="65" />
+          <line x1="10" y1="90" x2="230" y2="40" stroke="var(--accent-blue)" stroke-width="2" />
+          <g id="svrDots">
+            <circle class="svr-pt" cx="30" cy="80" r="5" />
+            <circle class="svr-pt" cx="55" cy="95" r="5" />
+            <circle class="svr-pt" cx="80" cy="60" r="5" />
+            <circle class="svr-pt" cx="105" cy="70" r="5" />
+            <circle class="svr-pt" cx="130" cy="45" r="5" />
+            <circle class="svr-pt" cx="150" cy="75" r="5" />
+            <circle class="svr-pt" cx="175" cy="35" r="5" />
+            <circle class="svr-pt" cx="200" cy="50" r="5" />
+            <circle class="svr-pt" cx="215" cy="25" r="5" />
           </g>
-          <path class="fit-line" d="M10,70 L230,65"/>
         </svg>
-        <p class="widget-caption">Modèle trop simple : la droite ignore la structure des données → erreurs importantes, même sur l'entraînement (biais élevé).</p>
+        <p class="widget-caption">Les points <strong>à l'intérieur</strong> du tube (en doré) ne sont pas pénalisés.
+          Ceux qui en sortent (en rouge) sont les vecteurs de support de la SVR — plus ε est petit, plus il y en a.</p>
       </div>
-      <div class="tab-panel" id="fit-good">
-        <svg viewBox="0 0 240 140" class="anim-svg" aria-hidden="true">
-          <g class="scatter">
-            <circle cx="20" cy="90" r="4"/><circle cx="40" cy="50" r="4"/><circle cx="55" cy="100" r="4"/><circle cx="70" cy="35" r="4"/><circle cx="85" cy="95" r="4"/><circle cx="100" cy="45" r="4"/><circle cx="115" cy="100" r="4"/><circle cx="130" cy="30" r="4"/><circle cx="145" cy="95" r="4"/><circle cx="160" cy="40" r="4"/><circle cx="175" cy="90" r="4"/><circle cx="190" cy="45" r="4"/><circle cx="205" cy="95" r="4"/><circle cx="220" cy="55" r="4"/>
-          </g>
-          <path class="fit-line" d="M15,80 C50,55 60,85 90,68 C115,90 120,45 150,62 C175,80 185,55 225,60"/>
-        </svg>
-        <p class="widget-caption">Modèle avec la bonne complexité : il capture la tendance générale sans coller au bruit → bonne généralisation.</p>
+    </section>
+
+    <!-- 6. PIEGES -->
+    <section id="pieges">
+      <div class="sec-head"><span class="sec-num">04</span>
+        <h2 class="sec-title">Pièges à éviter &amp; confusions fréquentes</h2>
       </div>
-      <div class="tab-panel" id="fit-over">
-        <svg viewBox="0 0 240 140" class="anim-svg" aria-hidden="true">
-          <g class="scatter">
-            <circle cx="20" cy="90" r="4"/><circle cx="40" cy="50" r="4"/><circle cx="55" cy="100" r="4"/><circle cx="70" cy="35" r="4"/><circle cx="85" cy="95" r="4"/><circle cx="100" cy="45" r="4"/><circle cx="115" cy="100" r="4"/><circle cx="130" cy="30" r="4"/><circle cx="145" cy="95" r="4"/><circle cx="160" cy="40" r="4"/><circle cx="175" cy="90" r="4"/><circle cx="190" cy="45" r="4"/><circle cx="205" cy="95" r="4"/><circle cx="220" cy="55" r="4"/>
-          </g>
-          <path class="fit-line" d="M20,90 L40,50 L55,100 L70,35 L85,95 L100,45 L115,100 L130,30 L145,95 L160,40 L175,90 L190,45 L205,95 L220,55"/>
-        </svg>
-        <p class="widget-caption">Modèle trop complexe : la courbe passe par <strong>tous</strong> les points d'entraînement, bruit compris, mais généralisera mal à de nouvelles données (variance élevée).</p>
+
+      <div class="piege"><span class="vs">RÉGRESSION vs CLASSIFICATION</span>La régression prédit une valeur continue,
+        la classification une catégorie discrète. La régression <strong>logistique</strong>, malgré son nom, est un
+        algorithme de <strong>classification</strong>, pas de régression.</div>
+
+      <div class="piege"><span class="vs">MSE vs LOG LOSS</span>Ne jamais utiliser la MSE pour entraîner une régression
+        logistique : combinée à la sigmoïde, elle rend J(θ) non convexe. Le log loss, lui, reste convexe.</div>
+
+      <div class="piege"><span class="vs">MISE À L'ÉCHELLE</span>Nécessaire pour la descente de gradient (accélère la
+        convergence), mais <strong>inutile</strong> pour la solution analytique (équation normale), qui n'est pas
+        affectée par l'échelle des descripteurs.</div>
+
+      <div class="piege"><span class="vs">MINIMUM LOCAL vs GLOBAL</span>Dans le cas général, la descente de gradient
+        peut rester bloquée dans un minimum local. Mais pour la régression linéaire (coût MSE) <strong>et</strong>
+        logistique (log loss), la fonction de coût est convexe : un minimum local y est toujours le minimum global.
       </div>
-    </div>
 
-    <h3 class="sub-title">Entraînement, validation, test</h3>
-    <div class="widget" id="widget-split">
-      <p class="widget-label">Illustration interactive — défiler pour lancer l'animation</p>
-      <div class="split-bar" id="splitBar">
-        <div class="split-seg seg-train"><span>Entraînement 60%</span></div>
-        <div class="split-seg seg-val"><span>Validation 20%</span></div>
-        <div class="split-seg seg-test"><span>Test 20%</span></div>
+      <div class="piege"><span class="vs">MISE À JOUR DES θ</span>Tous les θⱼ doivent être mis à jour
+        <strong>simultanément</strong> (via des variables temporaires), jamais l'un après l'autre avec des valeurs déjà
+        actualisées.
       </div>
-      <p class="widget-caption">On découpe toujours les données en trois pour pouvoir évaluer objectivement la <strong>capacité de généralisation</strong> du modèle : entraînement pour apprendre les θ, validation pour choisir le modèle ou ses hyperparamètres, test pour l'évaluation finale, une seule fois.</p>
-    </div>
-  </section>
 
-  <!-- 4. CHAPITRE 2 -->
-  <section id="chap2">
-    <div class="sec-head"><span class="sec-num">03 · Ch.2</span><h2 class="sec-title">Régression linéaire</h2></div>
+      <div class="piege"><span class="vs">VALIDATION vs TEST</span>La validation sert à comparer des modèles et régler
+        les hyperparamètres pendant le développement. Le test s'utilise <strong>une seule fois</strong>, à la toute fin,
+        pour estimer la performance réelle sur des données jamais vues.</div>
 
-    <ul class="concepts">
-      <li><strong>Rappels d'algèbre linéaire</strong> : addition matricielle terme à terme, produit matrice-vecteur / matrice-matrice, <strong>matrice inversible</strong> (A·A⁻¹=A⁻¹·A=I), <strong>matrice transposée</strong> (on échange lignes et colonnes) — les bases indispensables pour manipuler θ et X.</li>
-      <li><strong>Modèle paramétrique &amp; fonction de décision</strong> : la variable cible y est une combinaison linéaire pondérée des descripteurs.</li>
-    </ul>
-    <div class="formula-block">f<sub>θ</sub>(x) = θ₀ + θ₁x₁ + θ₂x₂ + ⋯ + θₙxₙ = θᵀx&nbsp;&nbsp;&nbsp;(ŷ = θᵀx)</div>
-    <p style="font-size:.9rem;color:var(--ink-soft);margin-top:-8px;">θ₀ est le <strong>biais</strong> (intercept), θ₁…θₙ les poids associés à chaque descripteur.</p>
+      <div class="piege"><span class="vs">FRONTIÈRE LINÉAIRE OU NON</span>La frontière de décision dépend de θᵀx = 0,
+        pas de la sigmoïde elle-même. Elle peut devenir non-linéaire dès qu'on ajoute des descripteurs d'ordre élevé —
+        la sigmoïde ne fait que transformer θᵀx en probabilité.</div>
 
-    <h3 class="sub-title">Fonction de coût (MSE)</h3>
-    <p>Les coefficients sont obtenus en minimisant la somme des moindres carrés :</p>
-    <div class="formula-block">J(θ) = (1 / 2m) · Σᵢ₌₁ᵐ ( f<sub>θ</sub>(x⁽ⁱ⁾) − y⁽ⁱ⁾ )²&nbsp;&nbsp;&nbsp;&nbsp;But : argmin<sub>θ</sub> J(θ)</div>
+      <div class="piege"><span class="vs">SUPERVISÉ / NON SUPERVISÉ / SEMI-SUPERVISÉ</span>La seule vraie différence est
+        la présence des étiquettes : toutes (supervisé), aucune (non supervisé), ou seulement une partie
+        (semi-supervisé).</div>
 
-    <h3 class="sub-title">La descente de gradient</h3>
-    <ul class="concepts">
-      <li>On répète, <strong>simultanément</strong> pour chaque θⱼ, jusqu'à convergence : θⱼ ← θⱼ − α·∂J/∂θⱼ.</li>
-      <li>α (<strong>taux d'apprentissage</strong>) fixe la taille du pas. Trop petit → convergence lente. Trop grand → l'algorithme peut dépasser le minimum, voire diverger.</li>
-      <li>En s'approchant du minimum, les pas deviennent naturellement plus petits (le gradient diminue) : pas besoin de réduire α au fil du temps.</li>
-    </ul>
-    <div class="widget" id="widget-gd">
-      <p class="widget-label">Illustration interactive — la fonction de coût J(θ)</p>
-      <svg viewBox="0 0 300 130" class="anim-svg" aria-hidden="true">
-        <path d="M30,101.4 L60,63.6 L90,36.6 L120,20.4 L150,15 L180,20.4 L210,36.6 L240,63.6 L270,101.4" fill="none" stroke="var(--line)" stroke-width="2"/>
-        <circle id="gdBall" cx="30" cy="101.4" r="7" fill="var(--accent-red)"/>
-      </svg>
-      <div class="gd-controls">
-        <button class="gd-btn" data-alpha="40">α optimal</button>
-        <button class="gd-btn" data-alpha="8">α trop petit</button>
-        <button class="gd-btn" data-alpha="180">α trop grand</button>
-        <button class="gd-btn" id="gdReset">Réinitialiser</button>
+      <div class="piege"><span class="vs">SOUS- vs SUR-APPRENTISSAGE</span>Sous-apprentissage = modèle trop simple
+        (mauvais même sur l'entraînement, biais élevé). Sur-apprentissage = modèle trop complexe (excellent sur
+        l'entraînement, mauvais en généralisation, variance élevée).</div>
+
+      <div class="piege"><span class="vs">MARGE RIGIDE vs MARGE SOUPLE</span>La marge rigide n'existe que si les données
+        sont parfaitement séparables et est très sensible aux outliers. En pratique, on utilise presque toujours la
+        marge souple, qui tolère des violations via C.</div>
+
+      <div class="piege"><span class="vs">HYPERPARAMÈTRE C : SENS INVERSÉ</span>Piège classique : <strong>C
+          petit</strong> → marge large mais plus de violations tolérées (proche du sous-apprentissage). <strong>C
+          grand</strong> → marge étroite, peu de violations (risque de sur-apprentissage). C se comporte donc à
+        l'inverse d'un terme de régularisation classique.</div>
+
+      <div class="piege"><span class="vs">ASTUCE DU NOYAU</span>Le noyau ne « augmente » jamais explicitement la
+        dimension des données : k(x,z) se calcule directement dans l'espace d'origine, sans jamais calculer φ(x).
+        Confondre les deux est l'erreur la plus fréquente sur ce point.</div>
+
+      <div class="piege"><span class="vs">SVC vs SVR</span>La SVM de classification (SVC) maximise la marge
+        <strong>entre</strong> deux classes. La SVM de régression (SVR) fait l'inverse : elle cherche à faire tenir un
+        maximum de points <strong>à l'intérieur</strong> d'un tube de largeur ε.
       </div>
-      <p class="gd-status" id="gdStatus">Choisis un taux d'apprentissage pour lancer la descente.</p>
-    </div>
 
-    <ul class="concepts">
-      <li><strong>Régression multivariable</strong> : généralisation directe à n descripteurs, avec x₀=1 pour intégrer θ₀ dans le produit matriciel θᵀx.</li>
-      <li><strong>Mise à l'échelle des données</strong> : sans normalisation, les contours de J(θ) sont des ellipses allongées → la descente de gradient <strong>zigzague</strong>. Après normalisation (ex : min-max), les contours deviennent circulaires → convergence plus directe.</li>
-    </ul>
-    <div class="widget" id="widget-scale">
-      <label class="switch-row"><input type="checkbox" id="scaleToggle"/> Normaliser les descripteurs</label>
-      <svg viewBox="0 0 240 140" class="anim-svg" aria-hidden="true">
-        <ellipse id="scaleEllipse" cx="120" cy="70" rx="95" ry="30"/>
-        <path id="pathZigzag" class="grad-path" d="M120,70 L92,50 L138,36 L74,20 L110,8"/>
-        <path id="pathStraight" class="grad-path" d="M120,70 L110,8" style="opacity:0"/>
-        <circle cx="120" cy="70" r="4" fill="var(--ink)"/>
-        <circle cx="110" cy="8" r="5" fill="var(--accent-gold)"/>
-      </svg>
-      <p class="widget-caption" id="scaleCaption">Sans normalisation : les contours de J(θ) sont allongés → la descente de gradient <strong>zigzague</strong> avant de converger.</p>
-    </div>
+      <div class="piege"><span class="vs">UN CONTRE TOUS vs UN CONTRE UN</span>Pour L classes : un-contre-tous entraîne
+        L classifieurs ; un-contre-un en entraîne L(L−1)/2 (un par paire de classes), avec un coût qui grandit bien plus
+        vite quand L augmente.</div>
+    </section>
 
-    <ul class="concepts">
-      <li><strong>Régression polynomiale</strong> : f<sub>θ</sub>(x) = θ₀+θ₁x+⋯+θ_d x<sup>d</sup> — se ramène à une régression linéaire multivariable (sur les puissances de x) et permet d'introduire de la <strong>non-linéarité</strong>.</li>
-    </ul>
-
-    <h3 class="sub-title">Solution analytique vs descente de gradient</h3>
-    <div class="formula-block">θ̂ = (Xᵀ X)⁻¹ · Xᵀ · y&nbsp;&nbsp;(équation normale)</div>
-    <table class="cmp">
-      <tr><th>Solution analytique</th><th>Descente de gradient</th></tr>
-      <tr><td>Pas besoin de choisir α</td><td>Besoin de choisir α</td></tr>
-      <tr><td>Non itérative</td><td>Nécessite de nombreuses itérations</td></tr>
-      <tr><td>Coûteuse si n est très grand (inversion de matrice)</td><td>Fonctionne bien même avec n très grand</td></tr>
-      <tr><td>Mise à l'échelle non requise</td><td>Mise à l'échelle requise</td></tr>
-    </table>
-    <ul class="concepts">
-      <li><strong>Batch / mini-batch / stochastique</strong> : variantes de la descente de gradient selon le nombre d'exemples utilisés à chaque mise à jour — tout le jeu d'entraînement, un petit sous-ensemble, ou un seul exemple à la fois.</li>
-    </ul>
-  </section>
-
-  <!-- 5. CHAPITRE 3 -->
-  <section id="chap3">
-    <div class="sec-head"><span class="sec-num">03 · Ch.3</span><h2 class="sec-title">Régression logistique</h2></div>
-
-    <ul class="concepts">
-      <li><strong>Classification binaire</strong> : y ∈ {0,1} (classe négative / positive). La régression linéaire classique ne convient pas : f<sub>θ</sub>(x)=θᵀx peut sortir de l'intervalle [0,1].</li>
-      <li><strong>Fonction de prédiction (sigmoïde)</strong> : f<sub>θ</sub>(x) = g(θᵀx), avec g(z) = 1/(1+e⁻ᶻ). f<sub>θ</sub>(x) s'interprète comme <strong>P(y=1 | x ; θ)</strong>, une probabilité.</li>
-    </ul>
-    <div class="widget" id="widget-sigmoid">
-      <p class="widget-label">Illustration interactive — déplacer le curseur</p>
-      <input type="range" id="sigSlider" min="-10" max="10" step="0.1" value="-2"/>
-      <p class="sig-readout">z = <span id="sigZ">−2.0</span> → g(z) = <span id="sigG">0.119</span> → prédiction : <span id="sigPred">classe 0 (&lt; 0.5)</span></p>
-      <svg viewBox="0 0 260 130" class="anim-svg" aria-hidden="true">
-        <line class="axis" x1="10" y1="15" x2="10" y2="115"/>
-        <line class="axis" x1="10" y1="115" x2="250" y2="115"/>
-        <line class="threshold" x1="10" y1="60" x2="250" y2="60" stroke-dasharray="4,4"/>
-        <path id="sigCurve"/>
-        <circle id="sigDot" cx="90" cy="98" r="6" fill="var(--accent-blue)"/>
-      </svg>
-      <p class="widget-caption">Quand z=θᵀx franchit 0, g(z) franchit 0.5 : c'est exactement là que se situe la <strong>frontière de décision</strong>.</p>
-    </div>
-
-    <ul class="concepts">
-      <li><strong>Limite de décision</strong> : on décide ŷ=1 si f<sub>θ</sub>(x) ≥ 0.5, ŷ=0 sinon — ce qui équivaut exactement à θᵀx ≥ 0. La frontière est donc l'ensemble <strong>θᵀx = 0</strong>.</li>
-      <li><strong>Frontières non-linéaires</strong> : en ajoutant des descripteurs d'ordre élevé (x₁², x₁x₂, …), cette frontière peut devenir un cercle ou une courbe complexe, tout en restant fondée sur le signe de θᵀx.</li>
-    </ul>
-    <div class="widget" id="widget-boundary">
-      <p class="widget-label">Illustration interactive — cliquer sur un onglet</p>
-      <div class="tabs">
-        <button class="tab-btn active" data-target="b-lin">Frontière linéaire</button>
-        <button class="tab-btn" data-target="b-circ">Frontière non-linéaire</button>
+    <!-- 7. QUIZ -->
+    <section id="quiz">
+      <div class="sec-head"><span class="sec-num">05</span>
+        <h2 class="sec-title">Auto-évaluation</h2>
       </div>
-      <div class="tab-panel active" id="b-lin">
-        <svg viewBox="0 0 240 140" class="anim-svg" aria-hidden="true">
-          <circle class="dot dotA" cx="30" cy="110" r="6" style="animation-delay:.02s"/>
-          <circle class="dot dotA" cx="50" cy="120" r="6" style="animation-delay:.08s"/>
-          <circle class="dot dotA" cx="45" cy="90" r="6" style="animation-delay:.14s"/>
-          <circle class="dot dotA" cx="70" cy="105" r="6" style="animation-delay:.2s"/>
-          <circle class="dot dotA" cx="60" cy="130" r="6" style="animation-delay:.26s"/>
-          <circle class="dot dotB" cx="170" cy="30" r="6" style="animation-delay:.08s"/>
-          <circle class="dot dotB" cx="190" cy="50" r="6" style="animation-delay:.14s"/>
-          <circle class="dot dotB" cx="160" cy="20" r="6" style="animation-delay:.2s"/>
-          <circle class="dot dotB" cx="210" cy="40" r="6" style="animation-delay:.26s"/>
-          <circle class="dot dotB" cx="180" cy="60" r="6" style="animation-delay:.32s"/>
-          <line class="boundary2 draw-anim" style="--len:237" x1="15" y1="125" x2="225" y2="15"/>
-        </svg>
-        <p class="widget-caption">La frontière θᵀx = 0 est une <strong>droite</strong> : suffisant quand les classes sont linéairement séparables.</p>
+      <p>Réponds mentalement avant de cliquer sur chaque réponse.</p>
+
+      <div class="quiz-item">
+        <p class="quiz-q">1. Vrai ou faux : la régression logistique est un algorithme d'apprentissage supervisé.</p>
+        <details>
+          <summary>Voir la réponse</summary>
+          <p class="quiz-a">Vrai. Elle a besoin d'exemples étiquetés (x⁽ⁱ⁾, y⁽ⁱ⁾) pour être entraînée.</p>
+        </details>
       </div>
-      <div class="tab-panel" id="b-circ">
-        <svg viewBox="0 0 240 140" class="anim-svg" aria-hidden="true">
-          <circle class="dot dotA" cx="20" cy="20" r="6" style="animation-delay:.02s"/>
-          <circle class="dot dotA" cx="220" cy="20" r="6" style="animation-delay:.06s"/>
-          <circle class="dot dotA" cx="20" cy="120" r="6" style="animation-delay:.1s"/>
-          <circle class="dot dotA" cx="220" cy="120" r="6" style="animation-delay:.14s"/>
-          <circle class="dot dotA" cx="120" cy="15" r="6" style="animation-delay:.18s"/>
-          <circle class="dot dotA" cx="120" cy="125" r="6" style="animation-delay:.22s"/>
-          <circle class="dot dotB" cx="120" cy="70" r="6" style="animation-delay:.26s"/>
-          <circle class="dot dotB" cx="108" cy="60" r="6" style="animation-delay:.3s"/>
-          <circle class="dot dotB" cx="132" cy="80" r="6" style="animation-delay:.34s"/>
-          <circle class="dot dotB" cx="105" cy="85" r="6" style="animation-delay:.38s"/>
-          <circle class="dot dotB" cx="135" cy="60" r="6" style="animation-delay:.42s"/>
-          <circle class="boundary2 draw-anim" style="--len:220" cx="120" cy="70" r="35"/>
-        </svg>
-        <p class="widget-caption">En ajoutant des descripteurs d'ordre élevé, θᵀx = 0 peut définir un <strong>cercle</strong> (ou une forme plus complexe).</p>
+
+      <div class="quiz-item">
+        <p class="quiz-q">2. Vrai ou faux : la régression logistique sert principalement à faire de la régression.</p>
+        <details>
+          <summary>Voir la réponse</summary>
+          <p class="quiz-a">Faux. Malgré son nom, c'est un algorithme de <strong>classification</strong> : elle prédit
+            une probabilité puis une classe discrète.</p>
+        </details>
       </div>
-    </div>
 
-    <h3 class="sub-title">Fonction de coût (log loss)</h3>
-    <p>Utiliser la MSE ici rendrait J(θ) <strong>non convexe</strong> (risque de minima locaux). On utilise donc :</p>
-    <div class="formula-block">Cost(f<sub>θ</sub>(x), y) = −log(f<sub>θ</sub>(x)) si y=1&nbsp;&nbsp;;&nbsp;&nbsp;−log(1−f<sub>θ</sub>(x)) si y=0</div>
-    <div class="formula-block">J(θ) = −(1/m) · Σᵢ [ y⁽ⁱ⁾log(f<sub>θ</sub>(x⁽ⁱ⁾)) + (1−y⁽ⁱ⁾)log(1−f<sub>θ</sub>(x⁽ⁱ⁾)) ]</div>
-    <p style="font-size:.9rem;color:var(--ink-soft);margin-top:-8px;">Cette écriture compacte remplace simplement y par 0 ou 1 dans la formule par morceaux. Cette fonction de coût, elle, <strong>est convexe</strong>.</p>
+      <div class="quiz-item">
+        <p class="quiz-q">3. Peut-on appliquer la régression logistique à un problème à 3 classes ?</p>
+        <details>
+          <summary>Voir la réponse</summary>
+          <p class="quiz-a">Oui, via la stratégie <strong>one-vs-all</strong> : on entraîne 3 classifieurs binaires
+            (chacun « une classe contre les deux autres ») et on garde la classe de probabilité maximale.</p>
+        </details>
+      </div>
 
-    <ul class="concepts">
-      <li><strong>Descente de gradient pour la régression logistique</strong> : la formule de mise à jour a exactement la même forme que pour la régression linéaire (θⱼ ← θⱼ − α·(1/m)Σ(f<sub>θ</sub>(x⁽ⁱ⁾)−y⁽ⁱ⁾)xⱼ⁽ⁱ⁾) — seule la fonction f<sub>θ</sub> change (sigmoïde au lieu de linéaire).</li>
-      <li><strong>Classification multi-classes (one-vs-all)</strong> : pour L classes, on entraîne L classifieurs logistiques binaires (« classe k contre le reste ») ; pour un nouvel exemple, on choisit la classe k qui maximise f<sub>θ</sub><sup>(k)</sup>(x).</li>
-    </ul>
-  </section>
+      <div class="quiz-item">
+        <p class="quiz-q">4. Que se passe-t-il si le taux d'apprentissage α est beaucoup trop grand ?</p>
+        <details>
+          <summary>Voir la réponse</summary>
+          <p class="quiz-a">L'algorithme peut dépasser le minimum à chaque pas, ne pas converger, voire diverger
+            complètement (l'erreur augmente au fil des itérations).</p>
+        </details>
+      </div>
 
-  <!-- 6. PIEGES -->
-  <section id="pieges">
-    <div class="sec-head"><span class="sec-num">04</span><h2 class="sec-title">Pièges à éviter &amp; confusions fréquentes</h2></div>
+      <div class="quiz-item">
+        <p class="quiz-q">5. Comment introduire une frontière de décision non linéaire en régression logistique ?</p>
+        <details>
+          <summary>Voir la réponse</summary>
+          <p class="quiz-a">En ajoutant des descripteurs d'ordre élevé (x₁², x₂², x₁x₂, …) dans θᵀx : la frontière θᵀx=0
+            peut alors dessiner un cercle ou une courbe complexe.</p>
+        </details>
+      </div>
 
-    <div class="piege"><span class="vs">RÉGRESSION vs CLASSIFICATION</span>La régression prédit une valeur continue, la classification une catégorie discrète. La régression <strong>logistique</strong>, malgré son nom, est un algorithme de <strong>classification</strong>, pas de régression.</div>
+      <div class="quiz-item">
+        <p class="quiz-q">6. Pourquoi ne peut-on pas réutiliser la fonction de coût MSE pour la régression logistique ?
+        </p>
+        <details>
+          <summary>Voir la réponse</summary>
+          <p class="quiz-a">Parce que combinée à la sigmoïde, elle rendrait J(θ) <strong>non convexe</strong>, avec un
+            risque de rester bloqué dans un minimum local plutôt que d'atteindre l'optimum global.</p>
+        </details>
+      </div>
 
-    <div class="piege"><span class="vs">MSE vs LOG LOSS</span>Ne jamais utiliser la MSE pour entraîner une régression logistique : combinée à la sigmoïde, elle rend J(θ) non convexe. Le log loss, lui, reste convexe.</div>
+      <div class="quiz-item">
+        <p class="quiz-q">7. Quelle est la différence entre l'ensemble de validation et l'ensemble de test ?</p>
+        <details>
+          <summary>Voir la réponse</summary>
+          <p class="quiz-a">La validation sert à ajuster le modèle ou ses hyperparamètres <strong>pendant</strong>
+            l'entraînement ; le test évalue la performance finale, une seule fois, sur des données jamais vues.</p>
+        </details>
+      </div>
 
-    <div class="piege"><span class="vs">MISE À L'ÉCHELLE</span>Nécessaire pour la descente de gradient (accélère la convergence), mais <strong>inutile</strong> pour la solution analytique (équation normale), qui n'est pas affectée par l'échelle des descripteurs.</div>
+      <div class="quiz-item">
+        <p class="quiz-q">8. La mise à l'échelle des données est-elle nécessaire pour la solution analytique (équation
+          normale) ?</p>
+        <details>
+          <summary>Voir la réponse</summary>
+          <p class="quiz-a">Non. Elle est nécessaire pour la descente de gradient (pour éviter des contours elliptiques
+            allongés), mais l'équation normale n'est pas affectée par l'échelle des descripteurs.</p>
+        </details>
+      </div>
 
-    <div class="piege"><span class="vs">MINIMUM LOCAL vs GLOBAL</span>Dans le cas général, la descente de gradient peut rester bloquée dans un minimum local. Mais pour la régression linéaire (coût MSE) <strong>et</strong> logistique (log loss), la fonction de coût est convexe : un minimum local y est toujours le minimum global.</div>
+      <div class="quiz-item">
+        <p class="quiz-q">9. Qu'est-ce que le sur-apprentissage (overfitting) ?</p>
+        <details>
+          <summary>Voir la réponse</summary>
+          <p class="quiz-a">Un modèle trop complexe qui colle aux données d'entraînement, bruit compris, mais qui
+            généralise mal à de nouvelles données (variance élevée).</p>
+        </details>
+      </div>
 
-    <div class="piege"><span class="vs">MISE À JOUR DES θ</span>Tous les θⱼ doivent être mis à jour <strong>simultanément</strong> (via des variables temporaires), jamais l'un après l'autre avec des valeurs déjà actualisées.</div>
+      <div class="quiz-item">
+        <p class="quiz-q">10. Cite les quatre grandes familles de problèmes en Machine Learning.</p>
+        <details>
+          <summary>Voir la réponse</summary>
+          <p class="quiz-a">Apprentissage supervisé, non supervisé, semi-supervisé, et par renforcement.</p>
+        </details>
+      </div>
 
-    <div class="piege"><span class="vs">VALIDATION vs TEST</span>La validation sert à comparer des modèles et régler les hyperparamètres pendant le développement. Le test s'utilise <strong>une seule fois</strong>, à la toute fin, pour estimer la performance réelle sur des données jamais vues.</div>
+      <div class="quiz-item">
+        <p class="quiz-q">11. Quelle est la solution analytique (équation normale) de la régression linéaire ?</p>
+        <details>
+          <summary>Voir la réponse</summary>
+          <p class="quiz-a">θ̂ = (XᵀX)⁻¹Xᵀy.</p>
+        </details>
+      </div>
 
-    <div class="piege"><span class="vs">FRONTIÈRE LINÉAIRE OU NON</span>La frontière de décision dépend de θᵀx = 0, pas de la sigmoïde elle-même. Elle peut devenir non-linéaire dès qu'on ajoute des descripteurs d'ordre élevé — la sigmoïde ne fait que transformer θᵀx en probabilité.</div>
+      <div class="quiz-item">
+        <p class="quiz-q">12. La descente de gradient peut-elle rester bloquée dans un minimum local pour la régression
+          linéaire ou logistique ?</p>
+        <details>
+          <summary>Voir la réponse</summary>
+          <p class="quiz-a">Non, car leurs fonctions de coût respectives (MSE et log loss) sont toutes les deux
+            <strong>convexes</strong> : tout minimum local y est un minimum global.
+          </p>
+        </details>
+      </div>
 
-    <div class="piege"><span class="vs">SUPERVISÉ / NON SUPERVISÉ / SEMI-SUPERVISÉ</span>La seule vraie différence est la présence des étiquettes : toutes (supervisé), aucune (non supervisé), ou seulement une partie (semi-supervisé).</div>
+      <div class="quiz-item">
+        <p class="quiz-q">13. Dans une SVM entraînée, si on supprime un vecteur de support, la frontière de décision
+          change-t-elle ?</p>
+        <details>
+          <summary>Voir la réponse</summary>
+          <p class="quiz-a">Oui. Les vecteurs de support sont les seuls points qui déterminent la position de
+            l'hyperplan ; en retirer un modifie les contraintes et donc la frontière.</p>
+        </details>
+      </div>
 
-    <div class="piege"><span class="vs">SOUS- vs SUR-APPRENTISSAGE</span>Sous-apprentissage = modèle trop simple (mauvais même sur l'entraînement, biais élevé). Sur-apprentissage = modèle trop complexe (excellent sur l'entraînement, mauvais en généralisation, variance élevée).</div>
-  </section>
+      <div class="quiz-item">
+        <p class="quiz-q">14. Et si on supprime un point qui n'est pas un vecteur de support ?</p>
+        <details>
+          <summary>Voir la réponse</summary>
+          <p class="quiz-a">Non, la frontière ne change pas : seuls les vecteurs de support influencent la position de
+            l'hyperplan séparateur.</p>
+        </details>
+      </div>
 
-  <!-- 7. QUIZ -->
-  <section id="quiz">
-    <div class="sec-head"><span class="sec-num">05</span><h2 class="sec-title">Auto-évaluation</h2></div>
-    <p>Réponds mentalement avant de cliquer sur chaque réponse.</p>
+      <div class="quiz-item">
+        <p class="quiz-q">15. Que mesure l'erreur de généralisation d'une SVM ?</p>
+        <details>
+          <summary>Voir la réponse</summary>
+          <p class="quiz-a">La capacité du modèle à prédire correctement des résultats pour des données jamais vues
+            (ensemble de test) — pas seulement sa performance sur l'entraînement.</p>
+        </details>
+      </div>
 
-    <div class="quiz-item"><p class="quiz-q">1. Vrai ou faux : la régression logistique est un algorithme d'apprentissage supervisé.</p>
-      <details><summary>Voir la réponse</summary><p class="quiz-a">Vrai. Elle a besoin d'exemples étiquetés (x⁽ⁱ⁾, y⁽ⁱ⁾) pour être entraînée.</p></details></div>
+      <div class="quiz-item">
+        <p class="quiz-q">16. Quand l'hyperparamètre C tend vers l'infini dans une SVM à marge souple, que se passe-t-il
+          ?</p>
+        <details>
+          <summary>Voir la réponse</summary>
+          <p class="quiz-a">Le classifieur se comporte comme une SVM à <strong>marge rigide</strong> : il cherche à
+            séparer parfaitement les données, sans laisser aucune place à l'erreur.</p>
+        </details>
+      </div>
 
-    <div class="quiz-item"><p class="quiz-q">2. Vrai ou faux : la régression logistique sert principalement à faire de la régression.</p>
-      <details><summary>Voir la réponse</summary><p class="quiz-a">Faux. Malgré son nom, c'est un algorithme de <strong>classification</strong> : elle prédit une probabilité puis une classe discrète.</p></details></div>
+      <div class="quiz-item">
+        <p class="quiz-q">17. Pourquoi préfère-t-on souvent chercher un classifieur linéaire plutôt qu'un classifieur
+          non linéaire « direct » ?</p>
+        <details>
+          <summary>Voir la réponse</summary>
+          <p class="quiz-a">Parce qu'un problème linéaire est <strong>convexe</strong> : il est plus facile à résoudre
+            (gradients simples à calculer, pas de risque de minimum local).</p>
+        </details>
+      </div>
 
-    <div class="quiz-item"><p class="quiz-q">3. Peut-on appliquer la régression logistique à un problème à 3 classes ?</p>
-      <details><summary>Voir la réponse</summary><p class="quiz-a">Oui, via la stratégie <strong>one-vs-all</strong> : on entraîne 3 classifieurs binaires (chacun « une classe contre les deux autres ») et on garde la classe de probabilité maximale.</p></details></div>
+      <div class="quiz-item">
+        <p class="quiz-q">18. Dans quel cas une SVM est-elle le moins efficace ?</p>
+        <details>
+          <summary>Voir la réponse</summary>
+          <p class="quiz-a">Quand les données sont bruitées et que les classes se chevauchent fortement : il devient
+            difficile de tracer un hyperplan clair sans erreurs.</p>
+        </details>
+      </div>
 
-    <div class="quiz-item"><p class="quiz-q">4. Que se passe-t-il si le taux d'apprentissage α est beaucoup trop grand ?</p>
-      <details><summary>Voir la réponse</summary><p class="quiz-a">L'algorithme peut dépasser le minimum à chaque pas, ne pas converger, voire diverger complètement (l'erreur augmente au fil des itérations).</p></details></div>
+      <div class="quiz-item">
+        <p class="quiz-q">19. Pour un problème à L classes avec la stratégie one-vs-all, combien de modèles SVM faut-il
+          entraîner ?</p>
+        <details>
+          <summary>Voir la réponse</summary>
+          <p class="quiz-a">L modèles : un classifieur binaire par classe, chacun opposant « cette classe » à « toutes
+            les autres ».</p>
+        </details>
+      </div>
 
-    <div class="quiz-item"><p class="quiz-q">5. Comment introduire une frontière de décision non linéaire en régression logistique ?</p>
-      <details><summary>Voir la réponse</summary><p class="quiz-a">En ajoutant des descripteurs d'ordre élevé (x₁², x₂², x₁x₂, …) dans θᵀx : la frontière θᵀx=0 peut alors dessiner un cercle ou une courbe complexe.</p></details></div>
+      <div class="quiz-item">
+        <p class="quiz-q">20. Vrai ou faux : un noyau dans une SVM est à la fois une fonction qui envoie les données
+          vers un espace de plus grande dimension, ET une mesure de similarité entre deux échantillons.</p>
+        <details>
+          <summary>Voir la réponse</summary>
+          <p class="quiz-a">Vrai — les deux affirmations sont correctes et décrivent la même réalité sous deux angles
+            différents.</p>
+        </details>
+      </div>
+    </section>
 
-    <div class="quiz-item"><p class="quiz-q">6. Pourquoi ne peut-on pas réutiliser la fonction de coût MSE pour la régression logistique ?</p>
-      <details><summary>Voir la réponse</summary><p class="quiz-a">Parce que combinée à la sigmoïde, elle rendrait J(θ) <strong>non convexe</strong>, avec un risque de rester bloqué dans un minimum local plutôt que d'atteindre l'optimum global.</p></details></div>
+  </main>
 
-    <div class="quiz-item"><p class="quiz-q">7. Quelle est la différence entre l'ensemble de validation et l'ensemble de test ?</p>
-      <details><summary>Voir la réponse</summary><p class="quiz-a">La validation sert à ajuster le modèle ou ses hyperparamètres <strong>pendant</strong> l'entraînement ; le test évalue la performance finale, une seule fois, sur des données jamais vues.</p></details></div>
+  <footer>Fiche générée à partir des supports de cours « Introduction au Machine Learning », « Régression linéaire », «
+    Régression logistique » et « Machines à vecteurs de support » — Yassine Zniyed, SeaTech.</footer>
 
-    <div class="quiz-item"><p class="quiz-q">8. La mise à l'échelle des données est-elle nécessaire pour la solution analytique (équation normale) ?</p>
-      <details><summary>Voir la réponse</summary><p class="quiz-a">Non. Elle est nécessaire pour la descente de gradient (pour éviter des contours elliptiques allongés), mais l'équation normale n'est pas affectée par l'échelle des descripteurs.</p></details></div>
+  <script>
+    (function () {
+      "use strict";
 
-    <div class="quiz-item"><p class="quiz-q">9. Qu'est-ce que le sur-apprentissage (overfitting) ?</p>
-      <details><summary>Voir la réponse</summary><p class="quiz-a">Un modèle trop complexe qui colle aux données d'entraînement, bruit compris, mais qui généralise mal à de nouvelles données (variance élevée).</p></details></div>
-
-    <div class="quiz-item"><p class="quiz-q">10. Cite les quatre grandes familles de problèmes en Machine Learning.</p>
-      <details><summary>Voir la réponse</summary><p class="quiz-a">Apprentissage supervisé, non supervisé, semi-supervisé, et par renforcement.</p></details></div>
-
-    <div class="quiz-item"><p class="quiz-q">11. Quelle est la solution analytique (équation normale) de la régression linéaire ?</p>
-      <details><summary>Voir la réponse</summary><p class="quiz-a">θ̂ = (XᵀX)⁻¹Xᵀy.</p></details></div>
-
-    <div class="quiz-item"><p class="quiz-q">12. La descente de gradient peut-elle rester bloquée dans un minimum local pour la régression linéaire ou logistique ?</p>
-      <details><summary>Voir la réponse</summary><p class="quiz-a">Non, car leurs fonctions de coût respectives (MSE et log loss) sont toutes les deux <strong>convexes</strong> : tout minimum local y est un minimum global.</p></details></div>
-  </section>
-
-</main>
-
-<footer>Fiche générée à partir des supports de cours « Introduction au Machine Learning », « Régression linéaire » et « Régression logistique » — Yassine Zniyed, SeaTech.</footer>
-
-<script>
-(function(){
-  "use strict";
-
-  // reading progress bar
-  var bar = document.getElementById('progressBar');
-  function updateProgress(){
-    var h = document.documentElement;
-    var scrollTop = h.scrollTop || document.body.scrollTop;
-    var scrollHeight = (h.scrollHeight || document.body.scrollHeight) - h.clientHeight;
-    var pct = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
-    bar.style.width = pct + '%';
-  }
-  document.addEventListener('scroll', updateProgress, { passive:true });
-  updateProgress();
-
-  // generic tab widgets (types / fit / boundary)
-  function restartAnims(panel){
-    var els = panel.querySelectorAll('.dot, .draw-anim, .fit-line');
-    els.forEach(function(el){
-      el.style.animation = 'none';
-      void el.offsetWidth;
-      el.style.animation = '';
-    });
-  }
-  document.querySelectorAll('.widget').forEach(function(widget){
-    var tabsWrap = widget.querySelector(':scope > .tabs');
-    if(!tabsWrap) return;
-    var btns = tabsWrap.querySelectorAll('.tab-btn');
-    btns.forEach(function(btn){
-      btn.addEventListener('click', function(){
-        btns.forEach(function(b){ b.classList.remove('active'); });
-        btn.classList.add('active');
-        widget.querySelectorAll(':scope > .tab-panel').forEach(function(p){ p.classList.remove('active'); });
-        var target = widget.querySelector('#' + CSS.escape(btn.dataset.target));
-        if(target){
-          target.classList.add('active');
-          restartAnims(target);
-        }
-      });
-    });
-  });
-
-  // train/val/test split reveal
-  var splitBar = document.getElementById('splitBar');
-  if(splitBar && 'IntersectionObserver' in window){
-    var obs = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if(entry.isIntersecting){
-          splitBar.classList.add('in-view');
-          obs.unobserve(splitBar);
-        }
-      });
-    }, { threshold:0.4 });
-    obs.observe(splitBar);
-  } else if(splitBar){
-    splitBar.classList.add('in-view');
-  }
-
-  // gradient descent widget
-  var gdBall = document.getElementById('gdBall');
-  var gdStatus = document.getElementById('gdStatus');
-  var gdButtons = document.querySelectorAll('.gd-btn[data-alpha]');
-  var gdReset = document.getElementById('gdReset');
-  var gdAnimating = false;
-
-  function yOf(x){
-    var dx = x - 150;
-    return 0.006 * dx * dx + 15;
-  }
-  function setBusy(busy){
-    gdAnimating = busy;
-    gdButtons.forEach(function(b){ b.disabled = busy; });
-  }
-  function animateSteps(xs, onDone){
-    var i = 0;
-    function step(){
-      if(i >= xs.length){ if(onDone) onDone(); return; }
-      var x = Math.max(-20, Math.min(320, xs[i]));
-      var y = yOf(xs[i]);
-      gdBall.setAttribute('cx', x);
-      gdBall.setAttribute('cy', Math.max(-10, Math.min(150, y)));
-      gdStatus.textContent = 'Pas ' + i + ' — θ ≈ ' + (xs[i]).toFixed(1);
-      i++;
-      setTimeout(step, 550);
-    }
-    step();
-  }
-  gdButtons.forEach(function(btn){
-    btn.addEventListener('click', function(){
-      if(gdAnimating) return;
-      setBusy(true);
-      var alpha = parseFloat(btn.dataset.alpha);
-      var x = 30, xs = [x];
-      var n = alpha > 100 ? 5 : 9;
-      for(var k=0;k<n;k++){
-        var grad = 0.012 * (x - 150);
-        x = x - alpha * grad;
-        xs.push(x);
+      // reading progress bar
+      var bar = document.getElementById('progressBar');
+      function updateProgress() {
+        var h = document.documentElement;
+        var scrollTop = h.scrollTop || document.body.scrollTop;
+        var scrollHeight = (h.scrollHeight || document.body.scrollHeight) - h.clientHeight;
+        var pct = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+        bar.style.width = pct + '%';
       }
-      animateSteps(xs, function(){
-        setBusy(false);
-        if(alpha > 100){
-          gdStatus.textContent = 'Divergence ! α est beaucoup trop grand : la bille s\'éloigne du minimum au lieu de s\'en approcher.';
-        } else if(alpha < 15){
-          gdStatus.textContent = 'Convergence très lente : après ' + n + ' pas, la bille est encore loin du minimum. α est trop petit.';
-        } else {
-          gdStatus.textContent = 'Convergence en ' + n + ' pas environ : θ se stabilise près du minimum de J(θ).';
-        }
-      });
-    });
-  });
-  if(gdReset){
-    gdReset.addEventListener('click', function(){
-      if(gdAnimating) return;
-      gdBall.setAttribute('cx', 30);
-      gdBall.setAttribute('cy', yOf(30));
-      gdStatus.textContent = "Choisis un taux d'apprentissage pour lancer la descente.";
-    });
-  }
+      document.addEventListener('scroll', updateProgress, { passive: true });
+      updateProgress();
 
-  // feature scaling widget
-  var scaleToggle = document.getElementById('scaleToggle');
-  var scaleEllipse = document.getElementById('scaleEllipse');
-  var pathZigzag = document.getElementById('pathZigzag');
-  var pathStraight = document.getElementById('pathStraight');
-  var scaleCaption = document.getElementById('scaleCaption');
-  if(scaleToggle){
-    scaleToggle.addEventListener('change', function(){
-      if(scaleToggle.checked){
-        scaleEllipse.setAttribute('rx', '48');
-        scaleEllipse.setAttribute('ry', '48');
-        pathZigzag.style.opacity = '0';
-        pathStraight.style.opacity = '1';
-        scaleCaption.innerHTML = 'Après normalisation : les contours de J(θ) deviennent <strong>circulaires</strong> → la descente de gradient suit une trajectoire quasi directe vers le minimum.';
-      } else {
-        scaleEllipse.setAttribute('rx', '95');
-        scaleEllipse.setAttribute('ry', '30');
-        pathZigzag.style.opacity = '1';
-        pathStraight.style.opacity = '0';
-        scaleCaption.innerHTML = 'Sans normalisation : les contours de J(θ) sont allongés → la descente de gradient <strong>zigzague</strong> avant de converger.';
+      // generic tab widgets (types / fit / boundary)
+      function restartAnims(panel) {
+        var els = panel.querySelectorAll('.dot, .draw-anim, .fit-line');
+        els.forEach(function (el) {
+          el.style.animation = 'none';
+          void el.offsetWidth;
+          el.style.animation = '';
+        });
       }
-    });
-  }
+      document.querySelectorAll('.widget').forEach(function (widget) {
+        var tabsWrap = widget.querySelector(':scope > .tabs');
+        if (!tabsWrap) return;
+        var btns = tabsWrap.querySelectorAll('.tab-btn');
+        btns.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            btns.forEach(function (b) { b.classList.remove('active'); });
+            btn.classList.add('active');
+            widget.querySelectorAll(':scope > .tab-panel').forEach(function (p) { p.classList.remove('active'); });
+            var target = widget.querySelector('#' + CSS.escape(btn.dataset.target));
+            if (target) {
+              target.classList.add('active');
+              restartAnims(target);
+            }
+          });
+        });
+      });
 
-  // sigmoid widget
-  var sigSlider = document.getElementById('sigSlider');
-  var sigZ = document.getElementById('sigZ');
-  var sigG = document.getElementById('sigG');
-  var sigPred = document.getElementById('sigPred');
-  var sigCurve = document.getElementById('sigCurve');
-  var sigDot = document.getElementById('sigDot');
+      // train/val/test split reveal
+      var splitBar = document.getElementById('splitBar');
+      if (splitBar && 'IntersectionObserver' in window) {
+        var obs = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              splitBar.classList.add('in-view');
+              obs.unobserve(splitBar);
+            }
+          });
+        }, { threshold: 0.4 });
+        obs.observe(splitBar);
+      } else if (splitBar) {
+        splitBar.classList.add('in-view');
+      }
 
-  function sigmoid(z){ return 1 / (1 + Math.exp(-z)); }
-  function mapX(z){ return 10 + (z + 10) / 20 * 240; }
-  function mapY(g){ return 115 - g * 100; }
+      // gradient descent widget
+      var gdBall = document.getElementById('gdBall');
+      var gdStatus = document.getElementById('gdStatus');
+      var gdButtons = document.querySelectorAll('.gd-btn[data-alpha]');
+      var gdReset = document.getElementById('gdReset');
+      var gdAnimating = false;
 
-  function buildSigmoidPath(){
-    var d = '';
-    for(var z = -10; z <= 10; z += 0.5){
-      var g = sigmoid(z);
-      var x = mapX(z), y = mapY(g);
-      d += (z === -10 ? 'M' : 'L') + x.toFixed(1) + ',' + y.toFixed(1) + ' ';
-    }
-    sigCurve.setAttribute('d', d.trim());
-  }
-  function updateSigmoid(){
-    var z = parseFloat(sigSlider.value);
-    var g = sigmoid(z);
-    sigZ.textContent = z.toFixed(1);
-    sigG.textContent = g.toFixed(3);
-    var isClass1 = g >= 0.5;
-    sigPred.textContent = isClass1 ? 'classe 1 (≥ 0.5)' : 'classe 0 (< 0.5)';
-    sigDot.setAttribute('cx', mapX(z));
-    sigDot.setAttribute('cy', mapY(g));
-    sigDot.setAttribute('fill', isClass1 ? 'var(--dotA)' : 'var(--dotB)');
-  }
-  if(sigSlider){
-    buildSigmoidPath();
-    updateSigmoid();
-    sigSlider.addEventListener('input', updateSigmoid);
-  }
+      function yOf(x) {
+        var dx = x - 150;
+        return 0.006 * dx * dx + 15;
+      }
+      function setBusy(busy) {
+        gdAnimating = busy;
+        gdButtons.forEach(function (b) { b.disabled = busy; });
+      }
+      function animateSteps(xs, onDone) {
+        var i = 0;
+        function step() {
+          if (i >= xs.length) { if (onDone) onDone(); return; }
+          var x = Math.max(-20, Math.min(320, xs[i]));
+          var y = yOf(xs[i]);
+          gdBall.setAttribute('cx', x);
+          gdBall.setAttribute('cy', Math.max(-10, Math.min(150, y)));
+          gdStatus.textContent = 'Pas ' + i + ' — θ ≈ ' + (xs[i]).toFixed(1);
+          i++;
+          setTimeout(step, 550);
+        }
+        step();
+      }
+      gdButtons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          if (gdAnimating) return;
+          setBusy(true);
+          var alpha = parseFloat(btn.dataset.alpha);
+          var x = 30, xs = [x];
+          var n = alpha > 100 ? 5 : 9;
+          for (var k = 0; k < n; k++) {
+            var grad = 0.012 * (x - 150);
+            x = x - alpha * grad;
+            xs.push(x);
+          }
+          animateSteps(xs, function () {
+            setBusy(false);
+            if (alpha > 100) {
+              gdStatus.textContent = 'Divergence ! α est beaucoup trop grand : la bille s\'éloigne du minimum au lieu de s\'en approcher.';
+            } else if (alpha < 15) {
+              gdStatus.textContent = 'Convergence très lente : après ' + n + ' pas, la bille est encore loin du minimum. α est trop petit.';
+            } else {
+              gdStatus.textContent = 'Convergence en ' + n + ' pas environ : θ se stabilise près du minimum de J(θ).';
+            }
+          });
+        });
+      });
+      if (gdReset) {
+        gdReset.addEventListener('click', function () {
+          if (gdAnimating) return;
+          gdBall.setAttribute('cx', 30);
+          gdBall.setAttribute('cy', yOf(30));
+          gdStatus.textContent = "Choisis un taux d'apprentissage pour lancer la descente.";
+        });
+      }
 
-})();
-</script>
+      // feature scaling widget
+      var scaleToggle = document.getElementById('scaleToggle');
+      var scaleEllipse = document.getElementById('scaleEllipse');
+      var pathZigzag = document.getElementById('pathZigzag');
+      var pathStraight = document.getElementById('pathStraight');
+      var scaleCaption = document.getElementById('scaleCaption');
+      if (scaleToggle) {
+        scaleToggle.addEventListener('change', function () {
+          if (scaleToggle.checked) {
+            scaleEllipse.setAttribute('rx', '48');
+            scaleEllipse.setAttribute('ry', '48');
+            pathZigzag.style.opacity = '0';
+            pathStraight.style.opacity = '1';
+            scaleCaption.innerHTML = 'Après normalisation : les contours de J(θ) deviennent <strong>circulaires</strong> → la descente de gradient suit une trajectoire quasi directe vers le minimum.';
+          } else {
+            scaleEllipse.setAttribute('rx', '95');
+            scaleEllipse.setAttribute('ry', '30');
+            pathZigzag.style.opacity = '1';
+            pathStraight.style.opacity = '0';
+            scaleCaption.innerHTML = 'Sans normalisation : les contours de J(θ) sont allongés → la descente de gradient <strong>zigzague</strong> avant de converger.';
+          }
+        });
+      }
+
+      // sigmoid widget
+      var sigSlider = document.getElementById('sigSlider');
+      var sigZ = document.getElementById('sigZ');
+      var sigG = document.getElementById('sigG');
+      var sigPred = document.getElementById('sigPred');
+      var sigCurve = document.getElementById('sigCurve');
+      var sigDot = document.getElementById('sigDot');
+
+      function sigmoid(z) { return 1 / (1 + Math.exp(-z)); }
+      function mapX(z) { return 10 + (z + 10) / 20 * 240; }
+      function mapY(g) { return 115 - g * 100; }
+
+      function buildSigmoidPath() {
+        var d = '';
+        for (var z = -10; z <= 10; z += 0.5) {
+          var g = sigmoid(z);
+          var x = mapX(z), y = mapY(g);
+          d += (z === -10 ? 'M' : 'L') + x.toFixed(1) + ',' + y.toFixed(1) + ' ';
+        }
+        sigCurve.setAttribute('d', d.trim());
+      }
+      function updateSigmoid() {
+        var z = parseFloat(sigSlider.value);
+        var g = sigmoid(z);
+        sigZ.textContent = z.toFixed(1);
+        sigG.textContent = g.toFixed(3);
+        var isClass1 = g >= 0.5;
+        sigPred.textContent = isClass1 ? 'classe 1 (≥ 0.5)' : 'classe 0 (< 0.5)';
+        sigDot.setAttribute('cx', mapX(z));
+        sigDot.setAttribute('cy', mapY(g));
+        sigDot.setAttribute('fill', isClass1 ? 'var(--dotA)' : 'var(--dotB)');
+      }
+      if (sigSlider) {
+        buildSigmoidPath();
+        updateSigmoid();
+        sigSlider.addEventListener('input', updateSigmoid);
+      }
+
+      // kernel trick widget
+      var kernelBtn = document.getElementById('kernelToggle');
+      var kernelWidget = document.getElementById('widget-kernel');
+      var kernelLine = document.getElementById('kernelLine');
+      var kernelCaption = document.getElementById('kernelCaption');
+      var kernelLifted = false;
+      if (kernelBtn) {
+        kernelBtn.addEventListener('click', function () {
+          kernelLifted = !kernelLifted;
+          kernelWidget.classList.toggle('lifted', kernelLifted);
+          kernelLine.style.opacity = kernelLifted ? '1' : '0';
+          kernelBtn.textContent = kernelLifted
+            ? "Revenir à l'espace original"
+            : "Appliquer la transformation φ";
+          kernelCaption.innerHTML = kernelLifted
+            ? "Après transformation par φ (schématisée ici par un décalage vertical), les deux classes deviennent <strong>linéairement séparables</strong>. En pratique, l'astuce du noyau calcule directement k(x,z) sans jamais calculer φ(x) explicitement."
+            : "Dans l'espace original, les deux classes ne sont <strong>pas linéairement séparables</strong> (aucune droite ne peut les séparer).";
+        });
+      }
+
+      // SVR epsilon-tube widget
+      var epsSlider = document.getElementById('epsSlider');
+      var epsVal = document.getElementById('epsVal');
+      var epsCount = document.getElementById('epsCount');
+      var svrUpper = document.getElementById('svrUpper');
+      var svrLower = document.getElementById('svrLower');
+      var svrPts = document.querySelectorAll('.svr-pt');
+
+      function svrCenterY(x) { return 90 + (-50 / 220) * (x - 10); }
+      function updateSVR() {
+        var eps = parseFloat(epsSlider.value);
+        epsVal.textContent = eps;
+        svrUpper.setAttribute('y1', svrCenterY(10) - eps);
+        svrUpper.setAttribute('y2', svrCenterY(230) - eps);
+        svrLower.setAttribute('y1', svrCenterY(10) + eps);
+        svrLower.setAttribute('y2', svrCenterY(230) + eps);
+        var count = 0;
+        svrPts.forEach(function (pt) {
+          var cx = parseFloat(pt.getAttribute('cx'));
+          var cy = parseFloat(pt.getAttribute('cy'));
+          var dist = Math.abs(cy - svrCenterY(cx));
+          if (dist > eps) {
+            pt.style.fill = 'var(--accent-red)';
+            count++;
+          } else {
+            pt.style.fill = 'var(--accent-gold)';
+          }
+        });
+        epsCount.textContent = count;
+      }
+      if (epsSlider) {
+        updateSVR();
+        epsSlider.addEventListener('input', updateSVR);
+      }
+
+    })();
+  </script>
 </body>
+
 </html>
