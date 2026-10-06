@@ -1,98 +1,40 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="fr">
 
 <head>
-  <meta charset=utf8>
-  <meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Fiche de révision — Marketing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Literata:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+    rel="stylesheet">
   <style>
     :root {
+      --paper: #F3F5F0;
+      --card: #FFFFFF;
+      --ink: #1E2A3A;
+      --ink-soft: #57677A;
+      --grid: #D8E2EC;
+      --margin: #C85661;
+      --accent: #2F6FA8;
+      --highlight: #F6C453;
+      --tint-blue: #EAF1F8;
+      --tint-gold: #FBF1DC;
+      --tint-red: #FBEBEC;
+      --row-alt: #EFF1EC;
+      --ok-bg: #DFF3E6;
+      --ok-border: #3C9A5C;
+      --bad-bg: #FBEBEC;
+      --bad-border: #C85661;
+      --shadow: 0 1px 2px rgba(30, 42, 58, .06), 0 8px 24px rgba(30, 42, 58, .05);
+      --sans-fallback: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
       color-scheme: light;
-      box-sizing: border-box;
-      padding-top: env(safe-area-inset-top, 0px);
-      padding-bottom: env(safe-area-inset-bottom, 0px)
     }
 
-    html {
-      scroll-padding-top: env(safe-area-inset-top, 0px)
-    }
-
-    body {
-      margin: 0;
-      padding: 0;
-      font: 14px -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #faf9f5;
-      color: #141413
-    }
-
-    img {
-      max-width: 100%
-    }
-
-    [hidden]:not([hidden=until-found i]) {
-      display: none !important
-    }
-  </style>
-</head>
-
-<body>
-  <!DOCTYPE html>
-  <html lang="fr">
-
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <title>Fiche de révision — Marketing (cours fusionné)</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Literata:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
-      rel="stylesheet">
-    <style>
-      :root {
-        --paper: #F3F5F0;
-        --card: #FFFFFF;
-        --ink: #1E2A3A;
-        --ink-soft: #57677A;
-        --grid: #D8E2EC;
-        --margin: #C85661;
-        --accent: #2F6FA8;
-        --highlight: #F6C453;
-        --tint-blue: #EAF1F8;
-        --tint-gold: #FBF1DC;
-        --tint-red: #FBEBEC;
-        --row-alt: #EFF1EC;
-        --ok-bg: #DFF3E6;
-        --ok-border: #3C9A5C;
-        --bad-bg: #FBEBEC;
-        --bad-border: #C85661;
-        --shadow: 0 1px 2px rgba(30, 42, 58, .06), 0 8px 24px rgba(30, 42, 58, .05);
-        color-scheme: light;
-      }
-
-      @media (prefers-color-scheme: dark) {
-        :root:not([data-theme="light"]) {
-          --paper: #12161D;
-          --card: #1A2029;
-          --ink: #E7ECF2;
-          --ink-soft: #9FAEC0;
-          --grid: #26303D;
-          --margin: #E2828B;
-          --accent: #7FB0DE;
-          --highlight: #B98F2A;
-          --tint-blue: #1B2837;
-          --tint-gold: #2A2517;
-          --tint-red: #2B1B1D;
-          --row-alt: #1E2530;
-          --ok-bg: #1E3327;
-          --ok-border: #4CAF6E;
-          --bad-bg: #2B1B1D;
-          --bad-border: #E2828B;
-          --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 8px 24px rgba(0, 0, 0, .35);
-          color-scheme: dark;
-        }
-      }
-
-      :root[data-theme="dark"] {
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
         --paper: #12161D;
         --card: #1A2029;
         --ink: #E7ECF2;
@@ -112,1618 +54,1753 @@
         --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 8px 24px rgba(0, 0, 0, .35);
         color-scheme: dark;
       }
+    }
 
-      * {
-        box-sizing: border-box;
-      }
+    :root[data-theme="dark"] {
+      --paper: #12161D;
+      --card: #1A2029;
+      --ink: #E7ECF2;
+      --ink-soft: #9FAEC0;
+      --grid: #26303D;
+      --margin: #E2828B;
+      --accent: #7FB0DE;
+      --highlight: #B98F2A;
+      --tint-blue: #1B2837;
+      --tint-gold: #2A2517;
+      --tint-red: #2B1B1D;
+      --row-alt: #1E2530;
+      --ok-bg: #1E3327;
+      --ok-border: #4CAF6E;
+      --bad-bg: #2B1B1D;
+      --bad-border: #E2828B;
+      --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 8px 24px rgba(0, 0, 0, .35);
+      color-scheme: dark;
+    }
 
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-padding-top: env(safe-area-inset-top, 0px);
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
       html {
-        scroll-padding-top: env(safe-area-inset-top, 0px);
+        scroll-behavior: smooth;
+      }
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Literata", Georgia, "Times New Roman", serif;
+      line-height: 1.6;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+      background-image:
+        repeating-linear-gradient(var(--grid) 0 1px, transparent 1px 34px);
+      background-attachment: local;
+    }
+
+    a {
+      color: var(--accent);
+    }
+
+    ::selection {
+      background: var(--highlight);
+      color: #1E2A3A;
+    }
+
+    /* ---------- Cover / header ---------- */
+    .cover {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 1.5rem;
+      text-align: center;
+    }
+
+    .tag {
+      display: inline-block;
+      font-family: "Kalam", cursive;
+      font-weight: 700;
+      font-size: .95rem;
+      color: var(--ink);
+      border: 2px solid var(--ink);
+      border-radius: 3px;
+      padding: .2rem .9rem;
+      transform: rotate(-1.2deg);
+      background: var(--card);
+      box-shadow: 2px 2px 0 var(--grid);
+    }
+
+    h1.title {
+      font-family: "Kalam", cursive;
+      font-weight: 700;
+      font-size: clamp(2rem, 5vw, 3.1rem);
+      margin: .9rem 0 .3rem;
+      color: var(--ink);
+      line-height: 1.15;
+    }
+
+    .subtitle {
+      font-size: 1.05rem;
+      color: var(--ink-soft);
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    /* ---------- Layout ---------- */
+    .layout {
+      max-width: 1180px;
+      margin: 1.5rem auto 4rem;
+      padding: 0 1.25rem;
+      display: grid;
+      grid-template-columns: 230px 1fr;
+      gap: 1.75rem;
+      align-items: start;
+    }
+
+    /* ---------- TOC / binder tabs ---------- */
+    nav.toc {
+      position: sticky;
+      top: calc(1rem + env(safe-area-inset-top, 0px));
+      background: var(--card);
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+      padding: .85rem .6rem;
+    }
+
+    nav.toc h2 {
+      font-family: "Kalam", cursive;
+      font-size: .95rem;
+      font-weight: 700;
+      margin: .2rem .5rem .6rem;
+      color: var(--ink-soft);
+    }
+
+    nav.toc ol {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    nav.toc a {
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+      text-decoration: none;
+      color: var(--ink);
+      font-size: .88rem;
+      padding: .5rem .6rem;
+      border-radius: 7px;
+      border-left: 3px solid transparent;
+    }
+
+    nav.toc a .n {
+      font-family: "Kalam", cursive;
+      font-weight: 700;
+      color: var(--accent);
+      min-width: 1.1rem;
+    }
+
+    nav.toc a:hover {
+      background: var(--tint-blue);
+    }
+
+    nav.toc a.active {
+      background: var(--tint-blue);
+      border-left-color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* ---------- Sheet (main paper) ---------- */
+    main.sheet {
+      position: relative;
+      background: var(--card);
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+      padding: 1.5rem 1.75rem 1.5rem 4.4rem;
+      overflow: hidden;
+    }
+
+    main.sheet::before {
+      /* punched holes */
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 46px;
+      background-image: radial-gradient(circle, var(--paper) 42%, transparent 43%);
+      background-size: 46px 78px;
+      background-position: 23px 34px;
+      background-repeat: repeat-y;
+    }
+
+    main.sheet::after {
+      /* red margin rule */
+      content: "";
+      position: absolute;
+      left: 56px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--margin);
+      opacity: .55;
+    }
+
+    @media (max-width:720px) {
+      main.sheet {
+        padding: 1.5rem 1.25rem;
       }
 
-      @media (prefers-reduced-motion: no-preference) {
-        html {
-          scroll-behavior: smooth;
-        }
+      main.sheet::before,
+      main.sheet::after {
+        display: none;
       }
+    }
 
-      html,
-      body {
-        height: 100%;
+    section {
+      scroll-margin-top: 1.25rem;
+      padding-bottom: 2.2rem;
+    }
+
+    section+section {
+      border-top: 1px dashed var(--grid);
+      padding-top: 2.2rem;
+    }
+
+    h2 {
+      font-family: "Literata", serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: .65rem;
+      margin: 0 0 1rem;
+    }
+
+    h2 .num {
+      font-family: "Kalam", cursive;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--accent);
+      border: 2px solid var(--accent);
+      border-radius: 50%;
+      width: 2.15rem;
+      height: 2.15rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: none;
+    }
+
+    h3 {
+      font-size: 1.12rem;
+      margin: 1.5rem 0 .6rem;
+      color: var(--ink);
+    }
+
+    p {
+      margin: .7rem 0;
+    }
+
+    ul,
+    ol {
+      padding-left: 1.3rem;
+    }
+
+    li {
+      margin: .3rem 0;
+    }
+
+    strong {
+      color: var(--ink);
+    }
+
+    .callout-def {
+      background: var(--tint-blue);
+      border-left: 4px solid var(--accent);
+      border-radius: 6px;
+      padding: .85rem 1rem;
+      margin: 1rem 0;
+      font-style: italic;
+    }
+
+    .callout-def::before {
+      content: "Définition — ";
+      font-family: "Kalam", cursive;
+      font-style: normal;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .callout-tip {
+      background: var(--tint-gold);
+      border-left: 4px solid var(--highlight);
+      border-radius: 6px;
+      padding: .85rem 1rem;
+      margin: 1rem 0;
+    }
+
+    .callout-warn {
+      background: var(--tint-red);
+      border-left: 4px solid var(--margin);
+      border-radius: 6px;
+      padding: .85rem 1rem;
+      margin: 1rem 0;
+    }
+
+    .formula {
+      font-family: "SFMono-Regular", Menlo, Consolas, monospace;
+      font-size: .92rem;
+      background: var(--tint-blue);
+      border: 1px dashed var(--accent);
+      border-radius: 6px;
+      padding: .65rem .9rem;
+      margin: .6rem 0;
+      color: var(--ink);
+      overflow-x: auto;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      font-size: .92rem;
+    }
+
+    caption {
+      caption-side: top;
+      text-align: left;
+      font-style: italic;
+      color: var(--ink-soft);
+      margin-bottom: .3rem;
+    }
+
+    th,
+    td {
+      border: 1px solid var(--grid);
+      padding: .55rem .7rem;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: var(--tint-blue);
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    tr:nth-child(even) td {
+      background: var(--row-alt);
+    }
+
+    .amont-aval {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .9rem;
+      margin: 1rem 0;
+    }
+
+    .amont-aval div {
+      border: 1px solid var(--grid);
+      border-radius: 8px;
+      padding: .8rem .9rem;
+      background: var(--tint-blue);
+    }
+
+    .amont-aval h4 {
+      margin: 0 0 .35rem;
+      font-family: "Kalam", cursive;
+      color: var(--accent);
+    }
+
+    @media (max-width:520px) {
+      .amont-aval {
+        grid-template-columns: 1fr;
       }
+    }
 
-      body {
-        margin: 0;
-        background: var(--paper);
-        color: var(--ink);
-        font-family: "Literata", Georgia, "Times New Roman", serif;
-        line-height: 1.6;
-        padding-top: env(safe-area-inset-top, 0px);
-        padding-bottom: env(safe-area-inset-bottom, 0px);
-        background-image: repeating-linear-gradient(var(--grid) 0 1px, transparent 1px 34px);
-        background-attachment: local;
-      }
+    .pyramid {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      margin: 1.3rem auto;
+      max-width: 520px;
+    }
 
-      a {
-        color: var(--accent);
-      }
+    .pyr-level {
+      width: 100%;
+      text-align: center;
+      padding: .55rem .7rem;
+      border-radius: 4px;
+      font-size: .86rem;
+      font-weight: 600;
+    }
 
-      ::selection {
-        background: var(--highlight);
-        color: #1E2A3A;
-      }
+    .pyr-level small {
+      display: block;
+      font-weight: 400;
+      font-size: .78rem;
+      opacity: .9;
+    }
 
-      .cover {
-        max-width: 920px;
-        margin: 0 auto;
-        padding: 3rem 1.5rem 1.5rem;
-        text-align: center;
-      }
+    /* ---------- QCM ---------- */
+    .quiz-score {
+      font-family: "Kalam", cursive;
+      font-weight: 700;
+      font-size: 1.05rem;
+      background: var(--tint-blue);
+      display: inline-block;
+      padding: .4rem 1.1rem;
+      border-radius: 20px;
+      margin: 0 0 1.2rem;
+    }
 
-      .tag {
-        display: inline-block;
-        font-family: "Kalam", cursive;
-        font-weight: 700;
-        font-size: .95rem;
-        color: var(--ink);
-        border: 2px solid var(--ink);
-        border-radius: 3px;
-        padding: .2rem .9rem;
-        transform: rotate(-1.2deg);
-        background: var(--card);
-        box-shadow: 2px 2px 0 var(--grid);
-      }
+    .quiz-item {
+      margin: 0 0 1.3rem;
+      padding: 1rem 1.1rem;
+      border: 1px solid var(--grid);
+      border-radius: 10px;
+      background: var(--card);
+    }
 
-      h1.title {
-        font-family: "Kalam", cursive;
-        font-weight: 700;
-        font-size: clamp(2rem, 5vw, 3.1rem);
-        margin: .9rem 0 .3rem;
-        color: var(--ink);
-        line-height: 1.15;
-      }
+    .quiz-q {
+      font-weight: 600;
+      margin: 0 0 .8rem;
+    }
 
-      .subtitle {
-        font-size: 1.05rem;
-        color: var(--ink-soft);
-        max-width: 640px;
-        margin: 0 auto;
-      }
+    .quiz-q .qn {
+      font-family: "Kalam", cursive;
+      font-weight: 700;
+      color: var(--accent);
+      margin-right: .4rem;
+    }
 
+    .quiz-opts {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
+
+    .quiz-opt {
+      text-align: left;
+      padding: .6rem .85rem;
+      border: 1px solid var(--grid);
+      border-radius: 8px;
+      background: var(--paper);
+      color: var(--ink);
+      font: inherit;
+      font-size: .94rem;
+      cursor: pointer;
+    }
+
+    .quiz-opt:hover:not(.locked) {
+      border-color: var(--accent);
+    }
+
+    .quiz-opt.correct {
+      background: var(--ok-bg);
+      border-color: var(--ok-border);
+    }
+
+    .quiz-opt.wrong {
+      background: var(--bad-bg);
+      border-color: var(--bad-border);
+    }
+
+    .quiz-opt.locked {
+      cursor: default;
+    }
+
+    .quiz-explain {
+      margin: .8rem 0 0;
+      font-size: .88rem;
+      color: var(--ink-soft);
+      font-style: italic;
+      display: none;
+    }
+
+    .quiz-explain.show {
+      display: block;
+    }
+
+    .quiz-reset {
+      font-family: "Kalam", cursive;
+      font-weight: 700;
+      font-size: .95rem;
+      background: var(--ink);
+      color: var(--paper);
+      border: none;
+      border-radius: 8px;
+      padding: .6rem 1.2rem;
+      cursor: pointer;
+      margin-top: .5rem;
+    }
+
+    /* ---------- Mobile layout ---------- */
+    @media (max-width:900px) {
       .layout {
-        max-width: 1180px;
-        margin: 1.5rem auto 4rem;
-        padding: 0 1.25rem;
-        display: grid;
-        grid-template-columns: 230px 1fr;
-        gap: 1.75rem;
-        align-items: start;
+        grid-template-columns: 1fr;
       }
 
       nav.toc {
         position: sticky;
-        top: calc(1rem + env(safe-area-inset-top, 0px));
-        background: var(--card);
-        border-radius: 10px;
-        box-shadow: var(--shadow);
-        padding: .85rem .6rem;
-        max-height: calc(100vh - 2rem);
-        overflow-y: auto;
+        top: 0;
+        z-index: 5;
+        border-radius: 0;
+        padding: .6rem .5rem;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
       }
 
       nav.toc h2 {
-        font-family: "Kalam", cursive;
-        font-size: .95rem;
-        font-weight: 700;
-        margin: .2rem .5rem .6rem;
-        color: var(--ink-soft);
-      }
-
-      nav.toc ol {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        gap: 2px;
-      }
-
-      nav.toc a {
-        display: flex;
-        align-items: center;
-        gap: .55rem;
-        text-decoration: none;
-        color: var(--ink);
-        font-size: .85rem;
-        padding: .42rem .6rem;
-        border-radius: 7px;
-        border-left: 3px solid transparent;
-      }
-
-      nav.toc a .n {
-        font-family: "Kalam", cursive;
-        font-weight: 700;
-        color: var(--accent);
-        min-width: 1.4rem;
-      }
-
-      nav.toc a:hover {
-        background: var(--tint-blue);
-      }
-
-      nav.toc a.active {
-        background: var(--tint-blue);
-        border-left-color: var(--accent);
-        font-weight: 600;
-      }
-
-      main.sheet {
-        position: relative;
-        background: var(--card);
-        border-radius: 10px;
-        box-shadow: var(--shadow);
-        padding: 1.5rem 1.75rem 1.5rem 4.4rem;
-        overflow: hidden;
-      }
-
-      main.sheet::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        width: 46px;
-        background-image: radial-gradient(circle, var(--paper) 42%, transparent 43%);
-        background-size: 46px 78px;
-        background-position: 23px 34px;
-        background-repeat: repeat-y;
-      }
-
-      main.sheet::after {
-        content: "";
-        position: absolute;
-        left: 56px;
-        top: 0;
-        bottom: 0;
-        width: 2px;
-        background: var(--margin);
-        opacity: .55;
-      }
-
-      @media (max-width:720px) {
-        main.sheet {
-          padding: 1.5rem 1.25rem;
-        }
-
-        main.sheet::before,
-        main.sheet::after {
-          display: none;
-        }
-      }
-
-      section {
-        scroll-margin-top: 1.25rem;
-        padding-bottom: 2.2rem;
-      }
-
-      section+section {
-        border-top: 1px dashed var(--grid);
-        padding-top: 2.2rem;
-      }
-
-      h2 {
-        font-family: "Literata", serif;
-        font-weight: 700;
-        font-size: 1.4rem;
-        display: flex;
-        align-items: center;
-        gap: .65rem;
-        margin: 0 0 1rem;
-      }
-
-      h2 .num {
-        font-family: "Kalam", cursive;
-        font-weight: 700;
-        font-size: 1rem;
-        color: var(--accent);
-        border: 2px solid var(--accent);
-        border-radius: 50%;
-        width: 2rem;
-        height: 2rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex: none;
-      }
-
-      h3 {
-        font-size: 1.08rem;
-        margin: 1.4rem 0 .55rem;
-        color: var(--ink);
-      }
-
-      p {
-        margin: .6rem 0;
-      }
-
-      ul,
-      ol {
-        padding-left: 1.3rem;
-      }
-
-      li {
-        margin: .28rem 0;
-      }
-
-      strong {
-        color: var(--ink);
-      }
-
-      .callout-def {
-        background: var(--tint-blue);
-        border-left: 4px solid var(--accent);
-        border-radius: 6px;
-        padding: .8rem 1rem;
-        margin: 1rem 0;
-        font-style: italic;
-      }
-
-      .callout-def::before {
-        content: "Définition — ";
-        font-family: "Kalam", cursive;
-        font-style: normal;
-        font-weight: 700;
-        color: var(--accent);
-      }
-
-      .callout-tip {
-        background: var(--tint-gold);
-        border-left: 4px solid var(--highlight);
-        border-radius: 6px;
-        padding: .8rem 1rem;
-        margin: 1rem 0;
-      }
-
-      .callout-warn {
-        background: var(--tint-red);
-        border-left: 4px solid var(--margin);
-        border-radius: 6px;
-        padding: .8rem 1rem;
-        margin: 1rem 0;
-      }
-
-      .formula {
-        font-family: "SFMono-Regular", Menlo, Consolas, monospace;
-        font-size: .88rem;
-        background: var(--tint-blue);
-        border: 1px dashed var(--accent);
-        border-radius: 6px;
-        padding: .6rem .85rem;
-        margin: .55rem 0;
-        color: var(--ink);
-        overflow-x: auto;
-      }
-
-      .table-wrap {
-        overflow-x: auto;
-        margin: 1rem 0;
-      }
-
-      table {
-        border-collapse: collapse;
-        width: 100%;
-        font-size: .88rem;
-      }
-
-      caption {
-        caption-side: top;
-        text-align: left;
-        font-style: italic;
-        color: var(--ink-soft);
-        margin-bottom: .3rem;
-      }
-
-      th,
-      td {
-        border: 1px solid var(--grid);
-        padding: .5rem .65rem;
-        text-align: left;
-        vertical-align: top;
-      }
-
-      th {
-        background: var(--tint-blue);
-        color: var(--ink);
-        font-weight: 600;
-      }
-
-      tr:nth-child(even) td {
-        background: var(--row-alt);
-      }
-
-      .amont-aval {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: .9rem;
-        margin: 1rem 0;
-      }
-
-      .amont-aval div {
-        border: 1px solid var(--grid);
-        border-radius: 8px;
-        padding: .8rem .9rem;
-        background: var(--tint-blue);
-      }
-
-      .amont-aval h4 {
-        margin: 0 0 .35rem;
-        font-family: "Kalam", cursive;
-        color: var(--accent);
-      }
-
-      @media (max-width:520px) {
-        .amont-aval {
-          grid-template-columns: 1fr;
-        }
-      }
-
-      .pyramid {
-        display: flex;
-        flex-direction: column;
-        gap: 3px;
-        margin: 1rem 0;
-        align-items: stretch;
-      }
-
-      .pyramid div {
-        background: var(--tint-blue);
-        border: 1px solid var(--accent);
-        border-radius: 6px;
-        padding: .5rem .8rem;
-        font-size: .85rem;
-      }
-
-      .pyramid div b {
-        color: var(--accent);
-        font-family: "Kalam", cursive;
-      }
-
-      .pyramid div:nth-child(1) {
-        margin: 0 0;
-      }
-
-      .pyramid div:nth-child(2) {
-        margin: 0 1.5rem;
-      }
-
-      .pyramid div:nth-child(3) {
-        margin: 0 3rem;
-      }
-
-      .pyramid div:nth-child(4) {
-        margin: 0 4.5rem;
-      }
-
-      .pyramid div:nth-child(5) {
-        margin: 0 6rem;
-        background: var(--tint-gold);
-        border-color: var(--highlight);
-      }
-
-      @media (max-width:520px) {
-        .pyramid div {
-          margin: 0 !important;
-        }
-      }
-
-      .quiz-score {
-        font-family: "Kalam", cursive;
-        font-weight: 700;
-        font-size: 1rem;
-        background: var(--tint-blue);
-        display: inline-block;
-        padding: .4rem 1.1rem;
-        border-radius: 20px;
-        margin: 0 0 1.2rem;
-      }
-
-      .quiz-item {
-        margin: 0 0 1.2rem;
-        padding: .9rem 1rem;
-        border: 1px solid var(--grid);
-        border-radius: 10px;
-        background: var(--card);
-      }
-
-      .quiz-q {
-        font-weight: 600;
-        margin: 0 0 .75rem;
-      }
-
-      .quiz-q .qn {
-        font-family: "Kalam", cursive;
-        font-weight: 700;
-        color: var(--accent);
-        margin-right: .4rem;
-      }
-
-      .quiz-opts {
-        display: flex;
-        flex-direction: column;
-        gap: .5rem;
-      }
-
-      .quiz-opt {
-        text-align: left;
-        padding: .55rem .8rem;
-        border: 1px solid var(--grid);
-        border-radius: 8px;
-        background: var(--paper);
-        color: var(--ink);
-        font: inherit;
-        font-size: .9rem;
-        cursor: pointer;
-      }
-
-      .quiz-opt:hover:not(.locked) {
-        border-color: var(--accent);
-      }
-
-      .quiz-opt.correct {
-        background: var(--ok-bg);
-        border-color: var(--ok-border);
-      }
-
-      .quiz-opt.wrong {
-        background: var(--bad-bg);
-        border-color: var(--bad-border);
-      }
-
-      .quiz-opt.locked {
-        cursor: default;
-      }
-
-      .quiz-explain {
-        margin: .75rem 0 0;
-        font-size: .85rem;
-        color: var(--ink-soft);
-        font-style: italic;
         display: none;
       }
 
-      .quiz-explain.show {
-        display: block;
+      nav.toc ol {
+        flex-direction: row;
       }
 
-      .quiz-reset {
-        font-family: "Kalam", cursive;
-        font-weight: 700;
-        font-size: .92rem;
-        background: var(--ink);
-        color: var(--paper);
-        border: none;
-        border-radius: 8px;
-        padding: .6rem 1.2rem;
-        cursor: pointer;
-        margin-top: .5rem;
+      nav.toc a {
+        white-space: nowrap;
+      }
+    }
+
+    .to-top {
+      position: fixed;
+      right: calc(1.1rem + env(safe-area-inset-right, 0px));
+      bottom: calc(1.1rem + env(safe-area-inset-bottom, 0px));
+      width: 2.7rem;
+      height: 2.7rem;
+      border-radius: 50%;
+      border: none;
+      background: var(--ink);
+      color: var(--paper);
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+    }
+
+    .to-top:focus-visible,
+    a:focus-visible,
+    nav.toc a:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    footer.note {
+      max-width: 1180px;
+      margin: 0 auto 3rem;
+      padding: 0 1.25rem;
+      color: var(--ink-soft);
+      font-size: .85rem;
+      text-align: center;
+    }
+
+    @media print {
+      body {
+        background: #fff;
       }
 
-      @media (max-width:900px) {
-        .layout {
-          grid-template-columns: 1fr;
-        }
-
-        nav.toc {
-          position: sticky;
-          top: 0;
-          z-index: 5;
-          border-radius: 0;
-          padding: .6rem .5rem;
-          overflow-x: auto;
-          max-height: none;
-          -webkit-overflow-scrolling: touch;
-        }
-
-        nav.toc h2 {
-          display: none;
-        }
-
-        nav.toc ol {
-          flex-direction: row;
-        }
-
-        nav.toc a {
-          white-space: nowrap;
-        }
-      }
-
+      nav.toc,
       .to-top {
-        position: fixed;
-        right: calc(1.1rem + env(safe-area-inset-right, 0px));
-        bottom: calc(1.1rem + env(safe-area-inset-bottom, 0px));
-        width: 2.7rem;
-        height: 2.7rem;
-        border-radius: 50%;
-        border: none;
-        background: var(--ink);
-        color: var(--paper);
-        font-size: 1.1rem;
-        cursor: pointer;
-        box-shadow: var(--shadow);
+        display: none;
       }
 
-      .to-top:focus-visible,
-      a:focus-visible,
-      nav.toc a:focus-visible {
-        outline: 3px solid var(--accent);
-        outline-offset: 2px;
+      .layout {
+        display: block;
+        max-width: 100%;
+        padding: 0;
       }
 
-      footer.note {
-        max-width: 1180px;
-        margin: 0 auto 3rem;
-        padding: 0 1.25rem;
-        color: var(--ink-soft);
-        font-size: .85rem;
-        text-align: center;
+      main.sheet {
+        box-shadow: none;
+        padding: 0;
       }
 
-      @media print {
-        body {
-          background: #fff;
-        }
-
-        nav.toc,
-        .to-top {
-          display: none;
-        }
-
-        .layout {
-          display: block;
-          max-width: 100%;
-          padding: 0;
-        }
-
-        main.sheet {
-          box-shadow: none;
-          padding: 0;
-        }
-
-        main.sheet::before,
-        main.sheet::after {
-          display: none;
-        }
-
-        section+section {
-          break-inside: avoid-page;
-        }
+      main.sheet::before,
+      main.sheet::after {
+        display: none;
       }
-    </style>
-  </head>
 
-  <body>
+      section+section {
+        break-inside: avoid-page;
+      }
+    }
+  </style>
+</head>
 
-    <header class="cover">
-      <span class="tag">Marketing — fiche de révision (fusionnée)</span>
-      <h1 class="title">Stratégie marketing, marché &amp; consommateur</h1>
-      <p class="subtitle">Tes notes du 16/09 et du 25/09, fusionnées avec le cours de ton camarade, plus l'étude du
-        consommateur et le chapitre sondages/panels.</p>
-    </header>
+<body>
 
-    <div class="layout">
-      <nav class="toc" aria-label="Sommaire">
-        <h2>Sommaire</h2>
+  <header class="cover">
+    <span class="tag">Marketing — fiche de révision</span>
+    <h1 class="title">Stratégie marketing &amp; étude de marché</h1>
+    <p class="subtitle">De la démarche mercatique aux 4P, en passant par la segmentation, le ciblage, le positionnement,
+      le comportement du consommateur et les études de marché (sondage, panel).</p>
+  </header>
+
+  <div class="layout">
+    <nav class="toc" aria-label="Sommaire">
+      <h2>Sommaire</h2>
+      <ol>
+        <li><a href="#s1"><span class="n">1</span> Démarche mercatique</a></li>
+        <li><a href="#s2"><span class="n">2</span> Le marché de l'entreprise</a></li>
+        <li><a href="#s3"><span class="n">3</span> L'étude de la demande</a></li>
+        <li><a href="#s4"><span class="n">4</span> L'étude de l'environnement</a></li>
+        <li><a href="#s5"><span class="n">5</span> Segmentation &amp; ciblage</a></li>
+        <li><a href="#s6"><span class="n">6</span> Stratégies concurrentielles</a></li>
+        <li><a href="#s7"><span class="n">7</span> Le positionnement</a></li>
+        <li><a href="#s8"><span class="n">8</span> Objectifs marketing</a></li>
+        <li><a href="#s9"><span class="n">9</span> Marketing mix (4P)</a></li>
+        <li><a href="#s10"><span class="n">10</span> Vocabulaire clé</a></li>
+        <li><a href="#s11"><span class="n">11</span> Comportement du consommateur</a></li>
+        <li><a href="#s12"><span class="n">12</span> Déterminants sociologiques</a></li>
+        <li><a href="#s13"><span class="n">13</span> Processus de décision d'achat</a></li>
+        <li><a href="#s14"><span class="n">14</span> Sondage &amp; panel</a></li>
+        <li><a href="#quiz"><span class="n">✓</span> QCM de révision</a></li>
+      </ol>
+    </nav>
+
+    <main class="sheet">
+
+      <section id="s1">
+        <h2><span class="num">1</span>La démarche mercatique : histoire et principes</h2>
+
+        <h3>Repères historiques</h3>
+        <ul>
+          <li><strong>Avant les années 1970</strong> : économie de production, l'offre est inférieure à la demande — il
+            suffit de produire, tout se vend.</li>
+          <li><strong>Années 1970</strong> : apparition du terme « marketing ». L'offre dépasse la demande : il faut
+            désormais orienter la production vers les besoins réels du client.</li>
+          <li><strong>Années 1990-2000</strong> : essor du <strong>consumérisme</strong> — multiplication des
+            associations de défense des droits des consommateurs (remise en cause du marketing jugé trop agressif).</li>
+        </ul>
+
+        <div class="callout-def">
+          La démarche mercatique est l'ensemble des actions d'une économie de marché qui visent à <strong>prévoir,
+            stimuler, susciter ou renouveler</strong> le besoin des consommateurs, et à <strong>adapter l'appareil
+            productif</strong> de l'entreprise à ce besoin déterminé.
+        </div>
+
+        <h3>Un cycle continu, jamais figé</h3>
+        <p>Analyse → Adaptation → Promotion → (retour à) Analyse…</p>
+
+        <h3>Les 4 étapes de la démarche</h3>
         <ol>
-          <li><a href="#s1"><span class="n">1</span> Démarche mercatique</a></li>
-          <li><a href="#s2"><span class="n">2</span> Le marché de l'entreprise</a></li>
-          <li><a href="#s3"><span class="n">3</span> L'étude de la demande</a></li>
-          <li><a href="#s4"><span class="n">4</span> L'étude de l'environnement</a></li>
-          <li><a href="#s5"><span class="n">5</span> Segmentation &amp; ciblage</a></li>
-          <li><a href="#s6"><span class="n">6</span> Stratégies concurrentielles</a></li>
-          <li><a href="#s7"><span class="n">7</span> Le positionnement</a></li>
-          <li><a href="#s8"><span class="n">8</span> Objectifs marketing</a></li>
-          <li><a href="#s9"><span class="n">9</span> Marketing mix (4P)</a></li>
-          <li><a href="#s10"><span class="n">10</span> Besoins, motivations, freins</a></li>
-          <li><a href="#s11"><span class="n">11</span> Attitudes du consommateur</a></li>
-          <li><a href="#s12"><span class="n">12</span> Styles de vie &amp; variables socio-culturelles</a></li>
-          <li><a href="#s13"><span class="n">13</span> Processus de décision d'achat</a></li>
-          <li><a href="#s14"><span class="n">14</span> Vocabulaire clé</a></li>
-          <li><a href="#s15"><span class="n">15</span> Sondages &amp; panels</a></li>
-          <li><a href="#quiz"><span class="n">✓</span> QCM de révision</a></li>
+          <li><strong>Analyser</strong> le marché (étude de la demande, de l'offre, de l'environnement).</li>
+          <li><strong>Adapter</strong> l'entreprise : fixer les objectifs à atteindre à partir de l'analyse.</li>
+          <li><strong>Concevoir</strong> le produit et le tester.</li>
+          <li><strong>Planifier</strong> les actions marketing : promouvoir le produit, définir le circuit de
+            distribution, organiser l'action marchande, définir la communication, organiser le SAV.</li>
         </ol>
-      </nav>
 
-      <main class="sheet">
+        <h3>Étape transversale : le contrôle continu</h3>
+        <p>Retex (retour d'expérience) + écoute permanente du marché (= <em>veille marketing</em>) pour rester en phase
+          avec son marché.</p>
 
-        <section id="s1">
-          <h2><span class="num">1</span>La démarche mercatique : histoire et principes</h2>
-          <h3>Repères historiques</h3>
-          <ul>
-            <li><strong>Avant les années 1970</strong> : l'offre est inférieure à la demande — il suffit de produire,
-              tout se vend.</li>
-            <li><strong>Années 1970</strong> : l'offre dépasse la demande. Il faut désormais orienter la production vers
-              les besoins réels du client — naissance du « marketing ».</li>
-            <li><strong>Années 1990-2000</strong> : essor du <strong>consumérisme</strong> — mouvement de défense du
-              pouvoir d'achat et des consommateurs, pour faire respecter la loi et préserver pouvoir d'achat et
-              consommation.</li>
-          </ul>
-          <div class="callout-def">La démarche mercatique est l'ensemble des actions d'une économie de marché qui visent
-            à <strong>prévoir, constater, stimuler ou renouveler</strong> le besoin des consommateurs, et à
-            <strong>adapter l'appareil productif</strong> de l'entreprise à ce besoin.
+        <div class="callout-tip">
+          <strong>Exemples classiques à citer en copie</strong> — <strong>Kodak</strong> n'a pas anticipé le basculement
+          vers la photo numérique ; <strong>Nokia</strong> n'a pas anticipé la révolution du smartphone. Ces deux cas
+          illustrent la « <strong>myopie marketing</strong> » (Theodore Levitt, 1960) : une entreprise qui définit son
+          métier par son produit plutôt que par le besoin qu'elle satisfait finit par être dépassée par l'innovation.
+        </div>
+      </section>
+
+      <section id="s2">
+        <h2><span class="num">2</span>Le marché de l'entreprise</h2>
+
+        <p>La connaissance du marché est la <strong>1<sup>ère</sup> étape</strong> de la démarche stratégique : elle
+          permet une analyse fine des <strong>opportunités et des contraintes</strong> de l'entreprise sur son marché (à
+          relier à l'analyse <strong>SWOT</strong> : Forces/Faiblesses en interne, Opportunités/Menaces en externe).</p>
+
+        <div class="callout-def">
+          Un marché est un lieu (réel ou virtuel) de rencontre entre une offre et une demande, dont la confrontation
+          détermine un <strong>prix</strong>.
+        </div>
+
+        <h3>Les différents types de marchés</h3>
+        <p>Classés selon l'objet de l'échange :</p>
+        <ul>
+          <li>Marché du <strong>produit</strong> (biens et services)</li>
+          <li>Marché du <strong>travail</strong></li>
+          <li>Marché <strong>financier / monétaire</strong> (capitaux)</li>
+        </ul>
+
+        <h3>Le marché du produit</h3>
+        <p>Sa connaissance est fondamentale. On précise toujours trois dimensions :</p>
+        <ol>
+          <li>Le <strong>produit</strong> concerné (nature précise)</li>
+          <li>Le <strong>territoire géographique</strong> (local, national, international)</li>
+          <li>La <strong>période de temps</strong> considérée (un marché évolue dans le temps)</li>
+        </ol>
+
+        <h3>Le marché de l'entreprise</h3>
+        <p>Lorsqu'une entreprise est présente sur plusieurs marchés, l'ensemble de ces marchés constitue le « marché de
+          l'entreprise ».</p>
+
+        <h3>Marché amont / aval</h3>
+        <div class="amont-aval">
+          <div>
+            <h4>Amont</h4>Tous les fournisseurs de l'entreprise (matières premières, banques, prestataires de services…)
           </div>
-          <h3>Un cycle continu, jamais figé</h3>
-          <p>Analyse → Adaptation → Promotion → (retour à) Analyse… Rester à l'écoute du marché en permanence (veille
-            marketing) pour rester en phase avec lui.</p>
-          <h3>Les étapes de la démarche</h3>
-          <ol>
-            <li>Analyser le marché (demande, offre, environnement)</li>
-            <li>Fixer les objectifs à atteindre</li>
-            <li>Concevoir le produit et le tester</li>
-            <li>Planifier les actions marketing</li>
-            <li>Organiser le réseau et le circuit de distribution</li>
-            <li>Organiser l'action marchande</li>
-            <li>Définir la communication</li>
-            <li>Organiser le SAV</li>
-          </ol>
-          <div class="callout-tip">
-            <strong>Exemples classiques à citer en copie</strong> — <strong>Kodak</strong> n'a pas anticipé le
-            basculement vers le numérique ; <strong>Nokia</strong> n'a pas anticipé la révolution du smartphone. Ces cas
-            illustrent la « <strong>myopie marketing</strong> » (Theodore Levitt, 1960) : une entreprise qui définit son
-            métier par son produit plutôt que par le besoin qu'elle satisfait finit dépassée par l'innovation.
+          <div>
+            <h4>Aval</h4>Les clients : intermédiaires (distributeurs) et finaux (consommateurs)
           </div>
-        </section>
+        </div>
 
-        <section id="s2">
-          <h2><span class="num">2</span>Le marché de l'entreprise</h2>
-          <p>La connaissance du marché est la <strong>1<sup>ère</sup> étape</strong> de la démarche stratégique :
-            analyse fine des <strong>opportunités et contraintes</strong> de l'entreprise sur son segment.</p>
-          <div class="callout-def">Un marché est un lieu (réel ou virtuel) de rencontre entre une offre et une demande,
-            dont la confrontation détermine un <strong>prix</strong>.</div>
-          <h3>Types de marchés</h3>
-          <p>Marché du <strong>produit</strong> (biens et services), du <strong>travail</strong>,
-            <strong>financier/monétaire</strong>.
-          </p>
-          <h3>Toujours préciser un marché selon 3 dimensions</h3>
-          <ol>
-            <li>Le <strong>produit</strong> concerné</li>
-            <li>Le <strong>territoire géographique</strong> (local, national, international)</li>
-            <li>La <strong>période</strong> considérée (un marché évolue dans le temps)</li>
-          </ol>
-          <p>Lorsqu'une entreprise est présente sur plusieurs marchés, l'ensemble constitue « le marché de l'entreprise
-            ».</p>
-          <h3>Marché amont / aval</h3>
-          <div class="amont-aval">
-            <div>
-              <h4>Amont</h4>Tous les fournisseurs de l'entreprise (matières premières, banques, prestataires de
-              services…)
-            </div>
-            <div>
-              <h4>Aval</h4>Les clients : intermédiaires (distributeurs) et finaux (consommateurs)
-            </div>
-          </div>
-          <h3>Les ratios de position concurrentielle</h3>
-          <div class="formula">Part de marché (PDM) = Ventes de l'entreprise / Ventes totales de la profession</div>
-          <div class="formula">PDM relative = Ventes de l'entreprise / Ventes du principal concurrent</div>
-          <div class="formula">Taux de pénétration = Ventes actuelles de la profession / Ventes potentielles de la
-            profession</div>
-          <div class="callout-warn"><strong>Réflexe examen</strong> : bien distinguer PDM <strong>absolue</strong> (vs
-            l'ensemble du secteur) et PDM <strong>relative</strong> (vs un concurrent précis, souvent le leader) —
-            confusion fréquente.</div>
-        </section>
+        <h3>La part de marché (PDM)</h3>
+        <p>Indicateur clé de la position concurrentielle : <em>PDM = % des ventes d'une entreprise / ventes totales d'un
+            secteur donné.</em></p>
+        <div class="formula">PDM = Ventes de l'entreprise / Ventes totales de la profession</div>
+        <p><strong>Part de marché relative</strong> (comparaison au principal concurrent, souvent le leader) :</p>
+        <div class="formula">PDM relative = Ventes de l'entreprise / Ventes du principal concurrent</div>
+        <div class="callout-tip"><strong>Exemple chiffré</strong> — une entreprise réalise 2 400 000 € de ventes sur un
+          marché total de 12 000 000 € : PDM = 2 400 000 / 12 000 000 = 0,20, soit <strong>20 %</strong>.</div>
 
-        <section id="s3">
-          <h2><span class="num">3</span>L'étude de la demande</h2>
-          <p>Estimation <strong>quantitative et qualitative</strong> des principaux segments de consommateurs
-            actuels/potentiels.</p>
-          <h3>La segmentation « en entonnoir » de la population</h3>
-          <ol>
-            <li><strong>Non-consommateurs absolus (NCA)</strong> : partie incompressible qui, pour des raisons durables
-              (physiques, culturelles, économiques, religieuses…), <strong>ne consommera jamais</strong> le produit.
+        <p>D'autres ratios commerciaux très utiles (taux de pénétration, taux de notoriété, taux de fidélité, panier
+          moyen…) sont détaillés avec leurs formules et un exemple chiffré en section 3.</p>
+
+        <div class="callout-warn">
+          <strong>Réflexe examen</strong> : bien distinguer part de marché <strong>absolue</strong> (en valeur ou en
+          volume) et part de marché <strong>relative</strong> (comparaison à un concurrent précis) — c'est une confusion
+          fréquente.
+        </div>
+      </section>
+
+      <section id="s3">
+        <h2><span class="num">3</span>L'étude de la demande</h2>
+
+        <p><strong>Objectif</strong> : avant d'engager toute action, le décideur marketing doit connaître l'état de la
+          demande actuelle et potentielle. Il produit une estimation <strong>quantitative et qualitative</strong> des
+          principaux segments de consommateurs actuels/potentiels.</p>
+
+        <h3>La segmentation « en entonnoir » de la population</h3>
+        <p>À partir de la population totale d'une zone géographique, on distingue plusieurs sous-ensembles :</p>
+        <ol>
+          <li><strong>Non-consommateurs absolus (NCA)</strong> : partie incompressible de la population qui, pour des
+            raisons durables et variées (physiques, culturelles, économiques, religieuses…), <strong>ne consommera
+              jamais</strong> le produit.</li>
+          <li><strong>Non-consommateurs relatifs (NCR)</strong> : ne consomment <strong>pas actuellement</strong>, mais
+            pas de manière définitive. Il faut comprendre pourquoi ils ne consomment pas → études sur les <strong>freins
+              et motivations</strong> (ex. modèle de Joannis : peur, risque, habitude d'un côté ; hédonisme,
+            auto-expression, oblativité de l'autre).</li>
+          <li><strong>Consommateurs actuels</strong> : ceux qui consomment déjà le produit — chez l'entreprise ou chez
+            un concurrent. Leur nombre est facilement quantifiable grâce aux statistiques internes et à la
+            <strong>veille marketing</strong> (rester en permanence à l'écoute de son marché).
+          </li>
+        </ol>
+
+        <h3>Marché actuel vs marché potentiel</h3>
+        <ul>
+          <li><strong>Marché actuel</strong> = consommateurs actuels (clients de l'entreprise + de la concurrence)</li>
+          <li><strong>Marché potentiel</strong> = marché actuel + non-consommateurs relatifs (cible que l'on peut
+            espérer convertir)</li>
+        </ul>
+
+        <h3>Les ratios commerciaux</h3>
+        <p>L'estimation de la demande globale permet de calculer des ratios qui situent l'entreprise sur son marché et
+          indiquent des <strong>pistes stratégiques</strong> à suivre. Ce sont ces formules qui reviennent le plus
+          souvent dans les exercices de calcul — à savoir par cœur :</p>
+
+        <p><strong>1. Part de marché</strong> — le ratio de référence (cf. section 2).</p>
+
+        <p><strong>2. Taux de pénétration</strong> — part du marché potentiel déjà conquise par l'entreprise :</p>
+        <div class="formula">Taux de pénétration (%) = (Consommateurs actuels / Marché potentiel) × 100</div>
+
+        <p><strong>3. Taux de notoriété</strong> — part de la population qui connaît la marque/le produit :</p>
+        <div class="formula">Taux de notoriété (%) = (Nb de personnes connaissant la marque / Population interrogée) ×
+          100</div>
+
+        <p><strong>4. Taux de fidélité</strong> — part des clients qui rachètent le produit :</p>
+        <div class="formula">Taux de fidélité (%) = (Nb de clients rachetant le produit / Nb total de clients) × 100
+        </div>
+
+        <p><strong>5. Taux d'attrition</strong> (ou <em>churn</em>) — l'inverse du taux de fidélité : mesure la perte de
+          clients sur une période :</p>
+        <div class="formula">Taux d'attrition (%) = (Clients perdus sur la période / Clients en début de période) × 100
+        </div>
+
+        <p><strong>6. Panier moyen</strong> — dépense moyenne par transaction :</p>
+        <div class="formula">Panier moyen (€) = Chiffre d'affaires / Nombre de tickets (transactions)</div>
+
+        <p><strong>7. Taux de transformation</strong> (ou de conversion) — efficacité commerciale d'un point de vente,
+          d'un site ou d'une campagne :</p>
+        <div class="formula">Taux de transformation (%) = (Nb d'acheteurs / Nb de visiteurs) × 100</div>
+
+        <div class="callout-tip">
+          <strong>Exemple chiffré</strong> — un magasin reçoit 500 visiteurs dans la journée, dont 85 repartent avec un
+          achat, pour un chiffre d'affaires total de 2 975 € :<br>
+          Taux de transformation = (85 / 500) × 100 = <strong>17 %</strong><br>
+          Panier moyen = 2 975 / 85 = <strong>35 €</strong>
+        </div>
+
+        <div class="callout-warn">
+          <strong>Réflexe examen</strong> : vérifiez toujours l'unité demandée (%, €, nombre d'unités) et le
+          <strong>dénominateur</strong> exact du ratio (marché potentiel ? population totale interrogée ? clients en
+          début ou en fin de période ?) — c'est souvent là que se jouent les points sur un exercice de calcul.
+        </div>
+      </section>
+
+      <section id="s4">
+        <h2><span class="num">4</span>L'étude de l'environnement</h2>
+
+        <p>Notion très vaste : l'entreprise doit analyser l'ensemble des facteurs externes qui influencent son marché
+          (on peut mobiliser l'acronyme <strong>PESTEL</strong> — Politique, Économique, Socioculturel, Technologique,
+          Écologique, Légal — pour structurer une réponse d'examen).</p>
+
+        <h3>Les composantes identifiées en cours</h3>
+        <ul>
+          <li><strong>Environnement démographique</strong> : connaissance des courbes démographiques (structure par âge,
+            pyramide des âges, natalité) des principaux pays/marchés avec lesquels l'entreprise travaille.</li>
+          <li><strong>Environnement technologique</strong> : la veille technologique est <strong>capitale</strong>
+            (anticiper les ruptures technologiques — cf. Kodak/Nokia, section 1).</li>
+          <li><strong>Environnement juridique</strong> : urbanisme, choix de société (forme juridique), réglementation
+            en vigueur (droit de la consommation, droit du travail, normes…).</li>
+          <li><strong>Environnement culturel et commercial</strong> : il est important de localiser une entreprise près
+            de sites attractifs pour sa cible (zone de chalandise, image du lieu).</li>
+          <li><strong>Environnement économique/politique</strong> : crise du pays, pays émetteur (marché export) en
+            difficulté → un « risque pays » à surveiller.</li>
+        </ul>
+
+        <h3>L'étude de la concurrence</h3>
+        <p>Avant de définir une stratégie, il faut mettre en évidence les <strong>forces et faiblesses des
+            concurrents</strong>.</p>
+        <ul>
+          <li><strong>Marché atomisé</strong> : la concurrence est nombreuse sur le marché, sans qu'aucune entreprise ne
+            se distingue nettement (pas de leader clair) — proche de la concurrence pure et parfaite.</li>
+          <li>À l'inverse, un <strong>marché concentré / oligopolistique</strong> voit un petit nombre d'acteurs dominer
+            nettement le marché.</li>
+        </ul>
+      </section>
+
+      <section id="s5">
+        <h2><span class="num">5</span>Segmentation &amp; ciblage</h2>
+
+        <h3>5.1 Le choix des cibles</h3>
+        <p>① <strong>Définir la cible</strong> : à qui l'entreprise s'adresse-t-elle ?</p>
+        <ul>
+          <li>Le <strong>consommateur</strong> (utilisateur final)</li>
+          <li>L'<strong>acheteur</strong> (qui paie, pas toujours le consommateur — ex. un parent qui achète pour son
+            enfant)</li>
+          <li>Le <strong>prescripteur</strong> (qui recommande/influence le choix sans acheter ni consommer — ex. un
+            médecin, un enseignant)</li>
+        </ul>
+
+        <p>② <strong>Définir la taille des cibles</strong> : il faut pouvoir <strong>quantifier</strong> chaque segment
+          (sous-ensemble homogène) auquel on décide de s'adresser, grâce à l'étude de marché.</p>
+
+        <p>③ <strong>Définir la cible selon les critères de segmentation</strong>. Un segment se définit selon plusieurs
+          critères :</p>
+        <ul>
+          <li>Catégorie socio-professionnelle (CSP), critères sociodémographiques (âge, sexe, revenu…)</li>
+          <li>Les besoins</li>
+          <li>Aptitudes et comportements</li>
+          <li>Freins et motivations</li>
+          <li>Le style de vie (critères psychographiques)</li>
+        </ul>
+        <div class="callout-tip">Pour qu'un critère de segmentation soit pertinent, il doit être
+          <strong>mesurable</strong>, <strong>accessible</strong> (on doit pouvoir atteindre le segment via la
+          distribution/communication) et <strong>substantiel</strong> (suffisamment important pour être rentable).
+        </div>
+
+        <h3>5.2 Les options stratégiques liées au choix des cibles</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Stratégie</th>
+                <th>Principe</th>
+                <th>Avantage</th>
+                <th>Limite</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Indifférenciée</strong><br>(marketing de masse)</td>
+                <td>S'adresser sans distinction à tous les consommateurs potentiels avec <strong>un seul marketing
+                    mix</strong></td>
+                <td>Économies d'échelle, coûts réduits</td>
+                <td>Ignore les attentes spécifiques de chaque segment</td>
+              </tr>
+              <tr>
+                <td><strong>Différenciée</strong><br>(segmentation)</td>
+                <td>Adapter la stratégie à chaque segment : un marketing mix spécifique par segment</td>
+                <td>Meilleure réponse aux attentes de chaque cible</td>
+                <td>Investissements plus élevés</td>
+              </tr>
+              <tr>
+                <td><strong>Concentrée</strong><br>(niche)</td>
+                <td>Ne s'adresser qu'à un seul segment préalablement défini</td>
+                <td>Forte expertise et maîtrise sur ce segment</td>
+                <td>Risque élevé de dépendance à un seul segment</td>
+              </tr>
+              <tr>
+                <td><strong>One-to-one</strong><br>(individualisée)</td>
+                <td>Différenciation jusqu'à l'individu, grâce à des bases de données (BDD) performantes</td>
+                <td>Individualisation maximale de la relation client</td>
+                <td>Nécessite des outils CRM/BDD coûteux</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p><strong>À noter</strong> : avec l'internationalisation croissante et l'homogénéisation des goûts et des modes
+          de consommation, de nombreuses entreprises définissent des <strong>stratégies indifférenciées à l'échelle
+            mondiale</strong>, réalisant des économies d'échelle en amortissant leurs charges de R&amp;D sur une plus
+          grande quantité de produits vendus.</p>
+      </section>
+
+      <section id="s6">
+        <h2><span class="num">6</span>Stratégies concurrentielles</h2>
+        <p>Une fois la cible choisie, l'entreprise peut mobiliser plusieurs orientations stratégiques — <strong>souvent
+            complémentaires entre elles</strong> :</p>
+
+        <h3>1) Stratégie concurrentielle</h3>
+        <p>L'entreprise s'efforce de gagner des parts de marché sur ses principaux concurrents. On distingue plusieurs
+          niveaux de concurrence :</p>
+        <ul>
+          <li><strong>Concurrents directs</strong> : produits similaires répondant au même besoin (ex. Apple / Samsung)
+          </li>
+          <li><strong>Concurrents indirects</strong> : produits différents répondant au même besoin (ex. train / avion)
+          </li>
+          <li><strong>Concurrents internes à un même groupe</strong> : risque de <strong>cannibalisation</strong> (un
+            produit du groupe prend des parts de marché à un autre produit du même groupe)</li>
+        </ul>
+
+        <h3>2) Stratégie intensive</h3>
+        <p>Obtenir une plus grande intensité de consommation de la part des clients actuels, en leur proposant de
+          <strong>nouvelles occasions de consommer</strong>. Se justifie lorsque le marché est <strong>saturé et
+            fortement concurrentiel</strong>.
+        </p>
+
+        <h3>3) Stratégie extensive</h3>
+        <p>S'attaquer aux <strong>non-consommateurs relatifs (NCR)</strong> du produit : des personnes qui n'ont pas de
+          raison majeure de ne pas consommer le produit, mais qui sont simplement habituées à un produit concurrent ou
+          de substitution.</p>
+
+        <h3>4) Stratégie de fidélisation</h3>
+        <p>Stratégie <strong>compatible avec toutes les autres</strong>, centrée sur la conservation des clients
+          existants.</p>
+        <div class="callout-tip">
+          Conquérir un nouveau client coûte nettement plus cher que fidéliser un client existant (règle empirique
+          souvent citée : de 5 à 7 fois plus cher). Un client <strong>insatisfait</strong> propage une opinion négative
+          à davantage de personnes qu'un client <strong>satisfait</strong> n'en recommande — d'où l'importance de la
+          gestion de la relation client (CRM). Outils classiques : carte de fidélité, club de clientèle, programme de
+          points, SAV de qualité, newsletters personnalisées…
+        </div>
+      </section>
+
+      <section id="s7">
+        <h2><span class="num">7</span>Le positionnement</h2>
+        <div class="callout-def">
+          Le positionnement est l'<strong>image / la personnalité / l'identité</strong> qu'une entreprise souhaite
+          donner d'un produit au consommateur, au sein d'un univers concurrentiel.
+        </div>
+        <p>Le positionnement est <strong>la clé de voûte de la stratégie marketing et du marketing mix</strong> : toutes
+          les variables du mix (produit, prix, distribution, communication) doivent être cohérentes avec le
+          positionnement choisi et le décliner concrètement.</p>
+        <p>Dans un univers fortement concurrentiel, seul un positionnement <strong>affirmé</strong> permet une réelle
+          <strong>différenciation</strong> des marques/enseignes aux yeux des consommateurs.
+        </p>
+
+        <h3>Compléments utiles pour l'examen</h3>
+        <ul>
+          <li>Le positionnement répond à deux questions : <em>Qu'est-ce que j'offre ?</em> (identification) et <em>En
+              quoi suis-je différent ?</em> (différenciation).</li>
+          <li>Une <strong>carte perceptuelle</strong> (mapping concurrentiel) visualise la position des marques sur deux
+            axes (ex. prix / qualité) pour repérer les espaces libres ou saturés du marché.</li>
+          <li>Le <strong>repositionnement</strong> consiste à modifier l'image d'un produit existant pour l'adapter à un
+            nouveau contexte concurrentiel ou à une nouvelle cible.</li>
+        </ul>
+      </section>
+
+      <section id="s8">
+        <h2><span class="num">8</span>Les objectifs marketing</h2>
+        <p>Les objectifs correspondent aux <strong>décisions des grandes orientations de l'entreprise</strong> ; ils
+          permettent de visualiser ce qu'il faut atteindre. On distingue trois grandes catégories :</p>
+        <ul>
+          <li>Les objectifs <strong>généraux</strong> (rentabilité, croissance, pérennité…)</li>
+          <li>Les objectifs <strong>commerciaux</strong> (parts de marché, chiffre d'affaires, volume de ventes…)</li>
+          <li>Les objectifs de <strong>communication</strong></li>
+        </ul>
+
+        <h3>Les 3 types d'objectifs de communication</h3>
+        <p>Modèle proche du modèle hiérarchique <strong>AIDA</strong> (Attention, Intérêt, Désir, Action) :</p>
+        <ol>
+          <li><strong>Cognitif</strong> (faire connaître / faire savoir) : accroître la <strong>notoriété</strong> d'un
+            produit, d'une entreprise, d'une enseigne ou d'une prestation. → agit sur le <em>savoir</em>.</li>
+          <li><strong>Affectif</strong> (faire aimer) : développer une image positive, susciter une attitude favorable
+            envers la marque. → agit sur le <em>ressenti</em>.</li>
+          <li><strong>Comportemental / conatif</strong> (faire agir) : obtenir de la cible un comportement précis (ex. «
+            se rendre dans un point de vente… »). → agit sur l'<em>action</em>.</li>
+        </ol>
+        <div class="callout-warn"><strong>Astuce examen</strong> : toujours relier un objectif de communication à l'un
+          de ces 3 registres, et savoir associer un outil de communication au registre qu'il sert plutôt (la publicité
+          média sert souvent le cognitif/affectif, la promotion des ventes sert plutôt le conatif).</div>
+      </section>
+
+      <section id="s9">
+        <h2><span class="num">9</span>Le marketing mix (4P)</h2>
+        <p>Le marketing mix organise les grands axes fixés pour la mise en œuvre de la stratégie. Il doit être
+          <strong>cohérent en interne</strong> (les 4 variables alignées entre elles), <strong>cohérent avec la
+            politique générale</strong> de l'entreprise, et <strong>bien dosé</strong> (équilibre des moyens/budgets
+          entre les 4 variables).
+        </p>
+
+        <h3>1. Produit (Product)</h3>
+        <ul>
+          <li>Caractéristiques techniques du produit, en fonction des attentes du marché</li>
+          <li><strong>Positionnement</strong> : identité/personnalité donnée au produit (démarcation vis-à-vis de la
+            concurrence)</li>
+          <li>Choix de la <strong>marque / de l'enseigne</strong> : nom + univers ; marque <strong>ombrelle</strong> ou
+            marque <strong>individuelle</strong></li>
+          <li>Choix de la <strong>gamme / de l'assortiment</strong> : composition et nombre de produits (largeur,
+            profondeur de gamme)</li>
+          <li><strong>Services complémentaires</strong> (garantie, SAV, livraison…)</li>
+        </ul>
+
+        <h3>2. Prix (Price)</h3>
+        <ul>
+          <li>Stratégie de prix / prix du marché (écrémage, pénétration, alignement…)</li>
+          <li>Conditions spécifiques de remise / ristourne</li>
+          <li>Conditions de paiement acceptées</li>
+        </ul>
+
+        <h3>3. Distribution (Place)</h3>
+        <ul>
+          <li>Choix des <strong>canaux de distribution</strong> jusqu'au consommateur final (super/hypermarchés,
+            grossistes, vente directe, e-commerce…)</li>
+          <li>Organisation de l'action marchande et de la <strong>force de vente</strong></li>
+        </ul>
+
+        <h3>4. Communication (Promotion)</h3>
+        <p>Décision stratégique à part entière : répercussions financières à <strong>court terme</strong> (budget
+          immédiat) et à <strong>long terme</strong> (image de marque).</p>
+        <ul>
+          <li>Le <strong>budget</strong>, le choix des <strong>moyens de communication</strong></li>
+          <li>La <strong>répartition des budgets</strong> entre canaux (publicité, promotion des ventes, relations
+            publiques, marketing direct…)</li>
+          <li>La <strong>stratégie de communication</strong> globale (média / hors-média)</li>
+        </ul>
+
+        <div class="callout-tip">
+          <strong>Pour aller plus loin</strong> — le modèle des 4P (vision producteur) se met en regard des
+          <strong>4C</strong> de Lauterborn (vision client) : Produit → <em>Customer value</em>, Prix → <em>Cost</em>,
+          Distribution → <em>Convenience</em>, Communication → <em>Communication</em>. Pour les services, on ajoute
+          souvent 3P (<strong>7P</strong>) : Personnel, Processus, Preuve physique.
+        </div>
+      </section>
+
+      <section id="s10">
+        <h2><span class="num">10</span>Vocabulaire clé &amp; pièges classiques</h2>
+
+        <div class="callout-def">
+          <strong>Politique</strong> : ensemble des lignes directrices qui orientent en permanence l'action de
+          l'entreprise dans un but donné — une façon de concevoir l'entreprise et son environnement, de la diriger, et
+          un cadre de référence pour les décisions.
+        </div>
+        <p>→ La politique fixe également les grandes options et moyens à long terme (les grands choix financiers sont
+          décidés dans ce cadre). On parle du « <strong>couple marché-produit</strong> » pour désigner le choix
+          fondamental d'une politique d'entreprise.</p>
+
+        <div class="callout-def">
+          <strong>Stratégie</strong> : (Le Petit Robert) partie de la science militaire qui concerne la conduite
+          générale de la guerre et la défense d'un pays, sur le <strong>long terme</strong>. Transposée au marketing :
+          la conduite générale à long terme de l'entreprise face à son marché et à ses concurrents.
+        </div>
+
+        <div class="callout-def">
+          <strong>Marketing</strong> : ensemble de <strong>moyens interdépendants</strong> mis en œuvre pour réaliser
+          les objectifs de la politique.
+        </div>
+
+        <p><strong>Positionnement</strong> : l'idée / l'image que l'on va donner du produit aux consommateurs (cf.
+          section 7).</p>
+
+        <h3>Hiérarchie à retenir</h3>
+        <p class="formula" style="font-family:'Literata',serif;font-style:italic;">Politique (vision long terme, cadre
+          général) → Stratégie (orientations pour atteindre les objectifs) → Marketing / marketing mix (moyens concrets)
+          → Actions opérationnelles</p>
+
+        <h3>Pièges classiques à éviter en examen</h3>
+        <div class="callout-warn">
+          <ul style="margin:0;">
+            <li>Confondre marché <strong>potentiel</strong> et marché <strong>actuel</strong></li>
+            <li>Confondre part de marché <strong>absolue</strong> et part de marché <strong>relative</strong></li>
+            <li>Oublier qu'un objectif de communication doit être rattaché à un registre (cognitif / affectif / conatif)
             </li>
-            <li><strong>Non-consommateurs relatifs (NCR)</strong> : ne consomment pas <strong>actuellement</strong>,
-              mais pas de façon définitive — leurs freins/motivations peuvent être étudiés (voir section 10, modèle des
-              motivations).</li>
-            <li><strong>Consommateurs actuels</strong> : consomment déjà le produit, chez l'entreprise ou chez un
-              concurrent — quantifiables via statistiques internes et veille marketing.</li>
-          </ol>
-          <h3>Marché actuel vs marché potentiel</h3>
-          <ul>
-            <li><strong>Marché actuel</strong> = consommateurs actuels (entreprise + concurrence)</li>
-            <li><strong>Marché potentiel</strong> = marché actuel + NCR (cible à convertir)</li>
+            <li>Oublier que le marketing mix doit être cohérent en interne et avec le positionnement choisi</li>
+            <li>Bons exemples à mobiliser : <strong>Kodak</strong> et <strong>Nokia</strong> (myopie marketing),
+              <strong>Apple vs Samsung</strong> (concurrents directs), <strong>train vs avion</strong> (concurrents
+              indirects)
+            </li>
           </ul>
-        </section>
+        </div>
+      </section>
 
-        <section id="s4">
-          <h2><span class="num">4</span>L'étude de l'environnement</h2>
-          <p>On mobilise l'acronyme <strong>PESTEL</strong> — Politique, Économique, Socioculturel, Technologique,
-            Écologique, Légal.</p>
-          <ul>
-            <li><strong>Démographique</strong> : pyramide des âges, natalité des marchés visés.</li>
-            <li><strong>Technologique</strong> : la veille technologique est <strong>capitale</strong> (cf. Kodak/Nokia,
-              section 1).</li>
-            <li><strong>Juridique</strong> : urbanisme, forme juridique, réglementation (droit de la conso, du travail,
-              normes).</li>
-            <li><strong>Culturel et commercial</strong> : localisation près de sites attractifs pour la cible (zone de
-              chalandise).</li>
-            <li><strong>Économique/politique</strong> : crise, « risque pays » à surveiller pour l'export.</li>
-          </ul>
-          <h3>L'étude de la concurrence</h3>
-          <p><strong>Marché atomisé</strong> : concurrence nombreuse, aucun acteur dominant (proche de la concurrence
-            pure et parfaite). <strong>Marché concentré / oligopolistique</strong> : un petit nombre d'acteurs domine
-            nettement.</p>
-        </section>
+      <section id="s11">
+        <h2><span class="num">11</span>Le comportement du consommateur</h2>
 
-        <section id="s5">
-          <h2><span class="num">5</span>Segmentation &amp; ciblage</h2>
-          <p>① <strong>Définir la cible</strong> : le <strong>consommateur</strong> (utilisateur final),
-            l'<strong>acheteur</strong> (qui paie, pas toujours le consommateur), le <strong>prescripteur</strong> (qui
-            recommande sans acheter ni consommer).</p>
-          <p>② <strong>Quantifier</strong> chaque segment (sous-ensemble homogène) grâce à l'étude de marché.</p>
-          <p>③ <strong>Définir la cible selon les critères de segmentation</strong> : catégorie socio-professionnelle et
-            sociodémographiques (âge, sexe, revenu), besoins, attitudes et comportements, freins et motivations, style
-            de vie.</p>
-          <div class="callout-tip">Pour qu'un critère de segmentation soit pertinent, il doit être
-            <strong>mesurable</strong>, <strong>accessible</strong> (atteignable via distribution/communication) et
-            <strong>substantiel</strong> (assez important pour être rentable).
+        <h3>11.1 Pourquoi étudier le consommateur ?</h3>
+        <p>La connaissance des besoins, motivations et attitudes du consommateur intervient à <strong>toutes les
+            étapes</strong> de la définition du marketing mix :</p>
+        <ul>
+          <li>dans la mise au point du produit, du système de service, et du positionnement ;</li>
+          <li>dans la définition du prix (notion de <strong>prix psychologique</strong>) ;</li>
+          <li>dans la mise en place des moyens de commercialisation ;</li>
+          <li>dans la conception de la stratégie publicitaire.</li>
+        </ul>
+
+        <h3>11.2 L'approche micro-économique classique</h3>
+        <p>Selon l'approche <strong>néo-classique</strong>, le consommateur cherche à maximiser sa consommation globale,
+          fonction de ses revenus et des prix proposés (approche libérale : peu d'intervention de l'État, limité à ses
+          fonctions régaliennes — défense, justice, éducation, police — à l'opposé du socialisme). Le consommateur y est
+          considéré comme un être <strong>rationnel</strong>, capable de prendre du recul sur ses goûts et préférences,
+          et réputé informé des produits proposés sur le marché : il achète donc la quantité de produit qui lui
+          apportera satisfaction.</p>
+
+        <h3>11.3 La pyramide des besoins de Maslow</h3>
+        <div class="pyramid">
+          <div class="pyr-level" style="width:34%; background:#2F6FA8; color:#fff;">V<small>Accomplissement
+              personnel</small></div>
+          <div class="pyr-level" style="width:50%; background:#4A85B8; color:#fff;">IV<small>Estime</small></div>
+          <div class="pyr-level" style="width:66%; background:#74A3CB; color:#1E2A3A;">III<small>Appartenance</small>
           </div>
-        </section>
+          <div class="pyr-level" style="width:82%; background:#A9C7DE; color:#1E2A3A;">II<small>Sécurité</small></div>
+          <div class="pyr-level" style="width:100%; background:#DCEAF6; color:#1E2A3A;">I<small>Besoins
+              primaires</small></div>
+        </div>
+        <ul>
+          <li><strong>I. Besoins primaires</strong> (physiologiques)</li>
+          <li><strong>II. Besoin de sécurité</strong> : contre la maladie, les accidents, les aléas divers</li>
+          <li><strong>III. Besoin d'appartenance</strong> : être accepté, aimé par son entourage</li>
+          <li><strong>IV. Besoin d'estime</strong> : se respecter, être respecté par les autres</li>
+          <li><strong>V. Besoin d'accomplissement personnel</strong> : réalisation de soi</li>
+        </ul>
+        <div class="callout-tip">Cette hiérarchie (Maslow, 1943) est très souvent mobilisée en marketing pour identifier
+          à quel niveau de besoin répond un produit — un bon réflexe d'analyse en cas de sujet d'examen sur un produit
+          donné.</div>
 
-        <section id="s6">
-          <h2><span class="num">6</span>Stratégies concurrentielles</h2>
-          <h3>Options liées au choix des cibles</h3>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Stratégie</th>
-                  <th>Principe</th>
-                  <th>Avantage</th>
-                  <th>Limite</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>Indifférenciée</strong></td>
-                  <td>Un seul mix pour tous les consommateurs.</td>
-                  <td>Économies d'échelle</td>
-                  <td>Ignore les attentes de chaque segment</td>
-                </tr>
-                <tr>
-                  <td><strong>Différenciée</strong></td>
-                  <td>Un mix spécifique par segment.</td>
-                  <td>Réponse précise à chaque cible</td>
-                  <td>Investissements élevés</td>
-                </tr>
-                <tr>
-                  <td><strong>Concentrée</strong></td>
-                  <td>Un seul segment (ex. luxe).</td>
-                  <td>Forte expertise</td>
-                  <td>Dépendance à ce segment</td>
-                </tr>
-                <tr>
-                  <td><strong>One-to-one</strong></td>
-                  <td>Différenciation jusqu'à l'individu (BDD/CRM).</td>
-                  <td>Individualisation maximale</td>
-                  <td>Outils coûteux</td>
-                </tr>
-              </tbody>
-            </table>
+        <h3>11.4 L'étude des motivations</h3>
+        <div class="callout-def">La motivation est un état de tension qui pousse l'individu à agir, jusqu'à ce que cette
+          tension soit réduite à un niveau qu'il juge tolérable.</div>
+        <p>On doit à <strong>Freud</strong> l'origine de l'étude des motivations : pour lui, le comportement des
+          individus s'explique par les expériences vécues dans la petite enfance, principalement d'ordre sexuel ; des
+          frustrations accumulées peuvent parfois être satisfaites par l'achat et la consommation de certains produits.
+        </p>
+        <p>Seules des études approfondies menées sur un petit échantillon représentatif peuvent donner des résultats
+          qualitatifs. L'objectif est de faire émerger de l'inconscient de l'individu ses freins et ses motivations à
+          l'achat.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th colspan="2">Les motivations <span style="font-weight:400;">(poussent vers l'achat)</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Hédonistes</strong></td>
+                <td>Rechercher un plaisir personnel</td>
+              </tr>
+              <tr>
+                <td><strong>Oblatives</strong></td>
+                <td>Faire plaisir aux autres</td>
+              </tr>
+              <tr>
+                <td><strong>D'auto-expression</strong></td>
+                <td>Exprimer qui l'on est, ou qui l'on voudrait être</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th colspan="2">Les freins <span style="font-weight:400;">(éloignent de l'achat)</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Inhibitions</strong></td>
+                <td>Freins liés à l'auto-censure de l'individu</td>
+              </tr>
+              <tr>
+                <td><strong>Peurs</strong></td>
+                <td>Freins dus à des difficultés réelles ou imaginaires</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>11.5 L'étude des attitudes</h3>
+        <div class="callout-def">L'attitude est la prédisposition mentale permanente d'un individu à évaluer d'une
+          certaine manière un objet ou une situation, et à réagir en conséquence.</div>
+        <p>Trois composantes à retenir :</p>
+        <ol>
+          <li><strong>Éléments cognitifs</strong> : connaissances factuelles. Les informations qui parviennent à
+            l'individu le confortent généralement dans ses croyances (<em>cohérence cognitive</em>). Si une information
+            contredit un choix déjà effectué, l'individu se trouve en état de <strong>dissonance cognitive</strong>.
+          </li>
+          <li><strong>Éléments affectifs</strong> : émotions et sentiments — ce que le consommateur retient d'une
+            marque. La publicité cherche notamment à « faire aimer » une marque.</li>
+          <li><strong>Éléments conatifs</strong> : composante comportementale — la traduction en actes des éléments
+            précédents (un individu peut déclarer connaître une marque/un produit sans forcément agir).</li>
+        </ol>
+        <div class="callout-warn"><strong>Passerelle à faire à l'examen</strong> : cette grille cognitif / affectif /
+          conatif est la même que celle des objectifs de communication (section 8) — mais ici elle décrit l'individu,
+          alors qu'en section 8 elle décrit les objectifs de l'entreprise. Les deux se répondent : un objectif cognitif
+          cible l'élément cognitif de l'attitude, etc.</div>
+      </section>
+
+      <section id="s12">
+        <h2><span class="num">12</span>Les déterminants sociologiques et culturels</h2>
+
+        <h3>12.1 L'environnement familial : le cycle de vie familial</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Foyer</th>
+                <th>Comportement de consommation typique</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Jeunes couples sans enfant</td>
+                <td>Loisirs, biens durables (équipement du foyer)</td>
+              </tr>
+              <tr>
+                <td>Couples avec jeunes enfants</td>
+                <td>Univers de l'enfant : nourriture, jouets, crèche…</td>
+              </tr>
+              <tr>
+                <td>Familles mono-parentales</td>
+                <td>Pouvoir d'achat contraint : dépenses orientées vers le vital (nourriture, vêtements, carburant)</td>
+              </tr>
+              <tr>
+                <td>Couples avec grands enfants</td>
+                <td>Renouvellement des équipements, budget éducation important — partent tout de même en vacances</td>
+              </tr>
+              <tr>
+                <td>Couples matures sans enfant</td>
+                <td>Dépenses davantage tournées vers le plaisir</td>
+              </tr>
+              <tr>
+                <td>Retraités</td>
+                <td>Revenus en baisse ; budget EHPAD ≈ 3 500 à 5 000 € le cas échéant</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Le pouvoir de décision varie selon les familles et les types d'achats : certains font l'objet d'une décision
+          <strong>autonome</strong>, d'autres d'une décision <strong>collective</strong> (ex. vacances, logement). Cette
+          répartition traditionnelle des rôles tend cependant à s'estomper (ex. la femme décide seule de la voiture
+          qu'elle achète ; l'enfant influence l'achat de ses propres produits).
+        </p>
+
+        <h3>12.2 Le groupe de référence (ou de pairs)</h3>
+        <p>L'individu est influencé dans ses croyances, attitudes et comportements par le groupe de référence qu'il
+          adopte comme repère social. Cette influence peut être <strong>positive</strong> ou <strong>négative</strong>.
+        </p>
+
+        <h3>12.3 Les catégories socio-professionnelles (CSP)</h3>
+        <p>Bien que la notion de position sociale « en classes » soit moins pertinente aujourd'hui, des mécanismes de
+          différenciation sociale demeurent perceptibles à travers la profession, le niveau de revenu, le lieu
+          d'habitation, le niveau scolaire…</p>
+
+        <h3>12.4 Les études de style de vie</h3>
+        <p>Elles étudient individuellement un grand nombre de personnes (sur la base d'un panel), puis effectuent des
+          regroupements afin de mettre en évidence des courants sociaux. On obtient ainsi une carte socioculturelle de
+          la population française, répartie en sous-groupes, dans le but de :</p>
+        <ul>
+          <li>anticiper les tendances à venir ;</li>
+          <li>segmenter et préciser les attentes/attitudes/motivations des différents segments ;</li>
+          <li>innover en tenant compte des courants sociaux et culturels ;</li>
+          <li>prévoir le média-planning.</li>
+        </ul>
+
+        <h3>12.5 L'environnement culturel, économique et politique</h3>
+        <p>Chaque zone géographique génère ses propres croyances, règles et habitudes de consommation. Exemples cités en
+          cours :</p>
+        <ul>
+          <li>Europe du <strong>Nord</strong> : consommation de bière, céréales, beurre ; Europe du <strong>Sud</strong>
+            : huile, vin.</li>
+          <li>En vacances : Italiens et Français sont exigeants sur la nourriture ; les Américains recherchent les parcs
+            d'attractions ; Allemands et Scandinaves valorisent la sécurité et l'environnement.</li>
+        </ul>
+        <div class="callout-tip">Pour respecter les principes du marketing, il est important de tenir compte de
+          l'origine culturelle des clients afin de répondre à leurs attentes spécifiques.</div>
+      </section>
+
+      <section id="s13">
+        <h2><span class="num">13</span>Le processus de décision d'achat</h2>
+        <p>Compte tenu de ses besoins, le consommateur cherche à atteindre, par la consommation, un niveau de
+          satisfaction qu'il juge acceptable : on dit qu'il maximise son « utilité » globale, fonction de ses revenus,
+          du prix des produits proposés, et des besoins ressentis — spontanés ou influencés par l'environnement.</p>
+
+        <h3>13.1 La recherche d'information (réduire la prise de risque)</h3>
+        <p>Lorsque le produit représente un enjeu financier ou d'image, le consommateur recherche des informations pour
+          réduire sa prise de risque :</p>
+        <ul>
+          <li><strong>Risque lié aux performances attendues</strong> (ex. un voyage sera-t-il suffisamment agréable ?)
+          </li>
+          <li><strong>Risque psychologique</strong> (le produit est-il conforme à l'usage recherché ?)</li>
+          <li><strong>Risque financier</strong> (la dépense envisagée met-elle en péril le budget ?)</li>
+          <li><strong>Risque lié à la sécurité</strong> (danger éventuel — ex. sécurité d'un pays de destination)</li>
+        </ul>
+        <p>Pour apaiser ces tensions, il mobilise diverses sources : expériences antérieures, avis des proches,
+          tests/revues, avis des vendeurs.</p>
+
+        <h3>13.2 La décision d'achat</h3>
+        <p>L'achat est précédé d'un conflit entre pensées positives et négatives (source d'angoisse). Le consommateur
+          achète lorsque les tensions positives dépassent les tensions négatives.</p>
+        <p>Ce qui peut faire basculer la décision :</p>
+        <ul>
+          <li>le vendeur qui argumente positivement (lève les tensions négatives) ;</li>
+          <li>une promotion temporaire ;</li>
+          <li>l'entourage qui « met la pression ».</li>
+        </ul>
+        <div class="callout-warn">L'action commerciale et la communication visent précisément à <strong>réduire les
+            tensions négatives</strong> et à <strong>renforcer les tensions positives</strong>.</div>
+
+        <h3>13.3 Après l'achat</h3>
+        <p>La relation commerciale ne s'arrête pas à l'achat : la <strong>satisfaction du client</strong> constitue la
+          meilleure publicité, en particulier pour les prestataires de services.</p>
+      </section>
+
+      <section id="s14">
+        <h2><span class="num">14</span>Les études de marché : sondage et panel</h2>
+        <p><em>Il faut bien connaître le besoin du client pour vendre.</em></p>
+
+        <h3>14.1 La démarche du sondage</h3>
+        <ol>
+          <li><strong>Détermination de l'objet</strong> : poser le problème marketing à résoudre par le sondage — lister
+            les informations à recueillir, évaluer les délais, définir le budget disponible pour l'enquête (ordre de
+            grandeur cité en cours : environ 6 000 personnes interrogées pour une grande enquête).</li>
+          <li><strong>Étude documentaire</strong> : mobiliser les ressources internes et externes déjà disponibles,
+            avant de lancer une nouvelle collecte.</li>
+          <li><strong>Étude qualitative préliminaire</strong> : interroger au préalable quelques personnes
+            caractéristiques de la population concernée, afin de dégager des items qualitatifs qui serviront à
+            construire un questionnaire de qualité et à déterminer la taille de l'échantillon. Il existe plusieurs
+            méthodes d'échantillonnage. Il est conseillé de <strong>tester le questionnaire</strong> avant de
+            l'administrer à un plus grand nombre de personnes.</li>
+          <li><strong>Choix du mode d'administration</strong> du questionnaire : entretien direct, téléphone, internet.
+            Le choix dépend des contraintes imposées : budget, qualité recherchée des répondants, étendue géographique.
+          </li>
+        </ol>
+
+        <h3>14.2 Le panel</h3>
+        <div class="callout-def">Le panel est un échantillon permanent d'unités statistiques (consommateurs, ménages,
+          médecins…), représentatif de l'univers étudié, interrogé à intervalles réguliers.</div>
+        <p>Bien qu'appartenant à la catégorie des études quantitatives, le panel se distingue par sa
+          <strong>permanence</strong> : le même échantillon représentatif est interrogé périodiquement, ce qui permet de
+          mettre en évidence des évolutions dans le temps. Les informations collectées peuvent être identiques d'une
+          période à l'autre, ou varier selon les besoins de l'entreprise.
+        </p>
+        <div class="callout-warn"><strong>Piège classique</strong> : ne pas confondre panel et échantillon — un panel
+          <em>est</em> un échantillon, mais un échantillon ponctuel n'est pas un panel : c'est sa <strong>permanence
+            dans le temps</strong> qui le caractérise.
+        </div>
+      </section>
+
+      <section id="quiz">
+        <h2><span class="num">✓</span>QCM de révision</h2>
+        <p>23 questions couvrant l'ensemble de la fiche, dont des exercices de calcul. Cliquez sur une réponse pour la
+          vérifier.</p>
+        <p class="quiz-score" id="quizScore">Score : 0 / 23</p>
+
+        <div class="quiz-item">
+          <p class="quiz-q"><span class="qn">Q1.</span> Dans les années 1970, quelle situation a fait émerger le
+            marketing ?</p>
+          <div class="quiz-opts">
+            <button class="quiz-opt">L'offre est inférieure à la demande</button>
+            <button class="quiz-opt" data-correct="true">L'offre dépasse la demande</button>
+            <button class="quiz-opt">L'offre et la demande sont égales</button>
+            <button class="quiz-opt">Il n'existe pas encore de marché</button>
           </div>
-          <p>Avec l'internationalisation croissante et l'homogénéisation des goûts, de nombreuses entreprises utilisent
-            une stratégie indifférenciée mondiale, amortissant leurs charges de R&amp;D sur un plus grand volume.</p>
-          <h3>Options liées aux sources de volume — 2 pivots : cible et concurrence</h3>
-          <ol>
-            <li><strong>Concurrentielle</strong> : gagner des parts sur les concurrents — <strong>directs</strong>
-              (produits similaires, ex. Apple/Samsung), <strong>indirects</strong> (produits différents, même besoin,
-              ex. train/avion), <strong>internes</strong> au groupe (cannibalisation).</li>
-            <li><strong>Intensive</strong> : faire consommer davantage les clients actuels — utile quand le marché est
-              saturé et concurrentiel.</li>
-            <li><strong>Extensive</strong> : s'attaquer aux non-consommateurs relatifs.</li>
-            <li><strong>Fidélisation</strong> : conserver la clientèle actuelle, compatible avec les 3 autres. Outils :
-              cadeau commercial, carte fidélité, club.</li>
-          </ol>
-          <div class="callout-tip">Conquérir un nouveau client coûte <strong>5 à 7 fois plus cher</strong> que fidéliser
-            un client existant. « Un client satisfait ramène 4 clients, un insatisfait en fait perdre 10. »</div>
-        </section>
+          <p class="quiz-explain">Quand l'offre dépasse la demande, il faut orienter la production vers les besoins
+            réels du client : c'est la naissance de la démarche mercatique.</p>
+        </div>
 
-        <section id="s7">
-          <h2><span class="num">7</span>Le positionnement</h2>
-          <div class="callout-def">Le positionnement est l'<strong>image / la personnalité / l'identité</strong> qu'une
-            entreprise souhaite donner d'un produit au consommateur, au sein d'un univers concurrentiel.</div>
-          <p>Clé de voûte de la stratégie marketing et du marketing mix : les 4 variables doivent être cohérentes avec
-            lui. Seul un positionnement <strong>affirmé</strong> permet une réelle différenciation.</p>
-          <ul>
-            <li>Répond à 2 questions : <em>qu'est-ce que j'offre ?</em> et <em>en quoi suis-je différent ?</em></li>
-            <li><strong>Carte perceptuelle</strong> : visualise les marques sur deux axes (ex. prix/qualité) pour
-              repérer les espaces libres.</li>
-            <li><strong>Repositionnement</strong> : modifier l'image d'un produit existant pour un nouveau contexte ou
-              une nouvelle cible.</li>
-          </ul>
-        </section>
+        <div class="quiz-item">
+          <p class="quiz-q"><span class="qn">Q2.</span> Les cas Kodak et Nokia illustrent surtout...</p>
+          <div class="quiz-opts">
+            <button class="quiz-opt">Une stratégie de fidélisation réussie</button>
+            <button class="quiz-opt" data-correct="true">La « myopie marketing » (Theodore Levitt)</button>
+            <button class="quiz-opt">Une stratégie concurrentielle indirecte</button>
+            <button class="quiz-opt">Un marché atomisé</button>
+          </div>
+          <p class="quiz-explain">Ces entreprises ont défini leur métier par leur produit plutôt que par le besoin
+            qu'elles satisfaisaient, et ont été dépassées par l'innovation.</p>
+        </div>
 
-        <section id="s8">
-          <h2><span class="num">8</span>Les objectifs marketing</h2>
-          <p>Trois catégories : objectifs <strong>généraux</strong> (rentabilité, croissance),
-            <strong>commerciaux</strong> (parts de marché, CA), et de <strong>communication</strong>.
+        <div class="quiz-item">
+          <p class="quiz-q"><span class="qn">Q3.</span> Le « marché amont » d'une entreprise désigne...</p>
+          <div class="quiz-opts">
+            <button class="quiz-opt">Ses clients finaux</button>
+            <button class="quiz-opt">Ses concurrents directs</button>
+            <button class="quiz-opt" data-correct="true">Ses fournisseurs (matières premières, banques,
+              services…)</button>
+            <button class="quiz-opt">Ses intermédiaires de distribution</button>
+          </div>
+          <p class="quiz-explain">L'amont regroupe tous les fournisseurs de l'entreprise ; l'aval regroupe les clients
+            (intermédiaires et finaux).</p>
+        </div>
+
+        <div class="quiz-item">
+          <p class="quiz-q"><span class="qn">Q4.</span> Comment calcule-t-on la part de marché <strong>relative</strong>
+            ?</p>
+          <div class="quiz-opts">
+            <button class="quiz-opt">Ventes de l'entreprise / Ventes totales de la profession</button>
+            <button class="quiz-opt" data-correct="true">Ventes de l'entreprise / Ventes du principal
+              concurrent</button>
+            <button class="quiz-opt">Ventes potentielles / Ventes actuelles</button>
+            <button class="quiz-opt">Ventes du concurrent / Ventes totales de la profession</button>
+          </div>
+          <p class="quiz-explain">La part de marché relative compare l'entreprise à son principal concurrent (souvent le
+            leader), contrairement à la part de marché absolue.</p>
+        </div>
+
+        <div class="quiz-item">
+          <p class="quiz-q"><span class="qn">Q5.</span> Un non-consommateur <strong>relatif</strong> est quelqu'un
+            qui...</p>
+          <div class="quiz-opts">
+            <button class="quiz-opt">Ne consommera jamais le produit, pour des raisons durables</button>
+            <button class="quiz-opt">Consomme déjà le produit chez un concurrent</button>
+            <button class="quiz-opt" data-correct="true">Ne consomme pas actuellement, mais pourrait un jour consommer
+              le produit</button>
+            <button class="quiz-opt">Fait partie du marché actuel de l'entreprise</button>
+          </div>
+          <p class="quiz-explain">Contrairement au non-consommateur absolu, le frein du non-consommateur relatif n'est
+            pas définitif : il peut être levé.</p>
+        </div>
+
+        <div class="quiz-item">
+          <p class="quiz-q"><span class="qn">Q6.</span> Qu'appelle-t-on un « marché atomisé » ?</p>
+          <div class="quiz-opts">
+            <button class="quiz-opt">Un marché dominé par deux ou trois grandes entreprises</button>
+            <button class="quiz-opt" data-correct="true">Un marché à la concurrence nombreuse, sans acteur qui se
+              distingue nettement</button>
+            <button class="quiz-opt">Un marché en situation de monopole</button>
+            <button class="quiz-opt">Un marché sans aucune concurrence</button>
+          </div>
+          <p class="quiz-explain">Le marché atomisé se rapproche de la concurrence pure et parfaite : aucun acteur n'a
+            de position dominante claire.</p>
+        </div>
+
+        <div class="quiz-item">
+          <p class="quiz-q"><span class="qn">Q7.</span> Proposer un marketing mix spécifique à chaque segment de marché
+            correspond à la stratégie...</p>
+          <div class="quiz-opts">
+            <button class="quiz-opt">Indifférenciée</button>
+            <button class="quiz-opt" data-correct="true">Différenciée</button>
+            <button class="quiz-opt">Concentrée</button>
+            <button class="quiz-opt">Extensive</button>
+          </div>
+          <p class="quiz-explain">La stratégie différenciée (ou de segmentation) adapte le marketing mix à chaque
+            segment ; elle demande plus d'investissement que la stratégie indifférenciée.</p>
+        </div>
+
+        <div class="quiz-item">
+          <p class="quiz-q"><span class="qn">Q8.</span> Pour être pertinent, un critère de segmentation doit notamment
+            être...</p>
+          <div class="quiz-opts">
+            <button class="quiz-opt">Uniquement démographique</button>
+            <button class="quiz-opt" data-correct="true">Mesurable, accessible et substantiel</button>
+            <button class="quiz-opt">Identique pour tous les segments du marché</button>
+            <button class="quiz-opt">Défini une fois pour toutes, sans révision possible</button>
+          </div>
+          <p class="quiz-explain">Un bon critère doit permettre de quantifier le segment, de l'atteindre via la
+            distribution/communication, et représenter un volume suffisant pour être rentable.</p>
+        </div>
+
+        <div class="quiz-item">
+          <p class="quiz-q"><span class="qn">Q9.</span> S'attaquer aux non-consommateurs relatifs correspond à la
+            stratégie...</p>
+          <div class="quiz-opts">
+            <button class="quiz-opt">Intensive</button>
+            <button class="quiz-opt" data-correct="true">Extensive</button>
+            <button class="quiz-opt">De fidélisation</button>
+            <button class="quiz-opt">Concurrentielle</button>
+          </div>
+          <p class="quiz-explain">La stratégie extensive vise à convertir des non-consommateurs relatifs, habitués à un
+            produit concurrent ou de substitution.</p>
+        </div>
+
+        <div class="quiz-item">
+          <p class="quiz-q"><span class="qn">Q10.</span> Apple et Samsung sont des concurrents...</p>
+          <div class="quiz-opts">
+            <button class="quiz-opt">Indirects</button>
+            <button class="quiz-opt">Internes à un même groupe</button>
+            <button class="quiz-opt" data-correct="true">Directs</button>
+            <button class="quiz-opt">Ce ne sont pas des concurrents</button>
+          </div>
+          <p class="quiz-explain">Concurrents directs = produits similaires répondant au même besoin. Train/avion serait
+            un exemple de concurrents indirects.</p>
+        </div>
+
+        <div class="quiz-item">
+          <p class="quiz-q"><span class="qn">Q11.</span> Le positionnement d'un produit correspond à...</p>
+          <div class="quiz-opts">
+            <button class="quiz-opt">Son prix de vente sur le marché</button>
+            <button class="quiz-opt" data-correct="true">L'image/l'identité que l'entreprise souhaite lui donner dans
+              l'esprit du consommateur</button>
+            <button class="quiz-opt">Le circuit de distribution utilisé</button>
+            <button class="quiz-opt">Le budget alloué à la communication</button>
+          </div>
+          <p class="quiz-explain">Le positionnement est la clé de voûte de la stratégie marketing : toutes les variables
+            du mix doivent le décliner de façon cohérente.</p>
+        </div>
+
+        <div class="quiz-item">
+          <p class="quiz-q"><span class="qn">Q12.</span> Un objectif de communication « cognitif » vise à...</p>
+          <div class="quiz-opts">
+            <button class="quiz-opt">Faire aimer la marque</button>
+            <button class="quiz-opt">Faire adopter un comportement précis</button>
+            <button class="quiz-opt" data-correct="true">Faire connaître un produit ou une marque (accroître la
+              notoriété)</button>
+            <button class="quiz-opt">Fixer le prix psychologique</button>
+          </div>
+          <p class="quiz-explain">Cognitif = faire savoir ; affectif = faire aimer ; comportemental/conatif = faire
+            agir.</p>
+        </div>
+
+        <div class="quiz-item">
+          <p class="quiz-q"><span class="qn">Q13.</span> Laquelle de ces variables ne fait <strong>pas</strong> partie
+            des 4P du marketing mix ?</p>
+          <div class="quiz-opts">
+            <button class="quiz-opt">Produit</button>
+            <button class="quiz-opt">Distribution</button>
+            <button class="quiz-opt" data-correct="true">Personnel</button>
+            <button class="quiz-opt">Communication</button>
+          </div>
+          <p class="quiz-explain">Les 4P sont Produit, Prix, Distribution, Communication. Le Personnel fait partie des
+            3P ajoutés pour les services (modèle des 7P).</p>
+        </div>
+
+        <div class="quiz-item">
+          <p class="quiz-q"><span class="qn">Q14.</span> Selon la hiérarchie vue en cours, quel est l'ordre correct ?
           </p>
-          <h3>Les 3 types d'objectifs de communication (modèle AIDA)</h3>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Registre</th>
-                  <th>Vise</th>
-                  <th>Formule</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Cognitif</td>
-                  <td>Notoriété (savoir)</td>
-                  <td><strong>Faire connaître</strong></td>
-                </tr>
-                <tr>
-                  <td>Affectif</td>
-                  <td>Image (ressentir)</td>
-                  <td><strong>Faire aimer</strong></td>
-                </tr>
-                <tr>
-                  <td>Conatif</td>
-                  <td>Comportement (agir)</td>
-                  <td><strong>Faire agir</strong></td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="quiz-opts">
+            <button class="quiz-opt">Marketing → Stratégie → Politique</button>
+            <button class="quiz-opt" data-correct="true">Politique → Stratégie → Marketing</button>
+            <button class="quiz-opt">Stratégie → Marketing → Politique</button>
+            <button class="quiz-opt">Marketing → Politique → Stratégie</button>
           </div>
-          <div class="callout-warn">Toujours relier un objectif de communication à l'un de ces 3 registres (proche du
-            modèle AIDA : Attention, Intérêt, Désir, Action).</div>
-        </section>
+          <p class="quiz-explain">La politique fixe le cadre long terme, la stratégie en découle, et le marketing
+            rassemble les moyens concrets et interdépendants pour l'appliquer.</p>
+        </div>
 
-        <section id="s9">
-          <h2><span class="num">9</span>Le marketing mix (4P)</h2>
-          <p>Organise les grands axes de la stratégie. Il doit être <strong>cohérent en interne</strong> (les 4
-            variables alignées), <strong>cohérent avec la politique générale</strong> de l'entreprise, et <strong>bien
-              dosé</strong> (équilibre des budgets entre les 4 variables).</p>
-          <h3>1. Produit</h3>
-          <ul>
-            <li>Caractéristiques techniques (attentes du marché)</li>
-            <li>Positionnement</li>
-            <li>Marque : <strong>ombrelle</strong> ou <strong>individuelle</strong></li>
-            <li>Gamme / assortiment</li>
-            <li>Design, services complémentaires</li>
-          </ul>
-          <h3>2. Prix</h3>
-          <ul>
-            <li>Stratégie de prix (écrémage, pénétration, alignement)</li>
-            <li>Remises / ristournes</li>
-            <li>Conditions de paiement</li>
-          </ul>
-          <h3>3. Distribution</h3>
-          <ul>
-            <li>Canaux jusqu'au consommateur final</li>
-            <li>Force de vente</li>
-          </ul>
-          <h3>4. Communication</h3>
-          <p>Décision stratégique à part entière : répercussions financières court et long terme.</p>
-          <ul>
-            <li>Budget et moyens (pub, promo, RP, marketing direct)</li>
-            <li>Stratégie média / hors-média</li>
-          </ul>
-          <div class="callout-tip"><strong>Pour aller plus loin</strong> — les 4P (vision producteur) se mettent en
-            regard des <strong>4C</strong> de Lauterborn (vision client). Pour les services, on ajoute 3P
-            (<strong>7P</strong>) : Personnel, Processus, Preuve physique.</div>
-        </section>
-
-        <section id="s10">
-          <h2><span class="num">10</span>Besoins, motivations et freins du consommateur</h2>
-          <h3>a) La conception microéconomique classique</h3>
-          <div class="callout-def">Selon l'approche <strong>néoclassique</strong> (aucune intervention de l'État), le
-            consommateur est rationnel et parfaitement informé sur les produits et prix du marché : il cherche à
-            <strong>maximiser sa satisfaction</strong> en fonction de ses revenus et des produits proposés.
+        <div class="quiz-item">
+          <p class="quiz-q"><span class="qn">Q15.</span> Dans la pyramide de Maslow, le besoin d'être accepté et aimé
+            par son entourage correspond au besoin...</p>
+          <div class="quiz-opts">
+            <button class="quiz-opt">De sécurité</button>
+            <button class="quiz-opt" data-correct="true">D'appartenance</button>
+            <button class="quiz-opt">D'estime</button>
+            <button class="quiz-opt">D'accomplissement personnel</button>
           </div>
-          <div class="callout-tip">Ce modèle néoclassique s'inscrit dans une approche <strong>libérale</strong> : l'État
-            intervient peu, limité à ses fonctions régaliennes (défense, justice, éducation, police), à l'opposé du
-            socialisme. Le consommateur y est vu comme capable de prendre du recul sur ses propres goûts et préférences.
+          <p class="quiz-explain">Le besoin d'appartenance (niveau III) traduit le besoin d'être accepté et aimé ; le
+            besoin d'estime (niveau IV) vise plutôt le respect de soi et des autres.</p>
+        </div>
+
+        <div class="quiz-item">
+          <p class="quiz-q"><span class="qn">Q16.</span> Selon Freud, l'origine du comportement des individus s'explique
+            surtout par...</p>
+          <div class="quiz-opts">
+            <button class="quiz-opt">Le niveau de revenu du foyer</button>
+            <button class="quiz-opt" data-correct="true">Les expériences vécues dans la petite enfance</button>
+            <button class="quiz-opt">Le groupe de référence actuel</button>
+            <button class="quiz-opt">La position socio-professionnelle</button>
           </div>
-          <h3>b) La pyramide de Maslow</h3>
-          <p>5 stades hiérarchisés, du besoin le plus basique au plus élevé :</p>
-          <div class="pyramid">
-            <div><b>1. Physiologiques</b> — faim, soif, sommeil</div>
-            <div><b>2. Sécurité</b> — protection, stabilité</div>
-            <div><b>3. Appartenance</b> — amour, relations sociales</div>
-            <div><b>4. Estime</b> — reconnaissance, statut</div>
-            <div><b>5. Accomplissement de soi</b> — réalisation personnelle</div>
+          <p class="quiz-explain">Freud est à l'origine de l'étude des motivations : pour lui, le comportement
+            s'explique par les expériences de la petite enfance, principalement d'ordre sexuel.</p>
+        </div>
+
+        <div class="quiz-item">
+          <p class="quiz-q"><span class="qn">Q17.</span> Un consommateur reçoit une information qui contredit un achat
+            qu'il vient de faire : il se trouve en état de...</p>
+          <div class="quiz-opts">
+            <button class="quiz-opt">Cohérence cognitive</button>
+            <button class="quiz-opt" data-correct="true">Dissonance cognitive</button>
+            <button class="quiz-opt">Motivation oblative</button>
+            <button class="quiz-opt">Non-consommation relative</button>
           </div>
-          <h3>c) L'étude des motivations</h3>
-          <div class="callout-def">Une <strong>motivation</strong> est un état de tension qui pousse l'individu à agir,
-            jusqu'à réduction de la tension à un stade tolérable.</div>
-          <p><strong>Théorie psychanalytique (Freud)</strong> : le comportement s'explique par les expériences de la
-            petite enfance, notamment d'ordre sexuel ; les frustrations accumulées mènent à l'achat et à la
-            consommation. Seules des études qualitatives approfondies, sur un petit échantillon représentatif, peuvent
-            faire surgir de l'inconscient les freins et motivations à l'achat.</p>
-          <h3>Classement motivations / freins (modèle de Joannis)</h3>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Motivations</th>
-                  <th>Freins</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>Hédonistes</strong> — bonheur personnel</td>
-                  <td><strong>Inhibition</strong> — auto-censure</td>
-                </tr>
-                <tr>
-                  <td><strong>Oblatives</strong> — faire plaisir à autrui</td>
-                  <td><strong>Peurs</strong> — difficultés réelles ou imaginaires</td>
-                </tr>
-                <tr>
-                  <td><strong>Auto-expression</strong> — exprimer sa personnalité actuelle ou désirée</td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
+          <p class="quiz-explain">Quand une information contredit un choix déjà effectué, l'individu est en état de
+            dissonance cognitive — à l'inverse, une information qui confirme ses croyances renforce la cohérence
+            cognitive.</p>
+        </div>
+
+        <div class="quiz-item">
+          <p class="quiz-q"><span class="qn">Q18.</span> Une famille mono-parentale oriente typiquement ses dépenses
+            vers...</p>
+          <div class="quiz-opts">
+            <button class="quiz-opt">Les loisirs et les biens durables</button>
+            <button class="quiz-opt">Le renouvellement des équipements du foyer</button>
+            <button class="quiz-opt" data-correct="true">Le vital : nourriture, vêtements, carburant</button>
+            <button class="quiz-opt">Le plaisir, en priorité</button>
           </div>
-          <div class="callout-warn">L'acte d'achat génère par avance un <strong>conflit entre tensions positives et
-              négatives</strong> → source d'angoisse. L'action commerciale et la communication cherchent à
-            <strong>réduire les tensions négatives</strong> / <strong>augmenter les tensions positives</strong> → d'où
-            l'importance de réaliser des études pour déterminer freins et motivations.
+          <p class="quiz-explain">Le pouvoir d'achat étant plus contraint, les familles mono-parentales orientent leurs
+            dépenses en priorité vers les besoins vitaux.</p>
+        </div>
+
+        <div class="quiz-item">
+          <p class="quiz-q"><span class="qn">Q19.</span> Le consommateur décide d'acheter lorsque...</p>
+          <div class="quiz-opts">
+            <button class="quiz-opt">Les tensions négatives dépassent les tensions positives</button>
+            <button class="quiz-opt" data-correct="true">Les tensions positives dépassent les tensions
+              négatives</button>
+            <button class="quiz-opt">Il n'y a aucune tension</button>
+            <button class="quiz-opt">Le vendeur n'intervient pas</button>
           </div>
-        </section>
+          <p class="quiz-explain">L'achat survient lorsque les tensions positives (envie, argumentation du vendeur,
+            promotion, pression de l'entourage) l'emportent sur les tensions négatives (freins, angoisse).</p>
+        </div>
 
-        <section id="s11">
-          <h2><span class="num">11</span>L'étude des attitudes</h2>
-          <div class="callout-def">Une <strong>attitude</strong> est une prédisposition mentale permanente à évaluer un
-            objet ou une situation, et à y réagir.</div>
-          <h3>a) Éléments cognitifs</h3>
-          <p>Connaissances factuelles : informations qui parviennent à l'individu et prennent sens grâce aux
-            représentations mentales construites au fil du temps → connaissances préjugées. Si l'information conforte
-            les croyances : <strong>consonance positive</strong>. Si elle est contradictoire avec le vécu :
-            <strong>dissonance cognitive</strong>.
-          </p>
-          <h3>b) Éléments affectifs</h3>
-          <p>Émotions et sentiments = l'image retenue d'une marque. L'une des missions de la publicité est de
-            <strong>faire aimer la marque</strong> et de lui associer une image spécifique, conforme au positionnement
-            stratégique choisi.
-          </p>
-          <h3>c) Éléments conatifs</h3>
-          <p>Le comportement de l'individu = la traduction en acte du cognitif et de l'affectif. Un individu peut
-            connaître une marque et un produit et ne pas l'acheter → cela peut déclencher des actions
-            publicité/communication.</p>
-          <div class="callout-warn"><strong>Passerelle à faire à l'examen</strong> : cette grille cognitif / affectif /
-            conatif est exactement celle des <strong>objectifs de communication</strong> (section 8) — sauf qu'ici elle
-            décrit l'individu, alors qu'en section 8 elle décrit les objectifs que l'entreprise se fixe. Les deux se
-            répondent terme à terme : un objectif cognitif de l'entreprise vise à agir sur l'élément cognitif de
-            l'attitude du consommateur, etc.</div>
-          <h3>Pourquoi connaître motivations et attitudes ?</h3>
-          <p>Ces connaissances interviennent dans <strong>toutes les étapes de définition du marketing mix</strong> :
-          </p>
-          <ul>
-            <li>mise au point du produit, du système de servuction et du positionnement</li>
-            <li>définition du prix (prix psychologique)</li>
-            <li>mise en place des moyens de commercialisation</li>
-            <li>conception de la stratégie publicitaire et sélection des moyens de communication</li>
-          </ul>
-        </section>
-
-        <section id="s12">
-          <h2><span class="num">12</span>Styles de vie &amp; variables socio-culturelles</h2>
-          <h3>L'étude des styles de vie</h3>
-          <p>Méthode : étudier individuellement un grand nombre de personnes sur la base d'un panel, puis effectuer un
-            regroupement pour relever des courants sociaux → une <strong>carte socio-culturelle</strong> représentant la
-            population française répartie en sous-groupes.</p>
-          <p>Buts : anticiper les tendances à venir · segmenter et préciser les segments (attitudes/motivations) ·
-            innover en adéquation avec les courants socio-culturels · connaître le planning des médias.</p>
-
-          <h3>I. L'environnement familial (cycle de vie familial)</h3>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Profil</th>
-                  <th>Dépenses typiques</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Célibataire sans enfant</td>
-                  <td>Mode, loisirs, ostentatoire</td>
-                </tr>
-                <tr>
-                  <td>Jeune couple sans enfant</td>
-                  <td>Loisirs, biens durables</td>
-                </tr>
-                <tr>
-                  <td>Couple avec jeunes enfants</td>
-                  <td>Nourriture, soin, éducation</td>
-                </tr>
-                <tr>
-                  <td>Monoparental</td>
-                  <td>Dépenses vitales : nourriture, enfants, énergie, charges</td>
-                </tr>
-                <tr>
-                  <td>Couple avec grands enfants</td>
-                  <td>Renouvellement d'équipements, éducation, budget vacances</td>
-                </tr>
-                <tr>
-                  <td>Couple âge mûr sans enfant</td>
-                  <td>Loisirs, luxe, voyages</td>
-                </tr>
-                <tr>
-                  <td>Retraités</td>
-                  <td>Temps ↑, argent ↓, santé — budget EHPAD le cas échéant : environ 3 500 à 5 000 € par mois</td>
-                </tr>
-              </tbody>
-            </table>
+        <div class="quiz-item">
+          <p class="quiz-q"><span class="qn">Q20.</span> Qu'est-ce qui distingue un panel d'un simple échantillon ?</p>
+          <div class="quiz-opts">
+            <button class="quiz-opt">Le panel n'interroge jamais les mêmes personnes</button>
+            <button class="quiz-opt">Le panel est toujours plus petit qu'un échantillon</button>
+            <button class="quiz-opt" data-correct="true">Le panel est interrogé de façon permanente, à intervalles
+              réguliers</button>
+            <button class="quiz-opt">Le panel ne sert qu'aux études qualitatives</button>
           </div>
-          <p>La prise de décision d'achat varie selon le type de famille et le type d'achat (autonome vs collectif).
-            Cette répartition tend à s'estomper, et les publicités valorisent de plus en plus certains modèles familiaux
-            et minorités.</p>
+          <p class="quiz-explain">Le panel est un échantillon permanent, représentatif, interrogé à intervalles
+            réguliers pour mettre en évidence des évolutions dans le temps.</p>
+        </div>
 
-          <h3>II. Référence au groupe de pairs</h3>
-          <p>L'individu est influencé par un groupe (croyances, comportements) adopté en tant que repère social — cette
-            influence peut être positive ou négative.</p>
-
-          <h3>III. Catégorie socio-professionnelle et classes sociales</h3>
-          <p>La répartition en classes sociales varie, mais il existe toujours des éléments de répartition : profession,
-            revenu, lieu de domicile, mode d'habitat, niveau scolaire.</p>
-
-          <h3>IV. Environnement politique, culturel</h3>
-          <p>Chaque région a ses croyances et habitudes de consommation :</p>
-          <ul>
-            <li>France : nord = beurre, sel, bière · sud = huile, vin</li>
-            <li>France et Italie : forte exigence sur la nourriture</li>
-            <li>États-Unis : sport et attractions</li>
-            <li>Nord de l'Europe : sécurité, santé</li>
-          </ul>
-          <p>Selon les principes du marketing, il est important de tenir compte de l'origine des clients dans la
-            publicité, la servuction et la production.</p>
-        </section>
-
-        <section id="s13">
-          <h2><span class="num">13</span>Le processus de décision d'achat</h2>
-          <p><strong>Conclusion générale</strong> : le consommateur cherche à atteindre un niveau de satisfaction
-            acceptable — la satisfaction globale dépend de ses revenus, des prix proposés, et des besoins spontanés ou
-            influencés.</p>
-
-          <h3>I. La recherche d'information — pour réduire la prise de risque</h3>
-          <p>Lorsque le produit représente un enjeu d'image ou financier, le consommateur recherche des informations
-            pour réduire les risques :</p>
-          <ul>
-            <li>liés aux <strong>performances attendues</strong></li>
-            <li><strong>psychologiques</strong> : image véhiculée vs souhaitée</li>
-            <li><strong>financiers</strong> : débours envisagés, péril du budget</li>
-            <li><strong>sécurité</strong> : danger à consommer</li>
-          </ul>
-          <p>Pour réduire ces tensions, le consommateur s'appuie sur ses expériences antérieures, l'avis de ses proches,
-            des revues, des vendeurs…</p>
-
-          <h3>II. La décision d'acheter</h3>
-          <p>Selon les informations observées, l'achat se déclenche si la tension positive dépasse la tension négative,
-            ou si :</p>
-          <ul>
-            <li>un vendeur convaincant (écoute + compréhension) réduit les tensions négatives</li>
-            <li>des promotions interviennent</li>
-            <li>l'environnement met une pression</li>
-          </ul>
-
-          <h3>III. Après l'achat</h3>
-          <p>La relation commerciale n'est pas terminée : l'avis du client est la <strong>meilleure publicité</strong>.
-          </p>
-        </section>
-
-        <section id="s14">
-          <h2><span class="num">14</span>Vocabulaire clé &amp; pièges classiques</h2>
-          <div class="callout-def"><strong>Politique</strong> : lignes directrices qui orientent en permanence l'action
-            de l'entreprise — une façon de la concevoir dans son environnement, de la diriger, et un cadre de référence
-            pour les décisions. Fixe le « couple marché-produit » et les grandes options long terme.</div>
-          <div class="callout-def"><strong>Stratégie</strong> : (sens militaire) conduite générale de la guerre, long
-            terme. En marketing : ensemble des <strong>moyens interdépendants</strong> mis en œuvre pour réaliser les
-            objectifs de la politique.</div>
-          <p><strong>Positionnement</strong> : l'image que l'on donne du produit aux consommateurs (cf. section 7).</p>
-          <h3>Hiérarchie à retenir</h3>
-          <p class="formula" style="font-family:'Literata',serif;font-style:italic;">Politique (cadre général) →
-            Stratégie (orientations) → Marketing mix (moyens concrets) → Actions opérationnelles</p>
-          <h3>Pièges classiques à éviter en examen</h3>
-          <div class="callout-warn">
-            <ul style="margin:0;">
-              <li>Confondre marché <strong>potentiel</strong> et marché <strong>actuel</strong></li>
-              <li>Confondre PDM <strong>absolue</strong> et PDM <strong>relative</strong></li>
-              <li>Oublier de rattacher un objectif de communication à un registre (cognitif / affectif / conatif)</li>
-              <li>Oublier que le mix doit être cohérent en interne, avec la politique générale, et bien dosé</li>
-              <li>Confondre attitude (prédisposition) et motivation (état de tension qui pousse à agir)</li>
-            </ul>
+        <div class="quiz-item">
+          <p class="quiz-q"><span class="qn">Q21.</span> Une entreprise réalise 500 000 € de ventes sur un marché total
+            de 2 500 000 €. Quelle est sa part de marché ?</p>
+          <div class="quiz-opts">
+            <button class="quiz-opt">10 %</button>
+            <button class="quiz-opt" data-correct="true">20 %</button>
+            <button class="quiz-opt">25 %</button>
+            <button class="quiz-opt">50 %</button>
           </div>
-        </section>
+          <p class="quiz-explain">PDM = 500 000 / 2 500 000 = 0,20, soit 20 %.</p>
+        </div>
 
-        <section id="s15">
-          <h2><span class="num">15</span>Chapitre : Sondages &amp; panels</h2>
-          <h3>1. Détermination de l'objet</h3>
-          <ul>
-            <li>Poser le problème marketing à résoudre</li>
-            <li>Dresser la liste des informations à recueillir</li>
-            <li>Évaluer les délais à respecter pour la collecte</li>
-            <li>Définir le budget de l'enquête</li>
-          </ul>
-          <div class="callout-tip">Ordre de grandeur cité en cours pour une grande enquête : environ <strong>6 000
-              personnes</strong> interrogées, pour une <strong>fidélité de réponse</strong> avoisinant <strong>95
-              %</strong>. <em>(Correction : le chiffre de personnes était mal lisible sur les notes manuscrites
-              d'origine — la fiche du camarade confirme l'ordre de grandeur de 6 000, pas 650.)</em></div>
-          <h3>2. Étude documentaire</h3>
-          <p>L'entreprise utilise ses sources d'informations internes et externes pour récolter des données.</p>
-          <h3>3. Phase qualitative préliminaire</h3>
-          <p>Sonder des personnes représentatives de la population (pré-test) ; entretiens qualitatifs pour affiner le
-            contenu.</p>
-          <h3>4. Contenu du sondage</h3>
-          <p>Taille de l'échantillon · création du questionnaire · méthode d'échantillonnage · faire tester puis
-            distribuer.</p>
-          <h3>5. Administration du questionnaire</h3>
-          <p>Entretien direct / téléphone / internet — selon les contraintes : budget, qualité du sondage, géographie…
-          </p>
-          <h3>Le panel</h3>
-          <div class="callout-def">Un <strong>panel</strong> est un échantillon, unité statistique représentative de
-            l'univers de consommation, étudié et interrogé à <strong>intervalles réguliers</strong>.</div>
-          <div class="callout-warn">Différence clé avec un sondage classique : le panel est <strong>permanent</strong>
-            et <strong>périodique</strong>, pour suivre une évolution — alors qu'un sondage classique est ponctuel, même
-            s'il s'appuie aussi sur un échantillon représentatif de la catégorie étudiée.</div>
-        </section>
-
-        <section id="quiz">
-          <h2><span class="num">✓</span>QCM de révision</h2>
-          <p>38 questions en deux temps. <strong>Bloc A</strong> teste le rappel actif des définitions et repères —
-            essaie de répondre <em>avant</em> de relire le cours, la difficulté à se souvenir fait partie de
-            l'apprentissage. <strong>Bloc B</strong> est plus exigeant : ce sont des mises en situation qui mélangent
-            les chapitres et demandent de transférer une notion à un cas concret, comme à l'examen.</p>
-          <p class="quiz-score" id="quizScore">Score : 0 / 38</p>
-
-          <h3>Bloc A — Rappel actif des définitions et repères</h3>
-
-          <div class="quiz-item">
-            <p class="quiz-q"><span class="qn">Q1.</span> Dans les années 1970, quelle situation a fait émerger le
-              marketing ?</p>
-            <div class="quiz-opts"><button class="quiz-opt">L'offre est inférieure à la demande</button><button
-                class="quiz-opt" data-correct="true">L'offre dépasse la demande</button><button class="quiz-opt">L'offre
-                et la demande sont égales</button><button class="quiz-opt">Il n'existe pas encore de marché</button>
-            </div>
-            <p class="quiz-explain">Quand l'offre dépasse la demande, il faut orienter la production vers les besoins
-              réels du client.</p>
+        <div class="quiz-item">
+          <p class="quiz-q"><span class="qn">Q22.</span> Un site e-commerce reçoit 200 visiteurs et enregistre 40
+            ventes. Quel est son taux de transformation ?</p>
+          <div class="quiz-opts">
+            <button class="quiz-opt">10 %</button>
+            <button class="quiz-opt" data-correct="true">20 %</button>
+            <button class="quiz-opt">25 %</button>
+            <button class="quiz-opt">40 %</button>
           </div>
+          <p class="quiz-explain">Taux de transformation = (Nb d'acheteurs / Nb de visiteurs) × 100 = (40 / 200) × 100 =
+            20 %.</p>
+        </div>
 
-          <div class="quiz-item">
-            <p class="quiz-q"><span class="qn">Q2.</span> Les cas Kodak et Nokia illustrent surtout...</p>
-            <div class="quiz-opts"><button class="quiz-opt">Une stratégie de fidélisation réussie</button><button
-                class="quiz-opt" data-correct="true">La « myopie marketing » (Theodore Levitt)</button><button
-                class="quiz-opt">Une stratégie concurrentielle indirecte</button><button class="quiz-opt">Un marché
-                atomisé</button></div>
-            <p class="quiz-explain">Définir son métier par son produit plutôt que par le besoin satisfait rend aveugle à
-              l'innovation.</p>
+        <div class="quiz-item">
+          <p class="quiz-q"><span class="qn">Q23.</span> Sur 1 000 clients, 750 rachètent le produit. Quel est le taux
+            de fidélité ?</p>
+          <div class="quiz-opts">
+            <button class="quiz-opt">60 %</button>
+            <button class="quiz-opt">70 %</button>
+            <button class="quiz-opt" data-correct="true">75 %</button>
+            <button class="quiz-opt">80 %</button>
           </div>
+          <p class="quiz-explain">Taux de fidélité = (Clients rachetant / Nb total de clients) × 100 = (750 / 1 000) ×
+            100 = 75 %.</p>
+        </div>
 
-          <div class="quiz-item">
-            <p class="quiz-q"><span class="qn">Q3.</span> Le « marché amont » d'une entreprise désigne...</p>
-            <div class="quiz-opts"><button class="quiz-opt">Ses clients finaux</button><button class="quiz-opt">Ses
-                concurrents directs</button><button class="quiz-opt" data-correct="true">Ses
-                fournisseurs</button><button class="quiz-opt">Ses intermédiaires de distribution</button></div>
-            <p class="quiz-explain">L'amont regroupe les fournisseurs ; l'aval regroupe les clients (intermédiaires et
-              finaux).</p>
-          </div>
+        <button class="quiz-reset" id="quizReset">Recommencer le QCM</button>
+      </section>
 
-          <div class="quiz-item">
-            <p class="quiz-q"><span class="qn">Q4.</span> Comment calcule-t-on la part de marché relative ?</p>
-            <div class="quiz-opts"><button class="quiz-opt">Ventes de l'entreprise / Ventes totales de la
-                profession</button><button class="quiz-opt" data-correct="true">Ventes de l'entreprise / Ventes du
-                principal concurrent</button><button class="quiz-opt">Ventes potentielles / Ventes
-                actuelles</button><button class="quiz-opt">Ventes du concurrent / Ventes totales de la
-                profession</button></div>
-            <p class="quiz-explain">La PDM relative compare l'entreprise à son principal concurrent, contrairement à la
-              PDM absolue.</p>
-          </div>
+    </main>
+  </div>
 
-          <div class="quiz-item">
-            <p class="quiz-q"><span class="qn">Q5.</span> Un non-consommateur relatif est quelqu'un qui...</p>
-            <div class="quiz-opts"><button class="quiz-opt">Ne consommera jamais le produit</button><button
-                class="quiz-opt">Consomme déjà le produit chez un concurrent</button><button class="quiz-opt"
-                data-correct="true">Ne consomme pas actuellement mais pourrait un jour consommer le
-                produit</button><button class="quiz-opt">Fait partie du marché actuel</button></div>
-            <p class="quiz-explain">Contrairement au non-consommateur absolu, son frein n'est pas définitif.</p>
-          </div>
+  <footer class="note">Fiche de révision — bon courage pour l'examen.</footer>
 
-          <div class="quiz-item">
-            <p class="quiz-q"><span class="qn">Q6.</span> Qu'appelle-t-on un « marché atomisé » ?</p>
-            <div class="quiz-opts"><button class="quiz-opt">Un marché dominé par deux ou trois grandes
-                entreprises</button><button class="quiz-opt" data-correct="true">Un marché à la concurrence nombreuse,
-                sans acteur qui se distingue nettement</button><button class="quiz-opt">Un marché en situation de
-                monopole</button><button class="quiz-opt">Un marché sans aucune concurrence</button></div>
-            <p class="quiz-explain">Proche de la concurrence pure et parfaite.</p>
-          </div>
+  <button class="to-top" id="toTop" aria-label="Retour en haut" title="Retour en haut">↑</button>
 
-          <div class="quiz-item">
-            <p class="quiz-q"><span class="qn">Q7.</span> Proposer un mix spécifique à chaque segment correspond à la
-              stratégie...</p>
-            <div class="quiz-opts"><button class="quiz-opt">Indifférenciée</button><button class="quiz-opt"
-                data-correct="true">Différenciée</button><button class="quiz-opt">Concentrée</button><button
-                class="quiz-opt">Extensive</button></div>
-            <p class="quiz-explain">La stratégie différenciée adapte le mix à chaque segment.</p>
-          </div>
+  <script>
+    document.getElementById('toTop').addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 
-          <div class="quiz-item">
-            <p class="quiz-q"><span class="qn">Q8.</span> Pour être pertinent, un critère de segmentation doit être...
-            </p>
-            <div class="quiz-opts"><button class="quiz-opt">Uniquement démographique</button><button class="quiz-opt"
-                data-correct="true">Mesurable, accessible et substantiel</button><button class="quiz-opt">Identique pour
-                tous les segments</button><button class="quiz-opt">Défini une fois pour toutes</button></div>
-            <p class="quiz-explain">Ces 3 critères garantissent qu'un segment est réellement exploitable.</p>
-          </div>
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav.toc a'));
+    var sections = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
 
-          <div class="quiz-item">
-            <p class="quiz-q"><span class="qn">Q9.</span> S'attaquer aux non-consommateurs relatifs correspond à la
-              stratégie...</p>
-            <div class="quiz-opts"><button class="quiz-opt">Intensive</button><button class="quiz-opt"
-                data-correct="true">Extensive</button><button class="quiz-opt">De fidélisation</button><button
-                class="quiz-opt">Concurrentielle</button></div>
-            <p class="quiz-explain">La stratégie extensive vise à convertir des non-consommateurs relatifs.</p>
-          </div>
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          var id = '#' + entry.target.id;
+          var link = links.filter(function (a) { return a.getAttribute('href') === id; })[0];
+          if (!link) return;
+          if (entry.isIntersecting) {
+            links.forEach(function (a) { a.classList.remove('active'); });
+            link.classList.add('active');
+          }
+        });
+      }, { rootMargin: '-15% 0px -70% 0px', threshold: 0 });
+      sections.forEach(function (s) { if (s) observer.observe(s); });
+    }
 
-          <div class="quiz-item">
-            <p class="quiz-q"><span class="qn">Q10.</span> Apple et Samsung sont des concurrents...</p>
-            <div class="quiz-opts"><button class="quiz-opt">Indirects</button><button class="quiz-opt">Internes à un
-                même groupe</button><button class="quiz-opt" data-correct="true">Directs</button><button
-                class="quiz-opt">Ce ne sont pas des concurrents</button></div>
-            <p class="quiz-explain">Concurrents directs = produits similaires répondant au même besoin.</p>
-          </div>
+    var quizItems = Array.prototype.slice.call(document.querySelectorAll('.quiz-item'));
+    var scoreEl = document.getElementById('quizScore');
+    var total = quizItems.length;
+    var score = 0;
 
-          <div class="quiz-item">
-            <p class="quiz-q"><span class="qn">Q11.</span> Le positionnement d'un produit correspond à...</p>
-            <div class="quiz-opts"><button class="quiz-opt">Son prix de vente</button><button class="quiz-opt"
-                data-correct="true">L'image/l'identité que l'entreprise souhaite lui donner dans l'esprit du
-                consommateur</button><button class="quiz-opt">Le circuit de distribution utilisé</button><button
-                class="quiz-opt">Le budget de communication</button></div>
-            <p class="quiz-explain">Clé de voûte de la stratégie marketing.</p>
-          </div>
+    function updateScore() {
+      scoreEl.textContent = 'Score : ' + score + ' / ' + total;
+    }
 
-          <div class="quiz-item">
-            <p class="quiz-q"><span class="qn">Q12.</span> Un objectif de communication « cognitif » vise à...</p>
-            <div class="quiz-opts"><button class="quiz-opt">Faire aimer la marque</button><button class="quiz-opt">Faire
-                adopter un comportement précis</button><button class="quiz-opt" data-correct="true">Faire connaître un
-                produit (notoriété)</button><button class="quiz-opt">Fixer le prix psychologique</button></div>
-            <p class="quiz-explain">Cognitif = savoir ; affectif = aimer ; conatif = agir.</p>
-          </div>
-
-          <div class="quiz-item">
-            <p class="quiz-q"><span class="qn">Q13.</span> Laquelle ne fait pas partie des 4P ?</p>
-            <div class="quiz-opts"><button class="quiz-opt">Produit</button><button
-                class="quiz-opt">Distribution</button><button class="quiz-opt"
-                data-correct="true">Personnel</button><button class="quiz-opt">Communication</button></div>
-            <p class="quiz-explain">Le Personnel fait partie des 3P ajoutés pour les services (modèle des 7P).</p>
-          </div>
-
-          <div class="quiz-item">
-            <p class="quiz-q"><span class="qn">Q14.</span> Quel est l'ordre hiérarchique correct ?</p>
-            <div class="quiz-opts"><button class="quiz-opt">Marketing → Stratégie → Politique</button><button
-                class="quiz-opt" data-correct="true">Politique → Stratégie → Marketing</button><button
-                class="quiz-opt">Stratégie → Marketing → Politique</button><button class="quiz-opt">Marketing →
-                Politique → Stratégie</button></div>
-            <p class="quiz-explain">La politique fixe le cadre, la stratégie en découle, le marketing rassemble les
-              moyens concrets.</p>
-          </div>
-
-          <div class="quiz-item">
-            <p class="quiz-q"><span class="qn">Q15.</span> Selon la pyramide de Maslow, quel besoin est le plus élevé ?
-            </p>
-            <div class="quiz-opts"><button class="quiz-opt">Sécurité</button><button
-                class="quiz-opt">Appartenance</button><button class="quiz-opt">Estime</button><button class="quiz-opt"
-                data-correct="true">Accomplissement de soi</button></div>
-            <p class="quiz-explain">Les 5 stades, du bas vers le haut : physiologiques, sécurité, appartenance, estime,
-              accomplissement de soi.</p>
-          </div>
-
-          <div class="quiz-item">
-            <p class="quiz-q"><span class="qn">Q16.</span> Selon Freud, le comportement du consommateur s'explique
-              surtout par...</p>
-            <div class="quiz-opts"><button class="quiz-opt">Ses revenus actuels</button><button class="quiz-opt"
-                data-correct="true">Les expériences de la petite enfance, notamment d'ordre sexuel</button><button
-                class="quiz-opt">La pression du groupe de pairs</button><button class="quiz-opt">La publicité perçue
-                récemment</button></div>
-            <p class="quiz-explain">Théorie psychanalytique : les frustrations accumulées durant l'enfance mènent à
-              l'achat/consommation.</p>
-          </div>
-
-          <div class="quiz-item">
-            <p class="quiz-q"><span class="qn">Q17.</span> Une motivation « oblative » consiste à...</p>
-            <div class="quiz-opts"><button class="quiz-opt">Rechercher son propre bonheur</button><button
-                class="quiz-opt" data-correct="true">Faire plaisir à autrui</button><button class="quiz-opt">Exprimer sa
-                personnalité</button><button class="quiz-opt">Éviter un danger</button></div>
-            <p class="quiz-explain">Hédoniste = bonheur personnel ; oblative = plaisir à autrui ; auto-expression =
-              exprimer sa personnalité.</p>
-          </div>
-
-          <div class="quiz-item">
-            <p class="quiz-q"><span class="qn">Q18.</span> La dissonance cognitive apparaît quand...</p>
-            <div class="quiz-opts"><button class="quiz-opt">Une information conforte les croyances de
-                l'individu</button><button class="quiz-opt" data-correct="true">Une information est contradictoire avec
-                le vécu de l'individu</button><button class="quiz-opt">L'individu n'a aucune connaissance du
-                produit</button><button class="quiz-opt">L'individu achète sans réfléchir</button></div>
-            <p class="quiz-explain">Consonance positive = conforte les croyances ; dissonance cognitive = contredit le
-              vécu.</p>
-          </div>
-
-          <div class="quiz-item">
-            <p class="quiz-q"><span class="qn">Q19.</span> Un panel se distingue d'un sondage classique car il est...
-            </p>
-            <div class="quiz-opts"><button class="quiz-opt">Réalisé une seule fois</button><button class="quiz-opt"
-                data-correct="true">Permanent et interrogé à intervalles réguliers</button><button
-                class="quiz-opt">Réservé aux grandes entreprises</button><button class="quiz-opt">Toujours réalisé par
-                téléphone</button></div>
-            <p class="quiz-explain">Le panel suit une évolution dans le temps, contrairement à un sondage ponctuel.</p>
-          </div>
-
-          <div class="quiz-item">
-            <p class="quiz-q"><span class="qn">Q20.</span> Pour qu'une enquête soit jugée fiable, ton cours retient
-              environ...</p>
-            <div class="quiz-opts"><button class="quiz-opt">50 personnes pour 100 % de fidélité</button><button
-                class="quiz-opt" data-correct="true">Environ 6 000 personnes, pour ~95 % de fidélité de
-                réponse</button><button class="quiz-opt">50 000 personnes minimum</button><button class="quiz-opt">Aucun
-                seuil n'est nécessaire</button></div>
-            <p class="quiz-explain">Repère donné en cours : pour une grande enquête, on vise de l'ordre de 6 000
-              répondants pour atteindre ~95 % de fidélité de réponse.</p>
-          </div>
-
-          <h3>Bloc B — Mises en situation &amp; transfert (plus difficile)</h3>
-
-          <div class="quiz-item">
-            <p class="quiz-q"><span class="qn">Q21.</span> Une entreprise réalise 200 M€ de chiffre d'affaires sur un
-              marché total de 1 000 M€. Quelle est sa part de marché absolue ?</p>
-            <div class="quiz-opts"><button class="quiz-opt">5 %</button><button class="quiz-opt" data-correct="true">20
-                %</button><button class="quiz-opt">50 %</button><button class="quiz-opt">200 %</button></div>
-            <p class="quiz-explain">PDM absolue = ventes de l'entreprise / ventes totales de la profession = 200/1000 =
-              20 %.</p>
-          </div>
-
-          <div class="quiz-item">
-            <p class="quiz-q"><span class="qn">Q22.</span> Cette même entreprise (200 M€) affronte un concurrent
-              principal qui réalise 100 M€. Quelle est sa PDM relative ?</p>
-            <div class="quiz-opts"><button class="quiz-opt">0,5</button><button class="quiz-opt"
-                data-correct="true">2</button><button class="quiz-opt">20</button><button class="quiz-opt">100</button>
-            </div>
-            <p class="quiz-explain">PDM relative = ventes de l'entreprise / ventes du principal concurrent = 200/100 = 2
-              (elle vend deux fois plus que son concurrent principal).</p>
-          </div>
-
-          <div class="quiz-item">
-            <p class="quiz-q"><span class="qn">Q23.</span> Uber (VTC) et BlaBlaCar (covoiturage) proposent des produits
-              différents mais répondent au même besoin de déplacement. Ce sont des concurrents...</p>
-            <div class="quiz-opts"><button class="quiz-opt">Directs</button><button class="quiz-opt"
-                data-correct="true">Indirects</button><button class="quiz-opt">Internes au groupe</button><button
-                class="quiz-opt">Ce ne sont pas des concurrents</button></div>
-            <p class="quiz-explain">Concurrents indirects = produits différents répondant au même besoin (contrairement
-              à Apple/Samsung, concurrents directs).</p>
-          </div>
-
-          <div class="quiz-item">
-            <p class="quiz-q"><span class="qn">Q24.</span> Une entreprise de cosmétiques vend un shampoing homme, un
-              shampoing enfant et un shampoing femme, chacun sous un nom de marque différent, sans lien visible avec la
-              maison mère. Quelle politique de marque applique-t-elle ?</p>
-            <div class="quiz-opts"><button class="quiz-opt">Marque ombrelle</button><button class="quiz-opt"
-                data-correct="true">Marque individuelle</button><button class="quiz-opt">Marque de
-                distributeur</button><button class="quiz-opt">Positionnement concentré</button></div>
-            <p class="quiz-explain">Marque individuelle = un nom par produit, sans lien apparent avec les autres (à
-              l'inverse de la marque ombrelle qui fédère toute la gamme sous un même nom).</p>
-          </div>
-
-          <div class="quiz-item">
-            <p class="quiz-q"><span class="qn">Q25.</span> Le marché du cosmétique bio est saturé chez les clientes
-              actuelles. L'entreprise décide de convaincre les personnes qui n'achètent pas encore de bio, mais
-              pourraient l'être. Quelle stratégie de sources de volume utilise-t-elle ?</p>
-            <div class="quiz-opts"><button class="quiz-opt">Intensive</button><button class="quiz-opt"
-                data-correct="true">Extensive</button><button class="quiz-opt">De fidélisation</button><button
-                class="quiz-opt">Indifférenciée</button></div>
-            <p class="quiz-explain">Elle cible des non-consommateurs relatifs (NCR) qu'elle n'a pas encore convertis :
-              c'est la définition même de la stratégie extensive.</p>
-          </div>
-
-          <div class="quiz-item">
-            <p class="quiz-q"><span class="qn">Q26.</span> Une publicité Coca-Cola montre des amis heureux réunis autour
-              d'un repas, sans jamais mentionner le goût, le prix ou la composition du produit. Quel objectif de
-              communication vise-t-elle en priorité ?</p>
-            <div class="quiz-opts"><button class="quiz-opt">Cognitif</button><button class="quiz-opt"
-                data-correct="true">Affectif</button><button class="quiz-opt">Conatif</button><button
-                class="quiz-opt">Général</button></div>
-            <p class="quiz-explain">Aucune information factuelle transmise (pas de cognitif), aucune incitation à
-              l'achat immédiat (pas de conatif) : c'est une construction d'image, donc affectif — « faire aimer ».</p>
-          </div>
-
-          <div class="quiz-item">
-            <p class="quiz-q"><span class="qn">Q27.</span> Laquelle de ces affirmations sur le marketing mix est
-              <strong>fausse</strong> ?
-            </p>
-            <div class="quiz-opts"><button class="quiz-opt">Il doit être cohérent avec la politique générale de
-                l'entreprise</button><button class="quiz-opt">Il doit être bien dosé entre les 4
-                variables</button><button class="quiz-opt" data-correct="true">Chaque variable (produit, prix,
-                distribution, communication) peut être décidée indépendamment des trois autres</button><button
-                class="quiz-opt">Il regroupe produit, prix, distribution et communication</button></div>
-            <p class="quiz-explain">Au contraire : le mix doit être cohérent <strong>en interne</strong>, les 4
-              variables s'articulent entre elles (ex. un positionnement premium impose un prix et une distribution
-              cohérents).</p>
-          </div>
-
-          <div class="quiz-item">
-            <p class="quiz-q"><span class="qn">Q28.</span> Une personne allergique au gluten ne pourra jamais consommer
-              de pain classique, quelle que soit la communication de la marque. C'est...</p>
-            <div class="quiz-opts"><button class="quiz-opt" data-correct="true">Un non-consommateur absolu
-                (NCA)</button><button class="quiz-opt">Un non-consommateur relatif (NCR)</button><button
-                class="quiz-opt">Un consommateur actuel</button><button class="quiz-opt">Un prescripteur</button></div>
-            <p class="quiz-explain">Frein durable et non contournable (raison physique) → NCA, à distinguer du NCR dont
-              le frein peut être levé.</p>
-          </div>
-
-          <div class="quiz-item">
-            <p class="quiz-q"><span class="qn">Q29.</span> Une personne n'a jamais essayé le vélo électrique mais
-              pourrait être convaincue par un bon argumentaire commercial. C'est...</p>
-            <div class="quiz-opts"><button class="quiz-opt">Un non-consommateur absolu (NCA)</button><button
-                class="quiz-opt" data-correct="true">Un non-consommateur relatif (NCR)</button><button
-                class="quiz-opt">Un consommateur actuel</button><button class="quiz-opt">Une non-consommatrice
-                définitive</button></div>
-            <p class="quiz-explain">Son frein n'est pas définitif : elle appartient au marché potentiel, cible
-              privilégiée d'une stratégie extensive.</p>
-          </div>
-
-          <div class="quiz-item">
-            <p class="quiz-q"><span class="qn">Q30.</span> Un client aimerait porter un parfum original, mais évite de
-              l'acheter par peur du jugement de ses collègues. Quel frein illustre cette situation ?</p>
-            <div class="quiz-opts"><button class="quiz-opt" data-correct="true">L'inhibition
-                (auto-censure)</button><button class="quiz-opt">La peur (difficulté réelle ou
-                imaginaire)</button><button class="quiz-opt">Une motivation hédoniste</button><button
-                class="quiz-opt">Une motivation oblative</button></div>
-            <p class="quiz-explain">Il se retient lui-même par crainte du regard social, sans difficulté matérielle
-              réelle : c'est de l'auto-censure, donc de l'inhibition.</p>
-          </div>
-
-          <div class="quiz-item">
-            <p class="quiz-q"><span class="qn">Q31.</span> Un client hésite à acheter un objet connecté car il craint de
-              ne pas savoir s'en servir techniquement. Quel frein illustre cette situation ?</p>
-            <div class="quiz-opts"><button class="quiz-opt">L'inhibition (auto-censure)</button><button class="quiz-opt"
-                data-correct="true">La peur (difficulté réelle ou imaginaire)</button><button class="quiz-opt">La
-                dissonance cognitive</button><button class="quiz-opt">La consonance positive</button></div>
-            <p class="quiz-explain">Ici la difficulté est concrète (compétence technique), pas une auto-censure sociale
-              : c'est le registre de la peur, pas de l'inhibition — les deux freins se confondent souvent, attention à
-              la nuance.</p>
-          </div>
-
-          <div class="quiz-item">
-            <p class="quiz-q"><span class="qn">Q32.</span> Un parent achète un vélo électrique non pas pour son propre
-              confort, mais « pour ses enfants et pour la planète ». Quel type de motivation illustre cette situation ?
-            </p>
-            <div class="quiz-opts"><button class="quiz-opt">Hédoniste</button><button class="quiz-opt"
-                data-correct="true">Oblative</button><button class="quiz-opt">Auto-expression</button><button
-                class="quiz-opt">Conative</button></div>
-            <p class="quiz-explain">Motivation tournée vers le bien-être d'autrui (enfants, collectivité) : oblative,
-              par opposition à l'hédonisme (bonheur personnel).</p>
-          </div>
-
-          <div class="quiz-item">
-            <p class="quiz-q"><span class="qn">Q33.</span> Une marque de luxe consacre l'essentiel de son budget de
-              communication à construire une image d'exclusivité, plutôt qu'à détailler les caractéristiques techniques
-              de ses produits. Sur quel registre agit-elle en priorité ?</p>
-            <div class="quiz-opts"><button class="quiz-opt">Cognitif</button><button class="quiz-opt"
-                data-correct="true">Affectif</button><button class="quiz-opt">Conatif</button><button
-                class="quiz-opt">Légal</button></div>
-            <p class="quiz-explain">L'image et le ressenti (« faire aimer ») priment sur l'information factuelle («
-              faire connaître ») : registre affectif.</p>
-          </div>
-
-          <div class="quiz-item">
-            <p class="quiz-q"><span class="qn">Q34.</span> Une entreprise lance un produit totalement inconnu du grand
-              public et veut d'abord qu'on sache qu'il existe. Sur quel élément de l'attitude agit-elle en priorité ?
-            </p>
-            <div class="quiz-opts"><button class="quiz-opt" data-correct="true">L'élément cognitif</button><button
-                class="quiz-opt">L'élément affectif</button><button class="quiz-opt">L'élément conatif</button><button
-                class="quiz-opt">L'élément socioculturel</button></div>
-            <p class="quiz-explain">Avant de faire aimer (affectif) ou agir (conatif), il faut faire connaître : on agit
-              d'abord sur le cognitif — rappelle la passerelle entre attitudes (s11) et objectifs de communication (s8).
-            </p>
-          </div>
-
-          <div class="quiz-item">
-            <p class="quiz-q"><span class="qn">Q35.</span> Une mère seule avec deux enfants consacre l'essentiel de son
-              budget à la nourriture, aux vêtements des enfants et aux charges fixes. À quel profil du cycle de vie
-              familial correspond-elle ?</p>
-            <div class="quiz-opts"><button class="quiz-opt">Couple avec jeunes enfants</button><button class="quiz-opt"
-                data-correct="true">Monoparental</button><button class="quiz-opt">Couple âge mûr sans
-                enfant</button><button class="quiz-opt">Célibataire sans enfant</button></div>
-            <p class="quiz-explain">Profil monoparental : dépenses concentrées sur les besoins vitaux (nourriture,
-              enfants, énergie, charges), sans le second revenu d'un couple.</p>
-          </div>
-
-          <div class="quiz-item">
-            <p class="quiz-q"><span class="qn">Q36.</span> Une plateforme de streaming interroge le même échantillon
-              d'abonnés chaque mois pour suivre l'évolution de leurs habitudes de visionnage. C'est...</p>
-            <div class="quiz-opts"><button class="quiz-opt">Un sondage ponctuel</button><button class="quiz-opt"
-                data-correct="true">Un panel</button><button class="quiz-opt">Une étude documentaire</button><button
-                class="quiz-opt">Une phase qualitative préliminaire</button></div>
-            <p class="quiz-explain">Échantillon interrogé à intervalles réguliers pour suivre une évolution = définition
-              même du panel.</p>
-          </div>
-
-          <div class="quiz-item">
-            <p class="quiz-q"><span class="qn">Q37.</span> Une entreprise italienne de pâtes qui exporte en Allemagne
-              doit avant tout adapter sa communication aux habitudes alimentaires locales. Quel élément de
-              l'environnement (PESTEL) mobilise-t-elle en priorité ?</p>
-            <div class="quiz-opts"><button class="quiz-opt">Juridique</button><button
-                class="quiz-opt">Technologique</button><button class="quiz-opt"
-                data-correct="true">Socioculturel</button><button class="quiz-opt">Démographique</button></div>
-            <p class="quiz-explain">Les habitudes de consommation alimentaire relèvent de l'environnement culturel et
-              commercial, pas de la réglementation ni de la démographie.</p>
-          </div>
-
-          <div class="quiz-item">
-            <p class="quiz-q"><span class="qn">Q38.</span> Une enseigne lance une promotion « -20 % ce week-end
-              uniquement » pour faire venir les clients en magasin dès maintenant. Quel objectif de communication et
-              quel élément de l'attitude vise-t-elle en priorité ?</p>
-            <div class="quiz-opts"><button class="quiz-opt">Cognitif — élément cognitif</button><button
-                class="quiz-opt">Affectif — élément affectif</button><button class="quiz-opt"
-                data-correct="true">Conatif — élément conatif</button><button class="quiz-opt">Général — élément
-                social</button></div>
-            <p class="quiz-explain">L'objectif est un comportement immédiat et daté (« faire agir » ce week-end) :
-              registre conatif, qui agit sur l'élément conatif de l'attitude — le passage à l'acte.</p>
-          </div>
-
-          <button class="quiz-reset" id="quizReset">Recommencer le QCM</button>
-        </section>
-
-      </main>
-    </div>
-
-    <footer class="note">Fiche de révision fusionnée — bon courage pour l'examen.</footer>
-    <button class="to-top" id="toTop" aria-label="Retour en haut" title="Retour en haut">↑</button>
-
-    <script>
-      document.getElementById('toTop').addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
-      var links = Array.prototype.slice.call(document.querySelectorAll('nav.toc a'));
-      var sections = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
-      if ('IntersectionObserver' in window) {
-        var observer = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            var id = '#' + entry.target.id;
-            var link = links.filter(function (a) { return a.getAttribute('href') === id; })[0];
-            if (!link) return;
-            if (entry.isIntersecting) { links.forEach(function (a) { a.classList.remove('active'); }); link.classList.add('active'); }
+    quizItems.forEach(function (item) {
+      var opts = Array.prototype.slice.call(item.querySelectorAll('.quiz-opt'));
+      var explain = item.querySelector('.quiz-explain');
+      opts.forEach(function (opt) {
+        opt.addEventListener('click', function () {
+          if (item.dataset.answered === 'true') return;
+          item.dataset.answered = 'true';
+          var isCorrect = opt.dataset.correct === 'true';
+          if (isCorrect) { score++; updateScore(); }
+          opts.forEach(function (o) {
+            o.classList.add('locked');
+            if (o.dataset.correct === 'true') { o.classList.add('correct'); }
+            else if (o === opt) { o.classList.add('wrong'); }
           });
-        }, { rootMargin: '-15% 0px -70% 0px', threshold: 0 });
-        sections.forEach(function (s) { if (s) observer.observe(s); });
-      }
-      var quizItems = Array.prototype.slice.call(document.querySelectorAll('.quiz-item'));
-      var scoreEl = document.getElementById('quizScore');
-      var total = quizItems.length; var score = 0;
-      function updateScore() { scoreEl.textContent = 'Score : ' + score + ' / ' + total; }
+          explain.classList.add('show');
+        });
+      });
+    });
+
+    document.getElementById('quizReset').addEventListener('click', function () {
+      score = 0;
+      updateScore();
       quizItems.forEach(function (item) {
-        var opts = Array.prototype.slice.call(item.querySelectorAll('.quiz-opt'));
-        var explain = item.querySelector('.quiz-explain');
-        opts.forEach(function (opt) {
-          opt.addEventListener('click', function () {
-            if (item.dataset.answered === 'true') return;
-            item.dataset.answered = 'true';
-            var isCorrect = opt.dataset.correct === 'true';
-            if (isCorrect) { score++; updateScore(); }
-            opts.forEach(function (o) { o.classList.add('locked'); if (o.dataset.correct === 'true') { o.classList.add('correct'); } else if (o === opt) { o.classList.add('wrong'); } });
-            explain.classList.add('show');
-          });
+        item.dataset.answered = 'false';
+        item.querySelector('.quiz-explain').classList.remove('show');
+        item.querySelectorAll('.quiz-opt').forEach(function (o) {
+          o.classList.remove('locked', 'correct', 'wrong');
         });
       });
-      document.getElementById('quizReset').addEventListener('click', function () {
-        score = 0; updateScore();
-        quizItems.forEach(function (item) {
-          item.dataset.answered = 'false';
-          item.querySelector('.quiz-explain').classList.remove('show');
-          item.querySelectorAll('.quiz-opt').forEach(function (o) { o.classList.remove('locked', 'correct', 'wrong'); });
-        });
-        document.getElementById('quiz').scrollIntoView({ block: 'start' });
-      });
-    </script>
-  </body>
-
-  </html>
+      document.getElementById('quiz').scrollIntoView({ block: 'start' });
+    });
+  </script>
 
 </body>
 
